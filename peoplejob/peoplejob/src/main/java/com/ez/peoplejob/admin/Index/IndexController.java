@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 	Logger logger = LoggerFactory.getLogger(IndexController.class);
 		
-	@RequestMapping("/index.do")
+	@RequestMapping("/manager/index.do")
 	public String index() {
 		logger.info("index 화면 보여주기");
-		return "admin/index";
+		return "manager/index";
 	}
 }
