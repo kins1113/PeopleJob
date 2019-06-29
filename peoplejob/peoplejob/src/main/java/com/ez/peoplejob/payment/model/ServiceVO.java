@@ -1,47 +1,48 @@
 package com.ez.peoplejob.payment.model;
 
 public class ServiceVO {
-	private int SERVICE_CODE;
-	private String SERVICENAME; 
-	private int SERVICEPRICE;  
-	private String SERVICECONTENT;
-	private int SERVICEDAY;
-	public int getSERVICE_CODE() {
-		return SERVICE_CODE;
+	private int serviceCode;
+	private String serviceName; 
+	private int servicePrice;  
+	private String serviceContent;
+	private int serviceDay;
+	public int getServiceCode() {
+		return serviceCode;
 	}
-	public void setSERVICE_CODE(int sERVICE_CODE) {
-		SERVICE_CODE = sERVICE_CODE;
+	public void setServiceCode(int serviceCode) {
+		this.serviceCode = serviceCode;
 	}
-	public String getSERVICENAME() {
-		return SERVICENAME;
+	public String getServiceName() {
+		return serviceName;
 	}
-	public void setSERVICENAME(String sERVICENAME) {
-		SERVICENAME = sERVICENAME;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
-	public int getSERVICEPRICE() {
-		return SERVICEPRICE;
+	public int getServicePrice() {
+		return servicePrice;
 	}
-	public void setSERVICEPRICE(int sERVICEPRICE) {
-		SERVICEPRICE = sERVICEPRICE;
+	public void setServicePrice(int servicePrice) {
+		this.servicePrice = servicePrice;
 	}
-	public String getSERVICECONTENT() {
-		return SERVICECONTENT;
+	public String getServiceContent() {
+		return serviceContent;
 	}
-	public void setSERVICECONTENT(String sERVICECONTENT) {
-		SERVICECONTENT = sERVICECONTENT;
+	public void setServiceContent(String serviceContent) {
+		this.serviceContent = serviceContent;
 	}
-	public int getSERVICEDAY() {
-		return SERVICEDAY;
+	public int getServiceDay() {
+		return serviceDay;
 	}
-	public void setSERVICEDAY(int sERVICEDAY) {
-		SERVICEDAY = sERVICEDAY;
+	public void setServiceDay(int serviceDay) {
+		this.serviceDay = serviceDay;
 	}
 	
 	@Override
 	public String toString() {
-		return "ServiceVO [SERVICE_CODE=" + SERVICE_CODE + ", SERVICENAME=" + SERVICENAME + ", SERVICEPRICE="
-				+ SERVICEPRICE + ", SERVICECONTENT=" + SERVICECONTENT + ", SERVICEDAY=" + SERVICEDAY + "]";
-	}   
+		return "ServiceVO [serviceCode=" + serviceCode + ", serviceName=" + serviceName + ", servicePrice="
+				+ servicePrice + ", serviceContent=" + serviceContent + ", serviceDay=" + serviceDay + "]";
+	}
+	
 	
 	
 }

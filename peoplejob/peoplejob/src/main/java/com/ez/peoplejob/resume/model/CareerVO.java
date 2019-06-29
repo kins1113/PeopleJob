@@ -3,40 +3,40 @@ package com.ez.peoplejob.resume.model;
 import java.sql.Timestamp;
 
 public class CareerVO {
-	private int DV_CODE;    
-	private String COMPANYNAME; 
-	private Timestamp WORKTERM;   
-	private String CHARGEWORK;
-	public int getDV_CODE() {
-		return DV_CODE;
+	private int dvCode;    
+	private String companyName; 
+	private Timestamp workTerm;   
+	private String chargeWork;
+	public int getDvCode() {
+		return dvCode;
 	}
-	public void setDV_CODE(int dV_CODE) {
-		DV_CODE = dV_CODE;
+	public void setDvCode(int dvCode) {
+		this.dvCode = dvCode;
 	}
-	public String getCOMPANYNAME() {
-		return COMPANYNAME;
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setCOMPANYNAME(String cOMPANYNAME) {
-		COMPANYNAME = cOMPANYNAME;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
-	public Timestamp getWORKTERM() {
-		return WORKTERM;
+	public Timestamp getWorkTerm() {
+		return workTerm;
 	}
-	public void setWORKTERM(Timestamp wORKTERM) {
-		WORKTERM = wORKTERM;
+	public void setWorkTerm(Timestamp workTerm) {
+		this.workTerm = workTerm;
 	}
-	public String getCHARGEWORK() {
-		return CHARGEWORK;
+	public String getChargeWork() {
+		return chargeWork;
 	}
-	public void setCHARGEWORK(String cHARGEWORK) {
-		CHARGEWORK = cHARGEWORK;
+	public void setChargeWork(String chargeWork) {
+		this.chargeWork = chargeWork;
 	}
-	
 	@Override
 	public String toString() {
-		return "CareerVO [DV_CODE=" + DV_CODE + ", COMPANYNAME=" + COMPANYNAME + ", WORKTERM=" + WORKTERM
-				+ ", CHARGEWORK=" + CHARGEWORK + "]";
+		return "CareerVO [dvCode=" + dvCode + ", companyName=" + companyName + ", workTerm=" + workTerm
+				+ ", chargeWork=" + chargeWork + "]";
 	}
+	
 	
 	
 }
