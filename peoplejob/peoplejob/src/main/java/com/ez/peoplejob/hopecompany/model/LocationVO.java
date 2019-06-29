@@ -1,31 +1,33 @@
 package com.ez.peoplejob.hopecompany.model;
 
 public class LocationVO {
-	private int LOCAL_CODE; 
-	private String SIDO;      
-	private String GUGUN;
-	public int getLOCAL_CODE() {
-		return LOCAL_CODE;
+	private int localCode; 
+	private String sido;      
+	private String gugun;
+	public int getLocalCode() {
+		return localCode;
 	}
-	public void setLOCAL_CODE(int lOCAL_CODE) {
-		LOCAL_CODE = lOCAL_CODE;
+	public void setLocalCode(int localCode) {
+		this.localCode = localCode;
 	}
-	public String getSIDO() {
-		return SIDO;
+	public String getSido() {
+		return sido;
 	}
-	public void setSIDO(String sIDO) {
-		SIDO = sIDO;
+	public void setSido(String sido) {
+		this.sido = sido;
 	}
-	public String getGUGUN() {
-		return GUGUN;
+	public String getGugun() {
+		return gugun;
 	}
-	public void setGUGUN(String gUGUN) {
-		GUGUN = gUGUN;
+	public void setGugun(String gugun) {
+		this.gugun = gugun;
 	}
+	
 	@Override
 	public String toString() {
-		return "LocationVO [LOCAL_CODE=" + LOCAL_CODE + ", SIDO=" + SIDO + ", GUGUN=" + GUGUN + "]";
-	} 
+		return "LocationVO [localCode=" + localCode + ", sido=" + sido + ", gugun=" + gugun + "]";
+	}
+	
 	
 	
 }

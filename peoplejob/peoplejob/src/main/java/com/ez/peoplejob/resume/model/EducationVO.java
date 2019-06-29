@@ -3,53 +3,54 @@ package com.ez.peoplejob.resume.model;
 import java.sql.Timestamp;
 
 public class EducationVO {
-	private int ACADIMIC_CODE; 
-	private String SCHOOLNAME;    
-	private String MAJOR;         
-	private String DEGREE;        
-	private Timestamp GRADUATE;     
-	private String GRADUATECHECK;
-	public int getACADIMIC_CODE() {
-		return ACADIMIC_CODE;
+	private int academicCode; 
+	private String schoolName;    
+	private String major;         
+	private String degree;        
+	private Timestamp graduate;     
+	private String graduateCheck;
+	public int getAcademicCode() {
+		return academicCode;
 	}
-	public void setACADIMIC_CODE(int aCADIMIC_CODE) {
-		ACADIMIC_CODE = aCADIMIC_CODE;
+	public void setAcademicCode(int academicCode) {
+		this.academicCode = academicCode;
 	}
-	public String getSCHOOLNAME() {
-		return SCHOOLNAME;
+	public String getSchoolName() {
+		return schoolName;
 	}
-	public void setSCHOOLNAME(String sCHOOLNAME) {
-		SCHOOLNAME = sCHOOLNAME;
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
 	}
-	public String getMAJOR() {
-		return MAJOR;
+	public String getMajor() {
+		return major;
 	}
-	public void setMAJOR(String mAJOR) {
-		MAJOR = mAJOR;
+	public void setMajor(String major) {
+		this.major = major;
 	}
-	public String getDEGREE() {
-		return DEGREE;
+	public String getDegree() {
+		return degree;
 	}
-	public void setDEGREE(String dEGREE) {
-		DEGREE = dEGREE;
+	public void setDegree(String degree) {
+		this.degree = degree;
 	}
-	public Timestamp getGRADUATE() {
-		return GRADUATE;
+	public Timestamp getGraduate() {
+		return graduate;
 	}
-	public void setGRADUATE(Timestamp gRADUATE) {
-		GRADUATE = gRADUATE;
+	public void setGraduate(Timestamp graduate) {
+		this.graduate = graduate;
 	}
-	public String getGRADUATECHECK() {
-		return GRADUATECHECK;
+	public String getGraduateCheck() {
+		return graduateCheck;
 	}
-	public void setGRADUATECHECK(String gRADUATECHECK) {
-		GRADUATECHECK = gRADUATECHECK;
+	public void setGraduateCheck(String graduateCheck) {
+		this.graduateCheck = graduateCheck;
 	}
 	@Override
 	public String toString() {
-		return "EducationVO [ACADIMIC_CODE=" + ACADIMIC_CODE + ", SCHOOLNAME=" + SCHOOLNAME + ", MAJOR=" + MAJOR
-				+ ", DEGREE=" + DEGREE + ", GRADUATE=" + GRADUATE + ", GRADUATECHECK=" + GRADUATECHECK + "]";
-	} 
+		return "EducationVO [academicCode=" + academicCode + ", schoolName=" + schoolName + ", major=" + major
+				+ ", degree=" + degree + ", graduate=" + graduate + ", graduateCheck=" + graduateCheck + "]";
+	}
+	
 	
 	
 }
