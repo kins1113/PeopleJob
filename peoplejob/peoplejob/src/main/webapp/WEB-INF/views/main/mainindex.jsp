@@ -751,9 +751,11 @@ input#username , input#password{
         <br><br><br>
         <div class="mbrLinks clear">
             <span class="mbr dotum">
-                <a href="https://www.jobkorea.co.kr/Join/M_Regist" class="devHref devClick" data-click-value="55"><strong>회원가입</strong>
+                <a href="https://www.jobkorea.co.kr/Join/M_Regist" class="devHref devClick" data-click-value="55">
+                <a href="<c:url value='/login/selectregister.do'/>" >
+                <strong>회원가입</strong></a>
                 </a><span class="idBx">
-                 <a href="https://www.jobkorea.co.kr/Login/Search/Search_Pwd.asp" class="devHref devClick" data-click-value="56">ID/PW 찾기</a></span>
+                 <a href="#">ID/PW 찾기</a></span>
             </span>
         
         </div> 
@@ -778,7 +780,7 @@ input#username , input#password{
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/samsung.png'/>" alt="IMG">
+									<img src="<c:url value='/resources/main/images/samsung.png'/>" alt="IMG" >
 								</a>
 
 								<div class="p-t-16">

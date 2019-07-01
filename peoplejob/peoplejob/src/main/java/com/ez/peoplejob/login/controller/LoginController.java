@@ -14,4 +14,10 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		logger.info("로그인 화면 보여주기");
 		return "login/login";
 	}
+	
+	@RequestMapping("/login/selectregister.do")
+	public String register() {
+		logger.info("회원가입 화면 보여주기");
+		return "login/selectregister";
+	}
 }
