@@ -1,5 +1,5 @@
 package com.ez.peoplejob.notice.model;
 
-public class NoticeService {
-
+public interface NoticeService {
+	public int insertNotice(NoticeVO vo);
 }

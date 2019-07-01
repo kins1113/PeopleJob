@@ -1,5 +1,5 @@
 package com.ez.peoplejob.notice.model;
 
-public class NoticeDAO {
-	
+public interface NoticeDAO {
+	public int insertNotice(NoticeVO vo);
 }

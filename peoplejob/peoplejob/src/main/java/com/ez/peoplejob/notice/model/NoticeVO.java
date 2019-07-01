@@ -10,7 +10,6 @@ public class NoticeVO {
 	private Timestamp notifydate;
 	private int admin_code;
 	
-	
 	public int getNotify_code() {
 		return notify_code;
 	}
