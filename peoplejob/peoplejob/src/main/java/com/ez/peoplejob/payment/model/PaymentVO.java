@@ -4,55 +4,54 @@ import java.sql.Timestamp;
 
 public class PaymentVO {
 	private int paymentCode;	// 결제 코드
-	private String PATMENTWAY;   // 결제수단
-	private String PROGRESS;     // 진행상황
-	private int DISCOUNT;     // 할인금액
-	private Timestamp PAYDATE;    // 결제일
-	private Timestamp PAYEND_DATE;  // 종료일
-	private int SERVICE_CODE;   //서비스 코드
+	private String patmentway;   // 결제수단
+	private String progress;     // 진행상황
+	private int discount;     // 할인금액
+	private Timestamp paydate;    // 결제일
+	private Timestamp payend_date;  // 종료일
+	private int service_code;   //서비스 코드
 	private int memberCode;  //회원 코드
-	
 	public int getPaymentCode() {
 		return paymentCode;
 	}
 	public void setPaymentCode(int paymentCode) {
 		this.paymentCode = paymentCode;
 	}
-	public String getPATMENTWAY() {
-		return PATMENTWAY;
+	public String getPatmentway() {
+		return patmentway;
 	}
-	public void setPATMENTWAY(String pATMENTWAY) {
-		PATMENTWAY = pATMENTWAY;
+	public void setPatmentway(String patmentway) {
+		this.patmentway = patmentway;
 	}
-	public String getPROGRESS() {
-		return PROGRESS;
+	public String getProgress() {
+		return progress;
 	}
-	public void setPROGRESS(String pROGRESS) {
-		PROGRESS = pROGRESS;
+	public void setProgress(String progress) {
+		this.progress = progress;
 	}
-	public int getDISCOUNT() {
-		return DISCOUNT;
+	public int getDiscount() {
+		return discount;
 	}
-	public void setDISCOUNT(int dISCOUNT) {
-		DISCOUNT = dISCOUNT;
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
-	public Timestamp getPAYDATE() {
-		return PAYDATE;
+	public Timestamp getPaydate() {
+		return paydate;
 	}
-	public void setPAYDATE(Timestamp pAYDATE) {
-		PAYDATE = pAYDATE;
+	public void setPaydate(Timestamp paydate) {
+		this.paydate = paydate;
 	}
-	public Timestamp getPAYEND_DATE() {
-		return PAYEND_DATE;
+	public Timestamp getPayend_date() {
+		return payend_date;
 	}
-	public void setPAYEND_DATE(Timestamp pAYEND_DATE) {
-		PAYEND_DATE = pAYEND_DATE;
+	public void setPayend_date(Timestamp payend_date) {
+		this.payend_date = payend_date;
 	}
-	public int getSERVICE_CODE() {
-		return SERVICE_CODE;
+	public int getService_code() {
+		return service_code;
 	}
-	public void setSERVICE_CODE(int sERVICE_CODE) {
-		SERVICE_CODE = sERVICE_CODE;
+	public void setService_code(int service_code) {
+		this.service_code = service_code;
 	}
 	public int getMemberCode() {
 		return memberCode;
@@ -62,10 +61,12 @@ public class PaymentVO {
 	}
 	@Override
 	public String toString() {
-		return "PaymentVO [paymentCode=" + paymentCode + ", PATMENTWAY=" + PATMENTWAY + ", PROGRESS=" + PROGRESS
-				+ ", DISCOUNT=" + DISCOUNT + ", PAYDATE=" + PAYDATE + ", PAYEND_DATE=" + PAYEND_DATE + ", SERVICE_CODE="
-				+ SERVICE_CODE + ", memberCode=" + memberCode + "]";
+		return "PaymentVO [paymentCode=" + paymentCode + ", patmentway=" + patmentway + ", progress=" + progress
+				+ ", discount=" + discount + ", paydate=" + paydate + ", payend_date=" + payend_date + ", service_code="
+				+ service_code + ", memberCode=" + memberCode + "]";
 	}
+	
+	
 	
 
 }
