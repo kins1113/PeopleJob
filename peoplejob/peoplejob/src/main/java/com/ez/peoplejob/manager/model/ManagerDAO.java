@@ -9,6 +9,6 @@ public interface ManagerDAO {
 	public int delectManager(int adminCode);
 	public String selectAuthorityById(String adminid);
 	public int selectIdChk(String adminid);
-	public ManagerVO selectById(int adminCode);
+	public ManagerVO selectByCode(int adminCode);
 	public int updateManager(ManagerVO managerVo);
 }

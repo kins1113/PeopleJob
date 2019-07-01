@@ -30,8 +30,8 @@ public class ManagerDAOMybatis implements ManagerDAO {
 	public int selectIdChk(String adminid) {
 		return sqlSession.selectOne(namespace+"selectIdChk",adminid);
 	}
-	public ManagerVO selectById(int adminCode) {
-		return sqlSession.selectOne(namespace+"selectById", adminCode);
+	public ManagerVO selectByCode(int adminCode) {
+		return sqlSession.selectOne(namespace+"selectByCode", adminCode);
 	}
 	public int updateManager(ManagerVO managerVo) {
 		return sqlSession.update(namespace+"updateManager", managerVo);

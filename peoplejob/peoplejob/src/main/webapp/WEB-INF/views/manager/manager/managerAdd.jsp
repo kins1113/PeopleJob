@@ -124,12 +124,11 @@
 				<div class="col-lg-6">
 					<div class="card card-default">
 						<div class="card-header card-header-border-bottom">
-							<h2>관리자 </h2>
+							<h2>관리자 추가 </h2>
 						</div>
 	<div class="card-body">
-		<form action="<c:url value='/manager/manger/managerAdd.do'/>" 
+		<form action="<c:url value='/manager/manager/managerAdd.do'/>" 
 				method="post" name="managerAddForm">
-			<input type="hidden" name="adminid">
 			<div class="form-row">
 				<div class="col-md-12 mb-3">
 					<label for="validationServer01">아이디</label> 

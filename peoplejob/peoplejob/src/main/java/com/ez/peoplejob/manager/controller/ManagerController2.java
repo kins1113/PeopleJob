@@ -1,8 +1,11 @@
 package com.ez.peoplejob.manager.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,7 +69,7 @@ public class ManagerController2 {
 		return "common/message";
 	}
 
-	@RequestMapping(value = "/manager/manger/managerList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/manager/manager/managerList.do", method = RequestMethod.GET)
 	public String managerList_get(Model model) {
 		logger.info("관리자 리스트 창입니다.");
 		//2 db
@@ -78,7 +82,7 @@ public class ManagerController2 {
 
 	}
 
-	@RequestMapping(name =  "/manager/manger/managerAdd.do", method = RequestMethod.GET)
+	@RequestMapping(value ="/manager/manager/managerAdd.do", method = RequestMethod.GET)
 	public String managerAdd_get(@RequestParam String adminid, Model model) {
 		logger.info("관리자 추가 페이지 입니다. 파라미터 adminid={}",adminid);
 
@@ -91,31 +95,59 @@ public class ManagerController2 {
 
 			return "common/message";
 		}
-
-		
 		return "manager/manager/managerAdd";	//여기서 관리자 삭제쪽으로 간다.
 	}
 
-	/*
-	 * 이거를 주석 풀면 왜 add 가 아니라 del이 되는 거지?
-	@RequestMapping(name= "/manager/manger/managerAdd.do", method = RequestMethod.POST)
-	public String managerAdd_post(@ModelAttribute ManagerVO managerVo, Model model) {
-		logger.info("관리자 추가 사항 입니다. \n파라미터 managerVo={}",managerVo);
+	@RequestMapping(value= "/manager/manager/managerAdd.do", method = RequestMethod.POST)
+	public String managerAddPost(@ModelAttribute ManagerVO managerVo) {
+		logger.info("관리자 추가 처리 페이지, 파라미터 managerVo={}",managerVo);
 
 		//관리자가 아이디가 중복되면 안되게 처리
 		int chkId=managerService.selectIdChk(managerVo.getAdminid());
 		logger.info("아이디 중복 체크 결과 chkId={}",chkId);
-
+	
 		int result=managerService.insertManager(managerVo);
-
+	
 		logger.info("관리자 추가 결과 result={}",result);
-
-		return "managerAdd";
+		
+		return "manager/index";
 	}
-	*/
 	
 	
-	@RequestMapping(name = "/manager/manager/managerDel.do",method =RequestMethod.POST) 
+	@RequestMapping(value= "/manager/manager/managerEdit.do", method = RequestMethod.GET)
+	public String managerEdit(@RequestParam(defaultValue = "0", required = false ) int adminCode,
+			Model model) {
+		logger.info("수정화면 보여주기");
+		
+		ManagerVO vo=managerService.selectByCode(adminCode);
+		model.addAttribute("vo", vo);
+		
+		return "manager/manager/managerEdit";
+	}
+	
+	@RequestMapping(value= "/manager/manager/managerEdit.do",method = RequestMethod.POST)
+	public String managerEdit(@RequestParam String adminid, @RequestParam String adminpwd,
+			@RequestParam String authority, Model model) {
+		logger.info("수정 처리 화면 , 파라미터 adminid={}, adminpwd={}",adminid,adminpwd);
+		logger.info("authority={}",authority);
+		
+		int result=managerService.selectPwdById(adminid,adminpwd);
+		String url="/manager/manager/managerList.do", msg="";
+		if(result==managerService.LOGIN_OK) {
+			//수정 성공
+			msg="수정 성공";
+		}else if(result==managerService.LOGIN_PWD_NOT){
+			msg="비밀번호가 일치해야합니다";
+		}else {
+			msg="비밀번호 처리 실패";
+		}
+		model.addAttribute("url", url);
+		model.addAttribute("msg", msg);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping(value= "/manager/manager/managerDel.do",method =RequestMethod.POST) 
 	public String managerDel(@RequestParam(defaultValue ="0") int adminCode, Model model) {
 		logger.info("관리자 삭제 처리, 파라미터 adminCode={}",adminCode);
 
@@ -134,23 +166,7 @@ public class ManagerController2 {
 		return "common/message"; 
 	}
 	
-	/*
-	@RequestMapping(name = "/manager/manager/managerEdit.do" ,method = RequestMethod.GET)
-	public String managerEdit(@RequestParam(defaultValue = "0") int adminCode,
-			Model model) {
-		logger.info("수정화면 보여주기 adminCode={}",adminCode);
-
-		ManagerVO managerVo=managerService.selectById(adminCode);
-		model.addAttribute("managerVo", managerVo);
-
-		return "manager/manager/managerEdit";
-	}
-	*/
-	@RequestMapping(name= "/manager/manager/managerEdit.do")
-	public String managerEdit(@RequestParam(defaultValue = "0", required = false ) int adminCode) {
-		logger.info("수정화면 보여주기");
-		
-		return "manager/manager/managerEdit";
-	}
+	
+	
 }
 

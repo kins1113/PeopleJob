@@ -51,9 +51,9 @@ public class ManagerServiceImpl implements ManagerService{
 		String authority=managerDao.selectAuthorityById(adminid);
 		logger.info("메니저 서비스에 isAuthority메서드 adminid={} ,authority={}",adminid,authority);
 		boolean isAuthority=false;
-		if(authority.equals(AUTHORITY_GM)) {
+		if(AUTHORITY_GM.equals(authority)) {
 			isAuthority = true;
-		}else if(authority.equals(AUTHORITY_ADMIN) || authority.equals(AUTHORITY_MASTER)){
+		}else if(AUTHORITY_ADMIN.equals(authority) || AUTHORITY_MASTER.equals(authority)){
 			isAuthority = false;
 		}
 		return isAuthority;
@@ -65,8 +65,8 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public ManagerVO selectById(int adminCode) {
-		return managerDao.selectById(adminCode);
+	public ManagerVO selectByCode(int adminCode) {
+		return managerDao.selectByCode(adminCode);
 	}
 
 	@Override

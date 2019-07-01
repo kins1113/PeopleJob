@@ -24,6 +24,6 @@ public interface ManagerService {
 	public int delectManager(int adminCode);
 	public boolean isAuthority(String adminid);
 	public int selectIdChk(String adminid);
-	public ManagerVO selectById(int adminCode);
+	public ManagerVO selectByCode(int adminCode);
 	public int updateManager(ManagerVO managerVo);
 }

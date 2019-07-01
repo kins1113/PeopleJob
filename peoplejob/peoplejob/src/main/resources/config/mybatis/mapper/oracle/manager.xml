@@ -39,7 +39,7 @@
 		select count(*) from manager where adminid = #{adminid}
 	</select> 
 	
-	<select id="selectById" parameterType="int" resultType="managerVo">
+	<select id="selectByCode" parameterType="int" resultType="managerVo">
 		select admin_code, adminid, adminpwd, authority, aut_regdate, aut_deldate from MANAGER
 		where admin_code = #{adminCode}
 	</select>

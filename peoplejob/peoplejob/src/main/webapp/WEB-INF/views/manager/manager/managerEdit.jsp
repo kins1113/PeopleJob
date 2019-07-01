@@ -129,19 +129,19 @@
 				<div class="col-lg-6">
 					<div class="card card-default">
 						<div class="card-header card-header-border-bottom">
-							<h2>관리자 </h2>
+							<h2>관리자 수정</h2>
 						</div>
 	<div class="card-body">
 		<form 
-				action="<c:url value='/manager/manger/managerEdit.do'/>" 		
+				action="<c:url value='/manager/manager/managerEdit.do'/>" 		
 				method="post" name="managerAddForm">
-			<input type="hidden" name="adminid">
 			<div class="form-row">
 				<div class="col-md-12 mb-3">
 					<label for="validationServer01">아이디</label> 
 					<input
 						type="text" class="form-control managerAdd" id="validationServer01"
 						placeholder="Id"  name="adminid"
+						value=${vo.adminid}
 						 >
 					<div class="valid-feedback">아이디를 입력하세요</div>
 				</div>
@@ -160,8 +160,14 @@
 									<option value="not">권한을 선택하세요</option>
 									<!-- <option value="GM">GM    : 최고관리자</option> -->
 									<option value="Master"
+									<c:if test="${vo.authority =='Master' }">
+									selected="selected"
+									</c:if>
 									>Master: 중간관리자</option>
 									<option value="Admin" 
+									<c:if test="${vo.authority =='Admin' }">
+									selected="selected"
+									</c:if>
 									>Admin : 일반 관리자</option>
 								</select>
 							</div>
