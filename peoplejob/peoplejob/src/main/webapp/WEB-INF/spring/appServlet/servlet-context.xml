@@ -38,5 +38,15 @@
 	</beans:bean>
 	
 	
+	<!-- Managerintercepter -->
+	<!-- <interceptors>
+		<interceptor>
+			<mapping path="/manager/manager/*"/>
+			<mapping path="/manager/index.do"/>
+				
+			<beans:ref bean="managerInterceptor"/>
+		</interceptor>
+	</interceptors> -->
+	
 	
 </beans:beans>
