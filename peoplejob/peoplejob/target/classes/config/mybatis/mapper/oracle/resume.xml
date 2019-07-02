@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.resume">
+
+	<insert id="insertResume" parameterType="resumeVo">
+		<selectKey order="BEFORE" keyProperty="resumeCode,langlicenceCode,dvCode,lNo,hopeworkCode,memberCode,localCode,firstCode,secondCode,thirdCode" resultType="hashmap">
+			select resume_seq.nextval as resumeCode, langcertification_seq.nextval as langlicenceCode
+			,career_seq.nextval as dvCode,certificate_seq.nextval as lNo,  
+			 Hope_working_seq.nextval as hopeworkCode,member_seq.nextval as memberCode, location_seq.nextval as localCode,
+			 first_seq.nextval as firstCode,second_seq.nextval as secondCode,third_seq.nextval as thirdCode from dual
+		</selectKey>
+	
+		
+		insert all INTO resume(resumeCode,resumetitle,introduce,award,opencheck)
+
+		VALUES (#{resumeCode},#{resumetitle},#{introduce},#{award},#{opencheck})
+
+		INTO langcertification (langlicenceCode,langlicencename,getdate,institute)
+
+		VALUES (#{langlicenceCode},#{langlicencename},#{getdate},#{institute})
+
+		INTO career (dvCode,companyname,workterm,chargework)
+
+		VALUES (#{dvCode},#{companyname},#{workterm},#{chargework})
+
+		INTO certificate (lNo,lName,lGetdate,lInstitution)
+
+		VALUES (#{lNo},#{lName},#{lGetdate},#{lInstitution})
+
+		INTO Hope_working (hopeworkCode,jobtype,hopeworkdate,hopepay,hopeworkform)
+		VALUES (#{hopeworkCode},#{jobtype},#{hopeworkdate},#{hopepay},#{hopeworkform})
+
+		into member(memberid,membername,zipcode,address,addressdetail,memberCode,pwd,birth,membergender,email,picture,tel)
+		values(#{memberid},#{membername},#{zipcode},#{address},#{addressdetail},#{memberCode},#{pwd},#{birth},#{membergender},#{eamil},#{picture},#{tel})
+
+		into location(localCode,sido,gugun)
+		values(#{localCode},#{sido},#{gugun})
+
+		into first(firstCode,firstname)
+		values(#{firstCode},#{firstname})
+
+		into second(secondCode,secondname)
+		values(#{secondCode},#{secondname})
+
+		into third(thirdCode,thirdname)
+		values(#{thirdCode},#{thirdname})
+
+		select * from dual
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+

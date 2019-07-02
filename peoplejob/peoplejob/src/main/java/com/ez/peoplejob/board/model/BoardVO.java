@@ -3,30 +3,30 @@ package com.ez.peoplejob.board.model;
 import java.sql.Timestamp;
 
 public class BoardVO {
-	private int board_code1;
-	private String fir_admin;
+	private int boardCode1;
+	private String firAdmin;
 	private String boardname;
 	private Timestamp boardregdate1;
 	private Timestamp boardupdate;
-	private String last_admin;
-	private String board_order;
+	private String lastAdmin;
+	private String boardOrder;
 	private String usage;
 	private String commentage;
 	private String upage;
 	private String upnumage;
 	private int upsizeage;
-	private int type_code;
-	public int getBoard_code1() {
-		return board_code1;
+	private int typeCode;
+	public int getBoardCode1() {
+		return boardCode1;
 	}
-	public void setBoard_code1(int board_code1) {
-		this.board_code1 = board_code1;
+	public void setBoardCode1(int boardCode1) {
+		this.boardCode1 = boardCode1;
 	}
-	public String getFir_admin() {
-		return fir_admin;
+	public String getFirAdmin() {
+		return firAdmin;
 	}
-	public void setFir_admin(String fir_admin) {
-		this.fir_admin = fir_admin;
+	public void setFirAdmin(String firAdmin) {
+		this.firAdmin = firAdmin;
 	}
 	public String getBoardname() {
 		return boardname;
@@ -46,17 +46,17 @@ public class BoardVO {
 	public void setBoardupdate(Timestamp boardupdate) {
 		this.boardupdate = boardupdate;
 	}
-	public String getLast_admin() {
-		return last_admin;
+	public String getLastAdmin() {
+		return lastAdmin;
 	}
-	public void setLast_admin(String last_admin) {
-		this.last_admin = last_admin;
+	public void setLastAdmin(String lastAdmin) {
+		this.lastAdmin = lastAdmin;
 	}
-	public String getBoard_order() {
-		return board_order;
+	public String getBoardOrder() {
+		return boardOrder;
 	}
-	public void setBoard_order(String board_order) {
-		this.board_order = board_order;
+	public void setBoardOrder(String boardOrder) {
+		this.boardOrder = boardOrder;
 	}
 	public String getUsage() {
 		return usage;
@@ -88,18 +88,20 @@ public class BoardVO {
 	public void setUpsizeage(int upsizeage) {
 		this.upsizeage = upsizeage;
 	}
-	public int getType_code() {
-		return type_code;
+	public int getTypeCode() {
+		return typeCode;
 	}
-	public void setType_code(int type_code) {
-		this.type_code = type_code;
+	public void setTypeCode(int typeCode) {
+		this.typeCode = typeCode;
 	}
 	@Override
 	public String toString() {
-		return "boardVO [board_code1=" + board_code1 + ", fir_admin=" + fir_admin + ", boardname=" + boardname
-				+ ", boardregdate1=" + boardregdate1 + ", boardupdate=" + boardupdate + ", last_admin=" + last_admin
-				+ ", board_order=" + board_order + ", usage=" + usage + ", commentage=" + commentage + ", upage="
-				+ upage + ", upnumage=" + upnumage + ", upsizeage=" + upsizeage + ", type_code=" + type_code + "]";
+		return "BoardVO [boardCode1=" + boardCode1 + ", firAdmin=" + firAdmin + ", boardname=" + boardname
+				+ ", boardregdate1=" + boardregdate1 + ", boardupdate=" + boardupdate + ", lastAdmin=" + lastAdmin
+				+ ", boardOrder=" + boardOrder + ", usage=" + usage + ", commentage=" + commentage + ", upage=" + upage
+				+ ", upnumage=" + upnumage + ", upsizeage=" + upsizeage + ", typeCode=" + typeCode + "]";
 	}
-	
+
+
+
 }
