@@ -1,8 +1,12 @@
 package com.ez.peoplejob.notice.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.ez.peoplejob.common.SearchVO;
 
 @Repository
 public class NoticeDAOMybatis implements NoticeDAO {
@@ -12,5 +16,11 @@ public class NoticeDAOMybatis implements NoticeDAO {
 	public int insertNotice(NoticeVO vo) {
 		int cnt=sqlSession.insert(namespace+"insertNotice",vo);
 		return cnt;
+	}
+	
+	public List<NoticeVO> selectAll(SearchVO searchVo){
+		List<NoticeVO>list
+		=sqlSession.selectList(namespace+"selectSearch",searchVo);
+		return list;
 	}
 }

@@ -1,6 +1,8 @@
 package com.ez.peoplejob.notice.controller;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.notice.model.NoticeService;
 import com.ez.peoplejob.notice.model.NoticeVO;
 
@@ -55,8 +58,17 @@ public class NoticeController {
 		model.addAttribute("url",url);
 		
 		//뷰페이지 리턴
-		return "manager/notice/list";
+		return "common/message";
 		
+	}
+	
+	@RequestMapping("/notice/list.do")
+	public String list(@ModelAttribute SearchVO searchVo, Model model) {
+		//1
+		List<NoticeVO> list=noticeService.selectAll(searchVo);
+		logger.info("공지 글 목록 결과, list.size={}",list.size());
+		
+		return "manager/notice/list";
 	}
 	
 }

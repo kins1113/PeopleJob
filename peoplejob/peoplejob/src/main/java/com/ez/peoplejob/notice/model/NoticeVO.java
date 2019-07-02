@@ -10,6 +10,16 @@ public class NoticeVO {
 	private Timestamp notifydate;
 	private int admin_code;
 	
+	//24시간 이내의 글인 경우 image표시하기 위해 사용
+		private double newImgTerm;
+	
+	public double getNewImgTerm() {
+			return newImgTerm;
+		}
+		public void setNewImgTerm(double newImgTerm) {
+			this.newImgTerm = newImgTerm;
+		}
+		//조회수 컬럼도 필요함
 	public int getNotify_code() {
 		return notify_code;
 	}
@@ -44,7 +54,8 @@ public class NoticeVO {
 	@Override
 	public String toString() {
 		return "NoticeVO [notify_code=" + notify_code + ", notifytitle=" + notifytitle + ", notifycontent="
-				+ notifycontent + ", notifydate=" + notifydate + ", admin_code=" + admin_code + "]";
+				+ notifycontent + ", notifydate=" + notifydate + ", admin_code=" + admin_code + ", newImgTerm="
+				+ newImgTerm + "]";
 	}
 	
 	
