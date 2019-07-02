@@ -65,6 +65,19 @@ public class BoardController {
 		String adminid=(String) request.getSession().getAttribute("adminid");
 		logger.info("계시판 추가 처리, 파라미터 boardVo={}\n adminid={}",boardVo,adminid);
 		boardVo.setFirAdmin(adminid);
+		
+		//업로드가 가능한지 체크여부
+		if(boardVo.getUpage()==null) {
+			boardVo.setUpage("N");
+		}else {
+			boardVo.setUpage("Y");
+		}
+		//댓글처리가 가능한지 체크 여부
+		if(boardVo.getCommentage()==null) {
+			boardVo.setCommentage("N");
+		}else {
+			boardVo.setCommentage("Y");
+		}
 		int re=boardService.insetBoard(boardVo);
 		String msg="", url="/manager/board/boardAdd.do";
 		if(re>0) {

@@ -8,9 +8,14 @@
 <h1>
 	Hello world!  
 </h1>
+<<<<<<< HEAD
 
 <P>  The time on the server is ${serverTime}. </P>
 
 
+=======
+fdsdafsadfasdfsfdsafsf
+<P>  The time on the server is ${serverTime}. </P>sdafsafsdfsaf
+>>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
 </body>
 </html>
