@@ -38,10 +38,10 @@ $(function() {
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="#" class="active" id="login-form-link">Login</a>
+								<a href="#" class="active" id="login-form-link">개인회원</a>
 							</div>
 							<div class="col-xs-6">
-								<a href="#" id="register-form-link">Register</a>
+								<a href="#" id="register-form-link">기업회원</a>
 							</div>
 						</div>
 						<hr>
@@ -49,42 +49,160 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+								<form id="login-form" action="" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="비밀번호">
 									</div>
 									<div class="form-group">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="가입하기">
-											</div>
+										<input type="password" name="pwd2" id="pwd2" tabindex="2" class="form-control" placeholder="비밀번호확인">
+									</div>
+									<div class="form-group">
+										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="이름">
+									</div>
+										<!-- <div class="radio radio-danger" style="float:left">
+ 
+										<input type="radio" name="membergender" id="membergender" value="Yes" checked>
+										<input type="radio" name="membergender" id="membergender" value="No">
+										<label>남</label>
+										<label>여</label>
+										</div> -->
+ 
+									<div class="form-group">
+										<table>
+											<tr style="font-size:1.3em">
+												<td>성별</td>
+												<td>&nbsp;&nbsp;</td>
+												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="남" checked>남</td>
+												<td>&nbsp;&nbsp;</td>
+												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="여" checked>여</td>
+											</tr>
+										</table>
+									</div>
+									<div class="form-group">
+										<input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="생년월일">
+									</div>
+									<div class="form-group">
+										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="전화번호">
+										
+									</div>
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="zipcode" id="zipcode" tabindex="1" placeholder="우편번호" 
+										class="form-control" style="width:150px" style="background-color: #50a954">
+									</div>
+									<div class="form-group">
+									<div class="row">
+										<input type="button" name="findzipcode" value="우편번호 찾기" class="btn btn-register" id="findzipcode">
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="text" name="address" id="address" tabindex="1" class="form-control" placeholder="주소">
+									</div>
+									<div class="form-group">
+										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
+									</div>
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
+										class="form-control" style="width:300px" style="background-color: #50a954">
+									</div>
+									<div class="form-group">
+									<div class="row">
+										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
 									
-								</form>
-								<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-									</div>
-									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-									</div>
-									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" 
+												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
+										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="가입하기">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
+												</div>
 											</div>
 										</div>
 									</div>
+								</form>
+								<form id="register-form" action="" method="post" role="form" style="display: none;">
+									<div class="form-group">
+										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
+									</div>
+									<div class="form-group">
+										<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="비밀번호">
+									</div>
+									<div class="form-group">
+										<input type="password" name="pwd2" id="pwd2" tabindex="2" class="form-control" placeholder="비밀번호확인">
+									</div>
+									<div class="form-group">
+										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="이름">
+									</div>
+										<!-- <div class="radio radio-danger" style="float:left">
+ 
+										<input type="radio" name="membergender" id="membergender" value="Yes" checked>
+										<input type="radio" name="membergender" id="membergender" value="No">
+										<label>남</label>
+										<label>여</label>
+										</div> -->
+ 
+									<div class="form-group">
+										<table>
+											<tr style="font-size:1.3em">
+												<td>성별</td>
+												<td>&nbsp;&nbsp;</td>
+												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="남" checked>남</td>
+												<td>&nbsp;&nbsp;</td>
+												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="여">여</td>
+											</tr>
+										</table>
+									</div>
+									<div class="form-group">
+										<input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="생년월일">
+									</div>
+									<div class="form-group">
+										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="전화번호">
+										
+									</div>
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="zipcode" id="zipcode" tabindex="1" placeholder="우편번호" 
+										class="form-control" style="width:150px" style="background-color: #50a954">
+									</div>
+									<div class="form-group">
+									<div class="row">
+										<input type="button" name="findzipcode" value="우편번호 찾기" class="btn btn-register" id="findzipcode">
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="text" name="address" id="address" tabindex="1" class="form-control" placeholder="주소">
+									</div>
+									<div class="form-group">
+										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
+									</div>
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
+										class="form-control" style="width:300px" style="background-color: #50a954">
+									</div>
+									<div class="form-group">
+									<div class="row">
+										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<input type="text" name="companyNo" id="companyno" tabindex="1" class="form-control" placeholder="사업자번호">
+									</div>
+									<div class="form-group">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" 
+												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
+										</div>
+									</div>
+									
 								</form>
 							</div>
 						</div>

@@ -336,7 +336,7 @@ button {
 				<!-- Logo desktop -->		
 				<div class="logo">
 					<a href="<c:url value='/main/mainindex.do'/>">
-					<img src="<c:url value='/resources/main/images/icons/logo-01.png'/>" alt="LOGO">
+					<img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="LOGO">
 					</a>
 				</div>	
 			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6" style="width: 500px">
@@ -358,7 +358,7 @@ button {
 					<!-- Menu desktop -->
 					<nav class="menu-desktop">
 						<a class="logo-stick" href="index.html">
-							<img src="<c:url value='/resources/main/images/logo-01.png'/>" alt="LOGO">
+							<img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="LOGO">
 						</a>
 
 						<ul class="main-menu">
