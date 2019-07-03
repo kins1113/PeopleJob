@@ -26,7 +26,6 @@ public class FileUploadUtility {
 	
 	@Resource(name="fileUploadProperties")
 	Properties props;
-	
 	public List<Map<String, Object>> fileUpload(HttpServletRequest request) {
 		//파일 업로드 처리
 		

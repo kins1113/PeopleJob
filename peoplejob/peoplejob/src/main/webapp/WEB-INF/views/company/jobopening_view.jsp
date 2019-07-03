@@ -34,7 +34,31 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">고용형태</label>
+                <label class="col-sm-2 control-label">역정보</label>
+                <div class="col-sm-3">
+                    <p class="form-control-static">${vo.subwayinfo}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">성별</label>
+                <div class="col-sm-3">
+                    <p class="form-control-static">${vo.gender}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">제한연령</label>
+                <div class="col-sm-3">
+                    <p class="form-control-static">${vo.agelimit}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">학력조건</label>
+                <div class="col-sm-3">
+                    <p class="form-control-static">${vo.academicCondition}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">근무형태</label>
                 <div class="col-sm-6">
                     <p class="form-control-static">${vo.workform }</p>
                 </div>
@@ -43,6 +67,18 @@
                 <label class="col-sm-2 control-label">근무기간</label>
                 <div class="col-sm-6">
                     <p class="form-control-static">${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">근무요일</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">${vo.dayofweek }</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">급여 및 급여방식</label>
+                <div class="col-sm-6">
+                    <p class="form-control-static">${vo.pay } / ${vo.payway }</p>
                 </div>
             </div>
             <div class="form-group">
@@ -87,7 +123,7 @@
             <input type="hidden" name="_method" value="delete"/>
             <div class="pull-right">
                 <button type="submit" id="deleteBtn" class="btn btn-default btn-mg" role="button">삭제</button>
-                <a href="hunting_form.jsp" id="modifyBtn" class="btn btn-default btn-mg" role="button">수정</a>
+                <a href="jobopening_edit.do?jobopening=${vo.jobopening }" id="modifyBtn" class="btn btn-default btn-mg" role="button">수정</a>
                 <button type="button" class="btn btn-default btn-mg" role="button">스크랩</button>
                 <a href="hunting_list.jsp" class="btn btn-default btn-mg" role="button">목록</a>
             </div>

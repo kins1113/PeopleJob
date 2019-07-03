@@ -1,6 +1,9 @@
 package com.ez.peoplejob.jobopening.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ez.peoplejob.common.FileUploadUtility;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
 
@@ -20,7 +24,7 @@ import com.ez.peoplejob.jobopening.model.JobopeningVO;
 public class JobopeningController {
 	private Logger logger=LoggerFactory.getLogger(JobopeningController.class);
 	@Autowired JobopeningService jobopeningService;
-	
+	@Autowired private FileUploadUtility fileUploadUtil;
 	@RequestMapping(value="/jobopening_register.do",method = RequestMethod.GET)
 	public String jobopening_register_get() {
 		logger.info("채용공고폼");
@@ -28,7 +32,7 @@ public class JobopeningController {
 	}
 	
 	@RequestMapping(value="/jobopening_register.do",method = RequestMethod.POST)
-	public String jobopening_register_post(@ModelAttribute JobopeningVO vo,Model model) {
+	public String jobopening_register_post(@ModelAttribute JobopeningVO vo,HttpServletRequest request,Model model) {
 		/*
 		 * String wel=""; for(int i=0;i<welfare1.size();i++) { if(i!=0) { wel+=","; }
 		 * wel+=welfare1.get(i); } vo.setWelfare(wel);
@@ -37,6 +41,14 @@ public class JobopeningController {
 		 * String walfare=vo.getWelfare(); String[] arr=walfare.split(",");
 		 */
 		logger.info("채용공고 등록 파라미터 vo={}",vo);
+		
+		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
+		 
+		String imageURL="";
+		for(Map<String,Object>map:list) {
+			imageURL=(String)map.get("fileName");
+		}
+		vo.setCompanyimage(imageURL);
 		
 		int cnt=jobopeningService.insertJobOpen(vo);
 		logger.info("공고등록결과 cnt={}",cnt);
@@ -66,5 +78,17 @@ public class JobopeningController {
 		logger.info("자세히보기 변수 vo=",vo);
 		model.addAttribute("vo", vo);
 		return "company/jobopening_view";
+	}
+	@RequestMapping("/jobopening_where.do")
+	public String jobopening_where() {
+		logger.info("조건지정");
+		return "company/jobopening_where";
+	}
+	@RequestMapping(value="/jobopening_edit.do",method = RequestMethod.GET)
+	public String jobopening_edit(@RequestParam (defaultValue = "0")int jobopening,Model model) {
+		logger.info("수정");
+		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
+		model.addAttribute("vo", vo);
+		return "company/jobopening_edit";
 	}
 }

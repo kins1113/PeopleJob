@@ -25,7 +25,8 @@
         <div class="page-header">
             <h3>구인</h3>
         </div>
-        <form id="boardForm" class="form-horizontal" role="form" method="post" action="<c:url value='/company/jobopening_register.do'/>">
+        <form id="boardForm" class="form-horizontal" role="form" method="post" action="<c:url value='/company/jobopening_register.do'/>"
+        enctype="multipart/form-data">
         <!-- ${company_code} -->
         <input type="text" name="companyCode" value="1">
 
@@ -214,11 +215,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <label class="control-label">공고 이미지 :</label> 
-                    <input id="companyimage" name="companyimage" class="form-control" type="file" />
+                    <input id="companyimageurl" name="companyimageurl" class="form-control" type="file" />
                 </div>
             </div>
- 				-->
-
             <div class="form-group">
                 <div class="text-center">
                     <input type="submit" class="btn btn-success btn-mg" value="저장" role="button" />
