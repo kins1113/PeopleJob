@@ -78,6 +78,15 @@ $(function() {
 											</div>
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<a href="<c:url value='/login/selectregister.do'/>" tabindex="5" class="forgot-password">회원가입</a>
+												</div>
+											</div>
+										</div>
+									</div>
 								</form>
 								<form id="register-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: none;">
 									<div class="form-group">
@@ -103,6 +112,15 @@ $(function() {
 											<div class="col-lg-12">
 												<div class="text-center">
 													<a href="<c:url value='/login/findId.do'/>" tabindex="5" class="forgot-password">ID/PW찾기</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<a href="<c:url value='/login/selectregister.do'/>" tabindex="5" class="forgot-password">회원가입</a>
 												</div>
 											</div>
 										</div>

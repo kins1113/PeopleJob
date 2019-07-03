@@ -34,15 +34,20 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <style type="text/css">
+
+a.f1-m-3.cl2.hov-cl10.trans-03 {
+    font-size: 1.2em;
+}
+
 img.imgsize {
     width: 160px;
 }
 .row{
 	display: block;
 }
-.m-b-45 {
+/*  .m-b-45 {
     width: 200px;
-}
+}  */
 .m-all-45, .m-b-45, .m-tb-45 {
     margin-bottom: 10px;
 }
@@ -52,7 +57,7 @@ img.imgsize {
 }
 
 .col-sm-6.p-r-25.p-r-15-sr991 {
-    width: 30%;
+    width: 25%;
 }
 
 .col-md-10.col-lg-4 {
@@ -335,9 +340,9 @@ button {
 							<li class="main-menu-active">
 								<a href="#">채용정보</a>
 								<ul class="sub-menu">
-									<li><a href="index.html">직종별</a></li>
-									<li><a href="home-02.html">지역별</a></li>
-									<li><a href="home-03.html">업무별</a></li>
+									<li><a href="<c:url value='/company/jobopening_list.do'/>">직종별</a></li>
+									<li><a href="<c:url value='/company/jobopening_list.do'/>">지역별</a></li>
+									<li><a href="<c:url value='/company/jobopening_list.do'/>">업무별</a></li>
 								</ul>
 							</li>
 
@@ -411,10 +416,9 @@ button {
         <br><br><br>
         <div class="mbrLinks clear">
             <span class="mbr dotum">
-                <a href="https://www.jobkorea.co.kr/Join/M_Regist" class="devHref devClick" data-click-value="55">
                 <a href="<c:url value='/login/selectregister.do'/>" >
                 <strong>회원가입</strong></a>
-                </a><span class="idBx">
+                <span class="idBx">
                  <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
             </span>
         
@@ -433,6 +437,7 @@ button {
 						<h3 class="f1-m-2 cl3 tab01-title" style="float:right">
 							채용정보
 						</h3>
+						<h5> VVIP</h5>
 						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
 					</div>
 
@@ -446,7 +451,7 @@ button {
 
 								<div class="p-t-16">
 									<h5 class="p-b-5">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em">
 											삼성전자 개발자 채용 
 										</a>
 									</h5>
@@ -594,19 +599,19 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/latest-06.jpg'/>" alt="IMG">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
 									<h5 class="p-b-5">
 										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-											You wish lorem ipsum dolor sit amet consectetur 
+											한화 2019 공채 
 										</a>
 									</h5>
 
 									<span class="cl8">
 										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
+											by HanWha
 										</a>
 
 										<span class="f1-s-3 m-rl-3">
@@ -614,7 +619,7 @@ button {
 										</span>
 
 										<span class="f1-s-3">
-											Feb 09
+											Feb 15
 										</span>
 									</span>
 								</div>
@@ -673,6 +678,7 @@ button {
 						<h3 class="f1-m-2 cl3 tab01-title" style="float:right">
 							채용정보
 						</h3>
+						<h5> VIP </h5>
 						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
 					</div>
 
@@ -834,19 +840,19 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/latest-06.jpg'/>" alt="IMG">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
 									<h5 class="p-b-5">
 										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-											You wish lorem ipsum dolor sit amet consectetur 
+											한화 2019 공채 
 										</a>
 									</h5>
 
 									<span class="cl8">
 										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
+											by HanWha
 										</a>
 
 										<span class="f1-s-3 m-rl-3">
@@ -854,7 +860,7 @@ button {
 										</span>
 
 										<span class="f1-s-3">
-											Feb 09
+											Feb 15
 										</span>
 									</span>
 								</div>

@@ -49,7 +49,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+								<form id="login-form" action="" method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
@@ -119,9 +119,17 @@ $(function() {
 												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
 										</div>
 									</div>
-									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
+												</div>
+											</div>
+										</div>
+									</div>
 								</form>
-								<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
+								<form id="register-form" action="" method="post" role="form" style="display: none;">
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
