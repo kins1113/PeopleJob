@@ -48,7 +48,6 @@
 	href="${pageContext.request.contextPath}/resources/admin/assets/css/sleek.css" />
 
 
-
 <!-- FAVICON -->
 <link
 	href="${pageContext.request.contextPath}/resources/admin/assets/img/favicon.png"
@@ -62,8 +61,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-<script
-	src="${pageContext.request.contextPath}/resources/admin/assets/plugins/nprogress/nprogress.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/admin/assets/plugins/nprogress/nprogress.js"></script>
+<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery-3.4.1.min.js"></script>
 </head>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
 

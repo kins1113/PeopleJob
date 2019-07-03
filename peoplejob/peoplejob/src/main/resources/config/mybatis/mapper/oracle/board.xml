@@ -13,6 +13,10 @@
 			values(#{boardCode1}, #{firAdmin}, #{boardname}, #{commentage}, 
 					#{upage}, #{upnumage}, #{upsizeage}, #{typeCode})
 	</insert>
+	
+	<select id="">
+	
+	</select>
 
 </mapper>
 

@@ -35,6 +35,18 @@
 			}
 			 	  
 		});
+		//맨위에 버튼 누르면 전체 선택
+		$("#bkCheckAll").click(function(){
+			$("#boardKindDiv input[name=bkCheck]").prop("checked",this.checked);
+		})
+		
+		//선택된것 삭제 
+		$("#btMultDel").click(function(){
+			
+			$("form[name=boardKindAddForm]").prop("action","<c:url value='/manager/board/boardkindDel.do'/>")
+			$("form[name=boardKindAddForm]").submit();
+			
+		});
 	})
 </script>
  <div class="content-wrapper">
@@ -51,7 +63,7 @@
 				<li class="nav-item">
 					<a class="nav-link active" id="home3-tab" data-toggle="tab" href="#home3" role="tab" aria-controls="home3" aria-selected="true">게시판 추가</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" >
 					<a class="nav-link" id="profile3-tab" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile3" aria-selected="false">카테고리 추가</a>
 				</li>
 			</ul>
@@ -134,10 +146,15 @@
 							<!-- 카테고리 보여주는 테이블 -->
 				<div class="col-lg-6">
 									<div class="card card-default">
-										<div class="card-body">
+										<div class="card-body" id="boardKindDiv">
 											<table class="table table-bordered">
 												<thead>
 													<tr>
+														<th>
+															<label class="control outlined control-checkbox checkbox-primary">
+															<input type="checkbox" id="bkCheckAll" />
+															<div class="control-indicator"></div>
+														</th>
 														<th scope="col">이름</th>
 														<th scope="col">사용여부</th>
 														<th scope="col">등록일</th>
@@ -147,6 +164,11 @@
 												<!--  -->
 												<c:forEach var="vo" items="${BKList }">
 													<tr>
+														<td>
+															<label class="control outlined control-checkbox checkbox-primary">
+															<input type="checkbox" name="bkCheck"  value="${vo.typeCode }"/>
+															<div class="control-indicator"></div>
+														</td>
 														<td scope="row">${vo.type }</td>
 														<td>
 														<c:if test="${vo.usage=='Y' }">
@@ -172,15 +194,17 @@
 									<div class="form-group">
 										<label for="fname">카테고리 명</label>
 										<input type="text" name="type" class="form-control" placeholder="Cartegory name">
+											<br>
+											<button type="submit" class="btn btn-primary btn-default">추가</button>
+											<button type="button" class="btn btn-primary btn-default" id="btMultDel">선택 삭제</button>
 									</div>
 								</div>
-								<div class="col-sm-6">
+								<!-- <div class="col-sm-6">
 									<div class="row">
 										<div class="col-6">
-											<button type="submit" class="btn btn-primary btn-default">추가</button>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</form>
 					</div>
@@ -191,7 +215,6 @@
 		</div>
 	</div>
 </div>
-
 
 </div></div></div>
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

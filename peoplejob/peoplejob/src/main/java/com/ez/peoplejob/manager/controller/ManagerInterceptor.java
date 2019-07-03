@@ -23,8 +23,8 @@ public class ManagerInterceptor extends HandlerInterceptorAdapter{
 		logger.info("인터셉트 로그인 체크, 세션에 id={}",id);
 		
 		if(id==null || id.isEmpty()) {
-			PrintWriter out = response.getWriter();
 			response.setContentType("text/html;charset=utf-8");		
+			PrintWriter out = response.getWriter();
 			out.print("<script type='text/javascript'>");
 			out.print("alert('로그인을 하셔야합니다.');");
 			out.print("location.href='"+request.getContextPath()+"/manager/login/managerLogin.do';");

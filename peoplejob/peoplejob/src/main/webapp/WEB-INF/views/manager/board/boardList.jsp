@@ -15,6 +15,34 @@
 						<p class="mb-5">
 							여기에 버튼 같은거 추가
 						</p>
+						<p class="mb-5">
+							<div class="divPage">
+	<!-- 페이지 번호 추가 -->		
+	<c:if test="${pagingInfo.firstPage>1 }">
+		<a href="#" onclick="boardList(${pagingInfo.firstPage-1})">			
+		    <img src='<c:url value="/images/first.JPG" />'  border="0">	</a>
+	</c:if>
+					
+	<!-- [1][2][3][4][5][6][7][8][9][10] -->
+	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+		<c:if test="${i==pagingInfo.currentPage }">
+			<span style="color:blue;font-weight:bold">${i }</span>
+		</c:if>
+		<c:if test="${i!=pagingInfo.currentPage }">						
+			<a href="#" onclick="boardList(${i})">
+				[${i }]
+			</a>
+		</c:if>		
+	</c:forEach>
+	
+	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+		<a href="#" onclick="boardList(${pagingInfo.lastPage+1})">			
+			<img src="<c:url value="/images/last.JPG" />" border="0">
+		</a>
+	</c:if>
+	<!--  페이지 번호 끝 -->
+</div>
+						</p>
 						<table class="table table-hover ">
 							<thead>
 								<tr>
@@ -25,42 +53,16 @@
 								</tr>
 							</thead>
 							<tbody>
+								<!-- 게시판 보여주기 반복 시작 -->
 								<tr>
 									<td scope="row">1</td>
 									<td>Lucia</td>
 									<td>Christ</td>
 									<td>@Lucia</td>
 								</tr>
-								<tr>
-									<td scope="row">2</td>
-									<td>Catrin</td>
-									<td>Seidl</td>
-									<td>@catrin</td>
-								</tr>
-								<tr>
-									<td scope="row">3</td>
-									<td>Lilli</td>
-									<td>Kirsh</td>
-									<td>@lilli</td>
-								</tr>
-								<tr>
-									<td scope="row">4</td>
-									<td>Else</td>
-									<td>Voigt</td>
-									<td>@voigt</td>
-								</tr>
-								<tr>
-									<td scope="row">5</td>
-									<td>Ursel</td>
-									<td>Harms</td>
-									<td>@ursel</td>
-								</tr>
-								<tr>
-									<td scope="row">6</td>
-									<td>Anke</td>
-									<td>Sauter</td>
-									<td>@Anke</td>
-								</tr>
+								
+								
+								<!--  게시판 반복 끝 -->
 							</tbody>
 						</table>
 					</div>
