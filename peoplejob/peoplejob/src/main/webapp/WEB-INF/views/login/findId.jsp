@@ -54,17 +54,8 @@ $(function() {
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="이름" value="">
 									</div>
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
-										class="form-control" style="width:300px" style="background-color: #50a954">
-									</div>
 									<div class="form-group">
-									<div class="row">
-										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
-										</div>
-									</div>
-									<div class="form-group">
-									
+										<input type="text" name="email" id="email" tabindex="2" class="form-control" placeholder="이메일">
 									</div>
 									<div class="form-group">
 										<div class="row">
@@ -82,15 +73,10 @@ $(function() {
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="2" class="form-control" placeholder="ID">
 									</div>
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
-										class="form-control" style="width:300px" style="background-color: #50a954">
-									</div>
 									<div class="form-group">
-									<div class="row">
-										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
-										</div>
+										<input type="text" name="email" id="email" tabindex="2" class="form-control" placeholder="이메일">
 									</div>
+									
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">

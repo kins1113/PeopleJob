@@ -55,8 +55,8 @@
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card text-center p-table p-blue">
                 <div class="card-header">
-                     <h3 class="p-name p-name">VIP</h3>
-                    <h4 class="p-price">700,000원 </h4>
+                     <h3 class="p-name p-name">Premium</h3>
+                    <h4 class="p-price">500,000원 </h4>
                     <small class="text-muted">매월</small>
                 </div>
                 <div class="card-body">
@@ -77,8 +77,8 @@
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card text-center p-table p-violet">
                 <div class="card-header">
-                     <h3 class="p-name p-name">VIP</h3>
-                    <h4 class="p-price">700,000원 </h4>
+                     <h3 class="p-name p-name">Grand</h3>
+                    <h4 class="p-price">300,000원 </h4>
                     <small class="text-muted">매월</small>
                 </div>
                 <div class="card-body">

@@ -34,6 +34,25 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <style type="text/css">
+/* .col-sm-6.p-r-25.p-r-15-sr991 {
+    border: 1px solid lightgray;
+} */
+
+.logo img {
+    max-width: 300%;
+    max-height: 50%;
+    width: 215px;
+}
+.how2.how2-cl4.flex-s-c.m-r-10.m-r-0-sr991 {
+    margin-left: 0px;
+}
+
+
+
+
+.col-md-10.col-lg-8.p-b-20 {
+    width: 767px;
+}
 
 a.f1-m-3.cl2.hov-cl10.trans-03 {
     font-size: 1.2em;
@@ -58,6 +77,7 @@ img.imgsize {
 
 .col-sm-6.p-r-25.p-r-15-sr991 {
     width: 25%;
+    height: 195px;
 }
 
 .col-md-10.col-lg-4 {
@@ -441,7 +461,7 @@ button {
 						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
 					</div>
 
-					<div class="row p-t-35" style="padding-top: 0px">
+					<div class="row p-t-35" style="padding-top: 0px;margin-left: 0px;width: 109%;">
 						<div class="col-sm-6 p-r-25 p-r-15-sr991">
 							<!-- Item latest -->	
 							<div class="m-b-45">
@@ -537,7 +557,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+									<img src="<c:url value='/resources/main/images/kaokaobank.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
@@ -568,7 +588,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+									<img src="<c:url value='/resources/main/images/ezen.jpg'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
@@ -599,7 +619,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+									<img src="<c:url value='/resources/main/images/lg.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
@@ -682,7 +702,7 @@ button {
 						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
 					</div>
 
-					<div class="row p-t-35" style="padding-top: 0px">
+					<div class="row p-t-35" style="padding-top: 0px;margin-left: 0px;width: 109%;">
 						<div class="col-sm-6 p-r-25 p-r-15-sr991">
 							<!-- Item latest -->	
 							<div class="m-b-45">
@@ -692,7 +712,7 @@ button {
 
 								<div class="p-t-16">
 									<h5 class="p-b-5">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03" style="font-size: 1.0em">
 											삼성전자 개발자 채용 
 										</a>
 									</h5>
@@ -778,7 +798,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+									<img src="<c:url value='/resources/main/images/kaokaobank.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
@@ -809,7 +829,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+									<img src="<c:url value='/resources/main/images/ezen.jpg'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
@@ -840,7 +860,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+									<img src="<c:url value='/resources/main/images/lg.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">

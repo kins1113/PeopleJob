@@ -112,7 +112,9 @@ $(function() {
 										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
-									
+									<div class="form-group">
+										<input type="text" name="" id="" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
+									</div>
 									<div class="form-group">
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="register-submit" id="register-submit" 
@@ -120,13 +122,11 @@ $(function() {
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="row">
-											<div class="col-lg-12">
+											<div class="col-sm-6 col-sm-offset-3">
 												<div class="text-center">
 													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
 												</div>
 											</div>
-										</div>
 									</div>
 								</form>
 								<form id="register-form" action="" method="post" role="form" style="display: none;">
@@ -144,10 +144,6 @@ $(function() {
 									</div>
 										<!-- <div class="radio radio-danger" style="float:left">
  
-										<input type="radio" name="membergender" id="membergender" value="Yes" checked>
-										<input type="radio" name="membergender" id="membergender" value="No">
-										<label>남</label>
-										<label>여</label>
 										</div> -->
  
 									<div class="form-group">
@@ -192,7 +188,9 @@ $(function() {
 										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
-									
+									<div class="form-group">
+										<input type="text" name="" id="" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
+									</div>
 									<div class="form-group">
 										<input type="text" name="companyNo" id="companyno" tabindex="1" class="form-control" placeholder="사업자번호">
 									</div>
@@ -202,7 +200,13 @@ $(function() {
 												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
 										</div>
 									</div>
-									
+									<div class="form-group">
+											<div class="col-sm-6 col-sm-offset-3">
+												<div class="text-center">
+													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
+												</div>
+											</div>
+									</div>
 								</form>
 							</div>
 						</div>
