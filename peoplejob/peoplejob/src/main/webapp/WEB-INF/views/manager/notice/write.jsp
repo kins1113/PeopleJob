@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
           
           <div class="content-wrapper">
@@ -6,7 +8,7 @@
 			<div class="col-lg-6">
 				<div class="card card-default">
 					<div class="card-header card-header-border-bottom">
-						<h2>notice</h2>
+						<h2>공지</h2>
 					</div>
 					<div class="card-body">
 						<form name="noticeWrite" method="post"

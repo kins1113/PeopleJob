@@ -41,9 +41,8 @@
 	<!-- Managerintercepter -->
 	 <interceptors>
 		<interceptor>
-			<mapping path="/manager/manager/**"/>
-			<mapping path="/manager/index.do"/>
-				<exclude-mapping path="/manager/login/login.do"/>
+			<mapping path="/manager/**"/>
+				<exclude-mapping path="/manager/login/managerLogin.do"/>
 			<beans:ref bean="managerInterceptor"/>
 		</interceptor>
 	</interceptors> 
