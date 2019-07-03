@@ -20,4 +20,16 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		logger.info("회원가입 화면 보여주기");
 		return "login/selectregister";
 	}
+	
+	@RequestMapping("/service/payment.do")
+	public String payment() {
+		logger.info("결제 서비스 화면 보여주기");
+		return "service/payment";
+	}
+	
+	@RequestMapping("/login/findId.do")
+	public String findId() {
+		logger.info("아이디/비밀번호 찾기 화면 보여주기");
+		return "login/findId";
+	}
 }

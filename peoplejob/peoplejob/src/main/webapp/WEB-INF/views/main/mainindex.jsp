@@ -300,31 +300,7 @@ button {
 		<div class="container-menu-desktop">
 
 			<!-- Header Mobile -->
-			<div class="wrap-header-mobile">
-				<!-- Logo moblie -->		
-				<div class="logo-mobile">
-					<a href="<c:url value='/main/mainindex.do'/>"><img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="IMG-LOGO"></a>
-				</div>
-			<span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
-					<span class="dis-inline-block slide100-txt-item animated visible-false">
-						Interest rate angst trips up US equity bull market
-					</span>
-					
-					<span class="dis-inline-block slide100-txt-item animated visible-false">
-						Designer fashion show kicks off Variety Week
-					</span>
-
-					<span class="dis-inline-block slide100-txt-item animated visible-false">
-						Microsoft quisque at ipsum vel orci eleifend ultrices
-					</span>
-				</span>
-				<!-- Button show menu -->
-				<div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-				</div>
-			</div>
+			
 
 			<!-- Menu Mobile -->
 			
@@ -357,7 +333,7 @@ button {
 
 						<ul class="main-menu">
 							<li class="main-menu-active">
-								<a href="index.html">채용정보</a>
+								<a href="#">채용정보</a>
 								<ul class="sub-menu">
 									<li><a href="index.html">직종별</a></li>
 									<li><a href="home-02.html">지역별</a></li>
@@ -398,20 +374,6 @@ button {
 							</li>
 
 
-							<li>
-								<a href="#">Features</a>
-								<ul class="sub-menu">
-									<li><a href="category-01.html">Category Page v1</a></li>
-									<li><a href="category-02.html">Category Page v2</a></li>
-									<li><a href="blog-grid.html">Blog Grid Sidebar</a></li>
-									<li><a href="blog-list-01.html">Blog List Sidebar v1</a></li>
-									<li><a href="blog-list-02.html">Blog List Sidebar v2</a></li>
-									<li><a href="blog-detail-01.html">Blog Detail Sidebar</a></li>
-									<li><a href="blog-detail-02.html">Blog Detail No Sidebar</a></li>
-									<li><a href="about.html">About Us</a></li>
-									<li><a href="contact.html">Contact Us</a></li>
-								</ul>
-							</li>
 						</ul>
 					</nav>
 				</div>
@@ -435,7 +397,6 @@ button {
 			
 		<!-- 로그인  -->
 		<div class="loginWrap">
-        <h3 class="blind">회원 로그인</h3>
         <ul class="memberType clear">
             <li>
                 <button type="button" class="tab devToggleLayer devHref devClick" data-click-value="53" data-target="#divLoginForm" title="개인회원 로그인">
@@ -444,44 +405,6 @@ button {
                     <span class="tx"> 로그인</span></a>
                 </button>
                 <div class="lyLoginForm" id="divLoginForm">
-                    <h4>개인회원 로그인</h4>
-                    <form id="loginForm" name="loginForm" action="https://www.jobkorea.co.kr/Login/Login.asp" method="post">
-                        <input type="hidden" id="DB_Name" name="DB_Name" value="GG">
-                        <input type="hidden" id="IP_ONOFF" name="IP_ONOFF" value="Y">
-                        <input type="hidden" id="re_url" name="re_url">
-                        <fieldset>
-                            <legend class="blind">로그인 및 관련 정보</legend>
-                            <div class="loginIptWrap clear">
-                                <div class="loginIpt">
-                                    <label type="text" for="lb_id" class="ph id">잡코리아 ID 또는 알바몬 ID</label>
-                                    <input type="text" name="M_ID" id="lb_id" class="iptTx" title="아이디 입력" maxlength="20" style="ime-mode:inactive;" value="">
-                                    <label for="lb_pw" class="ph pw">비밀번호</label>
-                                    <input type="password" name="M_PWD" id="lb_pw" class="iptTx" title="비밀번호 입력">
-                                </div>
-                                <button type="button" onclick="go_login_send(); return false;" class="btnLogin"><span>로그인</span></button>
-                            </div>
-                            <br><br>
-                            <div class="loginSetWrap">
-                                <span class="setBx"><input type="checkbox" name="lb_idSave" id="lb_idSave" value="Y" checked=""><label for="lb_idSave" class="devBox bxIpt chk">아이디저장</label></span>[개발] 선택 시 .chk 추가
-                                <span class="setBx">
-                                    <button type="button" onclick="window.open('http://www.jobkorea.co.kr/popup/popup_ipsecret01.asp','popName','width=500,height=460'); return false;"><span>IP 보안</span></button>
-                                    <button type="button" class="mainBtnA mainBtnSec devSecurity on" onclick="ipCheckSetting();"><span class="blind">ON</span></button>[개발] 선택 시 .on 추가
-                                    <span class="lyTooltip devHide" id="ipNotice" style="display:none;">개인정보 보호를 위해 IP보안을 <em>ON</em> 으로 변경해주세요.<span class="mainIcn mainIcnArrUp"></span></span>
-                                </span>
-                                <span class="links">
-                                    <span class="idBx"><a href="https://www.jobkorea.co.kr/Login/Search/Search_Id.asp" class="devHref devClick" data-click-value="56">ID</a></span><span class="pwBx"><a href="https://www.jobkorea.co.kr/Login/Search/Search_Pwd.asp" class="devHref devClick" data-click-value="56">PW 찾기</a></span>
-                                </span>
-                            </div>
-
-                            <ul class="btnSocial clear">
-                                <li><button type="button" class="mainBtnB mainBtnNv devNvLogin devHref devClick" data-click-value="57"><span class="icn icnNa"></span>네이버 로그인</button></li>
-                                <li><button type="button" class="mainBtnB mainBtnFb devFbLogin devHref devClick" data-click-value="58" onclick="facebookLogin()"><span class="icn icnFb"></span>페이스북 로그인</button></li>
-                                <li><button type="button" class="mainBtnB mainBtnKo devKaLogin devHref devClick" data-click-value="59"><span class="icn icnKo"></span>카카오 로그인</button></li>
-                                <li><button type="button" class="mainBtnB mainBtnGg devGlLogin devHref devClick" data-click-value="60"><span class="icn icnGl"></span>구글 로그인</button></li>
-                            </ul>
-
-                        </fieldset>
-                    </form>
                 </div>
             </li>
         </ul>
@@ -492,7 +415,7 @@ button {
                 <a href="<c:url value='/login/selectregister.do'/>" >
                 <strong>회원가입</strong></a>
                 </a><span class="idBx">
-                 <a href="#">ID/PW 찾기</a></span>
+                 <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
             </span>
         
         </div> 
@@ -609,7 +532,7 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/kaokaobank.png'/>" alt="IMG">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
@@ -640,11 +563,11 @@ button {
 							<!-- Item latest -->	
 							<div class="m-b-45">
 								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-									<img src="<c:url value='/resources/main/images/ezen.jpg'/>" alt="IMG">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
 								</a>
 
 								<div class="p-t-16">
-									<h5 class="">
+									<h5 class="p-b-5">
 										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
 											한화 2019 공채 
 										</a>
@@ -703,7 +626,7 @@ button {
 				</div>
 
 				<div class="col-md-10 col-lg-4">
-					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20" style="width: 274px">
 						<!-- Video -->
 						<div class="p-b-23">
 							<div class="how2 how2-cl4 flex-s-c m-b-35">
@@ -712,24 +635,24 @@ button {
 								</h3>
 							</div>
 							<ul class="p-t-35" style="padding-top: 0px">
-								<li class="">
+								<li style="margin-bottom: 5px">
 									<!-- <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
 										1
-									</div> -->
+									</div> -->1&nbsp;
 									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										기업회원 회원가입시  주의사항
+										&nbsp;기업회원 회원가입시  주의사항
 									</a>
 								</li>
 
-								<li class="">
+								<li style="margin-bottom: 5px">2&nbsp;
 									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										 배너광고 문의
+										&nbsp; 배너광고 문의
 									</a>
 								</li>
 
-								<li class="">
+								<li style="margin-bottom: 5px">3&nbsp;
 									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										 자주하는 질문
+										 &nbsp;자주하는 질문
 									</a>
 								</li>
 
@@ -743,6 +666,205 @@ button {
 				<%-- <div class="col-md-10 col-lg-4">
 					<img alt="사이드배너" src="<c:url value='/resources/main/images/skybanner.png'/>">
 					</div> --%>
+				</div>
+				<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8 p-b-20">
+					<div class="how2 how2-cl4 flex-s-c m-r-10 m-r-0-sr991">
+						<h3 class="f1-m-2 cl3 tab01-title" style="float:right">
+							채용정보
+						</h3>
+						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
+					</div>
+
+					<div class="row p-t-35" style="padding-top: 0px">
+						<div class="col-sm-6 p-r-25 p-r-15-sr991">
+							<!-- Item latest -->	
+							<div class="m-b-45">
+								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+									<img src="<c:url value='/resources/main/images/samsung.png'/>" alt="IMG" class="imgsize">
+								</a>
+
+								<div class="p-t-16">
+									<h5 class="p-b-5">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+											삼성전자 개발자 채용 
+										</a>
+									</h5>
+
+									<span class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by SAMSUNG
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											2019-07-01 ~ 2019-07-13
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-6 p-r-25 p-r-15-sr991">
+							<!-- Item latest -->	
+							<div class="m-b-45">
+								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+									<img src="<c:url value='/resources/main/images/naver.jpg'/>" alt="IMG" class="imgsize">
+								</a>
+
+									<h5 class="p-b-5">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+											2019 네이버 개발자 채용 
+										</a>
+									</h5>
+
+									<span class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by NAVER
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											2019-06-30 ~ 2019-07-15
+										</span>
+									</span>
+							</div>
+						</div>
+
+						<div class="col-sm-6 p-r-25 p-r-15-sr991">
+							<!-- Item latest -->	
+							<div class="m-b-45">
+								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+								</a>
+
+								<div class="p-t-16">
+									<h5 class="p-b-5">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+											한화 2019 공채 
+										</a>
+									</h5>
+
+									<span class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by HanWha
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											Feb 15
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-6 p-r-25 p-r-15-sr991">
+							<!-- Item latest -->	
+							<div class="m-b-45">
+								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+								</a>
+
+								<div class="p-t-16">
+									<h5 class="p-b-5">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+											한화 2019 공채 
+										</a>
+									</h5>
+
+									<span class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by HanWha
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											Feb 15
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-6 p-r-25 p-r-15-sr991">
+							<!-- Item latest -->	
+							<div class="m-b-45">
+								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+									<img src="<c:url value='/resources/main/images/한화.png'/>" alt="IMG" class="imgsize">
+								</a>
+
+								<div class="p-t-16">
+									<h5 class="p-b-5">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+											한화 2019 공채 
+										</a>
+									</h5>
+
+									<span class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by HanWha
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											Feb 15
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-6 p-r-25 p-r-15-sr991">
+							<!-- Item latest -->	
+							<div class="m-b-45">
+								<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
+									<img src="<c:url value='/resources/main/images/latest-06.jpg'/>" alt="IMG">
+								</a>
+
+								<div class="p-t-16">
+									<h5 class="p-b-5">
+										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+											You wish lorem ipsum dolor sit amet consectetur 
+										</a>
+									</h5>
+
+									<span class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by John Alvarado
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											Feb 09
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+
 				</div>
 			</div>
 		</div>

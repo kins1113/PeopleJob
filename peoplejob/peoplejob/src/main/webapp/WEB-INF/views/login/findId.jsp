@@ -39,10 +39,10 @@ $(function() {
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="#" class="active" id="login-form-link">개인회원 로그인</a>
+								<a href="#" class="active" id="login-form-link">ID찾기</a>
 							</div>
 							<div class="col-xs-6">
-								<a href="#" id="register-form-link">기업회원 로그인</a>
+								<a href="#" id="register-form-link">비밀번호 찾기</a>
 							</div>
 						</div>
 						<hr>
@@ -50,60 +50,51 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+								<form id="login-form" action="" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="ID" value="">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="이름" value="">
+									</div>
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
+										class="form-control" style="width:300px" style="background-color: #50a954">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-									<div class="row" style="margin-left:-1px">
-										<input type="checkbox" name="remember" id="remember">아이디 저장
+									<div class="row">
+										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
+									</div>
+									<div class="form-group">
+									
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="ID찾기">
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="text-center">
-													<a href="<c:url value='/login/findId.do'/>" tabindex="5" class="forgot-password">ID/PW찾기</a>
-												</div>
-											</div>
-										</div>
-									</div>
+									
 								</form>
-								<form id="register-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: none;">
+								<form id="register-form" action="" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="ID" value="">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="이름">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="text" name="memberid" id="memberid" tabindex="2" class="form-control" placeholder="ID">
+									</div>
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
+										class="form-control" style="width:300px" style="background-color: #50a954">
 									</div>
 									<div class="form-group">
-									<div class="row" style="margin-left:-1px">
-										<input type="checkbox" name="remember" id="remember">아이디 저장
+									<div class="row">
+										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="text-center">
-													<a href="<c:url value='/login/findId.do'/>" tabindex="5" class="forgot-password">ID/PW찾기</a>
-												</div>
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="PW찾기">
 											</div>
 										</div>
 									</div>
