@@ -12,5 +12,17 @@ public class ResumeServiceImpl implements ResumeService{
 		
 		return resumeDao.insertResume(vo);
 	}
+	@Override
+	public ResumeVO selectResumeByNo(int resumeCode) {
+		return resumeDao.selectResumeByNo(resumeCode);
+	}
+	@Override
+	public int deleteResumeByNo(int resumeCode) {
+		return resumeDao.deleteResumeByNo(resumeCode);
+	}
+	@Override
+	public int updateResume(ResumeVO vo) {
+		return resumeDao.updateResume(vo);
+	}
 
 }
