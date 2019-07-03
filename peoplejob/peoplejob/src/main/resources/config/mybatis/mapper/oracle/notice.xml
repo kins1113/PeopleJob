@@ -30,6 +30,13 @@
 		<![CDATA[ where RNUM>#{firstRecordIndex}  
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
+	 
+	 <select id="selectTotalCount" parameterType="searchVo" resultType="int">
+	 select count(*) from notice
+	 <if test="searchKeyword != null and searchKeyword !=''">
+	 	where ${searchCondition} like '%' || #{searchKeyword} || '%'
+	 </if>
+	 </select>
 </mapper>
 
 
