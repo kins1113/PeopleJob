@@ -1,11 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
 
+<script type="text/javascript">	
+	function pageFunc(curPage){
+		document.frmSearch.currentPage.value=curPage;
+		document.frmSearch.submit();
+	}
+</script>
 
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
+      <th scope="col">제목</th>
+      <th scope="col">dd</th>
       <th scope="col">Last</th>
       <th scope="col">Handle</th>
     </tr>

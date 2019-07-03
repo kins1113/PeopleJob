@@ -19,7 +19,7 @@
 		    from
 		    (
 		        select notify_code, notifytitle, notifycontent, readcount,notifydate,
-					(sysdate-regdate)*24 as new_Img_Term
+					(sysdate-notifydate)*24 as new_Img_Term
 				from notice		
 				<if test="searchKeyword != null and searchKeyword != ''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
