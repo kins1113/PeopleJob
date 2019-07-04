@@ -6,12 +6,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>People Job-index</title>
+	<title>People Job</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="<c:url value='/resources/main/images/icons/favicon.png'/>"/>
+	<link rel="icon" type="image/png" href="<c:url value='/resources/main/images/icons/icon.PNG'/>"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/bootstrap/css/bootstrap.min.css'/>">
 <!--===============================================================================================-->
@@ -417,12 +417,19 @@ button {
 	<div class="container" style="max-width: 105%">
 		<div class="flex-c-c" style="margin-top: 10px">
 			<a href="#">
-				<img class="max-w-full" src="<c:url value='/resources/main/images/190125_apple_752x110.png'/>" alt="IMG">
+				 <img class="max-w-full" src="<c:url value='/resources/main/images/190125_apple_752x110.png'/>" alt="IMG"> 
+				<%-- <img class="max-w-full" src="<c:url value='/resources/main/images/ezenbanner.PNG'/>" style="width: 100px;" alt="IMG"> --%>
 			</a>
 			
 		<!-- 로그인  -->
 		<div class="loginWrap">
-        <ul class="memberType clear">
+		<!-- 
+		<ul class="memberType clear">
+		<li><input type="text" name="memberid" width="40px" placeholder="아이디"></li>
+		<li><input type="text" name="password" width="40px" placeholder="비밀번호"></li>
+		</ul> -->
+		
+         <ul class="memberType clear">
             <li>
                 <button type="button" class="tab devToggleLayer devHref devClick" data-click-value="53" data-target="#divLoginForm" title="개인회원 로그인">
                     <span class="mainBtn mainBtnPer"></span>
@@ -443,9 +450,9 @@ button {
             </span>
         
         </div> 
-        
+         
        
-			</div>
+			</div> <!-- loginWrap -->
 		</div>
 
 	<!-- Latest -->
