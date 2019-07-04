@@ -27,7 +27,7 @@ public class ResumeVO {
 	private Timestamp lGetdate;
 	private String lInstitution;
 	private int hopeworkCode;
-	private String jobtype;
+	private String jobtype;  
 	private String hopeworkdate;
 	private String hopepay;
 	private String hopeworkform;
