@@ -3,23 +3,23 @@ package com.ez.peoplejob.cusanswer.model;
 import java.sql.Timestamp;
 
 public class CusanswerVO {
-	private int answer_code;
-	private int custext_code;
+	private int answerCode;
+	private int custextCode;
 	private String answertitle;
 	private String answercontent;
-	private Timestamp answer_regdate;
-	private int admin_code;
-	public int getAnswer_code() {
-		return answer_code;
+	private Timestamp answerRegdate;
+	private int adminCode;
+	public int getAnswerCode() {
+		return answerCode;
 	}
-	public void setAnswer_code(int answer_code) {
-		this.answer_code = answer_code;
+	public void setAnswerCode(int answerCode) {
+		this.answerCode = answerCode;
 	}
-	public int getCustext_code() {
-		return custext_code;
+	public int getCustextCode() {
+		return custextCode;
 	}
-	public void setCustext_code(int custext_code) {
-		this.custext_code = custext_code;
+	public void setCustextCode(int custextCode) {
+		this.custextCode = custextCode;
 	}
 	public String getAnswertitle() {
 		return answertitle;
@@ -33,23 +33,23 @@ public class CusanswerVO {
 	public void setAnswercontent(String answercontent) {
 		this.answercontent = answercontent;
 	}
-	public Timestamp getAnswer_regdate() {
-		return answer_regdate;
+	public Timestamp getAnswerRegdate() {
+		return answerRegdate;
 	}
-	public void setAnswer_regdate(Timestamp answer_regdate) {
-		this.answer_regdate = answer_regdate;
+	public void setAnswerRegdate(Timestamp answerRegdate) {
+		this.answerRegdate = answerRegdate;
 	}
-	public int getAdmin_code() {
-		return admin_code;
+	public int getAdminCode() {
+		return adminCode;
 	}
-	public void setAdmin_code(int admin_code) {
-		this.admin_code = admin_code;
+	public void setAdminCode(int adminCode) {
+		this.adminCode = adminCode;
 	}
 	@Override
 	public String toString() {
-		return "CusanswerVO [answer_code=" + answer_code + ", custext_code=" + custext_code + ", answertitle="
-				+ answertitle + ", answercontent=" + answercontent + ", answer_regdate=" + answer_regdate
-				+ ", admin_code=" + admin_code + "]";
+		return "CusanswerVO [answerCode=" + answerCode + ", custextCode=" + custextCode + ", answertitle=" + answertitle
+				+ ", answercontent=" + answercontent + ", answerRegdate=" + answerRegdate + ", adminCode=" + adminCode
+				+ "]";
 	}
 	
 	

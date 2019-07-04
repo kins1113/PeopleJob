@@ -5,13 +5,12 @@
 	<div class="content">
 		<div class="breadcrumb-wrapper">
 
-
-			<div class="col-lg-12">
-				<div class="card card-default">
-					<div class="card-header card-header-border-bottom">
-						<h2>게시판 상세 리스트</h2>
-					</div>
-					<div class="card-body">
+		<div class="col-lg-12">
+			<div class="card card-default">
+				<div class="card-header card-header-border-bottom">
+					<h2>Striped Table</h2>
+				</div>
+				<div class="card-body">
 						<p class="mb-5">
 							여기에 버튼 같은거 추가
 						</p>
@@ -43,23 +42,40 @@
 	<!--  페이지 번호 끝 -->
 </div>
 						</p>
-						<table class="table table-hover ">
+						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th scope="col">#</th>
-									<th scope="col">First</th>
-									<th scope="col">Last</th>
-									<th scope="col">Handle</th>
+									<th rowspan="2">순서</th>
+									<th rowspan="2">타입</th>
+									<th rowspan="2">이름</th>
+									<th rowspan="2">등록 관리자</th>
+									<th rowspan="2">최초 등록일</th>
+									<th rowspan="2">수정 관리자</th>
+									<th rowspan="2">수정일</th>
+									<th rowspan="2">댓글</th>
+									<th>업로드</th>
+									<th>업로드 파일수 </th>
+									<th>업로드 사이즈 크기</th>
+									<th rowspan="2">사용여부</th>
 								</tr>
 							</thead>
 							<tbody>
 								<!-- 게시판 보여주기 반복 시작 -->
 								<tr>
 									<td scope="row">1</td>
-									<td>Lucia</td>
-									<td>Christ</td>
-									<td>@Lucia</td>
+									<td>자료실</td>
+									<td>자유계시판</td>
+									<td>okHwan</td>
+									<td>2019-07-02</td>
+									<td>kimOk</td>
+									<td>2019-07-04</td>
+									<td>가능</td>
+									<td>불가능</td>
+									<td>2</td>
+									<td>10KB</td>
+									<td>가능</td>
 								</tr>
+								<tr></tr>
 								
 								
 								<!--  게시판 반복 끝 -->
