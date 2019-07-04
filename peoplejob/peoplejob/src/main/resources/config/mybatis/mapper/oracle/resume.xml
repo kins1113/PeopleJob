@@ -19,7 +19,7 @@
 		</selectKey>
 		insert into langcertification(langlicenceCode,langlicencename,langGetdate,institute,certificationtype,language,langpoint,langGrade)
 		values(langcertification_seq.nextval,#{langlicencename},#{langGetdate},#{institute},#{certificationtype},#{language},#{langpoint},#{langGrade})
-	</insert>
+	</insert>    
 	
 	<insert id="insertCertificate" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="lNo" resultType="int">
