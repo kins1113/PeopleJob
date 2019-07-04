@@ -87,7 +87,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="" method="post" role="form" style="display: block;">
+								<form id="registerform" action="<c:url value='/login/selectregister.do'/> " method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
@@ -113,11 +113,12 @@ $(function() {
 											<tr style="font-size:1.3em">
 												<td>성별</td>
 												<td>&nbsp;&nbsp;</td>
-												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="남" checked>남</td>
+												<td rowspan="3"><input type="radio" name="selectgender" id="selectgender" value="남" checked>남</td>
 												<td>&nbsp;&nbsp;</td>
-												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="여" checked>여</td>
+												<td rowspan="3"><input type="radio" name="selectgender" id="selectgender" value="여">여</td>
 											</tr>
 										</table>
+										<input type="text" name="membergender" id="membergender" value="남자">
 									</div>
 									<div class="form-group">
 										<input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="생년월일">
@@ -148,15 +149,15 @@ $(function() {
 									</div>
 									<div class="form-group">
 									<div class="row">
-										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
+										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="" id="" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
+										<input type="text" name="emailcertificatenum"  id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
 									</div>
 									<div class="form-group">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" 
+												<input type="submit" name="registersubmit" id="registersubmit" 
 												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
 										</div>
 									</div>
@@ -168,7 +169,7 @@ $(function() {
 											</div>
 									</div>
 								</form>
-								<form id="register-form" action="" method="post" role="form" style="display: none;">
+								<form id="registerform" action="<c:url value='/login/selectregister.do'/>" method="post" role="form" style="display: none;">
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
@@ -214,7 +215,7 @@ $(function() {
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="roadaddress" id="roadaddress" tabindex="1" class="form-control" placeholder="주소" readOnly>
+										<input type="text" name="address" id="roadaddress" tabindex="1" class="form-control" placeholder="주소" readOnly>
 									</div>
 									<div class="form-group">
 										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
@@ -225,18 +226,15 @@ $(function() {
 									</div>
 									<div class="form-group">
 									<div class="row">
-										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
+										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="" id="" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
-									</div>
-									<div class="form-group">
-										<input type="text" name="companyNo" id="companyno" tabindex="1" class="form-control" placeholder="사업자번호">
+										<input type="text" name="emailcertificatenum" id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
 									</div>
 									<div class="form-group">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" 
+												<input type="submit" name="btnCorporateregister" id="btnCorporateregister" 
 												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
 										</div>
 									</div>

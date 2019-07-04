@@ -4,14 +4,20 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
 	<insert id="insertMember" parameterType="memberVo">
-		<selectKey keyProperty="memberCode" order="BEFORE" resultType="memberVo">
+		<selectKey keyProperty="memberCode" order="BEFORE" resultType="int">
 			select member_seq.nextval from dual
 		</selectKey>
 	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
-	pwd, birth, membergender, email, tel)
-	values(#{memberCode}, #{memberId}, #{memberName},#{zipcode},#{address},#{addressDetail}, #{pwd},
-	#{birth},#{membergender},#{email},#{tel})
+	pwd, birth, membergender, email, tel, authority_code)
+	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
+	#{birth},#{membergender},#{email},#{tel}, 1)
 	</insert>
+	
+	<!-- <update id="updateAuthority" parameterType="int">
+		update member
+		set authority_code=2
+		where member_code=#{memberCode}
+	</update> -->
 	
 </mapper>
 

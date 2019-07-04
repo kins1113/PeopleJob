@@ -15,12 +15,6 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		return "login/login";
 	}
 	
-	@RequestMapping("/login/selectregister.do")
-	public String register() {
-		logger.info("회원가입 화면 보여주기");
-		return "login/selectregister";
-	}
-	
 	@RequestMapping("/service/payment.do")
 	public String payment() {
 		logger.info("결제 서비스 화면 보여주기");
