@@ -8,22 +8,21 @@
 			<div class="col-lg-6">
 				<div class="card card-default">
 					<div class="card-header card-header-border-bottom">
-						<h2>공지</h2>
+						<h2>공지사항</h2>
 					</div>
 					<div class="card-body">
 						<form name="noticeWrite" method="post"
 						action="<c:url value='/notice/write.do'/>" >
 							<div class="form-group">
-								<label for="notifytitle">title</label> <input
+								<label for="notifytitle">제목</label> <input
 									type="text" class="form-control" id="notifytitle"
-									name="notifytitle" class="infobox" placeholder="title"/> <span class="mt-2 d-block">
-									 with anyone else.</span>
+									name="notifytitle" class="infobox" />
+									 
 							</div>
 
 
 							<div class="form-group">
-								<label for="notifycontent">Example
-									textarea</label>
+								<label for="notifycontent">공지사항 내용</label>
 								<textarea class="form-control" id="notifycontent" name="notifycontent" 
 									rows="3" cols="30"></textarea>
 							</div>
@@ -34,8 +33,7 @@
 							</div>
 
 							<div class="form-footer pt-4 pt-5 mt-4 border-top">
-								<button type="submit" class="btn btn-primary btn-default">Submit</button>
-								<button type="submit" class="btn btn-secondary btn-default">Cancel</button>
+								<button type="submit" class="btn btn-primary btn-default">등록하기</button>
 							</div>
 						</form>
 					</div>
