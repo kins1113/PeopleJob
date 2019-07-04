@@ -23,5 +23,22 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 	public JobopeningVO selectJobOpenByNo(int jobopening) {
 		return sqlSession.selectOne(namespace+"selectJobOpenByNo",jobopening);
 	}
+	@Override
+	public int updateJobOpen(JobopeningVO vo) {
+		return sqlSession.update(namespace+"updateJobOpen",vo);
+	}
+	@Override
+	public int updateHits(int jobopening) {
+		return sqlSession.update(namespace+"updateHits",jobopening);
+	}
+	@Override
+	public int deleteJobOpen(int jobopening) {
+		return sqlSession.delete(namespace+"deleteJobOpen",jobopening);
+	}
+	@Override
+	public int updateAdminagree(int jobopening) {
+		return sqlSession.update(namespace+"updateAdminagree",jobopening);
+	}
+	         
 	
 }

@@ -23,6 +23,29 @@
 	<select id="selectJobOpenByNo" resultType="jobOpeningVO" parameterType="int">
 		select * from jobopening where jobopening=#{jobopening}
 	</select>
+	<update id="updateJobOpen" parameterType="jobOpeningVO" >
+		update jobopening
+		set jobopening=#{jobopening},jobtitle=#{jobtitle},localcheck=#{localcheck},subwayinfo=#{subwayinfo},workway=#{workway},
+		 workdate=#{workdate},dayofweek=#{dayofweek},worktime=#{worktime},payway=#{payway},pay=#{pay},workform=#{workform},	welfare=#{welfare},
+		 gender=#{gender},agelimit=#{agelimit},academic_condition=#{academicCondition},career=#{career},sweetener=#{sweetener},recruit=#{recruit},
+		 recruitment_target=#{recruitmentTarget},end_date=#{endDate},receiveway=#{receiveway},submit=#{submit},applicationhandbook=#{applicationhandbook},
+		 jobregdate=sysdate,companyimage=#{companyimage}
+		where jobopening=#{jobopening}
+	</update>
+	<update id="updateHits" parameterType="int">
+		update jobopening
+		set	hits=hits+1
+		where jobopening=#{jobopening}
+	</update>
+	<delete id="deleteJobOpen" parameterType="int">
+		delete jobopening
+		where jobopening=#{jobopening}
+	</delete>
+	<update id="updateAdminagree" parameterType="int">
+		update jobopening
+		set adminagree='N'
+		where jobopening=#{jobopening}
+	</update>
 </mapper>
 
 
