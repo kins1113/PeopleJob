@@ -20,4 +20,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<NoticeVO> selectAll(SearchVO searchVo) {
 		return noticeDao.selectAll(searchVo);
 	}
+
+	@Override
+	public int selectTotalCount(SearchVO searchVo) {
+		return noticeDao.selectTotalCount(searchVo);
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -85,7 +86,7 @@
                 <label class="col-sm-2 control-label">복리후생</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">
-                        <span class="label label-success">${vo.welfare }</span> <span class="label label-success">건강보험</span>
+                        <span class="label label-success">${vo.welfare }</span> 
                     </p>
                 </div>
             </div>
@@ -116,16 +117,26 @@
                     </p>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">공고이미지</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+			           <img src="<c:url value='/peoplejob_upload/${vo.companyimage }'/>" 
+						alt="공고이미지" width="50">
+                    </p>
+                </div>
+            </div>
 
         </div>
 
         <form id="removeForm" method="post">
             <input type="hidden" name="_method" value="delete"/>
             <div class="pull-right">
-                <button type="submit" id="deleteBtn" class="btn btn-default btn-mg" role="button">삭제</button>
-                <a href="jobopening_edit.do?jobopening=${vo.jobopening }" id="modifyBtn" class="btn btn-default btn-mg" role="button">수정</a>
-                <button type="button" class="btn btn-default btn-mg" role="button">스크랩</button>
-                <a href="hunting_list.jsp" class="btn btn-default btn-mg" role="button">목록</a>
+                <a href="<c:url value='/company/jobopening_del.do?jobopening=${vo.jobopening}'/>"><input type="button" id="deleteBtn" class="btn btn-default btn-mg" role="button" value="삭제"></a>
+                <a href="<c:url value='/company/jobopening_edit.do?jobopening=${vo.jobopening }'/>"><input type="button" id="modifyBtn" class="btn btn-default btn-mg" role="button" value="수정"></a>
+                <a href="<c:url value='/company/jobopening_agreeEdit.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="활성화 수정"></a>
+                <a href="#"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
+                <a href="<c:url value='/company/jobopening_list.do'/>"><input type="button" id="listBtn" class="btn btn-default btn-mg" role="button" value="목록"></a>
             </div>
         </form>
 

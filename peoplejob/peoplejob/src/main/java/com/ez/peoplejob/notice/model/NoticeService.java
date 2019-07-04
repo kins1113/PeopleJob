@@ -7,4 +7,5 @@ import com.ez.peoplejob.common.SearchVO;
 public interface NoticeService {
 	public int insertNotice(NoticeVO vo);
 	public List<NoticeVO> selectAll(SearchVO searchVo);
+	int selectTotalCount(SearchVO searchVo);
 }

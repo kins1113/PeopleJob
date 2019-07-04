@@ -24,5 +24,25 @@ public class JobopeningServiceImpl implements JobopeningService{
 	public JobopeningVO selectJobOpenByNo(int jobopening) {
 		return jobopeningDao.selectJobOpenByNo(jobopening);
 	}
+
+	@Override
+	public int updateJobOpen(JobopeningVO vo) {
+		return jobopeningDao.updateJobOpen(vo);
+	}
+
+	@Override
+	public int updateHits(int jobopening) {
+		return jobopeningDao.updateHits(jobopening);
+	}
+
+	@Override
+	public int deleteJobOpen(int jobopening) {
+		return jobopeningDao.deleteJobOpen(jobopening);
+	}
+
+	@Override
+	public int updateAdminagree(int jobopening) {
+		return jobopeningDao.updateAdminagree(jobopening);
+	}
 	
 }

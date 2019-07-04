@@ -1,5 +1,6 @@
 package com.ez.peoplejob.jobopening.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -85,10 +86,107 @@ public class JobopeningController {
 		return "company/jobopening_where";
 	}
 	@RequestMapping(value="/jobopening_edit.do",method = RequestMethod.GET)
-	public String jobopening_edit(@RequestParam (defaultValue = "0")int jobopening,Model model) {
+	public String jobopening_edit(@RequestParam (defaultValue = "0")int jobopening,HttpServletRequest request,Model model) {
 		logger.info("수정");
 		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
+		
+		
+		String fileInfo
+		=fileUploadUtil.getFileInfo(vo.getCompanyimage(), 1, request);
 		model.addAttribute("vo", vo);
+		model.addAttribute("fileInfo", fileInfo);
 		return "company/jobopening_edit";
+	}
+	@RequestMapping(value="/jobopening_edit.do",method =RequestMethod.POST)
+	public String jobopening_edit_post(@ModelAttribute JobopeningVO vo,@RequestParam String oldFileName,HttpServletRequest request,Model model) {
+		logger.info("수정처리");
+		
+		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
+		 
+		String imageURL="";
+		for(Map<String,Object>map:list) {
+			imageURL=(String)map.get("fileName");
+		}
+		vo.setCompanyimage(imageURL);
+		
+		int cnt=jobopeningService.updateJobOpen(vo);
+		logger.info("수정처리결과 cnt={}",cnt);
+		String msg="",url="/company/jobopening_edit.do?jobopening="+vo.getJobopening();
+		if(cnt>0) {
+			msg="수정성공";
+			url="/company/jobopening_view.do?jobopening="+vo.getJobopening();
+			//새로 업로드한 경우, 기존 파일이 있으면 기존파일은 삭제
+			if(imageURL!=null && !imageURL.isEmpty()) {
+				if(oldFileName!=null && !oldFileName.isEmpty()) {
+					String path=fileUploadUtil.getUploadPath(request);
+					File oldFile=new File(path, oldFileName);
+					if(oldFile.exists()) {
+						boolean bool=oldFile.delete();
+						logger.info("기존 파일 삭제 여부={}", bool);
+					}
+				}
+			}
+		}else {
+			msg="수정실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
+	}
+	@RequestMapping(value="/jobopening_upHit.do",method = RequestMethod.GET)
+	public String jobopening_upHit(@RequestParam (defaultValue = "0")int jobopening,HttpServletRequest request,Model model) {
+		logger.info("수정처리");
+		int cnt=jobopeningService.updateHits(jobopening);
+		logger.info("조회수 증가 결과 cnt={}",cnt);
+		String url="";
+		if(cnt>0) {
+			url="/company/jobopening_view.do?jobopening="+jobopening;
+		}else {
+			url="/company/jobopening_list.do";
+		}
+		model.addAttribute("url", url);
+		return "redirect:"+url;
+	}
+	@RequestMapping(value="/jobopening_del.do",method=RequestMethod.GET)
+	public String jobopening_del(@RequestParam (defaultValue = "0")int jobopening,HttpServletRequest request,Model model) {
+		logger.info("삭제처리");
+		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
+		int cnt=jobopeningService.deleteJobOpen(jobopening);
+		logger.info("vo={}",vo);
+		String msg="",url="";
+		if(cnt>0) {
+			msg="삭제완료";
+			url="/company/jobopening_list.do";
+			if(vo.getCompanyimage()!=null 
+					&& !vo.getCompanyimage().isEmpty()) {
+					String path=fileUploadUtil.getUploadPath(request);
+					File file=new File(path, vo.getCompanyimage());
+					if(file.exists()) {
+						boolean bool=file.delete();
+						logger.info("파일삭제 여부={}", bool);
+					}
+				}	
+		}else {
+			msg="삭제실패";
+			url="/company/jobopening_view.do?jobopening="+jobopening;
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message";
+	}
+	@RequestMapping(value="/jobopening_agreeEdit.do",method=RequestMethod.GET)
+	public String jobopening_agreeEdit(@RequestParam (defaultValue = "0")int jobopening,Model model) {
+		logger.info("활성화 변경");
+		int cnt=jobopeningService.updateAdminagree(jobopening);
+		String msg="",url="/company/jobopening_view.do?jobopening="+jobopening;
+		if(cnt>0) {
+			msg="활성화 변경 완료";
+			url="/company/jobopening_list.do";
+		}else {
+			msg="활성화 변경 실패";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message";
 	}
 }
