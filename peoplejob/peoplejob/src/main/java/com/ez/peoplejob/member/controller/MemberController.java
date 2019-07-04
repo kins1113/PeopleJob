@@ -14,5 +14,5 @@ public class MemberController {
 	
 	private MemberService memberService;
 	
-	
-}
+	        
+} 
