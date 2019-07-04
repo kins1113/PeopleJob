@@ -3,18 +3,18 @@ package com.ez.peoplejob.tableaply.model;
 import java.sql.Timestamp;
 
 public class TableaplyVO {
-	private int apply_code ;
+	private int applyCode ;
 	private Timestamp applydate;
 	private String applylist;
 	private String applycondition;
 	private String oepncheck;
-	private int member_code;
+	private int memberCode;
 	private int jobopening;
-	public int getApply_code() {
-		return apply_code;
+	public int getApplyCode() {
+		return applyCode;
 	}
-	public void setApply_code(int apply_code) {
-		this.apply_code = apply_code;
+	public void setApplyCode(int applyCode) {
+		this.applyCode = applyCode;
 	}
 	public Timestamp getApplydate() {
 		return applydate;
@@ -40,11 +40,11 @@ public class TableaplyVO {
 	public void setOepncheck(String oepncheck) {
 		this.oepncheck = oepncheck;
 	}
-	public int getMember_code() {
-		return member_code;
+	public int getMemberCode() {
+		return memberCode;
 	}
-	public void setMember_code(int member_code) {
-		this.member_code = member_code;
+	public void setMemberCode(int memberCode) {
+		this.memberCode = memberCode;
 	}
 	public int getJobopening() {
 		return jobopening;
@@ -54,8 +54,8 @@ public class TableaplyVO {
 	}
 	@Override
 	public String toString() {
-		return "tableaplyVO [apply_code=" + apply_code + ", applydate=" + applydate + ", applylist=" + applylist
-				+ ", applycondition=" + applycondition + ", oepncheck=" + oepncheck + ", member_code=" + member_code
+		return "TableaplyVO [applyCode=" + applyCode + ", applydate=" + applydate + ", applylist=" + applylist
+				+ ", applycondition=" + applycondition + ", oepncheck=" + oepncheck + ", memberCode=" + memberCode
 				+ ", jobopening=" + jobopening + "]";
 	}
 	

@@ -3,17 +3,17 @@ package com.ez.peoplejob.custext.model;
 import java.sql.Timestamp;
 
 public class CustextVO {
-	private int custext_code;
+	private int custextCode;
 	private String custextcategory;
 	private String custitleCUSTITLE;
 	private String cuscontent;
-	private Timestamp cus_regdate;
-	private int member_code;
-	public int getCustext_code() {
-		return custext_code;
+	private Timestamp cusRegdate;
+	private int memberCode;
+	public int getCustextCode() {
+		return custextCode;
 	}
-	public void setCustext_code(int custext_code) {
-		this.custext_code = custext_code;
+	public void setCustextCode(int custextCode) {
+		this.custextCode = custextCode;
 	}
 	public String getCustextcategory() {
 		return custextcategory;
@@ -33,23 +33,23 @@ public class CustextVO {
 	public void setCuscontent(String cuscontent) {
 		this.cuscontent = cuscontent;
 	}
-	public Timestamp getCus_regdate() {
-		return cus_regdate;
+	public Timestamp getCusRegdate() {
+		return cusRegdate;
 	}
-	public void setCus_regdate(Timestamp cus_regdate) {
-		this.cus_regdate = cus_regdate;
+	public void setCusRegdate(Timestamp cusRegdate) {
+		this.cusRegdate = cusRegdate;
 	}
-	public int getMember_code() {
-		return member_code;
+	public int getMemberCode() {
+		return memberCode;
 	}
-	public void setMember_code(int member_code) {
-		this.member_code = member_code;
+	public void setMemberCode(int memberCode) {
+		this.memberCode = memberCode;
 	}
 	@Override
 	public String toString() {
-		return "CustextVO [custext_code=" + custext_code + ", custextcategory=" + custextcategory
-				+ ", custitleCUSTITLE=" + custitleCUSTITLE + ", cuscontent=" + cuscontent + ", cus_regdate="
-				+ cus_regdate + ", member_code=" + member_code + "]";
+		return "CustextVO [custextCode=" + custextCode + ", custextcategory=" + custextcategory + ", custitleCUSTITLE="
+				+ custitleCUSTITLE + ", cuscontent=" + cuscontent + ", cusRegdate=" + cusRegdate + ", memberCode="
+				+ memberCode + "]";
 	}
 	
 	
