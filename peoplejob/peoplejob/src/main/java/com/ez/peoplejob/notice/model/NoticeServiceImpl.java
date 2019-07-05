@@ -25,4 +25,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public int selectTotalCount(SearchVO searchVo) {
 		return noticeDao.selectTotalCount(searchVo);
 	}
+
+	@Override
+	public int updateReadCount(int notifyCode) {
+		return noticeDao.updateReadCount(notifyCode);
+	}
 }

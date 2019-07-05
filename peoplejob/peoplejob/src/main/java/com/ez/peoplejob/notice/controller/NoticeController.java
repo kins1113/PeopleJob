@@ -24,7 +24,7 @@ public class NoticeController {
 
 	@Autowired private NoticeService noticeService;
 	
-	@RequestMapping(value="/notice/write.do", method = RequestMethod.GET)
+	@RequestMapping(value="/manager/notice/write.do", method = RequestMethod.GET)
 	public String write_get() {
 		
 		//1
@@ -50,7 +50,7 @@ public class NoticeController {
 		String msg="", url="";
 		if(cnt>0) {
 			msg="공지사항 등록 완료";
-			url="/notice/list.do";
+			url="/manager/notice/list.do";
 			
 		}else {
 			msg="공지사항 등록 실패";

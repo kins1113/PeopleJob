@@ -4,12 +4,13 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.notice">
 <insert id="insertNotice" parameterType="noticeVo">
-		<selectKey resultType="int" keyProperty="notify_code" order="BEFORE">
+		<selectKey resultType="int" keyProperty="notifyCode" order="BEFORE">
 			select notice_seq.nextval from dual
 		</selectKey>
-		insert into notice(notify_code, notifytitle, notifycontent, admin_code) 
-		values(#{notify_code}, #{notifytitle}, #{notifycontent}, #{admin_code})
+		insert into notice(notifyCode, notifytitle, notifycontent, adminCode) 
+		values(#{notifyCode}, #{notifytitle}, #{notifycontent}, #{adminCode})
 	</insert>
+
 	
 	<select id="selectSearch" parameterType="searchVo" resultType="boardVo">
 		select *
@@ -18,13 +19,13 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select notify_code, notifytitle, notifycontent, readcount,notifydate,
+		        select notifyCode, notifytitle, notifycontent, readcount,notifydate,
 					(sysdate-notifydate)*24 as new_Img_Term
 				from notice		
 				<if test="searchKeyword != null and searchKeyword != ''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>		
-				order by notify_code desc
+				order by notifyCode desc
 		    ) A
 		)
 		<![CDATA[ where RNUM>#{firstRecordIndex}  
@@ -37,6 +38,14 @@
 	 	where ${searchCondition} like '%' || #{searchKeyword} || '%'
 	 </if>
 	 </select>
+	
+	 
+<update id="updateReadCount" parameterType="int">
+		update notice
+		set readcount=readcount+1 
+		where notifyCode=#{notifyCode}
+	</update>
+	 
 </mapper>
 
 
