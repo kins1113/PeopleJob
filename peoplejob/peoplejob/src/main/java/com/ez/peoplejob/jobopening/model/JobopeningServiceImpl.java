@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ez.peoplejob.common.SearchVO;
+
 @Service
 public class JobopeningServiceImpl implements JobopeningService{
 
@@ -43,6 +45,11 @@ public class JobopeningServiceImpl implements JobopeningService{
 	@Override
 	public int updateAdminagree(int jobopening) {
 		return jobopeningDao.updateAdminagree(jobopening);
+	}
+
+	@Override
+	public int selectTotalCount(SearchVO vo) {
+		return jobopeningDao.selectTotalCount(vo);
 	}
 	
 }
