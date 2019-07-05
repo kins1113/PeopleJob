@@ -16,8 +16,25 @@
 		 sysdate,0,'N','N',#{category},#{companyimage},#{companyCode}
 		 )
 	</insert>
-	<select id="selectJobOpen" resultType="jobOpeningVO">
-		select * from jobopening where adminagree='Y'
+		
+	<select id="selectJobOpen" parameterType="searchVo" resultType="jobOpeningVO">
+		
+		
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM 
+		    from
+		    (
+		        select * from jobopening where adminagree='Y' 	
+				<if test="searchKeyword != null and searchKeyword != ''">
+					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>		
+				order by jobregdate desc
+		    ) A
+		)
+		<![CDATA[ where RNUM>#{firstRecordIndex}  
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
 	</select>
 	
 	<select id="selectJobOpenByNo" resultType="jobOpeningVO" parameterType="int">

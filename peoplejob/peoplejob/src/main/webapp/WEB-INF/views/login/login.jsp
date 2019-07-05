@@ -28,6 +28,18 @@ $(function() {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
+	
+	$('input[type=submit]').click(function(){
+		if($('#memberId').val()==''){
+			alert('아이디를 입력하세요');
+			event.preventDefault();
+			return false;
+		}else if($('#pwd').val()==''){
+			alert('비밀번호를 입력하세요');
+			event.preventDefault();
+			return false;
+		}
+	});
 
 });
 </script>
@@ -50,16 +62,21 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+								<form id="login-form" action="<c:url value='/login/login.do'/>" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="ID" value="">
+										<input type="text" name="memberId" id="memberId" tabindex="1" class="form-control" placeholder="ID" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
 									<div class="row" style="margin-left:-1px">
-										<input type="checkbox" name="remember" id="remember">아이디 저장
+										<input type="checkbox" name="saveId" id="saveId">&nbsp;아이디 저장
+										
+										<c:if test="${!empty cookie.ck_userid }">
+											checked="checked"
+										</c:if>
+				
 										</div>
 									</div>
 									<div class="form-group">
@@ -88,16 +105,22 @@ $(function() {
 										</div>
 									</div>
 								</form>
-								<form id="register-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: none;">
+								<form id="register-form" action="" method="post" role="form" style="display: none;">
+								<input type="Text" value="기업회원 로그인">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="ID" value="">
+										<input type="text" name="memberId" id="memberId" tabindex="1" class="form-control" placeholder="ID" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
 									<div class="row" style="margin-left:-1px">
-										<input type="checkbox" name="remember" id="remember">아이디 저장
+										<input type="checkbox" name="saveId" id="saveId">&nbsp;아이디 저장
+										
+										<c:if test="${!empty cookie.ck_userid }">
+											checked="checked"
+										</c:if>
+				
 										</div>
 									</div>
 									<div class="form-group">

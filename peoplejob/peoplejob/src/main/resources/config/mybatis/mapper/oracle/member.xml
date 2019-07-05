@@ -8,19 +8,24 @@
 			select member_seq.nextval from dual
 		</selectKey>
 	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
-	pwd, birth, membergender, email, tel, authority_code)
+	pwd, birth, membergender, email, tel)
 	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
-	#{birth},#{membergender},#{email},#{tel}, 1)
+	#{birth},#{membergender},#{email},#{tel})
 	</insert>
 	
-	<!-- <update id="updateAuthority" parameterType="int">
-		update member
-		set authority_code=2
-		where member_code=#{memberCode}
-	</update> -->
+	<select id="dupUserid" resultType="int" parameterType="string">
+	select count(*) from member where memberid=#{memberid}
+	</select>
+	
+	<select id="selectPwdForLogin" parameterType="string" resultType="string">
+		select pwd from member where memberid=#{memberid} and WITHDRAWALDATE is null
+	</select>
+	
+	<select id="selectMember" parameterType="string" resultType="memberVo">
+		select * from member where memberid=#{memberid}
+	</select>
 	
 </mapper>
-
 
 
 
