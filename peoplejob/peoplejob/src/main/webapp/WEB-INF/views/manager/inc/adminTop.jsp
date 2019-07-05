@@ -384,12 +384,12 @@
 
 
 									<li><a class="sidenav-item-link"
-										href="<c:url value='/manager/manger/managerList.do'/>"> <span
+										href="<c:url value='/manager/manager/managerList.do'/>"> <span
 											class="nav-text">조회</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="#"> <span
+									<!-- <li><a class="sidenav-item-link" href="#"> <span
 											class="nav-text">권한 보기</span>
-									</a></li>
+									</a></li> -->
 
 								</div>
 							</ul></li>
