@@ -26,12 +26,15 @@
 		<c:forEach var="vo" items="${list }">
         <div class="list-group">
             <div class="list-group-item">
-                <h4 class="list-group-item-heading"><a href="<c:url value='/company/jobopening_view.do?jobopening=${vo.jobopening }'/>">공고제목:${vo.jobtitle }</a></h4>
+                <h4 class="list-group-item-heading"><a href="<c:url value='/company/jobopening_upHit.do?jobopening=${vo.jobopening }'/>">공고제목:${vo.jobtitle }</a></h4>
                 <p class="list-group-item-text">회사이름으로 바꾸기(나중에) | 지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
-                | <small>${fn:substring(vo.jobregdate,0,10)}</small> </p> 
+                | <small>등록일 : ${fn:substring(vo.jobregdate,0,10)}</small> 
+                <small>조회수 : ${vo.hits }</small>
+                </p> 
                 <span class="label label-info">
-				<img src="<c:url value='/peoplejob_images/${vo.companyimage }'/>" 
+				<img src="<c:url value='/peoplejob_upload/${vo.companyimage }'/>" 
 						alt="공고이미지" width="50">
+				
 				</span> <span class="label label-info">복리후생 : ${vo.welfare }</span>
             </div>
         </div>
@@ -41,7 +44,7 @@
             <a href="#" class="btn btn-default btn-mg">다음 ></a>
         </div>
         <div class="pull-right">
-            <a href="jobopening_register.do" class="btn btn-primary" role="button">글쓰기</a>
+            <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">글쓰기</a>
         </div>
     </div>
 </body>

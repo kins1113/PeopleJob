@@ -9,6 +9,44 @@
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/login.css'/>" />
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+ 
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+ 
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+ 
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('roadAddress').value = fullRoadAddr;
+            }
+        }).open();
+    }
+</script>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
@@ -49,7 +87,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="" method="post" role="form" style="display: block;">
+								<form id="registerform" action="<c:url value='/login/selectregister.do'/> " method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
@@ -75,11 +113,12 @@ $(function() {
 											<tr style="font-size:1.3em">
 												<td>성별</td>
 												<td>&nbsp;&nbsp;</td>
-												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="남" checked>남</td>
+												<td rowspan="3"><input type="radio" name="selectgender" id="selectgender" value="남" checked>남</td>
 												<td>&nbsp;&nbsp;</td>
-												<td rowspan="3"><input type="radio" name="membergender" id="membergender" value="여" checked>여</td>
+												<td rowspan="3"><input type="radio" name="selectgender" id="selectgender" value="여">여</td>
 											</tr>
 										</table>
+										<input type="text" name="membergender" id="membergender" value="남자">
 									</div>
 									<div class="form-group">
 										<input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="생년월일">
@@ -90,15 +129,16 @@ $(function() {
 									</div>
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="zipcode" id="zipcode" tabindex="1" placeholder="우편번호" 
-										class="form-control" style="width:150px" style="background-color: #50a954">
+										class="form-control" style="width:150px" style="background-color: #50a954" readonly>
 									</div>
 									<div class="form-group">
 									<div class="row">
-										<input type="button" name="findzipcode" value="우편번호 찾기" class="btn btn-register" id="findzipcode">
+										<input type="button" value="우편번호 찾기" class="btn btn-register"
+										onclick="execDaumPostcode()">
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="address" id="address" tabindex="1" class="form-control" placeholder="주소">
+										<input type="text" name="address" id="roadAddress" tabindex="1" class="form-control" placeholder="주소" readonly>
 									</div>
 									<div class="form-group">
 										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
@@ -109,15 +149,15 @@ $(function() {
 									</div>
 									<div class="form-group">
 									<div class="row">
-										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
+										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="" id="" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
+										<input type="text" name="emailcertificatenum"  id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
 									</div>
 									<div class="form-group">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" 
+												<input type="submit" name="registersubmit" id="registersubmit" 
 												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
 										</div>
 									</div>
@@ -129,7 +169,7 @@ $(function() {
 											</div>
 									</div>
 								</form>
-								<form id="register-form" action="" method="post" role="form" style="display: none;">
+								<form id="registerform" action="<c:url value='/login/selectregister.do'/>" method="post" role="form" style="display: none;">
 									<div class="form-group">
 										<input type="text" name="memberid" id="memberid" tabindex="1" class="form-control" placeholder="아이디">
 									</div>
@@ -166,15 +206,16 @@ $(function() {
 									</div>
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="zipcode" id="zipcode" tabindex="1" placeholder="우편번호" 
-										class="form-control" style="width:150px" style="background-color: #50a954">
+										class="form-control" style="width:150px" style="background-color: #50a954" readOnly>
 									</div>
 									<div class="form-group">
 									<div class="row">
-										<input type="button" name="findzipcode" value="우편번호 찾기" class="btn btn-register" id="findzipcode">
+										<input type="button" value="우편번호 찾기" 
+										class="btn btn-register" onclick="execDaumPostcode()">
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="address" id="address" tabindex="1" class="form-control" placeholder="주소">
+										<input type="text" name="address" id="roadaddress" tabindex="1" class="form-control" placeholder="주소" readOnly>
 									</div>
 									<div class="form-group">
 										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
@@ -185,18 +226,15 @@ $(function() {
 									</div>
 									<div class="form-group">
 									<div class="row">
-										<input type="button" name="emailcertificate" value="이메일 인증" class="btn btn-register" id="emailcertificate">
+										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="" id="" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
-									</div>
-									<div class="form-group">
-										<input type="text" name="companyNo" id="companyno" tabindex="1" class="form-control" placeholder="사업자번호">
+										<input type="text" name="emailcertificatenum" id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호">
 									</div>
 									<div class="form-group">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" 
+												<input type="submit" name="btnCorporateregister" id="btnCorporateregister" 
 												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
 										</div>
 									</div>

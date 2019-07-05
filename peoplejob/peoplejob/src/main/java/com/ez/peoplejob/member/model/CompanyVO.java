@@ -3,7 +3,7 @@ package com.ez.peoplejob.member.model;
 public class CompanyVO {
 	private int companyCode;
 	private String companyname;
-	private String companyno;
+	private String bussinessNumber;
 	private String image;
 	public int getCompanyCode() {
 		return companyCode;
@@ -17,11 +17,12 @@ public class CompanyVO {
 	public void setCompanyname(String companyname) {
 		this.companyname = companyname;
 	}
-	public String getCompanyno() {
-		return companyno;
+	
+	public String getBussinessNumber() {
+		return bussinessNumber;
 	}
-	public void setCompanyno(String companyno) {
-		this.companyno = companyno;
+	public void setBussinessNumber(String bussinessNumber) {
+		this.bussinessNumber = bussinessNumber;
 	}
 	public String getImage() {
 		return image;
@@ -31,9 +32,10 @@ public class CompanyVO {
 	}
 	@Override
 	public String toString() {
-		return "CompanyVO [companyCode=" + companyCode + ", companyname=" + companyname + ", companyno=" + companyno
-				+ ", image=" + image + "]";
+		return "CompanyVO [companyCode=" + companyCode + ", companyname=" + companyname + ", bussinessNumber="
+				+ bussinessNumber + ", image=" + image + "]";
 	}
+	
 	
 	
 }

@@ -7,7 +7,7 @@ public class MemberVO {
 	private Timestamp regdate;
 	private String membername;
 	private String zipcode;
-	private String addrsess;
+	private String address;
 	private String addressdetail;
 	private int memberCode;
 	private Timestamp withdrawaldate;
@@ -15,9 +15,9 @@ public class MemberVO {
 	private String birth;
 	private String membergender;
 	private String email;
-	private String picture;
 	private String tel;
-	private int companyCode;
+	private int authorityCode;
+	
 	
 	public String getMemberid() {
 		return memberid;
@@ -43,11 +43,12 @@ public class MemberVO {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getAddrsess() {
-		return addrsess;
+	
+	public String getAddress() {
+		return address;
 	}
-	public void setAddrsess(String addrsess) {
-		this.addrsess = addrsess;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getAddressdetail() {
 		return addressdetail;
@@ -91,32 +92,29 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPicture() {
-		return picture;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
+	
 	public String getTel() {
 		return tel;
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public int getCompanyCode() {
-		return companyCode;
+	public int getAuthorityCode() {
+		return authorityCode;
 	}
-	public void setCompanyCode(int companyCode) {
-		this.companyCode = companyCode;
+	public void setAuthorityCode(int authorityCode) {
+		this.authorityCode = authorityCode;
 	}
 	@Override
 	public String toString() {
 		return "MemberVO [memberid=" + memberid + ", regdate=" + regdate + ", membername=" + membername + ", zipcode="
-				+ zipcode + ", addrsess=" + addrsess + ", addressdetail=" + addressdetail + ", memberCode=" + memberCode
+				+ zipcode + ", address=" + address + ", addressdetail=" + addressdetail + ", memberCode=" + memberCode
 				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
-				+ membergender + ", email=" + email + ", picture=" + picture + ", tel=" + tel + ", companyCode="
-				+ companyCode + "]";
+				+ membergender + ", email=" + email + ", tel=" + tel + ", authorityCode=" + authorityCode + "]";
 	}
+	
+	
+	
 	
 	
 

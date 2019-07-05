@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
@@ -17,5 +19,6 @@
 fdsdafsadfasdfsfdsafsf
 <P>  The time on the server is ${serverTime}. </P>sdafsafsdfsaf
 >>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
+pull받기위한 수정
 </body>
 </html>

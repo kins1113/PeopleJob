@@ -23,4 +23,9 @@ public class NoticeDAOMybatis implements NoticeDAO {
 		=sqlSession.selectList(namespace+"selectSearch",searchVo);
 		return list;
 	}
+
+	@Override
+	public int selectTotalCount(SearchVO searchVo) {
+		return sqlSession.selectOne(namespace+"selectTotalCount",searchVo);
+	}
 }

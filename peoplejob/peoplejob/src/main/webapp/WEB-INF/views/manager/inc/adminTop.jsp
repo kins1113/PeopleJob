@@ -219,7 +219,7 @@
 						</a>
 							<ul class="collapse" id="pages" data-parent="#sidebar-menu">
 								<div class="sub-menu">
-									<li><a class="sidenav-item-link" href="notice"> <span
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/notice/list.do"> <span
 											class="nav-text">공지사항 관리</span>
 									</a></li>
 									<li class="has-sub"><a class="sidenav-item-link"
