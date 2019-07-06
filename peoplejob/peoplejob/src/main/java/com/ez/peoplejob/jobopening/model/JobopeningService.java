@@ -2,6 +2,8 @@ package com.ez.peoplejob.jobopening.model;
 
 import java.util.List;
 
+import com.ez.peoplejob.common.SearchVO;
+
 public interface JobopeningService {
 	public int insertJobOpen(JobopeningVO vo);
 	List<JobopeningVO>selectJobOpen();
@@ -10,4 +12,5 @@ public interface JobopeningService {
 	int updateHits(int jobopening);
 	int deleteJobOpen(int jobopening);
 	int updateAdminagree(int jobopening);
+	int selectTotalCount(SearchVO vo);
 }

@@ -1,12 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="ko">
-<head>
-    <meta name="decorator" content="basic" />
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="../main/inc/top.jsp" %>
+<article>
+<fieldset>
     <div class="col-md-9">
         <div class="page-header">
             <h3>채용공고</h3>
@@ -141,5 +137,6 @@
         </form>
 
     </div>
-</body>
-</html>
+    </fieldset>
+    </article>
+<%@include file="../main/inc/bottom.jsp" %>

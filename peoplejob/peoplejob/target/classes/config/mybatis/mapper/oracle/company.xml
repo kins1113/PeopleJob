@@ -46,6 +46,12 @@
 		set adminagree='N'
 		where jobopening=#{jobopening}
 	</update>
+	<select id="selectTotalCount" resultType="int" parameterType="SearchVo">
+	select count(*) from jobopening
+	<if test="searchKeyword != null and searchKeyword != ''">
+			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+	</if>
+	</select>
 </mapper>
 
 

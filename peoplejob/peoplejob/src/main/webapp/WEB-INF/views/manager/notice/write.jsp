@@ -28,8 +28,8 @@
 							</div>
 							
 							<div>
-							<input type="text" id="admin_code" name="admin_code" value="1"/>
-							
+								<!-- 관리자 아이디를 세션 값으로 input  -->
+							<input type="text" id="adminCode" name="adminCode" value="1"/>
 							</div>
 
 							<div class="form-footer pt-4 pt-5 mt-4 border-top">

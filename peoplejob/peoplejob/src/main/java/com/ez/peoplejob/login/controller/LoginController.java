@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 private Logger logger=LoggerFactory.getLogger(LoginController.class);
 
-	@RequestMapping("/login/login.do")
-	public String login() {
-		logger.info("로그인 화면 보여주기");
-		return "login/login";
-	}
+	
 	
 	@RequestMapping("/service/payment.do")
 	public String payment() {

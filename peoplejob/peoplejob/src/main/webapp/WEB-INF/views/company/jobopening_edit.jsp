@@ -1,11 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!doctype html>
-<html lang="ko">
-<head>
-    <meta name="decorator" content="basic" />
-</head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="../main/inc/top.jsp" %>
 <script type="text/javascript" src=<c:url value='/resources/js/jquery-3.4.1.min.js'/>></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -21,7 +16,8 @@
 		});
 	});
 </script>
-<body>
+<article>
+<fieldset>
     <div class="col-md-9">
         <div class="page-header">
             <h3>구인</h3>
@@ -313,5 +309,6 @@
 
         </form> 
     </div>
-</body>
-</html>
+    </fieldset>
+    </article>
+<%@include file="../main/inc/bottom.jsp" %>
