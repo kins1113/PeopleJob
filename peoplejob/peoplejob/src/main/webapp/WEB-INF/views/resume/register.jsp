@@ -106,47 +106,47 @@ $('.btn').on('click', function(e){
 <form name="frm1" method="post" 
 	action="<c:url value='/resume/register.do'/>">
 <fieldset>
-	<legend>이력서등록</legend>
+	<legend style="font-weight: bold">이력서등록</legend>
 	
 	<div>        
         <label for="resumeTitle">이력서 제목</label>
-        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="resumeTitle" style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="resumeTitle"  style="ime-mode:active">
     </div>
     <hr>
     <h3>기본정보</h3>
     <div>        
         <label for="membername">이름</label>
-        <input type="text" class="form-control"  name="membername" id="membername" style="ime-mode:active">
+        <input type="text" class="form-control"  name="membername" id="membername" value="${vo.membername }" style="ime-mode:active">
     </div>
     <div>        
         <label for="birth">생년월일</label>
-        <input type="text" class="form-control"  name="birth" id="birth" style="ime-mode:active">
+        <input type="text" class="form-control"  name="birth" id="birth" value="${vo.birth}" style="ime-mode:active">
     	
     </div>
     
    
     <div>
         <label for="email">이메일 주소</label>
-        <input type="text" class="form-control"  name="email"  id="email" title="이메일주소 앞자리">
+        <input type="text" class="form-control"  name="email"  id="email" value="${vo.email }" title="이메일주소 앞자리">
     </div>
     
     <div>
         <label for="address">주소</label>
         <input type="text" class="form-control"  name="zipcode" id="zipcode" ReadOnly  
-        	title="우편번호" class="width_80">
+        	title="우편번호" class="width_80" value="${vo.zipcode}">
         
         <button type="button" class="btn btn-success" value="우편번호 찾기" id="btnZipcode" 
         title="새창열림">우편번호찾기</button>
         <br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" name="address" ReadOnly title="주소"  class="width_350"><br />
+        <input type="text"  class="form-control" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control"  name="addressdetail" title="상세주소"  class="width_350">
+        <input type="text"  class="form-control"  name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
     </div>
     <div>
         <label for="tel">핸드폰</label>&nbsp;
        
-        <input type="text"  class="form-control"   name="tel" id="tel" maxlength="4" title="휴대폰 번호"
+        <input type="text"  class="form-control"   name="tel" id="tel" value="${vo.tel}" maxlength="4" title="휴대폰 번호"
         	class="width_80">
     </div>
     

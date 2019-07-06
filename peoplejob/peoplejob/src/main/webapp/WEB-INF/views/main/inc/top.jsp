@@ -195,7 +195,7 @@ button {
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">이력서관리</a>
+								<a href="<c:url value='/resume/register.do'/>">이력서관리</a>
 
 							</li>
 

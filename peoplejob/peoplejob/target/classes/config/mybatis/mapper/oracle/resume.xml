@@ -9,8 +9,8 @@
 		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int">
 		select resume_seq.nextval from dual
 		</selectKey>
-		insert into resume(resumeCode,resumetitle,resumeregdate,introduce,award,langlicenceCode,licenceCode,dvCode,academicCode,desiredworkCode,opencheck,memberCode)
-		values(resume_seq.nextval,#{resumetitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode})
+		insert into resume(resumeCode,resumetitle,resumeregdate,introduce,award,langlicenceCode,licenceCode,dvCode,academicCode,desiredworkCode,opencheck,memberCode,picture)
+		values(resume_seq.nextval,#{resumetitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode},#{picture})
 	</insert>
 	
 	<insert id="insertLangcertification" parameterType="resumeVo">
@@ -28,6 +28,7 @@
 		insert into certificate(lNo,lName,lGetdate,lInstitution)
 		values(certificate_seq.nextval,#{lName},#{lGetdate},#{lInstitute})
 	</insert>
+	
 	<insert id="insertCareer" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="dvCode" resultType="int">
 		select career_seq.nextval from dual
@@ -36,6 +37,7 @@
 		values(career_seq.nextval,#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{jobgrade},#{workcondition})
 		
 	</insert>
+	
 	<insert id="insertEducation" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="academicCode" resultType="int">
 		select education_seq.nextval from dual
@@ -53,6 +55,16 @@
 		values(hopeWorking_seq.nextval,#{jobtype},#{hopepay},#{hopeworkform},#{localCode},#{firstjobCode},#{schoollocal},#{hopeworkdate})
 		
 	</insert>
+	
+	<insert id="insertLocation" parameterType="resumeVo">
+		<selectKey order="BEFORE" keyProperty="localCode" resultType="int">
+		select location_seq.nextval from dual
+		</selectKey>
+		insert into location
+		values(#{localCode},#{sido},#{gugun})
+		
+	</insert>
+	
 	<insert id="insertFirst" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="firstCode" resultType="int">
 		select first_seq.nextval from dual
@@ -61,18 +73,49 @@
 		values(first_seq.nextval,#{firstname},#{secondCode})
 		
 	</insert>
+	
 	<insert id="insertSecond" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="secondCode" resultType="int">
 		select second_seq.nextval from dual
 		</selectKey>
-		insert into first
-		values(first_seq.nextval,#{firstname},#{secondCode})
+		insert into second
+		values(second_seq.nextval,#{secondname},#{thirdCode})
 		
 	</insert>
+	<insert id="insertThird" parameterType="resumeVo">
+		<selectKey order="BEFORE" keyProperty="thirdCode" resultType="int">
+		select third_seq.nextval from dual
+		</selectKey>
+		insert into third
+		values(third_seq.nextval,#{thirdname})
+		
+	</insert>
+	<select id="selectSearch" parameterType="searchVo" resultType="resumeVo">
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM 
+		    from
+		    (
+		        select memberid,(sysdate-regdate)*24 as new_Img_Term, membername, zipcode, address,addressdetail,member_code,withdrawaldate,pwd,birth,membergender,email,tel,authority_code
+					
+				from member		
+				<if test="searchKeyword != null and searchKeyword != ''">
+					where ${searchCondition} like '%' || #{searchKeyword} || '%'
+				</if>		
+				order by no desc
+		    ) A
+		)
+		<![CDATA[ where RNUM>#{firstRecordIndex}  
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+	</select>
 	
+	<select id="selectByMemverid" parameterType="string" resultType="resumeVo">
+		select  from member where member=#{memberid}
+	</select>
 	
 		<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
-		select * from resume where resumeCode=#{resumeCode}
+		select membername,birth,email,zipcode,address,addressdetail,tel from resume where resumeCode=#{resumeCode}
 	</select>
 		
 		<delete id="deleteResumeByNo" parameterType="int">
@@ -85,6 +128,7 @@
 			 
 		where resumeCode=#{resumeCode}
 	</update>
+	
 	<!-- <insert id="insertResume" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="resumeCode,langlicenceCode,dvCode,licenceCode,academicCode,desiredworkCode,memberCode" resultType="hashmap">
 			select resume_seq.nextval as resumeCode, langcertification_seq.nextval as langlicenceCode

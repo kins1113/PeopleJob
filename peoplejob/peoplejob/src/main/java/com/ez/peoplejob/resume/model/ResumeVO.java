@@ -47,6 +47,7 @@ public class ResumeVO {
 	private String picture;
 	private String tel;
 	private String companyCode;
+	private int authority_code;
 	private String sido;
 	private String gugun;
 	private int firstCode;
@@ -67,6 +68,14 @@ public class ResumeVO {
 	private String language;
 	private String langpoint;
 	private String langGrade;
+	
+	
+	public int getAuthority_code() {
+		return authority_code;
+	}
+	public void setAuthority_code(int authority_code) {
+		this.authority_code = authority_code;
+	}
 	public int getResumeCode() {
 		return resumeCode;
 	}
@@ -451,6 +460,7 @@ public class ResumeVO {
 	public void setLangGrade(String langGrade) {
 		this.langGrade = langGrade;
 	}
+	
 	@Override
 	public String toString() {
 		return "ResumeVO [resumeCode=" + resumeCode + ", resumeTitle=" + resumeTitle + ", resumeRegdate="
@@ -466,9 +476,9 @@ public class ResumeVO {
 				+ ", regdate=" + regdate + ", membername=" + membername + ", zipcode=" + zipcode + ", address="
 				+ address + ", addressdetail=" + addressdetail + ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd
 				+ ", birth=" + birth + ", membergender=" + membergender + ", email=" + email + ", picture=" + picture
-				+ ", tel=" + tel + ", companyCode=" + companyCode + ", sido=" + sido + ", gugun=" + gugun
-				+ ", firstCode=" + firstCode + ", firstname=" + firstname + ", secondCode=" + secondCode
-				+ ", secondname=" + secondname + ", thirdCode=" + thirdCode + ", thirdname=" + thirdname
+				+ ", tel=" + tel + ", companyCode=" + companyCode + ", authority_code=" + authority_code + ", sido="
+				+ sido + ", gugun=" + gugun + ", firstCode=" + firstCode + ", firstname=" + firstname + ", secondCode="
+				+ secondCode + ", secondname=" + secondname + ", thirdCode=" + thirdCode + ", thirdname=" + thirdname
 				+ ", schoolname=" + schoolname + ", graduatecheck=" + graduatecheck + ", graduate=" + graduate
 				+ ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal + ", workcheck=" + workcheck
 				+ ", jobgrade=" + jobgrade + ", workcondition=" + workcondition + ", certificationtype="
