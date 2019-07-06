@@ -81,6 +81,7 @@ public class NoticeController {
 		//[2] SearchVo에 페이징 관련 변수 셋팅
 		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setBlockSize(WebUtility.BLOCK_SIZE);
 		logger.info("셋팅 후 searchVo={}", searchVo);
 		
 		//[3] 조회처리

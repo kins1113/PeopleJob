@@ -24,7 +24,7 @@
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.notifyCode }</td>
-					<td><a href="<c:url value='/notice/countUpdate.do?notifycode=${vo.notifycode}'/>">
+					<td><a href="<c:url value='/notice/countUpdate.do?notifyCode=${vo.notifyCode}'/>">
 							<!-- 제목이 긴경우 30글자만 보여주기 -->
 						 <c:if test="${fn:length(vo.notifytitle ) >=30}">
   							${fn:substring(vo.notifytitle,0,30)}...
@@ -80,7 +80,7 @@
 <div class="divSearch">
 	<!-- 페이징 처리에도 사용 -->
    	<form name="frmSearch" method="post" 
-   		action='<c:url value="/manager/noticec/list.do"/>'>
+   		action='<c:url value="/manager/notice/list.do"/>'>
    		<!-- 현재 페이지 hidden에 넣기 -->
    		<input type="Text" name='currentPage' value="1">
    		
