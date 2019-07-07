@@ -11,8 +11,8 @@ public interface MemberService {
 	int ID_NONE=3; //아이디 존재하지 않음
 		
 	int insertMember(MemberVO memberVo);
+	int insertCompany(CompanyVO companyVo);
 	int dupUserid(String memberId);
-	
 	int loginCheck(String memberid, String pwd);
 	MemberVO selectByUserid(String memberId);
 }

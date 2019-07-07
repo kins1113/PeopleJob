@@ -2,33 +2,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>People Job</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="<c:url value='/resources/main/images/icons/icon.PNG'/>"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/bootstrap/css/bootstrap.min.css'/>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css'/>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/fonts/iconic/css/material-design-iconic-font.min.css'/>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/animate/animate.css'/>">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/css-hamburgers/hamburgers.min.css'/>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/animsition/css/animsition.min.css'/>">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/util.min.css'/>">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/main.css'/>">
-<!--===============================================================================================-->
+<%@include file="inc/top.jsp" %>
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -46,9 +21,6 @@
 .how2.how2-cl4.flex-s-c.m-r-10.m-r-0-sr991 {
     margin-left: 0px;
 }
-
-
-
 
 .col-md-10.col-lg-8.p-b-20 {
     width: 767px;
@@ -99,7 +71,8 @@ h2 {
         margin: 0 0 15px;
     }
     
-    .loginWrap {
+.loginWrap {
+    width: 263px;
     margin-left: 20px;
     height: 110px;
     border: 1px solid #e3e4e8;
@@ -180,27 +153,6 @@ button {
     background: transparent;
     cursor: pointer;
 }
-	/* .login-form {
-	float:right;
-		width: 340px;
-    	margin: 30px auto;
-	}
-    .login-form form {        
-        background: #f7f7f7;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }    
-    .form-control, .btn {
-        height: 36px;
-        border-radius: 2px;
-    }
-    .btn {        
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .remember-me {
-        margin: 8pxfh 0 0 12px;
-    } */
     
    .panel.panel-login {
     width: 20%;
@@ -315,96 +267,40 @@ button {
     height: 35px;
 }
  
+ .getId {
+    border: 1px solid lightgray;
+    height: 27px;
+}
+
+button.btnLogin {
+    width: 56px;
+    position: absolute;
+    border: 1px solid lightgray;
+    font-weight: bold;
+    height: 54px;
+    background: white;
+    margin-top: -54px;
+    margin-left: 175px;
+}
+
+.cnt {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.mbrLinks.clear {
+    margin-top: -53px;
+}
+
+span.tx {
+    margin-left: -120px;
+}
 </style>
 </head>
 <body class="animsition">
 	
 	<!-- Header -->
-	<header>
-		<!-- Header desktop -->
-		<div class="container-menu-desktop">
-
-			<!-- Header Mobile -->
-			
-
-			<!-- Menu Mobile -->
-			
-			<div class="wrap-logo container">
-				<!-- Logo desktop -->		
-				<div class="logo">
-					<a href="<c:url value='/main/mainindex.do'/>"><img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="LOGO"></a>
-				</div>	
-			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6" style="width: 500px">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">
-				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-			</div>
-				<!-- Banner -->
-				<div class="banner-header">
-					<a href="https://themewagon.com/themes/free-bootstrap-4-html5-news-website-template-magnews2/">
-					<img src="<c:url value='/resources/main/images/banner_.png'/>" alt="IMG" ></a>
-				</div>
-			</div>	
-			
-			<!--  -->
-			<div class="wrap-main-nav">
-				<div class="main-nav">
-					<!-- Menu desktop -->
-					<nav class="menu-desktop">
-						<a class="logo-stick" href="<c:url value='/main/mainindex.do'/>">
-							<img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="LOGO">
-						</a>
-
-						<ul class="main-menu">
-							<li class="main-menu-active">
-								<a href="#">채용정보</a>
-								<ul class="sub-menu">
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">직종별</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">지역별</a></li>
-									<li><a href="<c:url value='/company/jobopening_list.do'/>">업무별</a></li>
-								</ul>
-							</li>
-
-							<li class="mega-menu-item">
-								<a href="category-01.html">인재정보</a>
-							</li>
-
-							<li>
-								<a href="#">자료실</a>
-								<ul class="sub-menu">
-									<li><a href="category-01.html">이력서 양식</a></li>
-									<li><a href="category-02.html">취업 뉴스</a></li>
-									
-								</ul>
-							</li>
-
-							<li class="mega-menu-item">
-								<a href="category-01.html">이력서관리</a>
-
-							</li>
-
-							<li class="mega-menu-item">
-								<a href="category-02.html">채용공고 관리</a>
-
-							</li>
-
-							<li>
-								<a href="#">게시판</a>
-								<ul class="sub-menu">
-									<li><a href="category-01.html">자유게시판</a></li>
-									<li><a href="category-02.html">QnA</a></li>
-									<li><a href="category-02.html">공지사항</a></li>
-								</ul>
-							</li>
-
-
-						</ul>
-					</nav>
-				</div>
-			</div>	
-		</div>
-	</header>
+	
 
 	<!-- Headline -->
 	
@@ -423,36 +319,36 @@ button {
 			
 		<!-- 로그인  -->
 		<div class="loginWrap">
-		<!-- 
-		<ul class="memberType clear">
-		<li><input type="text" name="memberid" width="40px" placeholder="아이디"></li>
-		<li><input type="text" name="password" width="40px" placeholder="비밀번호"></li>
-		</ul> -->
-		
+		<c:if test="${empty sessionScope.memberid }">
+		<div class="cnt">
+                            <div class="inputWrap user-id">
+                                <input type="text" id="getId" class="getId" name="memberid" placeholder="아이디">
+                            </div>
+                            <div class="inputWrap user-password">
+                                <input type="password" id="pwd" class="getId" name="pwd" placeholder="비밀번호">
+                            </div>
+                            <button type="button" class="btnLogin">로그인</button>
+         </div>
          <ul class="memberType clear">
             <li>
-                <button type="button" class="tab devToggleLayer devHref devClick" data-click-value="53" data-target="#divLoginForm" title="개인회원 로그인">
-                    <span class="mainBtn mainBtnPer"></span>
-                    <a href="<c:url value='/login/login.do'/>" >
-                    <span class="tx"> 로그인</span></a>
-                </button>
-                <div class="lyLoginForm" id="divLoginForm">
-                </div>
+            		<input type="checkbox" name="saveId" value="">
+            		<span>아이디 저장</span>
             </li>
-        </ul>
-        <br><br><br>
-        <div class="mbrLinks clear">
-            <span class="mbr dotum">
-                <a href="<c:url value='/login/selectregister.do'/>" >
+            <br>
+            <li>
+                    <span class="mbr dotum">
+                <a href="<c:url value='/login/registerU.do'/>" >
                 <strong>회원가입</strong></a>
                 <span class="idBx">
                  <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
             </span>
-        
-        </div> 
-         
-       
-			</div> <!-- loginWrap -->
+            </li>
+        </ul>
+        </c:if>
+        <c:if test="${!empty sessionScope.memberid }">
+        	${sessionScope.memberid }님, 환영합니다.
+        </c:if>
+	</div> <!-- loginWrap -->
 		</div>
 
 	<!-- Latest -->

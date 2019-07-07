@@ -120,24 +120,10 @@ textarea {
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
-
-    $('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
- 		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
- 		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
 	
 	
-	$('form[name=register1]').submit(function(){
+	
+	$('form[name=registerU]').submit(function(){
 		
 		 if($('#memberid').val()==''){
 			alert('아이디를 입력해주세요');
@@ -183,60 +169,6 @@ $(function() {
 		 
 	});
 	
-	$('form[name=register2]').submit(function(){
-	/* 	$('.form-control').each(function(){
-			if($(this).val().length<1){
-				var msg=$(this).attr('title');
-				alert(msg+'칸을 입력해주세요	.');
-				$(this).focus();
-				event.preventDefault();
-			}
-			
-		}); */
-		/* if($('#memberid').val()==''){
-			alert('아이디를 입력해주세요');
-			$('#memberid').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#pwd').val()==''){
-			alert('비밀번호를 입력해주세요');
-			$('#pwd').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#pwd2').val()==''){
-			alert('비밀번호 확인칸을 입력해주세요');
-			$('#pwd2').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#membername').val()==''){
-			alert('이름을 입력해주세요');
-			$('#membername').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#tel').val()==''){
-			alert('전화번호를 입력해주세요');
-			$('#tel').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#email').val()==''){
-			alert('이메일을 입력해주세요');
-			$('#email').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#emailcertificatenum').val()==''){
-			alert('이메일인증번호를 입력해주세요');
-			$('#emailcertificatenum').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#businessNumber').val().length<1){
-			alert($(this).attr('title')+"를 입력해주세요");
-			$(this).focus();
-			event.preventDefault;
-			return false;
-		} */
-		
-	});
-	
 	
 	//핸드폰 정규식
 	function validate_phoneno(ph){
@@ -253,10 +185,10 @@ $(function() {
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="#" class="active" id="login-form-link">개인회원</a>
+								<a href="<c:url value='/login/registerU.do'/>" style="color: green; font-size:1.2em;">개인회원</a>
 							</div>
 							<div class="col-xs-6">
-								<a href="#" id="register-form-link">기업회원</a>
+								<a href="<c:url value='/login/registerC.do'/>" id="">기업회원</a>
 							</div>
 						</div>
 						<hr>
@@ -264,8 +196,8 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="<c:url value='/login/register1.do'/> " 
-								method="post" role="form" style="display: block;" name="register1">
+								<form id="login-form" action="<c:url value='/login/registerU.do'/> " 
+								method="post" role="form" style="display: block;" name="registerU">
 									<input type="hidden" name="authorityCode" value=1>
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
@@ -288,8 +220,8 @@ $(function() {
 									
 									<div class="form-group">
 									<div class="row">
-										<span id="availableId">필수입력정보입니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
+										<!--<span id="availableId">필수입력정보입니다.</span>
+									 <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
 										</div>
 									</div>
 										<div class="form-group" style="float: left; margin-right:30px;" >
@@ -299,20 +231,12 @@ $(function() {
 									
 									<div class="form-group">
 									<div class="row">
-										<span id="availableId">비밀번호가 일치하지 않습니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
+										<!-- <span id="availableId">비밀번호가 일치하지 않습니다.</span> -->
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control infobox" placeholder="이름*" title="이름*" style="width: 250px">
+										<input type="text" name="membername" id="membername" tabindex="1" class="form-control infobox" placeholder="이름*" title="이름" style="width: 250px">
 									</div>
-										<!-- <div class="radio radio-danger" style="float:left">
- 
-										<input type="radio" name="membergender" id="membergender" value="Yes" checked>
-										<input type="radio" name="membergender" id="membergender" value="No">
-										<label>남</label>
-										<label>여</label>
-										</div> -->
  
 									<div class="form-group">
 										<table>
@@ -324,7 +248,6 @@ $(function() {
 												<td rowspan="3"><input type="radio" name="membergender" id="selectgender" value="여">여</td>
 											</tr>
 										</table>
-										<!-- <input type="text" name="membergender" id="membergender" value="남자"> -->
 									</div>
 									<div class="form-group">
 										<input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="생년월일"  style="width: 300px">
@@ -462,92 +385,7 @@ $(function() {
 											</div>
 									</div>
 								</form>
-								<form id="register-form" action="<c:url value='/login/register2.do'/>" method="post" role="form" style="display: none;" name="register2">
-									<input type="hidden" name="authorityCode" value=2>
-									<input type="hidden" name="zipcode">
-									<input type="hidden" name="address">
-									<input type="hidden" name="addressdetail">
-									<input type="hidden" name="membergender">
-									<input type="hidden" name="birth">
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디" 
-										class="form-control" style="width:250px" title="아이디" >
-									</div>
-									
-									<div class="form-group">
-									<div class="row">
-										<span id="availableId">사용가능한 아이디입니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
-										</div>
-									</div>
-									
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호" 
-										class="form-control" style="width:250px" title="비밀번호">
-									</div>
-									
-									<div class="form-group">
-									<div class="row">
-										<span id="necessary">필수입력정보입니다.</span>
-										</div>
-									</div>
-										<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인" 
-										class="form-control" style="width:250px" title="비밀번호 확인">
-									</div>
-									
-									<div class="form-group">
-									<div class="row">
-										<span id="availableId">비밀번호가 일치하지 않습니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
-										</div>
-									</div>
-									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="대표자명" title="대표자명"  style="width: 300px">
-									</div>
-									
-									<div class="form-group">
-										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="전화번호" title="전화번호"  style="width: 300px">
-									</div>
-									<div class="form-group">
-										<input type="text" name="companyname" id="companyname" tabindex="1" class="form-control" placeholder="기업명" style="width:300px" title="기업명">
-									</div>
-									<div class="form-group">
-										<input type="text" name="businessNumber" id="businessNumber" tabindex="1" class="form-control" placeholder="사업자등록번호" title="사업자 등록번호">
-									</div>
-									<div class="form-group">회사로고 이미지
-										<input type="file" name="image" id="image">
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
-										class="form-control" style="width:300px" style="background-color: #50a954" title="이메일">
-									</div>
-									<div class="form-group">
-									<div class="row">
-										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
-										</div>
-									</div>
-									<div class="form-group">
-										<input type="text" name="emailcertificatenum"  id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호" style="width:300px">
-									</div>
-									
-									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="registerCompanysubmit" id="registerCompanysubmit" 
-												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
-										</div>
-									</div>
-									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<div class="text-center">
-													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
-												</div>
-											</div>
-									</div>
-								</form>
+								
 							</div>
 						</div>
 					</div>

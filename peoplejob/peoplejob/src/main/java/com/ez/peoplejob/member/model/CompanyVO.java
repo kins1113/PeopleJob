@@ -3,8 +3,9 @@ package com.ez.peoplejob.member.model;
 public class CompanyVO {
 	private int companyCode;
 	private String companyname;
-	private String bussinessNumber;
+	private String businessNumber;
 	private String image;
+	
 	public int getCompanyCode() {
 		return companyCode;
 	}
@@ -18,11 +19,11 @@ public class CompanyVO {
 		this.companyname = companyname;
 	}
 	
-	public String getBussinessNumber() {
-		return bussinessNumber;
+	public String getBusinessNumber() {
+		return businessNumber;
 	}
-	public void setBussinessNumber(String bussinessNumber) {
-		this.bussinessNumber = bussinessNumber;
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 	public String getImage() {
 		return image;
@@ -32,8 +33,8 @@ public class CompanyVO {
 	}
 	@Override
 	public String toString() {
-		return "CompanyVO [companyCode=" + companyCode + ", companyname=" + companyname + ", bussinessNumber="
-				+ bussinessNumber + ", image=" + image + "]";
+		return "CompanyVO [companyCode=" + companyCode + ", companyname=" + companyname + ", businessNumber="
+				+ businessNumber + ", image=" + image + "]";
 	}
 	
 	

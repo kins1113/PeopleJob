@@ -1,5 +1,8 @@
 package com.ez.peoplejob.member.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ez.peoplejob.common.FileUploadUtility;
+import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.member.model.MemberVO;
 
@@ -22,26 +27,34 @@ import com.ez.peoplejob.member.model.MemberVO;
 @RequestMapping("/login")
 public class MemberController {
 	private Logger logger=LoggerFactory.getLogger(MemberController.class);
+	@Autowired private FileUploadUtility fileUploadUtil;
 	
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/selectregister.do", method = RequestMethod.GET)
-	public String register() {
-		logger.info("회원가입 화면 보여주기");
-		return "login/selectregister";
+	@RequestMapping(value="/registerU.do", method = RequestMethod.GET)
+	public String registerU() {
+		logger.info("개인 회원가입 화면 보여주기");
+		return "login/registerU";
 	}
 	
-	@RequestMapping(value="/selectregister.do", method = RequestMethod.POST)
+	@RequestMapping(value="/registerC.do", method = RequestMethod.GET)
+	public String registerC() {
+		logger.info("기업 회원가입 화면 보여주기");
+		return "login/registerC";
+	}
+	
+	
+	@RequestMapping(value="/registerU.do", method = RequestMethod.POST)
 	public String register_post(@ModelAttribute MemberVO memberVo, Model model) {
 		logger.info("회원가입 등록 처리 파라미터 memberVo={}",memberVo);
-		int acode=memberVo.getAuthorityCode();
-		logger.info("회원가입 등록 파라미터, 권한번호 authority_code={}",acode);
+		memberVo.setAuthorityCode(1);
+		logger.info("회원가입 등록 파라미터, 권한번호 authority_code={}",memberVo.getAuthorityCode());
 		
 		int cnt=memberService.insertMember(memberVo);
 		logger.info("회원가입 등록 처리 결과 cnt={}",cnt);
 		
-		String msg="", url="/login/selectregister.do";
+		String msg="", url="/login/registerC.do";
 		if(cnt>0) {
 			msg="회원가입이 완료되었습니다.";
 			url="/login/login.do";
@@ -52,6 +65,58 @@ public class MemberController {
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/registerC.do", method = RequestMethod.POST)
+	public String register2_post(@ModelAttribute MemberVO memberVo, Model model, 
+			@ModelAttribute CompanyVO companyVo, HttpServletRequest request) {
+		logger.info("기업회원가입 파라미터, memberVo={}",memberVo);
+		logger.info("기업회원가입 파라미터, companyVo={}",companyVo);
+		memberVo.setAuthorityCode(2);
+		
+		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
+		 
+		String imageURL="";
+		for(Map<String,Object>map:list) {
+			imageURL=(String)map.get("fileName");
+		}
+		
+		
+		int cnt=memberService.insertMember(memberVo);
+		logger.info("기업회원가입 처리 결과 cnt={}",cnt);
+		
+		String msg="", url="/login/registerC.do";
+		if(cnt>0) {
+			companyVo.setImage(imageURL);
+			int cnt2=memberService.insertCompany(companyVo);
+			logger.info("기업회원가입 처리 시, 회사등록 결과 cnt2={}",cnt2);
+			if(cnt2>0) {
+				msg="기업회원 회원가입이 완료되었습니다. "
+						+ "하루 뒤 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.";
+				url="/login/login.do";
+			}else {
+				msg="기업등록 실패";
+			}
+		}else {
+			msg="기업회원 회원가입 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+		
+	}
+	
+	@RequestMapping("/person_update.do")
+	public String person_update(HttpSession session, Model model) {
+		logger.info("개인회원 정보수정 화면 보여주기");
+		String memberId=(String) session.getAttribute("memberid");
+		MemberVO memberVo=memberService.selectByUserid(memberId);
+		logger.info("selectByUserid 결과 memberVo={}",memberVo);
+		
+		model.addAttribute("memberVo",memberVo);
+		return "login/person_update";
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
@@ -82,11 +147,12 @@ public class MemberController {
 			
 			//[1] session에 저장 (request에서 받아오기)
 			HttpSession session=request.getSession();
-			session.setAttribute("userid", memberId);
-			session.setAttribute("userName", memVo.getMembername());
+			session.setAttribute("memberid", memberId);
+			session.setAttribute("author_code", memVo.getAuthorityCode());
+			//session.setAttribute("userName", memVo.getMembername());
 			
 			//[2] 쿠키에 저장
-			Cookie ck=new Cookie("ck_userid", memberId);
+			Cookie ck=new Cookie("ck_memberid", memberId);
 			ck.setPath("/"); //안쓰면 못찾음 => 다른경로에서 쿠키지우려고하면 접근안되서 path설정해줘야함(/로 설정하면 지금 경로와 하위경로에서 사용가능)
 			
 			if(saveId!=null) {//아이디 저장하기를 체크한 경우
@@ -117,5 +183,11 @@ public class MemberController {
 		
 		return "common/message";
 	
+	}
+	
+	@RequestMapping("/login/findId.do")
+	public String findId() {
+		logger.info("아이디/비밀번호 찾기 화면 보여주기");
+		return "login/findId";
 	}
 } 
