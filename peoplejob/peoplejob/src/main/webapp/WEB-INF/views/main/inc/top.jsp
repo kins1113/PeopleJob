@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="<c:url value='/resources/main/images/icons/favicon.png'/>"/>
+	<link rel="icon" type="image/png" href="<c:url value='/resources/main/images/icons/icon.PNG'/>"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/vendor/bootstrap/css/bootstrap.min.css'/>">
 <!--===============================================================================================-->
@@ -214,8 +214,15 @@ button {
 									<li><a href="category-02.html">공지사항</a></li>
 								</ul>
 							</li>
-
-
+							
+								<a href="<c:url value='/mypage/user/userpage.do'/>"><img src="<c:url value='/resources/main/images/icons/my.png'/>" 
+								name="mypage" style="width: 40px;margin-left: 65px;"></a>
+								<ul class="sub-menu">
+									<li><a href="category-01.html">자유게시판</a></li>
+									<li><a href="category-02.html">QnA</a></li>
+									<li><a href="category-02.html">공지사항</a></li>
+								</ul>
+								
 						</ul>
 					</nav>
 				</div>

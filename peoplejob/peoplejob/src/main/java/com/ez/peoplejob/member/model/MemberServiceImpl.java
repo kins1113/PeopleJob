@@ -51,6 +51,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public int insertCompany(CompanyVO companyVo) {
+		return memberDao.insertCompany(companyVo);
+	}
+
+
 
 	
 

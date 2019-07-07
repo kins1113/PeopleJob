@@ -2,7 +2,9 @@ package com.ez.peoplejob.post.model;
 
 import java.sql.Timestamp;
 
-public class PostVO {
+import com.ez.peoplejob.common.SearchVO;
+
+public class PostVO extends SearchVO{
 	private int boardCode2;				//게시글 코드
 	private String boardtitle;			//제목
 	private String boardcontent;		//내용
@@ -11,9 +13,44 @@ public class PostVO {
 	private String deletecheck;			//삭제 여부
 	private int memberCode;				//회원 코드
 	private int boardCode; 				//게시판 코드
-	private String boardcheck; 			//게시판 구분 코드 
+	private String reportCk; 			//신고 체크 여부 
+	private String reportUser;			//신고 유저 아이디
+	private String reportComent;		//신고 내용
 	
+	public String getReportCk() {
+		return reportCk;
+	}
+	public void setReportCk(String reportCk) {
+		this.reportCk = reportCk;
+	}
+	public String getReportUser() {
+		return reportUser;
+	}
+	public void setReportUser(String reportUser) {
+		this.reportUser = reportUser;
+	}
+	public String getReportComent() {
+		return reportComent;
+	}
+	public void setReportComent(String reportComent) {
+		this.reportComent = reportComent;
+	}
+	//필터링을 위한 변수
+	private String filterCode;
+	private String filterKey;
 	
+	public String getFilterKey() {
+		return filterKey;
+	}
+	public void setFilterKey(String filterKey) {
+		this.filterKey = filterKey;
+	}
+	public String getFilterCode() {
+		return filterCode;
+	}
+	public void setFilterCode(String filterCode) {
+		this.filterCode = filterCode;
+	}
 	public int getBoardCode2() {
 		return boardCode2;
 	}
@@ -62,17 +99,13 @@ public class PostVO {
 	public void setBoardCode(int boardCode) {
 		this.boardCode = boardCode;
 	}
-	public String getBoardcheck() {
-		return boardcheck;
-	}
-	public void setBoardcheck(String boardcheck) {
-		this.boardcheck = boardcheck;
-	}
 	@Override
 	public String toString() {
 		return "PostVO [boardCode2=" + boardCode2 + ", boardtitle=" + boardtitle + ", boardcontent=" + boardcontent
 				+ ", boardregdate2=" + boardregdate2 + ", boardhits=" + boardhits + ", deletecheck=" + deletecheck
-				+ ", memberCode=" + memberCode + ", boardCode=" + boardCode + ", boardcheck=" + boardcheck + "]";
+				+ ", memberCode=" + memberCode + ", boardCode=" + boardCode + ", reportCk=" + reportCk + ", reportUser="
+				+ reportUser + ", reportComent=" + reportComent + ", filterCode=" + filterCode + ", filterKey="
+				+ filterKey + ", toString()=" + super.toString() + "]";
 	}
 	
 	

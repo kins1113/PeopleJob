@@ -64,19 +64,20 @@ $(function() {
 							<div class="col-lg-12">
 								<form id="login-form" action="<c:url value='/login/login.do'/>" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="memberId" id="memberId" tabindex="1" class="form-control" placeholder="ID" value="">
+										<input type="text" name="memberId" id="memberId" tabindex="1" class="form-control" placeholder="ID"
+										 value="${cookie.ck_memberid.value}">
 									</div>
 									<div class="form-group">
 										<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
 									<div class="row" style="margin-left:-1px">
-										<input type="checkbox" name="saveId" id="saveId">&nbsp;아이디 저장
+										<input type="checkbox" name="saveId" id="saveId"
 										
-										<c:if test="${!empty cookie.ck_userid }">
+										<c:if test="${!empty cookie.ck_memberid }">
 											checked="checked"
-										</c:if>
-				
+										</c:if>>
+										<label for="saveId">아이디 저장</label>
 										</div>
 									</div>
 									<div class="form-group">

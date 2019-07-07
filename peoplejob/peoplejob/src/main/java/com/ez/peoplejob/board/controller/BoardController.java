@@ -1,6 +1,8 @@
 package com.ez.peoplejob.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -112,12 +115,72 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardList.do")
-	public String boardList() {
-		logger.info("게시판 보여주기");
+	public String boardList(@RequestParam(required = false, defaultValue = "") String key, @RequestParam(required = false, defaultValue = "") String content,
+			@RequestParam(required = false ,defaultValue = "") String fileter,
+			@RequestParam(required = false) String useCheck
+			,Model model ) {
+		logger.info("게시판 보여주기 파라미터 key={}, content={}",key, content);
+		logger.info("fileter={} useCheck={}",fileter,useCheck);
 		//게시판 정보 보여주기.
+		Map<String,String> map=new HashMap<String,String>();
+		map.put("key", key);
+		map.put("content", content);
+		map.put("fileter", fileter);
+		map.put("useCheck",	useCheck);
 		
+		List<BoardVO> boardList=boardService.selectBoardSerch(map);
+		logger.info("게시판 리스트 보여주기 처리 결과 boardList.size={}",boardList.size());
+		List<BoardKindVO> BKList=boardKindService.selectBKind();
+		
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("BKList",BKList);
 		
 		return "manager/board/boardList";
 	}
+	
+	@RequestMapping("/boardUpdate.do")
+	public String updateBoard(@RequestParam(defaultValue = "0")int boardCode,
+				@RequestParam String usage, @RequestParam(required = false) String fileter) {
+		logger.info("계시판 업로드 처리 파라미터 , boardCode={} usage={}",boardCode,usage);
+		
+		Map<String , Object> map=new HashMap<String, Object>();
+		map.put("boardCode", boardCode);
+		map.put("usage", usage);
+		map.put("fileter", fileter);
+		int re=boardService.boardUpdate(map);
+		
+		return "redirect:/manager/board/boardList.do";
+	}
+	
+	@RequestMapping("/boardDelete.do")
+	public String boardDelete(@RequestParam int[] boardCheckBox) {
+		Map<String, int[]> map=new HashMap<String, int[]>();
+		for(int i=0; i<boardCheckBox.length ;i++) {
+			logger.info("게시판 삭제 파라미터 i={}",i);
+		}
+		map.put("boardCheckBox", boardCheckBox);
+		
+		int re=boardService.deleteMultDelete(map);
+		
+		return "redirect:/manager/board/boardList.do";
+	}
+	
+	@RequestMapping("/boardEdit.do")
+	public String boardEdit(@RequestParam int[] boardCheckBox, Model model) {
+		Map<String, int[]> map=new HashMap<String, int[]>();
+		for(int i=0; i<boardCheckBox.length ;i++) {
+			logger.info("게시판 수정 화면 보여주기; 파라미터 i={}",i);
+		}
+		map.put("boardCordList",boardCheckBox);
+		List<BoardVO> list=boardService.selectByCodeVariable(map);
+		logger.info("게시판 수정 조회 결과 list.size={}",list.size());
+		
+		List<BoardKindVO> BKList=boardKindService.selectBKind();
+		model.addAttribute("list", list);
+		model.addAttribute("BKList", BKList);
+		
+		return "manager/board/boardEdit";
+		}
 	
 }

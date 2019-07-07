@@ -17,9 +17,12 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		return "service/payment";
 	}
 	
-	@RequestMapping("/login/findId.do")
-	public String findId() {
-		logger.info("아이디/비밀번호 찾기 화면 보여주기");
-		return "login/findId";
+	@RequestMapping("/mypage/user/userpage.do")
+	public String mypage() {
+		logger.info("마이페이지 화면 보여주기");
+		return "mypage/user/userpage";
+		
 	}
+	
+	
 }
