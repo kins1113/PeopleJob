@@ -18,8 +18,8 @@ public class JobopeningServiceImpl implements JobopeningService{
 	}
 
 	@Override
-	public List<JobopeningVO> selectJobOpen() {
-		return jobopeningDao.selectJobOpen();
+	public List<JobopeningVO> selectJobOpen(SearchVO vo) {
+		return jobopeningDao.selectJobOpen(vo);
 	}
 
 	@Override

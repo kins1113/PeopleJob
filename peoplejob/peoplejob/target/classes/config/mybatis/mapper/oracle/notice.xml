@@ -7,25 +7,25 @@
 		<selectKey resultType="int" keyProperty="notifyCode" order="BEFORE">
 			select notice_seq.nextval from dual
 		</selectKey>
-		insert into notice(notifyCode, notifytitle, notifycontent, adminCode) 
+		insert into notice(notify_Code, notifytitle, notifycontent, admin_Code) 
 		values(#{notifyCode}, #{notifytitle}, #{notifycontent}, #{adminCode})
 	</insert>
 
 	
-	<select id="selectSearch" parameterType="searchVo" resultType="boardVo">
+	<select id="selectSearch" parameterType="searchVo" resultType="noticeVo">
 		select *
 		from
 		(
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select notifyCode, notifytitle, notifycontent, readcount,notifydate,
+		        select notify_Code, notifytitle, notifycontent, readcount,notifydate,
 					(sysdate-notifydate)*24 as new_Img_Term
 				from notice		
 				<if test="searchKeyword != null and searchKeyword != ''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>		
-				order by notifyCode desc
+				order by notify_Code desc
 		    ) A
 		)
 		<![CDATA[ where RNUM>#{firstRecordIndex}  

@@ -9,8 +9,17 @@ public class NoticeVO {
 	private String notifycontent;
 	private Timestamp notifydate;
 	private int adminCode;
+	private int readcount;
 	
-	//24시간 이내의 글인 경우 image표시하기 위해 사용
+	public int getReadcount() {
+		return readcount;
+	}
+
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
+
+		//24시간 이내의 글인 경우 image표시하기 위해 사용
 		private double newImgTerm;
 
 		public int getNotifyCode() {
@@ -64,8 +73,8 @@ public class NoticeVO {
 		@Override
 		public String toString() {
 			return "NoticeVO [notifyCode=" + notifyCode + ", notifytitle=" + notifytitle + ", notifycontent="
-					+ notifycontent + ", notifydate=" + notifydate + ", adminCode=" + adminCode + ", newImgTerm="
-					+ newImgTerm + "]";
+					+ notifycontent + ", notifydate=" + notifydate + ", adminCode=" + adminCode + ", readcount="
+					+ readcount + ", newImgTerm=" + newImgTerm + "]";
 		}
 	
 	

@@ -1,23 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../main/inc/top.jsp" %>
+<script>
+	function pageFunc(curPage){
+		document.frmSearch.currentPage.value=curPage;
+		document.frmSearch.submit();
+	}
+</script>
 <article>
 	<fieldset>
     <div class="col-md-9">
         <div class="page-header">
             <h3>채용공고</h3>
         </div>
-        <div class="form-group clearfix">
-            <form id="boardForm" class="form-inline" role="form" method="post">
-                <div class="input-group col-xs-4 pull-right">
-                    <input id="search" name="search" type="text" class="form-control" placeholder="검색" />
-                    <span class="input-group-btn">
-                        <input type="button" class="btn btn-default" value="검색">
-                        <a href="<c:url value='/company/jobopening_where.do'/>"><input type="button" value="검색조건"></a>
-                    </span>
-                </div>
-            </form>
-        </div>
+        <c:if test="${!empty param.searchKeyword}">
+			<p>
+				검색어 : ${param.searchKeyword}, ${pagingInfo.totalRecord}건 검색되었습니다.
+			</p>
+		</c:if>
         <div>
         <c:if test="${empty list }">	 
 	 	<tr>
@@ -76,7 +76,7 @@
    	<form name="frmSearch" method="post" 
    		action='<c:url value="/company/jobopening_list.do"/>'>
    		<!-- 현재 페이지 hidden에 넣기 -->
-   		<input type="Text" name='currentPage' value="1" >
+   		<input type="hidden" name='currentPage' value="1" >
    		
         <select name="searchCondition">
             <option value="jobtitle" 
@@ -89,15 +89,17 @@
             		selected="selected"
             	</c:if>
             >지역</option>
-            <option value="academicCondition"
-            	<c:if test="${param.searchCondition=='academicCondition'}">
+            <option value="academic_condition"
+            	<c:if test="${param.searchCondition=='academic_condition'}">
             		selected="selected"
             	</c:if>
             >학력</option>
         </select>   
-        <input type="text" name="searchKeyword" title="검색어 입력"
-        	value="${param.searchKeyword }">   
+        <div class="input-group col-xs-4 pull-right">
+         <input id="searchKeyword" name="searchKeyword" type="text" value="${param.searchKeyword }"
+         class="form-control" placeholder="검색" />
 		<input type="submit" value="검색">
+        </div>
     </form>
 </div>
         </div>

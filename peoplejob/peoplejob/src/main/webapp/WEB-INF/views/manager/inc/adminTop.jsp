@@ -202,15 +202,21 @@
 							href="javascript:void(0)" data-toggle="collapse"
 							data-target="#charts" aria-expanded="false"
 							aria-controls="charts"> <i class="mdi mdi-chart-pie"></i> <span
-								class="nav-text">가나다 변경</span> <b class="caret"></b>
+								class="nav-text">메일/SMS</span> <b class="caret"></b>
 						</a>
 							<ul class="collapse" id="charts" data-parent="#sidebar-menu">
 								<div class="sub-menu">
-									<li><a class="sidenav-item-link" href="chartjs.html">
-											<span class="nav-text">ChartJS</span>
-									</a></li>
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath }/manager/email_sms/emailWrite.do">
+											<span class="nav-text">메일</span>
+									</a>
+									</li>
+									<li><a class="sidenav-item-link" href="#">	<!-- ${pageContext.request.contextPath} -->
+											<span class="nav-text">SMS</span>
+									</a>
+									</li>
 								</div>
-							</ul></li>
+							</ul>
+							</li>
 						<li class="has-sub"><a class="sidenav-item-link"
 							href="javascript:void(0)" data-toggle="collapse"
 							data-target="#pages" aria-expanded="false" aria-controls="pages">
@@ -249,7 +255,7 @@
 										<ul class="collapse" id="abc">
 											<div class="sub-menu">
 
-												<li><a href="<c:url value='/manager/board/postList.do'/>">전체 조회</a></li>
+												<li><a href="<c:url value='/manager/post/postList.do'/>">전체 조회</a></li>
 
 												<li><a href="sign-up.html">변경</a></li>
 
@@ -384,12 +390,12 @@
 
 
 									<li><a class="sidenav-item-link"
-										href="<c:url value='/manager/manger/managerList.do'/>"> <span
+										href="<c:url value='/manager/manager/managerList.do'/>"> <span
 											class="nav-text">조회</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="#"> <span
+									<!-- <li><a class="sidenav-item-link" href="#"> <span
 											class="nav-text">권한 보기</span>
-									</a></li>
+									</a></li> -->
 
 								</div>
 							</ul></li>

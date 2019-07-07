@@ -7,18 +7,18 @@
 		$("#uploadCheck").change(function(){
 			var checked = $(this).prop('checked')
 			if(checked){
-				$("#uploadCK").show();
+				$("#uploadCK").show();	
 			}else{
 				$("#uploadCK").hide();
 				
 			}
 				
 		})
-		
+		 
 		$("form[name=insertBoardForm]").submit(function(){
 			//업로드 체크가 안되면 0이 들어가도록			
 			if($('#boardname').val()<1){
-				alert("아이디를 입력하세요");
+				alert("이름을 입력하세요");
 				$('#boardname').focus();
 				event.preventDefault();
 				return false;
@@ -32,6 +32,18 @@
 			if(!$("input[name=upage]").prop('checked')){
 				$("input[name=upnumage]").val(0);
 				$("input[name=upsizeage]").val(0);
+			}else{
+				if($("input[name=upnumage]").val().length<1){
+					alert("업로드 가능 숫자를 입력하세요");
+					$("input[name=upnumage]").focus()
+					event.preventDefault();
+					return false;
+				}else if($("input[name=upsizeage]").val().length<1){
+					alert("업로드 사이즈를 입력하세요");
+					$("input[name=upsizeage]").focus()
+					event.preventDefault();
+					return false;
+				}
 			}
 			 	  
 		});
@@ -47,6 +59,11 @@
 			$("form[name=boardKindAddForm]").submit();
 			
 		});
+		
+		//목록으로
+		$("#goToBoardList").click(function(){
+			location.href="<c:url value='/manager/board/boardList.do'/>";
+		});
 	})
 </script>
  <div class="content-wrapper">
@@ -56,7 +73,7 @@
 <div class="col-lg-12">
 	<div class="card card-default">
 		<div class="card-header card-header-border-bottom">
-			<h2>Custom List Tabs</h2>
+			<h2>게시판 추가</h2>
 		</div>
 		<div class="card-body">
 			<ul class="nav nav-pills nav-justified nav-style-fill" id="myTab" role="tablist">
@@ -107,10 +124,11 @@
 								</label>
 									<br>									
 								<button id="boardAddButton" type="submit" class="mb-1 btn active  btn-secondary">추가</button>
+								<button type="button" id="goToBoardList" class="mb-1 btn btn-info">목록으로</button>
 								</div>
 								<div class="col-sm-6" id="uploadCK">
 									<div class="form-group">
-										<label for="exampleFormControlPassword3">업로드 가능 한 숫자</label>
+										<label for="exampleFormControlPassword3">업로드 가능 한 숫자(1~5개)</label>
 										<input type="Upload Count" name="upnumage" class="form-control" id="exampleFormControlPassword3" placeholder="Password">
 									</div>				
 									<div class="form-group">

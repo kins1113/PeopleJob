@@ -81,11 +81,11 @@ public class JobopeningController {
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("셋팅 후 serchVo={}",searchVo);
 		
-		List<JobopeningVO> list=jobopeningService.selectJobOpen();
+		List<JobopeningVO> list=jobopeningService.selectJobOpen(searchVo);
 		logger.info("공고 list.size={}",list.size());
 		int totalRecord=0;
 		totalRecord=jobopeningService.selectTotalCount(searchVo);
-		logger.info("전체 레코드 개수 조회 결과, totalRecord=",totalRecord);
+		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
 		
 		//5]PaginationInfo에 totalRecord값셋팅
 		pagingInfo.setTotalRecord(totalRecord);
