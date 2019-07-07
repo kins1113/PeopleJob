@@ -104,4 +104,10 @@ public class ResumeDAOMybatis implements ResumeDAO {
 		List<ResumeVO> list=sqlsession.selectList(namespace+"selectSearch",searscVo);
 		return list;
 	}
+
+	@Override
+	public int insertMember2(ResumeVO vo) {
+		int cnt=sqlsession.insert(namespace+"insertMember2",vo);
+		return cnt;
+	}
 }

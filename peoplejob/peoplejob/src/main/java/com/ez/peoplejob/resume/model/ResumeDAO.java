@@ -5,6 +5,8 @@ import java.util.List;
 import com.ez.peoplejob.common.SearchVO;
 
 public interface ResumeDAO {
+	
+	public int insertMember2(ResumeVO vo);
 	public int insertResume(ResumeVO vo);
 	
 	public int insertLangcertification(ResumeVO vo);
