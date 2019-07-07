@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../main/inc/top.jsp" %>
-
+<script type="text/javascript">	
+	function pageFunc(curPage){
+		document.frmSearch.currentPage.value=curPage;
+		document.frmSearch.submit();
+	}
+</script>
 
 <div class="divList">
 <table class="box2"
 	 	summary="이력서 현황에 관한 표로써, 이력서제목, 이력서 공개 설정, 내 이력서 열람 기업에 대한 정보를 제공합니다.">
-	<caption>기본 게시판</caption>
+	<caption>이력서리스트</caption>
 	<colgroup>
 		<col style="width:60%;" />
 		<col style="width:10%;" />
@@ -44,7 +49,6 @@
 				<td>${vo.opencheck}</td>
 					
 					
-					</a></td>
 				<td>${vo.membername}</td><!--일단 멤버 네임으로  -->
 				<td><fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
 				</td>

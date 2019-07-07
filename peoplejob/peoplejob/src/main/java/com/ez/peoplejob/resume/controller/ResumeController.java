@@ -9,11 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ez.peoplejob.board.model.BoardVO;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
@@ -85,21 +86,105 @@ public class ResumeController {
 			
 			//[3] 조회처리
 			List<ResumeVO> list=resumeService.selectAll(searchVo);
-			logger.info("글목록 결과, list.size={}",list.size());
-			
-			//[4] 전체 레코드 개수 조회
-			int totalRecord=0;
-			totalRecord=boardService.selectTotalCount(searchVo);
-			logger.info("전체 레코드 개수 조회 결과, totalRecord={}", totalRecord);
-			
-			//[5] PaginationInfo에 totalRecord 값 셋팅
-			pagingInfo.setTotalRecord(totalRecord);
-			
+			logger.info("이력서목록 결과, list.size={}",list.size());
+				
 			//3
 			model.addAttribute("list", list);
 			model.addAttribute("pagingInfo", pagingInfo);
 			
-			return "board/list";
+			return "resume/list";
 		}
+	
+	
+	@RequestMapping("/detail.do")
+	public String detail(@RequestParam(defaultValue = "0") int resumeCode, 
+			ModelMap model) {
+		logger.info("글 상세보기, 파라미터 resumeCode={}", resumeCode);
+		
+		if(resumeCode==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/resume/list.do");
+			
+			return "common/message";
+		}
+		
+		ResumeVO resumeVo=resumeService.selectResumeByNo(resumeCode);
+		logger.info("상세보기 결과 vo={}", resumeVo);
+		
+		model.addAttribute("vo", resumeVo);
+		
+		return "resume/detail";
+	}
+	
+	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
+	public String edit_get(@RequestParam(defaultValue = "0") int resumeCode, 
+			ModelMap model) {
+		logger.info("수정화면, 파라미터 resumeCode={}", resumeCode);
+		
+		if(resumeCode==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/resume/list.do");
+			return "common/message";
+		}
+		
+		ResumeVO resumeVo=resumeService.selectResumeByNo(resumeCode);
+		logger.info("수정화면 조회 결과, vo={}", resumeVo);
+		
+		model.addAttribute("vo", resumeVo);
+		return "resume/edit";
+	}
+	
+	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
+	public String edit_post(@ModelAttribute ResumeVO resumeVo, Model model) {
+		logger.info("이력서 수정 처리, 파라미터 resumeVo={}", resumeVo);
+		
+		String msg="", url="/resume/edit.do";
+			int cnt=resumeService.updateResume(resumeVo);
+			if(cnt>0) {
+				msg="이력서 수정되었습니다.";
+				url="/resume/detail.do?resumeCode="+resumeVo.getResumeCode();
+			}else {
+				msg="이력서 수정 실패.";
+			}
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+		}
+	
+	@RequestMapping(value="/delete.do",method = RequestMethod.GET)
+	public String delete_get(@RequestParam(defaultValue = "0") int resumeCode, Model model) {
+		logger.info("삭제 화면 파라미터 resumeCode={}" , resumeCode);
+		
+		if(resumeCode==0) {
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/resume/list.do");
+			return "common/message";
+			
+		}
+		
+		return "resume/delete";
+	}
+	@RequestMapping(value="/delete.do",method = RequestMethod.POST)
+	public String delete_post(@ModelAttribute ResumeVO resumeVo, Model model) {
+		logger.info("이력서 삭제 처리, 파라미터 resumeVo={}",resumeVo);
+		
+		String msg="",url="/resume/delete.do?resumeCode="+resumeVo.getResumeCode();
+			int cnt=resumeService.deleteResumeByNo(resumeVo.getResumeCode());
+			logger.info("이력서 삭제 처리 결과, cnt={}",cnt);
+			
+			if(cnt>0) {
+				msg="이력서 삭제되었습니다.";
+				url="/resume/list.do";
+			}else {
+				msg="이력서 삭제 실패!";
+			}
+		
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	}	
-}
+

@@ -23,6 +23,21 @@
         $("#datepicker1").datepicker();
     });
  
+    
+    $(document).ready(function(){
+		$('form[name=frm1]').submit(function(){
+			$('#infobox').each(function(idx, item){
+				if($(this).val().length<1){
+					alert($(this).prev().html()+'를 입력하세요');
+					$(this).focus();
+					
+					event.preventDefault();  //이벤트 진행을 막고
+					return false;  //each() 탈출
+				}
+			});	
+		});
+		
+	});
 </script>
  
 
@@ -98,7 +113,6 @@ $('.btn').on('click', function(e){
     margin: 0 auto;
 }
 </style>
-<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 </script>
 <article>
@@ -110,43 +124,47 @@ $('.btn').on('click', function(e){
 	
 	<div>        
         <label for="resumeTitle">이력서 제목</label>
-        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="resumeTitle"  style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox"  style="ime-mode:active">
     </div>
     <hr>
     <h3>기본정보</h3>
+    <div>
+    <!--이력서 사진  https://kuzuro.blogspot.com/2018/10/11.html-->
+    <img src="..." alt="..." class="img-thumbnail">
+    </div>
     <div>        
         <label for="membername">이름</label>
-        <input type="text" class="form-control"  name="membername" id="membername" value="${vo.membername }" style="ime-mode:active">
+        <input type="text" class="form-control"  name="membername" id="infobox" value="${vo.membername }" style="ime-mode:active">
     </div>
     <div>        
         <label for="birth">생년월일</label>
-        <input type="text" class="form-control"  name="birth" id="birth" value="${vo.birth}" style="ime-mode:active">
+        <input type="text" class="form-control"  name="birth" id="infobox" value="${vo.birth}" style="ime-mode:active">
     	
     </div>
     
    
     <div>
         <label for="email">이메일 주소</label>
-        <input type="text" class="form-control"  name="email"  id="email" value="${vo.email }" title="이메일주소 앞자리">
+        <input type="text" class="form-control"  name="email"  id="infobox" value="${vo.email }" title="이메일주소 앞자리">
     </div>
     
     <div>
         <label for="address">주소</label>
-        <input type="text" class="form-control"  name="zipcode" id="zipcode" ReadOnly  
+        <input type="text" class="form-control"  name="zipcode" id="infobox" ReadOnly  
         	title="우편번호" class="width_80" value="${vo.zipcode}">
         
         <button type="button" class="btn btn-success" value="우편번호 찾기" id="btnZipcode" 
         title="새창열림">우편번호찾기</button>
         <br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
+        <input type="text"  class="form-control" id="infobox" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control"  name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
+        <input type="text"  class="form-control" id="infobox" name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
     </div>
     <div>
         <label for="tel">핸드폰</label>&nbsp;
        
-        <input type="text"  class="form-control"   name="tel" id="tel" value="${vo.tel}" maxlength="4" title="휴대폰 번호"
+        <input type="text"  class="form-control"   name="tel" id="infobox" value="${vo.tel}" maxlength="4" title="휴대폰 번호"
         	class="width_80">
     </div>
     
@@ -173,12 +191,12 @@ $('.btn').on('click', function(e){
 		<div>
 		 <label for="element">학교명</label>&nbsp;
 			    
-        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="schoolname" 
+        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="infobox" 
         	class="width_80">
         </div>
         <div>
 		 <label for="schoollocal">지역</label>&nbsp;
-			<select class="form-control" name="schoollocal" id="schoollocal" >
+			<select class="form-control" name="schoollocal" id="infobox" >
         	<option value="서울">서울</option>
         	<option value="경기">경기</option>
         	<option value="광주">광주</option>
@@ -208,7 +226,7 @@ $('.btn').on('click', function(e){
        <div>
 		 <label for="graduate">졸업년도</label>&nbsp;
 		 <input type="text" class="form-control" name="graduate" id="datepicker1">
-         <select class="form-control" name="graduatecheck" id="graduatecheck" >
+         <select class="form-control" name="graduatecheck" id="infobox" >
         	<option value="졸업여부">졸업여부</option>
         	<option value="졸업">졸업</option>
         	<option value="중퇴">중퇴</option>
@@ -220,49 +238,53 @@ $('.btn').on('click', function(e){
     <label for="workcheck">경력구분</label>&nbsp;
        
        <label class="radio-inline">
-  		<input type="radio" name="workcheck" id="workcheck" value="신입">신입
+  		<input type="radio" name="workcheck" id="infobox" value="신입">신입
 		</label>
 		
 		<label class="radio-inline">
-  		<input type="radio" name="workcheck" id="workcheck" value="경력">경력
+  		<input type="radio" name="workcheck" id="infobox" value="경력">경력
 		</label>
     </div>
     <hr>
     <div>        
         <label for="companyname">회사명</label>
-        <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="companyname" style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="infobox" style="ime-mode:active">
     </div>
     <div>
         <label for="workterm">근무기간</label>
-		<input type="text" class="form-control" name="workterm" id="workterm1">~ 
-  		<input type="text" class="form-control" name="workterm" id="workterm2">
+		<input type="text" class="form-control" name="workterm" id="infobox">~ 
+  		<input type="text" class="form-control" name="workterm" id="infobox">
   		&nbsp;
-		<select class="form-control" name="workcondition" id="workcondition" >
+		<select class="form-control" name="workcondition" id="infobox" >
         	<option value="재직중">재직중</option>
         	<option value="퇴사">퇴사</option>
         </select>
 	</div>
 	<div>
-        <label for="companyname">직종</label>
-        <input type="text" class="form-control"  name="chargework" id="chargework" style="ime-mode:active">
+        <label for="chargework">직종</label>
+        <input type="text" class="form-control"  name="chargework" id="infobox" style="ime-mode:active">
     </div>	
     <div>
-        <label for="companyname">직급</label>
-        <input type="text" class="form-control"  name="jobgrade" id="jobgrade" style="ime-mode:active">
+        <label for="jobgrade">직급</label>
+        <input type="text" class="form-control"  name="jobgrade" id="infobox" style="ime-mode:active">
    </div>
   
-    	
-    <h3>자격증/어학/수상 내역</h3>	
-   <div>
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  자격증/어학시험
+</a>
+
+<div class="collapse" id="collapseExample">
+  <div class="well">
+   
+    <h3>자격증/어학</h3>	
         <label for="certificationtype">항목선택</label>
         <select class="form-control" name="certificationtype" id="certificationtype" >
         	<option value="자격증/면허증">자격증/면허증</option>
         	<option value="어학시험">어학시험</option>
-        	<option value="수상내역">수상내역</option>
         </select>
-   </div>&nbsp;&nbsp;
-   <h5>자격증/면허증</h5>
+     <c:if test="${vo.certificationtype=='자격증/면허증'}">
      <div>
+   <h5>자격증/면허증</h5>
         <label for="lName">자격증명</label>
         <input type="text" class="form-control"  name="lName" id="lName" style="ime-mode:active">
     </div>
@@ -274,10 +296,11 @@ $('.btn').on('click', function(e){
         <label for="lGetdate">취득일</label>
         <input type="text" class="form-control"  name="lGetdate" id="lGetdate" style="ime-mode:active">
     </div> 
-    
+    </c:if>
     &nbsp;
-    <h5>어학시험</h5>  
+    <c:if test="${vo.certificationtype=='어학시험'}">
     <div>	
+    <h5>어학시험</h5>  
         <label for="language">언어</label>
         <input type="text" class="form-control"  name="language" id="language" style="ime-mode:active">
     </div>
@@ -301,20 +324,46 @@ $('.btn').on('click', function(e){
      <div>             
         <label for="langGetdate">취득일</label>
         <input type="text" class="form-control"  name="langGetdate" id="langGetdate" style="ime-mode:active">
-     </div>
+	</div>
+	</c:if>
+</div>
+</div>
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  수상내역
+</a>
+
      &nbsp;
+<div class="collapse" id="collapseExample">
+  <div class="well">
      <h5>수상내역</h5>
       <label for="award">수상명</label>
         <input type="text" class="form-control"  name="award" id="award" style="ime-mode:active">
+  </div>
+</div>
      &nbsp;
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  자기소개서
+</a>
+
+<div class="collapse" id="collapseExample">
+  <div class="well">
+    
      <h3>자기소개서</h3>
       <div>	
     	<label for="introduce">자기소개서</label>
         <textarea class="form-control" rows="3"></textarea>
       </div>
+  </div>
+</div>
       &nbsp;
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  희망근무
+</a>
+
+<div class="collapse" id="collapseExample">
+  <div class="well">
       <h3>희망근무 선택</h3>
-      <div>	
+      <div>
     	<label for="hopeworkform">근무형태</label>
     	<select class="form-control" name="hopeworkform" id="hopeworkform" >
         	<option value="근무형태 선택">근무형태 선택</option>
@@ -401,6 +450,8 @@ $('.btn').on('click', function(e){
         	<option value="자율근무제">자율근무제</option>
         </select>
         </div>
+  </div>
+</div>
    &nbsp;
     <div>
     <label>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</label>

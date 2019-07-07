@@ -9,24 +9,24 @@
 		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int">
 		select resume_seq.nextval from dual
 		</selectKey>
-		insert into resume(resumeCode,resumetitle,resumeregdate,introduce,award,langlicenceCode,licenceCode,dvCode,academicCode,desiredworkCode,opencheck,memberCode,picture)
-		values(resume_seq.nextval,#{resumetitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode},#{picture})
+		insert into resume(resume_code,resumetitle,resumeregdate,introduce,award,langlicence_code,licence_code,dv_code,academic_code,desiredwork_code,opencheck,member_code,picture)
+		values(#{resumeCode},#{resumetitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode},#{picture})
 	</insert>
 	
 	<insert id="insertLangcertification" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="langlicenceCode" resultType="int">
 		select langcertification_seq.nextval from dual
 		</selectKey>
-		insert into langcertification(langlicenceCode,langlicencename,langGetdate,institute,certificationtype,language,langpoint,langGrade)
-		values(langcertification_seq.nextval,#{langlicencename},#{langGetdate},#{institute},#{certificationtype},#{language},#{langpoint},#{langGrade})
+		insert into langcertification(langlicence_code,langlicencename,lang_getdate,institute,certificationtype,language,langpoint,lang_grade)
+		values(#{langlicenceCode},#{langlicencename},#{langGetdate},#{institute},#{certificationtype},#{language},#{langpoint},#{langGrade})
 	</insert>    
 	
 	<insert id="insertCertificate" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="lNo" resultType="int">
 		select certificate_seq.nextval from dual
 		</selectKey>
-		insert into certificate(lNo,lName,lGetdate,lInstitution)
-		values(certificate_seq.nextval,#{lName},#{lGetdate},#{lInstitute})
+		insert into certificate(l_no,l_name,l_getdate,l_institution)
+		values(#{lNo},#{lName},#{lGetdate},#{lInstitute})
 	</insert>
 	
 	<insert id="insertCareer" parameterType="resumeVo">
@@ -34,7 +34,7 @@
 		select career_seq.nextval from dual
 		</selectKey>
 		insert into career
-		values(career_seq.nextval,#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{jobgrade},#{workcondition})
+		values(#{dvCode},#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{jobgrade},#{workcondition})
 		
 	</insert>
 	
@@ -43,16 +43,16 @@
 		select education_seq.nextval from dual
 		</selectKey>
 		insert into education
-		values(education_seq.nextval,#{schoolname},#{major},#{degree},#{graduate},#{graduatecheck},#{schoollocal},#{graduatetype})
+		values(#{academicCode},#{schoolname},#{major},#{degree},#{graduate},#{graduatecheck},#{schoollocal},#{graduatetype})
 		
 	</insert>
 	
 	<insert id="insertHopeWorking" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="hopeworkCode" resultType="int">
-		select hopeWorking_seq.nextval from dual
+		select hope_working_seq.nextval from dual
 		</selectKey>
-		insert into hopeWorking 
-		values(hopeWorking_seq.nextval,#{jobtype},#{hopepay},#{hopeworkform},#{localCode},#{firstjobCode},#{schoollocal},#{hopeworkdate})
+		insert into hope_working 
+		values(#{hopeworkCode},#{jobtype},#{hopepay},#{hopeworkform},#{localCode},#{firstjobCode},#{schoollocal},#{hopeworkdate})
 		
 	</insert>
 	
@@ -70,7 +70,7 @@
 		select first_seq.nextval from dual
 		</selectKey>
 		insert into first
-		values(first_seq.nextval,#{firstname},#{secondCode})
+		values(#{firstCode},#{firstname},#{secondCode})
 		
 	</insert>
 	
@@ -79,7 +79,7 @@
 		select second_seq.nextval from dual
 		</selectKey>
 		insert into second
-		values(second_seq.nextval,#{secondname},#{thirdCode})
+		values(#{secondCode},#{secondname},#{thirdCode})
 		
 	</insert>
 	<insert id="insertThird" parameterType="resumeVo">
@@ -87,7 +87,7 @@
 		select third_seq.nextval from dual
 		</selectKey>
 		insert into third
-		values(third_seq.nextval,#{thirdname})
+		values(#{thirdCode},#{thirdname})
 		
 	</insert>
 	<select id="selectSearch" parameterType="searchVo" resultType="resumeVo">
@@ -111,22 +111,55 @@
 	</select>
 	
 	<select id="selectByMemverid" parameterType="string" resultType="resumeVo">
-		select  from member where member=#{memberid}
+		select * from member where member=#{memberid}
 	</select>
 	
 		<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
-		select membername,birth,email,zipcode,address,addressdetail,tel from resume where resumeCode=#{resumeCode}
+		select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
+    	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
+    	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
+    	hopeworkform,memberid,membername,zipcode,address,addressdetail,birth,
+    	membergender,email,picture,tel,sido,gugun,firstname,secondname,thirdname
+
+		from resume r,langcertification la,career ca,
+    	certificate ce,education ed,Hope_working ho,
+    	member m,location lo,first f,second s ,third t
+
+		where r.langlicence_code=la.langlicence_code and r.LICENCE_CODE=ce.L_NO and 
+    	r.DV_CODE = ca.DV_CODE and r.ACADEMIC_CODE=ed.ACADEMIC_CODE and 
+    	r.DESIREDWORK_CODE=ho.HOPEWORK_CODE and m.MEMBER_CODE = r.MEMBER_CODE and 
+    	ho.LOCAL_CODE=lo.LOCAL_CODE and ho.FIRSTJOB_CODE=f.FIRST_CODE and 
+    	f.SECOND_CODE = s.SECOND_CODE and s.THIRD_CODE = t.THIRD_CODE and resume_code=#{resumeCode}
 	</select>
 		
 		<delete id="deleteResumeByNo" parameterType="int">
-		delete from resume where resumeCode=#{resumeCode}
+		delete from resume where resume_code=#{resumeCode}
 		</delete>
 		
-		<update id="updateResume" parameterType="memberVo">
-		update resume
-		set resumeTitle=#{resumeTitle},introduce=#{introduce},award=#{award},opencheck=#{opencheck},
+		<update id="updateResume" parameterType="resumeVo">
+		update (select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
+    	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
+    	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
+    	hopeworkform,memberid,membername,zipcode,address,addressdetail,birth,
+    	membergender,email,picture,tel,sido,gugun,firstname,secondname,thirdname
+
+		from resume r,langcertification la,career ca,
+    	certificate ce,education ed,Hope_working ho,
+    	member m,location lo,first f,second s ,third t
+
+		where r.langlicence_code=la.langlicence_code and r.LICENCE_CODE=ce.L_NO and 
+    	r.DV_CODE = ca.DV_CODE and r.ACADEMIC_CODE=ed.ACADEMIC_CODE and 
+    	r.DESIREDWORK_CODE=ho.HOPEWORK_CODE and m.MEMBER_CODE = r.MEMBER_CODE and 
+    	ho.LOCAL_CODE=lo.LOCAL_CODE and ho.FIRSTJOB_CODE=f.FIRST_CODE and 
+    	f.SECOND_CODE = s.SECOND_CODE and s.THIRD_CODE = t.THIRD_CODE)
+    	
+		set resumeTitle=#{resumeTitle},introduce=#{introduce},award=#{award},opencheck=#{opencheck},langlicencename=#{langlicencename},
+		lang_getdate=#{langGetdate},institute=#{institute},companyname=#{companyname},workterm=#{workterm},chargework=#{chargework},l_name=#{lName},l_getdate=#{lGetdate},l_institution=#{lInstitution},
+    	schoolname=#{schoolname},major=#{major},degree=#{degree},graduate=#{graduate},graduatecheck=#{graduatecheck},jobtype=#{jobtype},hopeworkdate=#{hopeworkdate},hopepay=#{hopepay},
+    	hopeworkform=#{hopeworkform},zipcode=#{zipcode},address=#{address},addressdetail=#{addressdetail},
+    	email=#{email},picture=#{picture},tel=#{tel},sido=#{sido},gugun=#{gugun},firstname=#{firstname},secondname=#{secondname},thirdname=#{thirdname}
 			 
-		where resumeCode=#{resumeCode}
+		where resume_code=#{resumeCode}
 	</update>
 	
 	<!-- <insert id="insertResume" parameterType="resumeVo">
