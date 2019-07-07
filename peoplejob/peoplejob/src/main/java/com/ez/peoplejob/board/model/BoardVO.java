@@ -16,6 +16,7 @@ public class BoardVO {
 	private String upnumage;
 	private int upsizeage;
 	private int typeCode;
+	
 	public int getBoardCode1() {
 		return boardCode1;
 	}

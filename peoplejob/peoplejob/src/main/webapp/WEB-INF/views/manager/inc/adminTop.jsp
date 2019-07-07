@@ -249,7 +249,7 @@
 										<ul class="collapse" id="abc">
 											<div class="sub-menu">
 
-												<li><a href="<c:url value='/manager/board/postList.do'/>">전체 조회</a></li>
+												<li><a href="<c:url value='/manager/post/postList.do'/>">전체 조회</a></li>
 
 												<li><a href="sign-up.html">변경</a></li>
 
