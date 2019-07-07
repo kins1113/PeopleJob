@@ -72,5 +72,9 @@ public class ResumeServiceImpl implements ResumeService{
 	public List<ResumeVO> selectAll(SearchVO searscVo) {
 		return resumeDao.selectAll(searscVo);
 	}
+	@Override
+	public int insertMember2(ResumeVO vo) {
+		return resumeDao.insertMember2(vo);
+	}
 
 }

@@ -10,6 +10,7 @@
 
 <div class="divList">
 <table class="box2"
+	
 	 	summary="이력서 현황에 관한 표로써, 이력서제목, 이력서 공개 설정, 내 이력서 열람 기업에 대한 정보를 제공합니다.">
 	<caption>이력서리스트</caption>
 	<colgroup>
@@ -21,6 +22,7 @@
 	</colgroup>
 	<thead>
 	  <tr>
+	  <th> <input type="hidden" name="resumeCode" value="${param.resumeCode }"/></th>
 	    <th scope="col">이력서제목</th>
 	    <th scope="col">이력서 공개 설정</th>
 	    <th scope="col">내 이력서 열람 기업</th>

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
+import com.ez.peoplejob.member.model.MemberService;
+import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.resume.model.ResumeService;
 import com.ez.peoplejob.resume.model.ResumeVO;
 
@@ -43,15 +45,8 @@ public class ResumeController {
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
 	public String write(@ModelAttribute ResumeVO resumeVo,Model model) {
 		logger.info("이력서 등록화면 보여주기 매개변수 resumeVo{}=",resumeVo);
-		int cnt=resumeService.insertLangcertification(resumeVo);
-		cnt=resumeService.insertCertificate(resumeVo);
-		cnt=resumeService.insertCareer(resumeVo);
-		cnt=resumeService.insertEducation(resumeVo);
-		cnt=resumeService.insertHopeWorking(resumeVo);
-		cnt=resumeService.insertLocation(resumeVo);
-		cnt=resumeService.insertFirst(resumeVo);
-		cnt=resumeService.insertSecond(resumeVo);
-		cnt=resumeService.insertThird(resumeVo);
+		int cnt=resumeService.insertResume(resumeVo);
+		
 		logger.info("이력서 등록 결과 cnt ={}",cnt);
 		String msg="",url="/resume/register.do";
 		if(cnt>0) {

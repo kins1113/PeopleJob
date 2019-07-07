@@ -25,13 +25,14 @@
 	<legend style="font-weight: bold">이력서수정</legend>
 	<!-- hidden필드에 no 넣기 -->
 		<input type="hidden" name="resumeCode" value="${vo.resumeCode}" />
+		<input type="hidden" name="memberCode" value="${vo.memberCode}" />
 		<div>
 		<!--이력서 사진 https://kuzuro.blogspot.com/2018/10/11.html  -->
 		<img src="..." alt="..." class="img-thumbnail">
 		</div>
 	<div>        
         <label for="resumeTitle">이력서 제목</label>
-        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox"  style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox" value="${vo.memberTitle }"  style="ime-mode:active">
     </div>
     <hr>
     <h3>기본정보</h3>
@@ -42,7 +43,16 @@
     <div>        
         <label for="birth">생년월일</label>
         <input type="text" class="form-control"  name="birth" id="infobox" value="${vo.birth}" style="ime-mode:active">
-    	
+    	<label class="radio-inline">
+  		<input type="radio" name="membergender" id="infobox" value="남" <c:if test="${vo.membergender=='남'}">            	
+            		checked="checked"
+            	</c:if>>남
+		</label>
+    	<label class="radio-inline">
+  		<input type="radio" name="membergender" id="infobox" value="여" <c:if test="${vo.membergender=='여'}">            	
+            		checked="checked"
+            	</c:if>>여
+		</label>
     </div>
     
    
@@ -242,12 +252,9 @@
         <input type="text" class="form-control"  name="jobgrade" id="infobox" value="${vo.jobgrade }" style="ime-mode:active">
    </div>
   
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-자격증/어학시험
-</a>
+   
 
-<div class="collapse" id="collapseExample">
-  <div class="well">
+
     <h3>자격증/어학</h3>	
    <div>
         <label for="certificationtype">항목선택</label>
@@ -304,45 +311,26 @@
         <input type="text" class="form-control"  name="langGetdate" id="langGetdate" value="${vo.langGetdate }" style="ime-mode:active">
      </div>
      </c:if>
-  </div>
-</div>	
+	
 
      &nbsp;
      
-     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	수상내역
-</a>
-
-<div class="collapse" id="collapseExample">
-  <div class="well">
-     <c:if test="${vo.award!=null}">
+  
+     <c:if test="${!empty vo.award}">
      <h5>수상내역</h5>
       <label for="award">수상명</label>
         <input type="text" class="form-control"  name="award" id="award" value="${vo.award }" style="ime-mode:active">
         </c:if>
-  </div>
-</div>
      &nbsp;
-     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  자기소개서
-</a>
-
-<div class="collapse" id="collapseExample">
-  <div class="well">
+ 
      <h3>자기소개서</h3>
       <div>	
     	<label for="introduce">자기소개서</label>
         <textarea class="form-control" rows="3" value="${vo.introduce }"></textarea>
       </div>
-  </div>
-</div>
+  
       &nbsp;
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  희망근무
-</a>
 
-<div class="collapse" id="collapseExample">
-  <div class="well">
       <h3>희망근무 선택</h3>
       <div>	
     	<label for="hopeworkform">근무형태</label>
@@ -501,8 +489,7 @@
             	</c:if>>자율근무제</option>
         </select>
         </div>
-  </div>
-</div>
+ 
    &nbsp;
     <div>
     <label>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</label>

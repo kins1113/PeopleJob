@@ -184,7 +184,7 @@ button {
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">인재정보</a>
+								<a href="<c:url value='/peopleinfo/peopleinfolist.do'/>">인재정보</a>
 							</li>
 
 							<li>
@@ -197,7 +197,7 @@ button {
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="<c:url value='/resume/register.do'/>">이력서관리</a>
+								<a href="<c:url value='/resume/list.do'/>">이력서관리</a>
 
 							</li>
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ez.peoplejob.common.SearchVO;
 
 public interface ResumeService {
+	public int insertMember2(ResumeVO vo);
 	public int insertResume(ResumeVO vo);
 	public ResumeVO selectResumeByNo(int resumeCode);
 	public int deleteResumeByNo(int resumeCode);

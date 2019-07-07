@@ -23,6 +23,7 @@
  				<td><span class="glyphicon glyphicon-text-size" aria-hidden="true">이력서제목</span> <span>${vo.resumeTitle}</span></td>
  				<td><span class="glyphicon glyphicon-user" aria-hidden="true">이름</span> <span>${vo.membername}</span></td>
  				<td><span class="glyphicon glyphicon-gift" aria-hidden="true">생년월일</span> <span>${vo.birth}</span></td>
+ 				<td><span class="glyphicon glyphicon-gift" aria-hidden="true">성별</span> <span>${vo.membergender}</span></td>
  				<td><span class="glyphicon glyphicon-envelope" aria-hidden="true">이메일주소</span> <span>${vo.email}</span></td>
  				<td><span class="glyphicon glyphicon-globe" aria-hidden="true">우편번호</span> <span>${vo.zipcode}</span></td>
  				<td><span class="glyphicon glyphicon-globe" aria-hidden="true">주소</span> <span>${vo.address}</span></td>
@@ -87,10 +88,10 @@
 			</table>
 		
 		</div>
-		
+		<c:if test="${!empty vo.award}">
 		 <label for="award">수상명</label>
  		<span class="glyphicon glyphicon-tower" aria-hidden="true"></span> <span>${vo.award}</span>
- 				
+ 		</c:if>		
 		<div>
 		<table class="table">
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">근무형태</span> <span>${vo.hopeworkform}</span></td>

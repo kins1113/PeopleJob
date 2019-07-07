@@ -128,6 +128,13 @@ $('.btn').on('click', function(e){
     </div>
     <hr>
     <h3>기본정보</h3>
+    <!-- hidden필드에 no 넣기 -->
+		<input type="hidden" name="memberCode" value="${param.memberCode }" />
+		<input type="hidden" name="langlicenceCode" value="${param.langlicenceCode}" />
+		<input type="hidden" name="licenceCode" value="${param.licenceCode }" />
+		<input type="hidden" name="dvCode" value="${param.dvCode }" />
+		<input type="hidden" name="academicCode" value="${param.academicCode }" />
+		<input type="hidden" name="desiredworkCode" value="${param.desiredworkCode }" />
     <div>
     <!--이력서 사진  https://kuzuro.blogspot.com/2018/10/11.html-->
     <img src="..." alt="..." class="img-thumbnail">
@@ -139,7 +146,16 @@ $('.btn').on('click', function(e){
     <div>        
         <label for="birth">생년월일</label>
         <input type="text" class="form-control"  name="birth" id="infobox" value="${vo.birth}" style="ime-mode:active">
-    	
+    	<label class="radio-inline">
+  		<input type="radio" name="membergender" id="infobox" value="남" <c:if test="${vo.membergender=='남'}">            	
+            		checked="checked"
+            	</c:if>>남
+		</label>
+    	<label class="radio-inline">
+  		<input type="radio" name="membergender" id="infobox" value="여" <c:if test="${vo.membergender=='여'}">            	
+            		checked="checked"
+            	</c:if>>여
+		</label>
     </div>
     
    
@@ -269,12 +285,7 @@ $('.btn').on('click', function(e){
         <input type="text" class="form-control"  name="jobgrade" id="infobox" style="ime-mode:active">
    </div>
   
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  자격증/어학시험
-</a>
 
-<div class="collapse" id="collapseExample">
-  <div class="well">
    
     <h3>자격증/어학</h3>	
         <label for="certificationtype">항목선택</label>
@@ -282,7 +293,6 @@ $('.btn').on('click', function(e){
         	<option value="자격증/면허증">자격증/면허증</option>
         	<option value="어학시험">어학시험</option>
         </select>
-     <c:if test="${vo.certificationtype=='자격증/면허증'}">
      <div>
    <h5>자격증/면허증</h5>
         <label for="lName">자격증명</label>
@@ -296,9 +306,7 @@ $('.btn').on('click', function(e){
         <label for="lGetdate">취득일</label>
         <input type="text" class="form-control"  name="lGetdate" id="lGetdate" style="ime-mode:active">
     </div> 
-    </c:if>
     &nbsp;
-    <c:if test="${vo.certificationtype=='어학시험'}">
     <div>	
     <h5>어학시험</h5>  
         <label for="language">언어</label>
@@ -325,43 +333,21 @@ $('.btn').on('click', function(e){
         <label for="langGetdate">취득일</label>
         <input type="text" class="form-control"  name="langGetdate" id="langGetdate" style="ime-mode:active">
 	</div>
-	</c:if>
-</div>
-</div>
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  수상내역
-</a>
-
      &nbsp;
-<div class="collapse" id="collapseExample">
+
   <div class="well">
      <h5>수상내역</h5>
       <label for="award">수상명</label>
         <input type="text" class="form-control"  name="award" id="award" style="ime-mode:active">
   </div>
-</div>
      &nbsp;
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  자기소개서
-</a>
 
-<div class="collapse" id="collapseExample">
-  <div class="well">
-    
      <h3>자기소개서</h3>
       <div>	
     	<label for="introduce">자기소개서</label>
         <textarea class="form-control" rows="3"></textarea>
       </div>
-  </div>
-</div>
       &nbsp;
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  희망근무
-</a>
-
-<div class="collapse" id="collapseExample">
-  <div class="well">
       <h3>희망근무 선택</h3>
       <div>
     	<label for="hopeworkform">근무형태</label>
@@ -450,8 +436,6 @@ $('.btn').on('click', function(e){
         	<option value="자율근무제">자율근무제</option>
         </select>
         </div>
-  </div>
-</div>
    &nbsp;
     <div>
     <label>기업 인사담당자의 입사제의 및 면접제의를 받으시겠어요?</label>
@@ -465,6 +449,7 @@ $('.btn').on('click', function(e){
     </div>
     <br>
     <input type="submit" value="이력서 저장"/>
+    
 </fieldset> 
 </form>
 </div>       
