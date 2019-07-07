@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@include file="../main/inc/top.jsp" %>
+<article>
+<fieldset>
 <label>지역구분</label>
 <input type="checkbox" id="localcheck" name="localcheck" value="서울특별시">서울
 <input type="checkbox" id="localcheck" name="localcheck" value="부산광역시">부산
@@ -44,4 +40,6 @@
 
 <br><br><hr> 
 <input type="button" id="submit" name="submit"value="확인">
-</html>
+</fieldset>
+</article>
+<%@include file="../main/inc/bottom.jsp" %>

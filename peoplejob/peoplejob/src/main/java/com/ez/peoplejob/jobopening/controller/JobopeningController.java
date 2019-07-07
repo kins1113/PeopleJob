@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ez.peoplejob.common.FileUploadUtility;
+import com.ez.peoplejob.common.PaginationInfo;
+import com.ez.peoplejob.common.SearchVO;
+import com.ez.peoplejob.common.WebUtility;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
 
@@ -65,11 +68,30 @@ public class JobopeningController {
 		return "common/message";
 	}
 	@RequestMapping("/jobopening_list.do")
-	public String jobopening_list(Model model) {
+	public String jobopening_list(@ModelAttribute SearchVO searchVo,Model model) {
 		logger.info("채용공고 리스트");
-		List<JobopeningVO> list=jobopeningService.selectJobOpen();
-		model.addAttribute("list",list);
+		//1]PaginationInfo 객체 생성
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(WebUtility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//2]SearchVo에 페이징 관련 변수 세팅
+		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("셋팅 후 serchVo={}",searchVo);
+		
+		List<JobopeningVO> list=jobopeningService.selectJobOpen(searchVo);
 		logger.info("공고 list.size={}",list.size());
+		int totalRecord=0;
+		totalRecord=jobopeningService.selectTotalCount(searchVo);
+		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
+		
+		//5]PaginationInfo에 totalRecord값셋팅
+		pagingInfo.setTotalRecord(totalRecord);
+		//3
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("list",list);
 		return "company/jobopening_list";
 	}
 	@RequestMapping("/jobopening_view.do")

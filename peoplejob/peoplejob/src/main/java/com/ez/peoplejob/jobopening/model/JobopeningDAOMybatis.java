@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ez.peoplejob.common.SearchVO;
+
 @Repository
 public class JobopeningDAOMybatis implements JobopeningDAO{
 	
@@ -16,8 +18,8 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 		return sqlSession.insert(namespace+"insertJobOpen",vo);
 	}
 	@Override
-	public List<JobopeningVO> selectJobOpen() {
-		return sqlSession.selectList(namespace+"selectJobOpen");
+	public List<JobopeningVO> selectJobOpen(SearchVO vo) {
+		return sqlSession.selectList(namespace+"selectJobOpen",vo);
 	}
 	@Override
 	public JobopeningVO selectJobOpenByNo(int jobopening) {
@@ -38,6 +40,10 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 	@Override
 	public int updateAdminagree(int jobopening) {
 		return sqlSession.update(namespace+"updateAdminagree",jobopening);
+	}
+	@Override
+	public int selectTotalCount(SearchVO vo) {
+		return sqlSession.selectOne(namespace+"selectTotalCount",vo);
 	}
 	         
 	

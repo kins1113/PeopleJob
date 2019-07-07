@@ -24,7 +24,7 @@ public class NoticeController {
 
 	@Autowired private NoticeService noticeService;
 	
-	@RequestMapping(value="/notice/write.do", method = RequestMethod.GET)
+	@RequestMapping(value="/manager/notice/write.do", method = RequestMethod.GET)
 	public String write_get() {
 		
 		//1
@@ -50,7 +50,7 @@ public class NoticeController {
 		String msg="", url="";
 		if(cnt>0) {
 			msg="공지사항 등록 완료";
-			url="/notice/list.do";
+			url="/manager/notice/list.do";
 			
 		}else {
 			msg="공지사항 등록 실패";
@@ -81,6 +81,7 @@ public class NoticeController {
 		//[2] SearchVo에 페이징 관련 변수 셋팅
 		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setBlockSize(WebUtility.BLOCK_SIZE);
 		logger.info("셋팅 후 searchVo={}", searchVo);
 		
 		//[3] 조회처리
