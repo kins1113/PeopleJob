@@ -202,15 +202,21 @@
 							href="javascript:void(0)" data-toggle="collapse"
 							data-target="#charts" aria-expanded="false"
 							aria-controls="charts"> <i class="mdi mdi-chart-pie"></i> <span
-								class="nav-text">가나다 변경</span> <b class="caret"></b>
+								class="nav-text">메일/SMS</span> <b class="caret"></b>
 						</a>
 							<ul class="collapse" id="charts" data-parent="#sidebar-menu">
 								<div class="sub-menu">
-									<li><a class="sidenav-item-link" href="chartjs.html">
-											<span class="nav-text">ChartJS</span>
-									</a></li>
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath }/manager/email_sms/emailWrite.do">
+											<span class="nav-text">메일</span>
+									</a>
+									</li>
+									<li><a class="sidenav-item-link" href="#">	<!-- ${pageContext.request.contextPath} -->
+											<span class="nav-text">SMS</span>
+									</a>
+									</li>
 								</div>
-							</ul></li>
+							</ul>
+							</li>
 						<li class="has-sub"><a class="sidenav-item-link"
 							href="javascript:void(0)" data-toggle="collapse"
 							data-target="#pages" aria-expanded="false" aria-controls="pages">
