@@ -44,8 +44,8 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 		return sqlSession.update(namespace+"updateAdminagree",jobopening);
 	}
 	@Override
-	public int selectTotalCount(SearchVO vo) {
-		return sqlSession.selectOne(namespace+"selectTotalCount",vo);
+	public int selectTotalCount(Map<String,Object>map) {
+		return sqlSession.selectOne(namespace+"selectTotalCount",map);
 	}
 	@Override
 	public List<JobopeningVO> selectJobOpen2(Map<String, Object> map) {

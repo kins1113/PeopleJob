@@ -14,5 +14,5 @@ public interface JobopeningService {
 	int updateHits(int jobopening);
 	int deleteJobOpen(int jobopening);
 	int updateAdminagree(int jobopening);
-	int selectTotalCount(SearchVO vo);
+	int selectTotalCount(Map<String,Object>map);
 }
