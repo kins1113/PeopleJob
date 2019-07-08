@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../main/inc/top.jsp" %>
-
+<style type="text/css">
+.square{
+	width: 700px;
+    height: 150px;
+    border: 1px solid lightgray;
+    margin-top: 30px;
+}
+</style>
 	<!-- Content -->
 	<section class="bg0 p-b-140 p-t-10">
 		<div class="container">
@@ -9,15 +16,51 @@
 				<div class="col-md-10 col-lg-8 p-b-30" style="float: right;">
 					<div class="p-r-10 p-r-0-sr991">
 						<!-- Blog Detail -->
+						
 						<div class="p-b-70">
 						
-
-							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-								Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
-							</h3>
-							
 							<div class="flex-wr-s-s p-b-40">
-								<span class="f1-s-3 cl8 m-r-15">
+							<div class="square">
+								<ul>
+		<li>
+			<a href="http://www.incruit.com/resume/resumelist.asp" onclick="return goCL(this,'18672','www','상단_이력서관리');">
+				<strong>이력서 관리</strong>
+				<em><span id="Mh_ResumePoint">6%</span></em>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.incruit.com/applymng/applystatus.asp" onclick="return goCL(this,'18672','www','상단_입사지원');">
+				<strong>입사지원</strong>
+				<em><span id="Mh_ApplyCnt">0</span></em>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.incruit.com/applymng/resumeviewlist.asp" onclick="return goCL(this,'18672','www','상단_이력서열람');">
+				<strong>이력서 열람</strong>
+				<em><span id="Mh_ResumeOpenCnt">0</span></em>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.incruit.com/applymng/applysendlist.asp?mode=2" onclick="return goCL(this,'18672','www','상단_면접제의');">
+				<strong>면접제의</strong>
+				<em><span id="Mh_InterviewCnt">0</span></em>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.incruit.com/matchjob/scrapjob.asp" onclick="return goCL(this,'18672','www','상단_스크랩');">
+				<strong>스크랩</strong>
+				<em><span id="Mh_ScrapCnt">0</span></em>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.incruit.com/matchjob/scrapcompany.asp" onclick="return goCL(this,'18672','www','상단_관심기업');">
+				<strong>관심기업</strong>
+				<em><span id="Mh_ScrapCorpCnt">0</span></em>
+			</a>
+		</li>
+	</ul>
+							</div>
+								<!-- <span class="f1-s-3 cl8 m-r-15">
 									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
 										by John Alvarado
 									</a>
@@ -35,7 +78,7 @@
 
 								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
 									0 Comment
-								</a>
+								</a> -->
 							</div>
 
 							<div class="wrap-pic-max-w p-b-30">
@@ -131,7 +174,7 @@
 
 								<li class="how-bor3 p-rl-4">
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										지원 현황
+										지원 현황 ?
 									</a>
 								</li>
 
@@ -144,6 +187,12 @@
 								<li class="how-bor3 p-rl-4">
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										비밀번호 변경
+									</a>
+								</li>
+								
+									<li class="how-bor3 p-rl-4">
+									<a href="<c:url value='/login/memberOut.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+										회원 탈퇴
 									</a>
 								</li>
 							</ul>

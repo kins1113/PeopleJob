@@ -34,6 +34,18 @@
 		select * from member where memberid=#{memberid}
 	</select>
 	
+	<update id="updateMember" parameterType="memberVo">
+	update member
+	set zipcode=#{zipcode}, address=#{address}, addressdetail=#{addressdetail},
+	birth=#{birth},membergender=#{membergender},email=#{email},tel=#{tel}
+	where memberid=#{memberid}
+	</update>
+	
+	<update id="memberOut" parameterType="string">
+		update member
+		set WITHDRAWALDATE=sysdate
+		where memberid=#{memberid}
+	</update>
 </mapper>
 
 

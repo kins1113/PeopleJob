@@ -15,4 +15,6 @@ public interface MemberService {
 	int dupUserid(String memberId);
 	int loginCheck(String memberid, String pwd);
 	MemberVO selectByUserid(String memberId);
+	int updateMember(MemberVO memberVo);
+	int memberOut(String memberId);
 }
