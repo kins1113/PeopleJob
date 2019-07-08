@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
 
+<!-- 디자인을 위해서 추가했습니다. - 옥환 -->
+<div class="content-wrapper">
+	<div class="content">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-default">
+					<div class="card-body">
+
+
 <div class="divList">
 <table class="table">
 	<thead class="thead-dark">
@@ -109,5 +118,10 @@
 		onclick="location.href='write.do' ">공지등록</button>
 
 </div>
+
+<!-- 디자인을 위해서 추가했습니다. - 옥환 -->
+</div></div></div></div></div></div>
+
+
 
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
-<form action="<c:url value='/manager/email_sms/emailWrite.do'/>" method="post">
+<form action="<c:url value='/manager/email_sms/emailWrite.do'/>" method="post"
+				enctype="multipart/form-data">
 <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
@@ -27,6 +28,7 @@
 								<c:import url="/manager/smarteditorTestjsp.do">
 									<c:param name="name" value="coment"></c:param>
 								</c:import>
+								<input type="file" name="sendFile"> 
 							</div>
 							<div>
 								<input type="submit" class="btn btn-primary btn-default" value="보내기">

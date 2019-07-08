@@ -202,7 +202,7 @@
 							href="javascript:void(0)" data-toggle="collapse"
 							data-target="#charts" aria-expanded="false"
 							aria-controls="charts"> <i class="mdi mdi-chart-pie"></i> <span
-								class="nav-text">메일/SMS</span> <b class="caret"></b>
+								class="nav-text">메일</span> <b class="caret"></b>
 						</a>
 							<ul class="collapse" id="charts" data-parent="#sidebar-menu">
 								<div class="sub-menu">
@@ -210,8 +210,8 @@
 											<span class="nav-text">메일</span>
 									</a>
 									</li>
-									<li><a class="sidenav-item-link" href="#">	<!-- ${pageContext.request.contextPath} -->
-											<span class="nav-text">SMS</span>
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath }/manager/email_sms/emailMultWrite.do">	<!-- ${pageContext.request.contextPath} -->
+											<span class="nav-text">다중 메일</span>
 									</a>
 									</li>
 								</div>
