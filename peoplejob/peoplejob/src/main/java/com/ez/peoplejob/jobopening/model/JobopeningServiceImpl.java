@@ -1,6 +1,8 @@
 package com.ez.peoplejob.jobopening.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +50,13 @@ public class JobopeningServiceImpl implements JobopeningService{
 	}
 
 	@Override
-	public int selectTotalCount(SearchVO vo) {
-		return jobopeningDao.selectTotalCount(vo);
+	public int selectTotalCount(Map<String,Object>map) {
+		return jobopeningDao.selectTotalCount(map);
+	}
+
+	@Override
+	public List<JobopeningVO> selectJobOpen2(Map<String, Object> map) {
+		return jobopeningDao.selectJobOpen2(map);
 	}
 	
 }

@@ -1,6 +1,8 @@
 package com.ez.peoplejob.jobopening.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +47,6 @@ public class JobopeningController {
 		 * String walfare=vo.getWelfare(); String[] arr=walfare.split(",");
 		 */
 		logger.info("채용공고 등록 파라미터 vo={}",vo);
-		
 		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
 		 
 		String imageURL="";
@@ -68,7 +69,12 @@ public class JobopeningController {
 		return "common/message";
 	}
 	@RequestMapping("/jobopening_list.do")
-	public String jobopening_list(@ModelAttribute SearchVO searchVo,Model model) {
+	public String jobopening_list(
+			@RequestParam(required=false) String[] localcheck1,
+			@RequestParam(required=false) String[] workway1,
+			@RequestParam(required=false) String[] payway1,
+			@RequestParam(required=false) String[] academicCondition1,
+			@ModelAttribute SearchVO searchVo,Model model) {
 		logger.info("채용공고 리스트");
 		//1]PaginationInfo 객체 생성
 		PaginationInfo pagingInfo=new PaginationInfo();
@@ -81,10 +87,26 @@ public class JobopeningController {
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("셋팅 후 serchVo={}",searchVo);
 		
-		List<JobopeningVO> list=jobopeningService.selectJobOpen(searchVo);
-		logger.info("공고 list.size={}",list.size());
+		List<JobopeningVO> list=new ArrayList<JobopeningVO>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		logger.info("localcheck1={},workway1={}",localcheck1,workway1);
+		logger.info("payway1={},academicCondition1={}",payway1,academicCondition1);
+		logger.info("searchVo.getFirstRecordIndex()={},getRecordCountPerPage={}",searchVo.getFirstRecordIndex(),searchVo.getRecordCountPerPage());
+			map.put("localcheck1", localcheck1);
+			map.put("workway1", workway1);
+			map.put("payway1", payway1);
+			map.put("academicCondition1", academicCondition1);
+			map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
+			map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
+			logger.info("map={}",map);
+		list = jobopeningService.selectJobOpen2(map);
+		logger.debug("상품 검색 결과: list.size()={}",list.size());		
+		
+		//list=jobopeningService.selectJobOpen(searchVo);
+		//logger.info("공고 list.size={}",list.size());
+		 
 		int totalRecord=0;
-		totalRecord=jobopeningService.selectTotalCount(searchVo);
+		totalRecord=jobopeningService.selectTotalCount(map);
 		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
 		
 		//5]PaginationInfo에 totalRecord값셋팅

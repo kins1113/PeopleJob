@@ -1,6 +1,8 @@
 package com.ez.peoplejob.jobopening.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +44,12 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 		return sqlSession.update(namespace+"updateAdminagree",jobopening);
 	}
 	@Override
-	public int selectTotalCount(SearchVO vo) {
-		return sqlSession.selectOne(namespace+"selectTotalCount",vo);
+	public int selectTotalCount(Map<String,Object>map) {
+		return sqlSession.selectOne(namespace+"selectTotalCount",map);
+	}
+	@Override
+	public List<JobopeningVO> selectJobOpen2(Map<String, Object> map) {
+		return sqlSession.selectList(namespace+"selectJobOpen2",map);
 	}
 	         
 	
