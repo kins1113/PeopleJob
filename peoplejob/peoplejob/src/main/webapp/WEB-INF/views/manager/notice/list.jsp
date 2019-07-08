@@ -33,7 +33,7 @@
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.notifyCode }</td>
-					<td><a href="<c:url value='/notice/countUpdate.do?notifyCode=${vo.notifyCode}'/>">
+					<td><a href="<c:url value='/manager/notice/countUpdate.do?notifyCode=${vo.notifyCode}'/>">
 							<!-- 제목이 긴경우 30글자만 보여주기 -->
 						 <c:if test="${fn:length(vo.notifytitle ) >=30}">
   							${fn:substring(vo.notifytitle,0,30)}...
