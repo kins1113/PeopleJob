@@ -2,81 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../main/inc/top.jsp" %>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
-
-<script>
-jQuery.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd',
-        prevText: '이전 달',
-        nextText: '다음 달',
-        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-        showMonthAfterYear: true,
-        yearSuffix: 'Year'
-    });
- 
-jQuery(function() {
-	jQuery("#graduate").datepicker();
-    });
- 
-    
-    $(document).ready(function(){
-		$('form[name=frm1]').submit(function(){
-			$('#infobox').each(function(idx, item){
-				if($(this).val().length<1){
-					alert($(this).prev().html()+'를 입력하세요');
-					$(this).focus();
-					
-					event.preventDefault();  //이벤트 진행을 막고
-					return false;  //each() 탈출
-				}
-			});	
-		});
-		
-	});
-</script>
- 
- <script>
-  $( function() {
-    var dateFormat = "mm/dd/yy",
-      from = $( "#workterm1" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          numberOfMonths: 3
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
-        }),
-      to = $( "#workterm2" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 3
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
-      });
- 
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
- 
-      return date;
-    }
-  } );
-  </script>
-
 
 
 
@@ -116,18 +41,18 @@ jQuery(function() {
     </div>
     <div>        
         <label for="membername">이름</label>
-        <input type="text" class="form-control"  name="membername" id="infobox" value="${vo.membername }" style="ime-mode:active">
+        <input type="text" class="form-control"  name="membername" id="membername" value="${vo.membername }" style="ime-mode:active">
     </div>
     <div>        
         <label for="birth">생년월일</label>
-        <input type="text" class="form-control"  name="birth" id="infobox" value="${vo.birth}" style="ime-mode:active">
+        <input type="text" class="form-control"  name="birth" id="birth" value="${vo.birth}" style="ime-mode:active">
     	<label class="radio-inline">
-  		<input type="radio" name="membergender" id="infobox" value="남" <c:if test="${vo.membergender=='남'}">            	
+  		<input type="radio" name="membergender" id="membergender" value="남" <c:if test="${vo.membergender=='남'}">            	
             		checked="checked"
             	</c:if>>남
 		</label>
     	<label class="radio-inline">
-  		<input type="radio" name="membergender" id="infobox" value="여" <c:if test="${vo.membergender=='여'}">            	
+  		<input type="radio" name="membergender" id="membergender" value="여" <c:if test="${vo.membergender=='여'}">            	
             		checked="checked"
             	</c:if>>여
 		</label>
@@ -136,26 +61,26 @@ jQuery(function() {
    
     <div>
         <label for="email">이메일 주소</label>
-        <input type="text" class="form-control"  name="email"  id="infobox" value="${vo.email }" title="이메일주소 앞자리">
+        <input type="text" class="form-control"  name="email"  id="email" value="${vo.email }" title="이메일주소 앞자리">
     </div>
     
     <div>
         <label for="address">주소</label>
-        <input type="text" class="form-control"  name="zipcode" id="infobox" ReadOnly  
+        <input type="text" class="form-control"  name="zipcode" id="zipcode" ReadOnly  
         	title="우편번호" class="width_80" value="${vo.zipcode}">
         
         <button type="button" class="btn btn-success" value="우편번호 찾기" id="btnZipcode" 
         title="새창열림">우편번호찾기</button>
         <br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" id="infobox" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
+        <input type="text"  class="form-control" id="address" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" id="infobox" name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
+        <input type="text"  class="form-control" id="addressdetail" name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
     </div>
     <div>
         <label for="tel">핸드폰</label>&nbsp;
        
-        <input type="text"  class="form-control"   name="tel" id="infobox" value="${vo.tel}" maxlength="4" title="휴대폰 번호"
+        <input type="text"  class="form-control"   name="tel" id="tel" value="${vo.tel}" maxlength="4" title="휴대폰 번호"
         	class="width_80">
     </div>
     
@@ -182,12 +107,12 @@ jQuery(function() {
 		<div>
 		 <label for="element">학교명</label>&nbsp;
 			    
-        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="infobox" 
+        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="schoolname" 
         	class="width_80">
         </div>
         <div>
 		 <label for="schoollocal">지역</label>&nbsp;
-			<select class="form-control" name="schoollocal" id="infobox" >
+			<select class="form-control" name="schoollocal" id="schoollocal" >
         	<option value="서울">서울</option>
         	<option value="경기">경기</option>
         	<option value="광주">광주</option>
@@ -217,7 +142,7 @@ jQuery(function() {
        <div>
 		 <label for="graduate">졸업년도</label>&nbsp;
 		 <input type="text" class="form-control" name="graduate" id="graduate">
-         <select class="form-control" name="graduatecheck" id="infobox" >
+         <select class="form-control" name="graduatecheck" id="graduatecheck" >
         	<option value="졸업여부">졸업여부</option>
         	<option value="졸업">졸업</option>
         	<option value="중퇴">중퇴</option>
@@ -229,35 +154,35 @@ jQuery(function() {
     <label for="workcheck">경력구분</label>&nbsp;
        
        <label class="radio-inline">
-  		<input type="radio" name="workcheck" id="infobox" value="신입">신입
+  		<input type="radio" name="workcheck" id="workcheck" value="신입">신입
 		</label>
 		
 		<label class="radio-inline">
-  		<input type="radio" name="workcheck" id="infobox" value="경력">경력
+  		<input type="radio" name="workcheck" id="workcheck" value="경력">경력
 		</label>
     </div>
     <hr>
     <div>        
         <label for="companyname">회사명</label>
-        <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="infobox" style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="companyname" style="ime-mode:active">
     </div>
     <div>
         <label for="workterm">근무기간</label>
 		<input type="text" class="form-control" name="workterm" id="workterm1">~ 
   		<input type="text" class="form-control" name="workterm" id="workterm2">
   		&nbsp;
-		<select class="form-control" name="workcondition" id="infobox" >
+		<select class="form-control" name="workcondition" id="workcondition" >
         	<option value="재직중">재직중</option>
         	<option value="퇴사">퇴사</option>
         </select>
 	</div>
 	<div>
         <label for="chargework">직종</label>
-        <input type="text" class="form-control"  name="chargework" id="infobox" style="ime-mode:active">
+        <input type="text" class="form-control"  name="chargework" id="chargework" style="ime-mode:active">
     </div>	
     <div>
         <label for="jobgrade">직급</label>
-        <input type="text" class="form-control"  name="jobgrade" id="infobox" style="ime-mode:active">
+        <input type="text" class="form-control"  name="jobgrade" id="jobgrade" style="ime-mode:active">
    </div>
   
 

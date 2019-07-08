@@ -46,14 +46,13 @@ public class ResumeVO {
 	private String email;
 	private String picture;
 	private String tel;
-	private String companyCode;
 	private int authority_code;
 	private String sido;
 	private String gugun;
 	private int firstCode;
 	private String firstname;
 	private int secondCode;
-	private int secondname;
+	private String secondname;
 	private int thirdCode;
 	private String thirdname;
 	private String schoolname;
@@ -335,12 +334,7 @@ public class ResumeVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getCompanyCode() {
-		return companyCode;
-	}
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
-	}
+	
 	public int getAuthority_code() {
 		return authority_code;
 	}
@@ -377,10 +371,10 @@ public class ResumeVO {
 	public void setSecondCode(int secondCode) {
 		this.secondCode = secondCode;
 	}
-	public int getSecondname() {
+	public String getSecondname() {
 		return secondname;
 	}
-	public void setSecondname(int secondname) {
+	public void setSecondname(String secondname) {
 		this.secondname = secondname;
 	}
 	public int getThirdCode() {
@@ -483,7 +477,7 @@ public class ResumeVO {
 				+ ", regdate=" + regdate + ", membername=" + membername + ", zipcode=" + zipcode + ", address="
 				+ address + ", addressdetail=" + addressdetail + ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd
 				+ ", birth=" + birth + ", membergender=" + membergender + ", email=" + email + ", picture=" + picture
-				+ ", tel=" + tel + ", companyCode=" + companyCode + ", authority_code=" + authority_code + ", sido="
+				+ ", tel=" + tel + ", authority_code=" + authority_code + ", sido="
 				+ sido + ", gugun=" + gugun + ", firstCode=" + firstCode + ", firstname=" + firstname + ", secondCode="
 				+ secondCode + ", secondname=" + secondname + ", thirdCode=" + thirdCode + ", thirdname=" + thirdname
 				+ ", schoolname=" + schoolname + ", graduatecheck=" + graduatecheck + ", graduate=" + graduate
