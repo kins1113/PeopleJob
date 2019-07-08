@@ -16,15 +16,15 @@ public class ResumeVO {
 	private String opencheck;
 	private int memberCode;
 	private String langlicencename;
-	private Timestamp langGetdate;
-	private Timestamp getdate;
+	private String langGetdate;
+	private String getdate;
 	private String institute;
 	private String companyname;
-	private Timestamp workterm;
+	private String workterm;
 	private String chargework;
 	private int lNO;
 	private String lName;
-	private Timestamp lGetdate;
+	private String lGetdate;
 	private String lInstitution;
 	private int hopeworkCode;
 	private String jobtype;  
@@ -58,7 +58,7 @@ public class ResumeVO {
 	private String thirdname;
 	private String schoolname;
 	private String graduatecheck;
-	private Timestamp graduate;
+	private String graduate;
 	private String graduatetype;
 	private String schoollocal;
 	private String workcheck;
@@ -68,13 +68,14 @@ public class ResumeVO {
 	private String language;
 	private String langpoint;
 	private String langGrade;
+	private String institution;
 	
 	
-	public int getAuthority_code() {
-		return authority_code;
+	public String getInstitution() {
+		return institution;
 	}
-	public void setAuthority_code(int authority_code) {
-		this.authority_code = authority_code;
+	public void setInstitution(String institution) {
+		this.institution = institution;
 	}
 	public int getResumeCode() {
 		return resumeCode;
@@ -154,16 +155,16 @@ public class ResumeVO {
 	public void setLanglicencename(String langlicencename) {
 		this.langlicencename = langlicencename;
 	}
-	public Timestamp getLangGetdate() {
+	public String getLangGetdate() {
 		return langGetdate;
 	}
-	public void setLangGetdate(Timestamp langGetdate) {
+	public void setLangGetdate(String langGetdate) {
 		this.langGetdate = langGetdate;
 	}
-	public Timestamp getGetdate() {
+	public String getGetdate() {
 		return getdate;
 	}
-	public void setGetdate(Timestamp getdate) {
+	public void setGetdate(String getdate) {
 		this.getdate = getdate;
 	}
 	public String getInstitute() {
@@ -178,10 +179,10 @@ public class ResumeVO {
 	public void setCompanyname(String companyname) {
 		this.companyname = companyname;
 	}
-	public Timestamp getWorkterm() {
+	public String getWorkterm() {
 		return workterm;
 	}
-	public void setWorkterm(Timestamp workterm) {
+	public void setWorkterm(String workterm) {
 		this.workterm = workterm;
 	}
 	public String getChargework() {
@@ -202,10 +203,10 @@ public class ResumeVO {
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
-	public Timestamp getlGetdate() {
+	public String getlGetdate() {
 		return lGetdate;
 	}
-	public void setlGetdate(Timestamp lGetdate) {
+	public void setlGetdate(String lGetdate) {
 		this.lGetdate = lGetdate;
 	}
 	public String getlInstitution() {
@@ -340,6 +341,12 @@ public class ResumeVO {
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
+	public int getAuthority_code() {
+		return authority_code;
+	}
+	public void setAuthority_code(int authority_code) {
+		this.authority_code = authority_code;
+	}
 	public String getSido() {
 		return sido;
 	}
@@ -400,10 +407,10 @@ public class ResumeVO {
 	public void setGraduatecheck(String graduatecheck) {
 		this.graduatecheck = graduatecheck;
 	}
-	public Timestamp getGraduate() {
+	public String getGraduate() {
 		return graduate;
 	}
-	public void setGraduate(Timestamp graduate) {
+	public void setGraduate(String graduate) {
 		this.graduate = graduate;
 	}
 	public String getGraduatetype() {
@@ -483,8 +490,10 @@ public class ResumeVO {
 				+ ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal + ", workcheck=" + workcheck
 				+ ", jobgrade=" + jobgrade + ", workcondition=" + workcondition + ", certificationtype="
 				+ certificationtype + ", language=" + language + ", langpoint=" + langpoint + ", langGrade=" + langGrade
-				+ "]";
+				+ ", institution=" + institution + "]";
 	}
+	
+	
 	
 
 	

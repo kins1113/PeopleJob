@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../main/inc/top.jsp" %>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
 
-
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
-    $.datepicker.setDefaults({
+jQuery.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
         nextText: '다음 달',
@@ -19,8 +22,8 @@
         yearSuffix: 'Year'
     });
  
-    $(function() {
-        $("#datepicker1").datepicker();
+jQuery(function() {
+	jQuery("#graduate").datepicker();
     });
  
     
@@ -40,71 +43,43 @@
 	});
 </script>
  
-
-
-
-<script type="text/javascript">
-
-var rangeDate = 31; // set limit day
-var setSdate, setEdate;
-$("#jobdate1").datepicker({
-    dateFormat: 'yy-mm-dd',
-    minDate: 0,
-    onSelect: function(selectDate){
-        var stxt = selectDate.split("-");
-            stxt[1] = stxt[1] - 1;
-        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
-        var edate = new Date(stxt[0], stxt[1], stxt[2]);
-            edate.setDate(sdate.getDate() + rangeDate);
-        
-        $('#jobdate2').datepicker('option', {
-            minDate: selectDate,
-            beforeShow : function () {
-                $("#jobdate2").datepicker( "option", "maxDate", edate );                
-                setSdate = selectDate;
-                console.log(setSdate)
-        }});
-        //to 설정
+ <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#workterm1" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#workterm2" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
     }
-    //from 선택되었을 때
-});
-            
-$("#jobdate2").datepicker({ 
-    dateFormat: 'yy-mm-dd',
-    onSelect : function(selectDate){
-        setEdate = selectDate;
-        console.log(setEdate)
-    }
-});
-$('.btn').on('click', function(e){
-    if($('input#jobdate1').val() == ''){
-        alert('시작일을 선택해주세요.');
-        $('input#jobdate1').focus();
-        return false;
-    }else if($('input#jobdate2').val() == ''){
-        alert('종료일을 선택해주세요.');
-        $('input#jobdate2').focus();
-        return false;
-    }
-
-    var t1 = $('input#jobdate1').val().split("-");
-    var t2 = $('input#jobdate2').val().split("-");
-    var t1date = new Date(t1[0], t1[1], t1[2]);
-    var t2date = new Date(t2[0], t2[1], t2[2]);
-    var diff = t2date - t1date;
-    var currDay = 24 * 60 * 60 * 1000;
-    if(parseInt(diff/currDay) > rangeDate){
-        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
-        return false;
-    }
-
-    alert("성공")
-});
-//조회 버튼 클릭
-	
+  } );
+  </script>
 
 
-</script>
+
+
 
 
 <style type="text/css">
@@ -137,7 +112,7 @@ $('.btn').on('click', function(e){
 		<input type="hidden" name="desiredworkCode" value="${param.desiredworkCode }" />
     <div>
     <!--이력서 사진  https://kuzuro.blogspot.com/2018/10/11.html-->
-    <img src="..." alt="..." class="img-thumbnail">
+    <img src="..." alt="..." class="img-thumbnail" name="picture">
     </div>
     <div>        
         <label for="membername">이름</label>
@@ -241,7 +216,7 @@ $('.btn').on('click', function(e){
        </div>
        <div>
 		 <label for="graduate">졸업년도</label>&nbsp;
-		 <input type="text" class="form-control" name="graduate" id="datepicker1">
+		 <input type="text" class="form-control" name="graduate" id="graduate">
          <select class="form-control" name="graduatecheck" id="infobox" >
         	<option value="졸업여부">졸업여부</option>
         	<option value="졸업">졸업</option>
@@ -268,8 +243,8 @@ $('.btn').on('click', function(e){
     </div>
     <div>
         <label for="workterm">근무기간</label>
-		<input type="text" class="form-control" name="workterm" id="infobox">~ 
-  		<input type="text" class="form-control" name="workterm" id="infobox">
+		<input type="text" class="form-control" name="workterm" id="workterm1">~ 
+  		<input type="text" class="form-control" name="workterm" id="workterm2">
   		&nbsp;
 		<select class="form-control" name="workcondition" id="infobox" >
         	<option value="재직중">재직중</option>
@@ -344,8 +319,14 @@ $('.btn').on('click', function(e){
 
      <h3>자기소개서</h3>
       <div>	
-    	<label for="introduce">자기소개서</label>
-        <textarea class="form-control" rows="3"></textarea>
+    	<!-- <label for="introduce">자기소개서</label>
+        <textarea class="form-control" rows="3"></textarea> -->
+        
+        <c:import url="/main/smarteditorTestjsp.do">
+			<c:param name="name" value="introduce"></c:param>
+		</c:import>
+        
+        
       </div>
       &nbsp;
       <h3>희망근무 선택</h3>
