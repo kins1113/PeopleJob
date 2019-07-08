@@ -50,8 +50,8 @@ public class JobopeningServiceImpl implements JobopeningService{
 	}
 
 	@Override
-	public int selectTotalCount(SearchVO vo) {
-		return jobopeningDao.selectTotalCount(vo);
+	public int selectTotalCount(Map<String,Object>map) {
+		return jobopeningDao.selectTotalCount(map);
 	}
 
 	@Override

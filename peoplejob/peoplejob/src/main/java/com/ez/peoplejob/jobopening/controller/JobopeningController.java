@@ -106,7 +106,7 @@ public class JobopeningController {
 		//logger.info("공고 list.size={}",list.size());
 		 
 		int totalRecord=0;
-		totalRecord=jobopeningService.selectTotalCount(searchVo);
+		totalRecord=jobopeningService.selectTotalCount(map);
 		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
 		
 		//5]PaginationInfo에 totalRecord값셋팅
