@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
-import com.ez.peoplejob.member.model.MemberService;
-import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.resume.model.ResumeService;
 import com.ez.peoplejob.resume.model.ResumeVO;
 
@@ -33,7 +31,7 @@ public class ResumeController {
 	private Logger logger = LoggerFactory.getLogger(ResumeController.class);
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
-	public String register(HttpSession session, Model model) {
+	public String register_get(HttpSession session, Model model) {
 		String memberid=(String) session.getAttribute("memberid");
 		logger.info("이력서등록 화면 보여주기");
 		ResumeVO vo=resumeService.selectByMemverid(memberid);
@@ -43,7 +41,7 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
-	public String write(@ModelAttribute ResumeVO resumeVo,Model model) {
+	public String write_post(@ModelAttribute ResumeVO resumeVo,Model model) {
 		logger.info("이력서 등록화면 보여주기 매개변수 resumeVo{}=",resumeVo);
 		int cnt=resumeService.insertResume(resumeVo);
 		

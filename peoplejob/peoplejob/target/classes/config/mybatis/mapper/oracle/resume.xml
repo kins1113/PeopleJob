@@ -17,8 +17,8 @@
 		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int">
 		select resume_seq.nextval from dual
 		</selectKey>
-		insert into resume(resume_code,resumetitle,resumeregdate,introduce,award,langlicence_code,licence_code,dv_code,academic_code,desiredwork_code,opencheck,member_code,picture)
-		values(#{resumeCode},#{resumetitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode},#{picture})
+		insert into resume(resume_code,resumeTitle,resumeRegdate,introduce,award,langlicence_code,licence_code,dv_code,academic_code,desiredwork_code,opencheck,member_code,picture)
+		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode},#{picture})
 	</insert>
 	
 	<insert id="insertLangcertification" parameterType="resumeVo">
@@ -42,7 +42,7 @@
 		select career_seq.nextval from dual
 		</selectKey>
 		insert into career
-		values(#{dvCode},#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{jobgrade},#{workcondition})
+		values(#{dvCode},#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{workcondition})
 		
 	</insert>
 	
@@ -60,7 +60,7 @@
 		select hope_working_seq.nextval from dual
 		</selectKey>
 		insert into hope_working 
-		values(#{hopeworkCode},#{jobtype},#{hopepay},#{hopeworkform},#{localCode},#{firstjobCode},#{schoollocal},#{hopeworkdate})
+		values(#{hopeworkCode},#{jobtype},#{hopepay},#{hopeworkform},#{localCode},#{firstjobCode},#{hopeworkdate})
 		
 	</insert>
 	
@@ -105,9 +105,11 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select memberid,(sysdate-regdate)*24 as new_Img_Term, membername, zipcode, address,addressdetail,member_code,withdrawaldate,pwd,birth,membergender,email,tel,authority_code
+		        select 
+		        resume_code,resumetitle, resumeregdate, opencheck 
+		        
 					
-				from member		
+				from resume		
 				<if test="searchKeyword != null and searchKeyword != ''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>		
