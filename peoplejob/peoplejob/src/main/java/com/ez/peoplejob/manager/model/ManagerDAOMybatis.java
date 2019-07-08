@@ -1,6 +1,7 @@
 package com.ez.peoplejob.manager.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ManagerDAOMybatis implements ManagerDAO {
+	
 	private String namespace="config.mybatis.mapper.oracle.manager.";
 	@Autowired private SqlSessionTemplate sqlSession;
 	
-	public String selectPwdById(String adminid) {
+	public ManagerVO selectPwdById(String adminid) {
 		return sqlSession.selectOne(namespace+"loginCheck",adminid);
 	}
 	public List<ManagerVO> selectManagerAll(){
@@ -35,5 +37,8 @@ public class ManagerDAOMybatis implements ManagerDAO {
 	}
 	public int updateManager(ManagerVO managerVo) {
 		return sqlSession.update(namespace+"updateManager", managerVo);
+	}
+	public int selectCheckPwd(Map<String, String> map) {
+		return sqlSession.selectOne(namespace+"selectCheckPwd", map);
 	}
 }

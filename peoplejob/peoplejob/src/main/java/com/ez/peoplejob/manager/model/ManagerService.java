@@ -1,6 +1,7 @@
 package com.ez.peoplejob.manager.model;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ManagerService {
 	//관리자 로그인 관련 상수 
@@ -17,7 +18,8 @@ public interface ManagerService {
 	public final static int ID_OK=1;	//사용가능한 아이디
 	public final static int ID_NOT=2;	//사용 불가한 아이디
 	public final static int ID_OUT=3;	//삭제한 아이디
-	
+
+	public ManagerVO selectPwdById(String adminid);
 	public int selectPwdById(String adminid,String adminpwd);
 	public List<ManagerVO> selectManagerAll();
 	public int insertManager(ManagerVO managerVo);
@@ -26,4 +28,5 @@ public interface ManagerService {
 	public int selectIdChk(String adminid);
 	public ManagerVO selectByCode(int adminCode);
 	public int updateManager(ManagerVO managerVo);
+	public int selectCheckPwd(Map<String, String> map);
 }

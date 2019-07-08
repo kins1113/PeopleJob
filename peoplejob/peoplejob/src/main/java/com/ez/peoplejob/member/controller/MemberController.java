@@ -1,4 +1,4 @@
-package com.ez.peoplejob.member.controller;
+	package com.ez.peoplejob.member.controller;
 
 import java.util.List;
 import java.util.Map;
