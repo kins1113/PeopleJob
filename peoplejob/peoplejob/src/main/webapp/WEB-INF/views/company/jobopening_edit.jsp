@@ -28,34 +28,52 @@
         <input type="text" name="companyCode" value="${vo.companyCode}">
 		<input type="hidden" name="jobopening" value="${vo.jobopening}">
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">공고제목</label>
-                <div class="col-sm-10">
-                    <input id="jobtitle" name="jobtitle" class="form-control" type="text" value="${vo.jobtitle }"/>
+                   <input id="jobtitle" name="jobtitle" class="form-control" type="text" value="${vo.jobtitle }"/>
                 </div>
             </div>
              
             <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">지역구분</label>
-                <div class="col-sm-10">
-                    <input id="localcheck" name="localcheck" class="form-control" type="text" value="${vo.localcheck }"/>
+                    <select name="localcheck">
+                		<option value="서울특별시">서울</option>
+                		<option value="부산광역시">서울</option>
+                		<option value="인천광역시">서울</option>
+                		<option value="대전">대전</option>
+                		<option value="광주">광주</option>
+                		<option value="대구">대구</option>
+                		<option value="울산">울산</option>
+                		<option value="세종">세종</option>
+                		<option value="경기도">경기</option>
+                		<option value="강원도">강원</option>
+                		<option value="충청북도">충북</option>
+                		<option value="충청남도">충남</option>
+                		<option value="전라북도">전북</option>
+                		<option value="전라남도">전남</option>
+                		<option value="경상북도">경북</option>
+                		<option value="경상남도">경남</option>
+                		<option value="제주">제주</option>
+                	</select>
                 </div>
             </div>
             
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">역정보</label>
-                <div class="col-sm-10">
                     <input id="subwayinfo" name="subwayinfo" class="form-control" type="text" value="${vo.subwayinfo }"/>
                 </div>
             </div>
             <div class="form-group">
-                <label for="title" class="col-sm-2 control-label">근무방식</label>
-                <div class="col-sm-10">
-                    <input id="workway" name="workway" class="form-control" type="text" value="${vo.workway }"/>
+                <div class="col-sm-offset-2 col-sm-10">
+                <label for="title" class="col-sm-2 control-label">근무형태</label>
+                    <input id="workform" name="workform" class="form-control" type="text" value="${vo.workway }"/>
                 </div>
             </div>
             <div class="form-group">
+               <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">근무기간(date)</label>
-                <div class="col-sm-10">
                     <input id="workdate" name="workdate" class="form-control" type="text" value="${fn:substring(vo.workdate,0,10) }"/>
                 </div>
             </div>
@@ -79,36 +97,40 @@
             </div>
              -->
             <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">	
                 <label for="title" class="col-sm-2 control-label">근무요일</label>
-                <div class="col-sm-10">
                     <input id="dayofweek" name="dayofweek" class="form-control" type="text" value="${vo.dayofweek }"/>
                 </div>
             </div>
             
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">근무시간</label>
-                <div class="col-sm-10">
                     <input id="worktime" name="worktime" class="form-control" type="text" value="${vo.worktime }"/>
                 </div>
             </div>
           
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">급여방식</label>
-                <div class="col-sm-10">
-                    <input id="payway" name="payway" class="form-control" type="text" value="${vo.payway }"/>
+                	<select name="payway">
+                	<option value="월급">월급</option>
+                	<option value="연봉">연봉</option>
+                	<option value="주급">주급</option>
+                	</select>
                 </div>
             </div>
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">급여</label>
-                <div class="col-sm-10">
                     <input id="pay" name="pay" class="form-control" type="text" value="${vo.pay }"/>
                 </div>
             </div>
             
             <div class="form-group">
-                <label class="col-sm-2 control-label">근무형태</label>
-                <div class="col-sm-6">
-                    <select name="workform" class="form-control">
+                <div class="col-sm-offset-2 col-sm-10">
+                <label class="col-sm-2 control-label">근무방식</label>
+                    <select name="workway" class="form-control">
                         <option value="정규직(신입)"
                         <c:if test="${vo.workform=='정규직(신입)'}">
                         selected
@@ -124,11 +146,16 @@
                         selected
                         </c:if>
                         >프리랜서(계약직)</option>
+                        <option value="인턴"
+                        <c:if test="${vo.workform=='인턴'}">
+                        selected
+                        </c:if>
+                        >인턴</option>
                     </select>
                 </div>
             </div>
               <!-- name="welfare" -->
-             <div class="form-group">
+             <div class="col-sm-offset-2 col-sm-10">
                 <label class="col-sm-2 control-label">복리후생</label>
                 <div class="col-sm-10">  
                 <c:set var="welfare" value="${vo.welfare }"/>
@@ -186,8 +213,8 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">성별</label>
-                <div class="col-sm-10">
                 	<select class="form-control" id="gender" name="gender">
                         <option value="남자"
                         <c:if test="${vo.gender=='남자'}">
@@ -208,31 +235,46 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">제한연령</label>
-                <div class="col-sm-10">
                     <input id="agelimit" name="agelimit" class="form-control" type="text" value="${vo.agelimit }"/>
                 </div>
              </div>
 
             <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                 <label class="col-sm-2 control-label">학력조건</label>
-                <div class="col-sm-3">
                     <select class="form-control" id="academicCondition" name="academicCondition">
-                        <option value="대졸"
-                        <c:if test="${vo.academicCondition=='대졸'}">
-                        selected
-                        </c:if>
-                        >대졸</option>
-                        <option value="대학원"
-                        <c:if test="${vo.academicCondition=='대학원'}">
-                        selected
-                        </c:if>
-                        >대학원</option>
                         <option value="고졸"
                         <c:if test="${vo.academicCondition=='고졸'}">
                         selected
                         </c:if>
                         >고졸</option>
+                        <option value="대졸(2,3년)"
+                        <c:if test="${vo.academicCondition=='대졸(2,3년)'}">
+                        selected
+                        </c:if>
+                        >대졸(2,3년)</option>
+                        <option value="대졸(4년)"
+                        <c:if test="${vo.academicCondition=='대졸(4년)'}">
+                        selected
+                        </c:if>
+                        >대졸(4년)</option>
+                        <option value="석사졸업"
+                        <c:if test="${vo.academicCondition=='석사졸업'}">
+                        selected
+                        </c:if>
+                        >석사졸업</option>
+                        <option value="박사졸업"
+                        <c:if test="${vo.academicCondition=='박사졸업'}">
+                        selected
+                        </c:if>
+                        >박사졸업</option>
+                        <option value="학력무관"
+                        <c:if test="${vo.academicCondition=='학력무관'}">
+                        selected
+                        </c:if>
+                        >학력무관</option>
                     </select>
                 </div>
             </div>

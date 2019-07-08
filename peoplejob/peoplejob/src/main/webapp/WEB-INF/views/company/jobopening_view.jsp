@@ -8,7 +8,7 @@
             <h3>채용공고</h3>
         </div>
 		<input type="hidden" name="jobopening" value="${vo.jobopening }">
-        <h2>${vo.jobtitle } <small>${vo.workform }</small></h2>
+        <h2>${vo.jobtitle } <small>${vo.workway }</small></h2>
 
         <div class="form-horizontal job-view">
 
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">근무형태</label>
                 <div class="col-sm-6">
-                    <p class="form-control-static">${vo.workform }</p>
+                    <p class="form-control-static">${vo.workway }</p>
                 </div>
             </div>
             <div class="form-group">

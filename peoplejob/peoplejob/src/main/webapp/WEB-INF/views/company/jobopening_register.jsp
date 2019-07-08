@@ -38,20 +38,44 @@
              <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">지역구분</label>
-                    <input id="localcheck" name="localcheck" class="form-control" type="text" />
+                	<select name="localcheck">
+                		<option value="서울특별시">서울</option>
+                		<option value="부산광역시">서울</option>
+                		<option value="인천광역시">서울</option>
+                		<option value="대전">대전</option>
+                		<option value="광주">광주</option>
+                		<option value="대구">대구</option>
+                		<option value="울산">울산</option>
+                		<option value="세종">세종</option>
+                		<option value="경기도">경기</option>
+                		<option value="강원도">강원</option>
+                		<option value="충청북도">충북</option>
+                		<option value="충청남도">충남</option>
+                		<option value="전라북도">전북</option>
+                		<option value="전라남도">전남</option>
+                		<option value="경상북도">경북</option>
+                		<option value="경상남도">경남</option>
+                		<option value="제주">제주</option>
+                	</select>
                 </div>
             </div>
-            
+             
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">역정보</label>
                     <input id="subwayinfo" name="subwayinfo" class="form-control" type="text" />
                 </div>
-            </div>
+            </div>         
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                <label class="control-label">근무방식</label>
-                    <input id="workway" name="workway" class="form-control" type="text" />
+                <label class="control-label">근무형태</label>
+                <input id="workform" name="workform" class="form-control" type="text" />
+               <!--  <select name="workform">
+                		<option value="정규직(경력)">정규직(경력)</option>
+                		<option value="정규직(신입)">정규직(신입)</option>
+                		<option value="계약직">계약직</option>
+                		<option value="인턴">인턴</option>
+                </select> -->
                 </div>
             </div>
              <div class="form-group">
@@ -96,7 +120,11 @@
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">급여방식</label>
-                    <input id="payway" name="payway" class="form-control" type="text" />
+                	<select name="payway">
+                	<option value="월급">월급</option>
+                	<option value="연봉">연봉</option>
+                	<option value="주급">주급</option>
+                	</select>
                 </div>
             </div>
              <div class="form-group">
@@ -108,11 +136,12 @@
             
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                <label class="control-label">근무형태</label>
-                    <select name="workform" class="form-control">
+                <label class="control-label">근무방식</label>
+                    <select name="workway">
                         <option value="정규직(신입)">정규직(신입)</option>
                         <option value="정규직(경력)">정규직(경력)</option>
                         <option value="프리랜서(계약직)">프리랜서(계약직)</option>
+                        <option value="인턴">인턴</option>
                     </select>
                 </div>
             </div>
@@ -120,7 +149,7 @@
                <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">복리후생</label>
-                <br> 
+                <br>  
                     <label><input type="checkbox" name="welfare1" value="국민연금" /> 국민연금</label>
                     <label><input type="checkbox" name="welfare1" value="건강보험" /> 건강보험</label>
                     <label><input type="checkbox" name="welfare1" value="고용보험" /> 고용보험</label><br>
@@ -131,13 +160,13 @@
                     <label><input type="checkbox" name="welfare1" value="교통비"/> 교통비</label>
                     <label><input type="checkbox" name="welfare1" value="통신비" /> 통신비</label><br>
                     <label><input type="checkbox" name="welfare1" value="퇴직금"/> 퇴직금</label>
-                    <input type="text" ud="welfare" name="welfare"  class="form-control">
+                    <input type="text" id="welfare" name="welfare"  class="form-control">
                 </div>
             </div>
              <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">성별</label>
-                	<select class="form-control" id="gender" name="gender">
+                	<select id="gender" name="gender">
                         <option value="남자">남자</option>
                         <option value="여자">여자</option>
                         <option value="무관">무관</option>
@@ -153,11 +182,14 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                <label class="control-label">학력조건</label>
-                    <select class="form-control" id="academicCondition" name="academicCondition">
-                        <option value="대졸">대졸</option>
-                        <option value="대학원">대학원</option>
+                <label class="control-label">학력조건</label> 
+                    <select id="academicCondition" name="academicCondition">
                         <option value="고졸">고졸</option>
+                        <option value="대졸(2,3년)">대졸(2,3년)</option>
+                        <option value="대졸(4년)">대졸(4년)</option>
+                        <option value="석사졸업">석사졸업</option>
+                        <option value="박사졸업">박사졸업</option>
+                        <option value="학력무관">학력무관</option>
                     </select>
                 </div>
             </div>
