@@ -33,4 +33,19 @@ public class NoticeDAOMybatis implements NoticeDAO {
 	public int updateReadCount(int notifyCode) {
 		return sqlSession.update(namespace+"updateReadCount", notifyCode);
 	}
+
+	@Override
+	public NoticeVO selectByNo(int notifyCode) {
+		NoticeVO vo=sqlSession.selectOne(namespace+"selectByNo", notifyCode);
+		return vo;
+	}
+
+	public int updateNotice(NoticeVO vo) {
+		return sqlSession.update(namespace+"updateNotice", vo);
+	}
+
+	@Override
+	public int deleteNotice(int notifyCode) {
+		return sqlSession.delete(namespace+"deleteNotice", notifyCode);
+	}
 }

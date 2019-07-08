@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
@@ -101,6 +103,125 @@ public class NoticeController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "manager/notice/list";
+	}
+	
+
+	@RequestMapping("/manager/notice/countUpdate.do")
+	public String countUpdate(@RequestParam(defaultValue = "0") int notifyCode, 
+			Model model) {
+		logger.info("조회수 증가, 파라미터 notifyCode={}", notifyCode);
+		
+		if(notifyCode==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/manager/notice/list.do");
+			
+			return "common/message";
+		}
+		
+		int cnt= noticeService.updateReadCount(notifyCode);
+		logger.info("조회수 증가 결과, cnt={}", cnt);
+		
+		return "redirect:/manager/notice/detail.do?notifyCode="+notifyCode;
+	}
+	
+	
+		@RequestMapping("/manager/notice/detail.do")
+		public String detail(@RequestParam(defaultValue = "0") int notifyCode, 
+				ModelMap model) {
+			logger.info("글 상세보기, 파라미터 notifyCode={}", notifyCode);
+			
+			if(notifyCode==0) {
+				model.addAttribute("msg", "잘못된 url입니다.");
+				model.addAttribute("url", "/manager/notice/list.do");
+				
+				return "common/message";
+			}
+			
+			NoticeVO noticeVo=noticeService.selectByNo(notifyCode);
+			logger.info("상세보기 결과 vo={}", noticeVo);
+			
+			model.addAttribute("vo", noticeVo);
+			
+			return "manager/notice/detail";
+		}
+	
+	
+	
+
+		
+		@RequestMapping(value="/manager/notice/edit.do", method=RequestMethod.GET)
+		public String edit_get(@RequestParam(defaultValue = "0") int notifyCode, 
+				ModelMap model) {
+			logger.info("수정화면, 파라미터 notifyCode={}", notifyCode);
+			
+			if(notifyCode==0) {
+				model.addAttribute("msg", "잘못된 url입니다.");
+				model.addAttribute("url", "/manager/notice/list.do");
+				return "common/message";
+			}
+			
+			NoticeVO noticeVo=noticeService.selectByNo(notifyCode);
+			logger.info("수정화면 조회 결과, vo={}", noticeVo);
+			
+			model.addAttribute("vo", noticeVo);
+			return "manager/notice/edit";
+		}
+		
+		@RequestMapping(value="/manager/notice/edit.do", method=RequestMethod.POST)
+		public String edit_post(@ModelAttribute NoticeVO noticeVo, Model model) {
+			logger.info("글수정 처리, 파라미터 noticeVo={}", noticeVo);
+			
+			String msg="", url="/manager/notice/edit.do?notifyCode="+noticeVo.getNotifyCode();
+				int cnt=noticeService.updateNotice(noticeVo);
+				
+				if(cnt>0) {
+					msg="글 수정되었습니다.";
+					url="/manager/notice/detail.do?notifyCode="+noticeVo.getNotifyCode();
+				}else {
+					msg="글 수정 실패.";
+				}
+		
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+		}
+		
+	
+	
+	@RequestMapping(value="/manager/notice/delete.do",method = RequestMethod.GET)
+	public String delete_get(@RequestParam(defaultValue = "0") int notifyCode,
+			Model model) {
+		logger.info("삭제 화면 파라미터 notifyCode={}", notifyCode);
+		
+		if(notifyCode==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/manager/notice/list.do");
+			return "common/message";
+		}
+		
+		return "manager/notice/delete";		
+	}
+	
+	@RequestMapping(value="/manager/notice/delete.do",method=RequestMethod.POST)
+	public String delete_post(@ModelAttribute NoticeVO noticeVo, Model model) {
+		logger.info("글 삭제 처리, 파라미터 noticeVo={}", noticeVo);
+		
+		String msg="", url="/manager/notice/delete.do?notifyCode="+noticeVo.getNotifyCode();
+		
+			int cnt=noticeService.deleteNotice(noticeVo.getNotifyCode());
+			if(cnt>0) {
+				msg="글 삭제되었습니다.";
+				url="/manager/notice/list.do";
+			}else {
+				msg="글 삭제 실패!";
+			}
+		
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 	
 }

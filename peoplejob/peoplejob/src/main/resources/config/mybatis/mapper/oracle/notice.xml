@@ -12,6 +12,7 @@
 	</insert>
 
 	
+	
 	<select id="selectSearch" parameterType="searchVo" resultType="noticeVo">
 		select *
 		from
@@ -19,7 +20,7 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select notify_Code, notifytitle, notifycontent, readcount,notifydate,
+		        select notify_Code, notifytitle, notifycontent, readcount,notifydate,admin_code,
 					(sysdate-notifydate)*24 as new_Img_Term
 				from notice		
 				<if test="searchKeyword != null and searchKeyword != ''">
@@ -43,9 +44,24 @@
 <update id="updateReadCount" parameterType="int">
 		update notice
 		set readcount=readcount+1 
-		where notifyCode=#{notifyCode}
+		where notify_Code=#{notifyCode}
 	</update>
 	 
+	<select id="selectByNo" parameterType="int" resultType="noticeVo">
+		select * from notice where notify_Code=#{notifyCode}
+	</select>	 
+
+		<update id="updateNotice" parameterType="noticeVo">
+		update notice set notifytitle=#{notifytitle},
+			notifycontent=#{notifycontent}
+		where notify_Code=#{notifyCode}
+	</update>
+		
+		
+		<delete id="deleteNotice" parameterType="int">
+		delete from notice
+		where notify_Code=#{notifyCode}
+	</delete>
 </mapper>
 
 

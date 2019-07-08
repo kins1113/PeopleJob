@@ -29,6 +29,7 @@
 							
 							<div>
 								<!-- 관리자 아이디를 세션 값으로 input  -->
+								<label for="adminCode">관리자코드</label>
 							<input type="text" id="adminCode" name="adminCode" value="1"/>
 							</div>
 

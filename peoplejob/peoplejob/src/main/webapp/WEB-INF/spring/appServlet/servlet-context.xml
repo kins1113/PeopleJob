@@ -39,14 +39,14 @@
 	
 	
 	<!-- Managerintercepter -->
-	<interceptors>
+	<!-- <interceptors>
 		<interceptor>
 			<mapping path="/manager/**"/>
 			<exclude-mapping path="/manager/login/managerLogin.do"/>
 				<exclude-mapping path="/manager/login/managerLogin.do"/>
 			<beans:ref bean="managerInterceptor"/>
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 	
 	
 </beans:beans>

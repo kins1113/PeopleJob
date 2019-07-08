@@ -30,4 +30,19 @@ public class NoticeServiceImpl implements NoticeService {
 	public int updateReadCount(int notifyCode) {
 		return noticeDao.updateReadCount(notifyCode);
 	}
+
+	@Override
+	public NoticeVO selectByNo(int notifyCode) {
+		return noticeDao.selectByNo(notifyCode);
+	}
+
+	@Override
+	public int updateNotice(NoticeVO vo) {
+		return noticeDao.updateNotice(vo);
+	}
+
+	@Override
+	public int deleteNotice(int notifyCode) {
+		return noticeDao.deleteNotice(notifyCode);
+	}
 }
