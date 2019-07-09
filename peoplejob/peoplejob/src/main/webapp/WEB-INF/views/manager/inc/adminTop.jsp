@@ -118,12 +118,15 @@
 							<ul class="collapse show" id="dashboard"
 								data-parent="#sidebar-menu">
 								<div class="sub-menu">
+									<!-- <li class="active"><a class="sidenav-item-link"
+										href="#"> <span class="nav-text">통합 관리</span>
+									</a></li> -->
 									<li class="active"><a class="sidenav-item-link"
-										href="#"> <span class="nav-text">일반 회원</span>
+										href="${pageContext.request.contextPath}/manager/member/memberList.do"> <span class="nav-text">일반 회원</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="#">
-											<span class="nav-text">기업 회원</span> <span
-											class="badge badge-success">new</span>
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/company/companyList.do">
+											<span class="nav-text">기업 회원</span>
+											 <!-- <span	class="badge badge-success">new</span> -->
 
 									</a></li>
 								</div>
@@ -316,11 +319,11 @@
 								<div class="sub-menu">
 
 									<li><a class="sidenav-item-link"
-										href="#"> <span
+										href="${pageContext.request.contextPath}/manager/popup/popupList.do"> <span
 											class="nav-text">관리</span>
 									</a></li>
 									<li><a class="sidenav-item-link"
-										href="#"> <span
+										href="${pageContext.request.contextPath}/manager/popup/popupAdd.do"> <span
 											class="nav-text">등록</span>
 									</a></li>
 									<!-- <li><a class="sidenav-item-link" href="#"> <span

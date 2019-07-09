@@ -19,6 +19,10 @@
 	<delete id="deleteBKind" parameterType="int">
 		delete from board_kind where type_code=#{Code}
 	</delete>	
+	
+	<select id="boardKindChange" >
+		
+	</select>
 </mapper>
 
 
