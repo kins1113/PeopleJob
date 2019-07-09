@@ -115,7 +115,9 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				</c:if>>날짜</option>
 					</select>
 				</div>
-
+				<div class="form-group serDiv">
+					<c:import url="/inc/searchDate.do"></c:import>					
+				</div>
 				<div class="form-group" id='pageSize'>
 					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
 						<option value="10"
