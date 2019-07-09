@@ -30,7 +30,8 @@
 							<div>
 								<!-- 관리자 아이디를 세션 값으로 input  -->
 								<label for="adminid">관리자아이디</label>
-							<input type="text" id="adminid" name="adminid" value="${vo.adinmid }" />
+							<input type="text" id="adminid" name="adminid" value="${sessionScope.adminid}" />
+							<input type="text" id="adminCode" name="adminCode" value="${sessionScope.adminCode}" />
 							</div>
 
 							<div class="form-footer pt-4 pt-5 mt-4 border-top">
