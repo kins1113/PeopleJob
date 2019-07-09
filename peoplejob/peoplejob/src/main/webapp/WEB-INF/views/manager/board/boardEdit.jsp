@@ -115,13 +115,10 @@
 					<div class="col-md-6 mb-3">
 						<div class="contact-info pt-4">
 							<h5 class="text-dark mb-1">게시판 관련 정보</h5>
-							<span class="text-dark font-weight-medium pt-4 mb-2">등록인</span> <span>Albrech</span><br>
-							<span class="text-dark font-weight-medium pt-4 mb-2">등록일</span> <span>+99
-								9539 2641 31</span><br> <span
-								class="text-dark font-weight-medium pt-4 mb-2">수정인</span> <span>Nov
-								15, 1990</span><br> <span
-								class="text-dark font-weight-medium pt-4 mb-2">수정일</span> <span>Nov
-								15, 1990</span><br>
+							<span class="text-dark font-weight-medium pt-4 mb-2">등록인</span> <span>${vo.firAdmin}</span><br>
+							<span class="text-dark font-weight-medium pt-4 mb-2">등록일</span> <span><fmt:formatDate value="${vo.boardregdate1 }" pattern="yyyy-MM--dd"/></span><br> <span
+								class="text-dark font-weight-medium pt-4 mb-2">수정인</span> <span>${vo.lastAdmin }</span><br> <span
+								class="text-dark font-weight-medium pt-4 mb-2">수정일</span> <span><fmt:formatDate value="${vo.boardupdate }" pattern="yyyy-MM--dd"/></span><br>
 						</div>
 					</div>
 	</div>

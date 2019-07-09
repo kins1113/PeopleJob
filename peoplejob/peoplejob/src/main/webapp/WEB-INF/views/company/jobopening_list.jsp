@@ -108,9 +108,13 @@
 </div>
 
         </div>
+       <!-- 기업회원(3)이면 글쓰기 나옴  -->
+         <c:if test="${mvo.authorityCode==1}">
         <div class="pull-right">
+            <a href="<c:url value='/company/my_jobopening_list.do?companycode1=1'/>" class="btn btn-primary" role="button">내가쓴 채용 정보</a>
             <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">글쓰기</a>
         </div>
+        </c:if>
     </div>
     </div>
     </fieldset>

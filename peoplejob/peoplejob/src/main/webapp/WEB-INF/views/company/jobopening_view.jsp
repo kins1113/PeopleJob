@@ -13,9 +13,9 @@
         <div class="form-horizontal job-view">
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">${vo.companyCode }(이름으로 바꾸기)</label>
+                <label class="col-sm-2 control-label">회사이름</label>
                 <div class="col-sm-5">
-                    <p class="form-control-static">좋은회사</p>
+                    <p class="form-control-static">${vo.companyCode }회사이름으로 바꾸기</p> 
                 </div>
             </div>
             <div class="form-group">
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+           <!--  <div class="form-group">
                 <label class="col-sm-2 control-label">업무내용</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">
@@ -112,7 +112,7 @@
                         남들은 다하는 외식 몇 번 한적이 없었고.<br/>
                     </p>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label class="col-sm-2 control-label">공고이미지</label>
                 <div class="col-sm-10">
@@ -128,10 +128,14 @@
         <form id="removeForm" method="post">
             <input type="hidden" name="_method" value="delete"/>
             <div class="pull-right">
+               <!-- 기업회원(3)이면 글쓰기 나옴  -->
+        		 <c:if test="${mvo.authorityCode==3}">
                 <a href="<c:url value='/company/jobopening_del.do?jobopening=${vo.jobopening}'/>"><input type="button" id="deleteBtn" class="btn btn-default btn-mg" role="button" value="삭제"></a>
                 <a href="<c:url value='/company/jobopening_edit.do?jobopening=${vo.jobopening }'/>"><input type="button" id="modifyBtn" class="btn btn-default btn-mg" role="button" value="수정"></a>
                 <a href="<c:url value='/company/jobopening_agreeEdit.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="활성화 수정"></a>
-                <a href="#"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
+                </c:if>
+                <!-- 일반회원일경우 -->
+                <a href="<c:url value='/scrap/insertscrap.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
                 <a href="<c:url value='/company/jobopening_list.do'/>"><input type="button" id="listBtn" class="btn btn-default btn-mg" role="button" value="목록"></a>
             </div>
         </form>

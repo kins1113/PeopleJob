@@ -144,17 +144,17 @@ $(document).ready(function(){
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">복리후생</label>
                 <br>  
-                    <label><input type="checkbox" name="welfare1" value="국민연금" /> 국민연금</label>
-                    <label><input type="checkbox" name="welfare1" value="건강보험" /> 건강보험</label>
-                    <label><input type="checkbox" name="welfare1" value="고용보험" /> 고용보험</label><br>
-                    <label><input type="checkbox" name="welfare1" value="산재보험" /> 산재보험</label>
-                    <label><input type="checkbox" name="welfare1" value="야근수당"/> 야근수당</label>
-                    <label><input type="checkbox" name="welfare1" value="식대(점심)"/> 식대(점심)</label><br>
-                    <label><input type="checkbox" name="welfare1" value="식대(저녁)"/> 식대(저녁)</label>
-                    <label><input type="checkbox" name="welfare1" value="교통비"/> 교통비</label>
-                    <label><input type="checkbox" name="welfare1" value="통신비" /> 통신비</label><br>
-                    <label><input type="checkbox" name="welfare1" value="퇴직금"/> 퇴직금</label>
-                    <input type="text" id="welfare" name="welfare"  class="form-control">
+                    <label><input type="checkbox" name="welfare1" id="welfare1" value="국민연금" /> 국민연금</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="건강보험" /> 건강보험</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="고용보험" /> 고용보험</label><br>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="산재보험" /> 산재보험</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="야근수당"/> 야근수당</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="식대(점심)"/> 식대(점심)</label><br>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="식대(저녁)"/> 식대(저녁)</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="교통비"/> 교통비</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="통신비" /> 통신비</label><br>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="퇴직금"/> 퇴직금</label>
+                   <input type="text" id="welfare" name="welfare"  class="form-control">
                 </div>
             </div>
              <div class="form-group">
@@ -241,6 +241,13 @@ $(document).ready(function(){
                 <div class="col-sm-offset-2 col-sm-10">
                     <label class="control-label">공고 이미지</label> 
                     <input id="companyimageurl" name="companyimageurl" class="form-control" type="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <label class="control-label">활성화여부</label> 
+                    <input id="adminagree" name="adminagree"  type="radio" value="Y" checked/>Y
+                    <input id="adminagree" name="adminagree"  type="radio" value="N"/>N 
                 </div>
             </div>
             <div class="form-group">

@@ -32,10 +32,12 @@ $(function() {
 	$('input[type=submit]').click(function(){
 		if($('#memberId').val()==''){
 			alert('아이디를 입력하세요');
+			$('#memberId').focus();
 			event.preventDefault();
 			return false;
 		}else if($('#pwd').val()==''){
 			alert('비밀번호를 입력하세요');
+			$('#pwd').focus();
 			event.preventDefault();
 			return false;
 		}
@@ -100,7 +102,7 @@ $(function() {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="<c:url value='/login/selectregister.do'/>" tabindex="5" class="forgot-password">회원가입</a>
+													<a href="<c:url value='/login/registerU.do'/>" tabindex="5" class="forgot-password">회원가입</a>
 												</div>
 											</div>
 										</div>

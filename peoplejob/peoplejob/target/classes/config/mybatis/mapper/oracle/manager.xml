@@ -4,8 +4,8 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.manager">
 	
-	<select id="loginCheck" parameterType="String" resultType="String">
-		select adminpwd from manager where adminid=#{adminid}
+	<select id="loginCheck" parameterType="String" resultType="managerVo">
+		select adminpwd , admin_code from manager where adminid=#{adminid}
 	</select>
 
 	<select id="selectManagerAll" resultType="managerVO">
@@ -49,6 +49,11 @@
 		set adminid=#{amdinid}, adminpwd=#{adminpwd}, authority=#{authority}, aut_regdate=sysdate
 		where admin_code=#{adminCode}
 	</update>
+	
+	<select id="selectCheckPwd" parameterType="map" resultType="int">
+		select count(*) from  manager
+		where adminid=#{id} and adminpwd=#{pwd}
+	</select>
 </mapper>
 
 
