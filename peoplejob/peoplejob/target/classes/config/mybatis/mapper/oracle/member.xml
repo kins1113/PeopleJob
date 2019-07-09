@@ -3,24 +3,19 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
+
+	
 	<insert id="insertMember" parameterType="memberVo">
+	 
 		<selectKey keyProperty="memberCode" order="BEFORE" resultType="int">
 			select member_seq.nextval from dual
 		</selectKey>
 	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
-	pwd, birth, membergender, email, tel, authority_code)
+	pwd, birth, membergender, email, tel, authority_code, company_code)
 	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
-	#{birth},#{membergender},#{email},#{tel},#{authorityCode})
+	#{birth},#{membergender},#{email},#{tel},#{authorityCode}, #{companyCode} )
 	</insert>
 
-	
-	<insert id="insertCompany" parameterType="companyVo">
-	<selectKey keyProperty="companyCode" order="BEFORE" resultType="int">
-		select company_seq.nextval from dual
-	</selectKey>
-	insert into company(company_code,companyname, business_number,image)
-	values(#{companyCode}, #{companyname},#{businessNumber},#{image})
-	</insert>
 	
 	<select id="dupUserid" resultType="int" parameterType="string">
 	select count(*) from member where memberid=#{memberid}
@@ -40,6 +35,14 @@
 	birth=#{birth},membergender=#{membergender},email=#{email},tel=#{tel}
 	where memberid=#{memberid}
 	</update>
+	
+	<insert id="insertCompany" parameterType="companyVo">
+	<selectKey keyProperty="companyCode" order="BEFORE" resultType="int">
+		select company_seq.nextval from dual
+	</selectKey> 
+	insert into company(company_code,companyname, business_number)
+	values(#{companyCode}, #{companyname},#{businessNumber})
+	</insert>
 	
 	<update id="memberOut" parameterType="string">
 		update member

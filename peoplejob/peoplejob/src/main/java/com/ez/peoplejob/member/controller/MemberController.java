@@ -78,12 +78,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/registerC.do", method = RequestMethod.POST)
-	public String register2_post(@ModelAttribute MemberVO memberVo, Model model, 
-			@ModelAttribute CompanyVO companyVo, HttpServletRequest request) {
-		logger.info("기업회원가입 파라미터, memberVo={}",memberVo);
-		logger.info("기업회원가입 파라미터, companyVo={}",companyVo);
+	public String register2_post( Model model,
+			@ModelAttribute CompanyVO companyVo, HttpServletRequest request, @ModelAttribute MemberVO memberVo) {
+		/*
 		memberVo.setAuthorityCode(2);
-		
 		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
 		 
 		String imageURL="";
@@ -91,11 +89,13 @@ public class MemberController {
 			imageURL=(String)map.get("fileName");
 		}
 		
+		companyVo.setImage(imageURL);
 		
 		int cnt=memberService.insertMember(memberVo);
 		logger.info("기업회원가입 처리 결과 cnt={}",cnt);
 		
 		String msg="", url="/login/registerC.do";
+		
 		if(cnt>0) {
 			companyVo.setImage(imageURL);
 			int cnt2=memberService.insertCompany(companyVo);
@@ -111,11 +111,40 @@ public class MemberController {
 			msg="기업회원 회원가입 실패";
 		}
 		
+		
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		
 		return "common/message";
+		*/
 		
+		logger.info("기업회원 등록 파라미터, companyVo={}",companyVo);
+		logger.info("기업회원 등록 파라미터, memberVo={}",memberVo);
+		
+		int comcnt=memberService.insertCompany(companyVo);
+		logger.info("기업 등록 처리 결과 comcnt={}",comcnt);
+		logger.info("기업 등록 처리 후, companyVo={}",companyVo);
+		
+		memberVo.setCompanyCode(companyVo.getCompanyCode());
+		int cnt=memberService.insertMember(memberVo);
+		
+		logger.info("기업회원 등록 처리 결과 cnt={}",cnt);
+		
+		String msg="",url="/login/registerC.do";
+		
+		if(cnt>0) {
+			msg="기업회원 회원가입이 완료되었습니다. "
+					+ "하루 뒤 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.";
+			url="/login/login.do";
+		}else {
+			msg="기업회원 회원가입 실패";
+		}
+		
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 	
 	@RequestMapping(value="/person_update.do", method = RequestMethod.GET)
