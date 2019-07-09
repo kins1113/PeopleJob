@@ -1,6 +1,7 @@
 package com.ez.peoplejob.notice.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> selectAll(SearchVO searchVo) {
+	public List<Map<String, Object>> selectAll(SearchVO searchVo) {
 		return noticeDao.selectAll(searchVo);
 	}
 

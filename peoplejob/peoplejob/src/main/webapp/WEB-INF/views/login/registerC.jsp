@@ -92,18 +92,21 @@ $(function() {
 				$(this).focus();
 				event.preventDefault();
 				return false;
-			} else if($('#chkId').val()!='Y'){
+			} 
+			if($('#chkId').val()!='Y'){
 				alert('이메일 인증을 해주세요');
 				event.preventDefault();
 				$('#chkId').focus();
 				return false;
-			}else if($('input[type=checkbox]').is(":checked")==false){
+			}
+			if($('input[type=checkbox]').is(":checked")==false){
 				alert('이용약관에 동의해주세요');
 				$('input[type=checkbox]').focus();
 				event.preventDefault();
 				return false;
-			}
+			} 
 		});
+		
 	});
 	
 	 $('#emailcertificate').click(function(){
@@ -146,9 +149,9 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								
-								<form action="<c:url value='/login/registerC.do'/>" method="post" role="form" 
-								name="registerC" enctype="multipart/form-data">
+							
+								 <form id="" action="<c:url value='/login/registerC.do'/> " 
+								method="post" role="form" style="display: block;" name="registerC"  enctype="multipart/form-data">
 								
 									<input type="hidden" name="authorityCode" value=2>
 									<input type="hidden" name="zipcode">
@@ -156,6 +159,10 @@ $(function() {
 									<input type="hidden" name="addressdetail">
 									<input type="hidden" name="membergender">
 									<input type="hidden" name="birth">
+									
+									<input type="hidden" name="companyZipcode">
+									<input type="hidden" name="companyAddress">
+									<input type="hidden" name="companyAddressdetail">
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디" 
@@ -177,7 +184,7 @@ $(function() {
 									
 									<div class="form-group">
 									<div class="row">
-										<span id="necessary">필수입력정보입니다.</span>
+										<!-- <span id="necessary">필수입력정보입니다.</span> -->
 										</div>
 									</div>
 										<div class="form-group" style="float: left; margin-right:30px;" >
@@ -191,20 +198,17 @@ $(function() {
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="대표자명" title="대표자명"  style="width: 300px">
+										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="담당자명" title="담당자명"  style="width: 300px">
 									</div>
 									
 									<div class="form-group">
-										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="전화번호" title="전화번호"  style="width: 300px">
+										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="담당자전화번호" title="담당자 전화번호"  style="width: 300px">
 									</div>
 									<div class="form-group">
 										<input type="text" name="companyname" id="companyname" tabindex="1" class="form-control" placeholder="기업명" style="width:300px" title="기업명">
 									</div>
 									<div class="form-group">
 										<input type="text" name="businessNumber" id="businessNumber" tabindex="1" class="form-control" placeholder="사업자등록번호" title="사업자 등록번호">
-									</div>
-									<div class="form-group">회사로고 이미지
-										<input type="file" name="image" id="image">
 									</div>
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
@@ -221,21 +225,9 @@ $(function() {
 										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px">
 									</div>
 									
+									
 									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="registerCompanysubmit" id="registerCompanysubmit" 
-												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
-										</div>
-									</div>
-									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<div class="text-center">
-													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
-												</div>
-											</div>
-									</div>
-									<div class="form-group">
-				          <h3>이용약관 동의<input type="checkbox" name="chk" id="chk"></h3>
+				          <h4 style="float:left;">이용약관 동의<input type="checkbox" name="chk" id="chk" style="float: right; margin-right: 300px; margin-left:10px;"></h4>
 						
 				        <ul id="faq-list" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
 				          <li>
@@ -313,6 +305,21 @@ $(function() {
 				
 				      
    				 </div>
+   				 
+   				 <div class="form-group">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="registerCompanysubmit" id="registerCompanysubmit" 
+												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
+										</div>
+									</div>
+									<div class="form-group">
+											<div class="col-sm-6 col-sm-offset-3">
+												<div class="text-center">
+													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
+												</div>
+											</div>
+									</div>
+									
 								</form>
 							</div>
 						</div>
