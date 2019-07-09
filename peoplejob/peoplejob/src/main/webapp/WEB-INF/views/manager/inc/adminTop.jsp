@@ -118,9 +118,9 @@
 								data-parent="#sidebar-menu">
 								<div class="sub-menu">
 									<li class="active"><a class="sidenav-item-link"
-										href="index.html"> <span class="nav-text">일반 회원</span>
+										href="#"> <span class="nav-text">일반 회원</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="analytics.html">
+									<li><a class="sidenav-item-link" href="#">
 											<span class="nav-text">기업 회원</span> <span
 											class="badge badge-success">new</span>
 
@@ -137,65 +137,48 @@
 							<ul class="collapse" id="ui-elements" data-parent="#sidebar-menu">
 								<div class="sub-menu">
 									<li class="has-sub"><a class="sidenav-item-link"
-										href="javascript:void(0)" data-toggle="collapse"
+										href="#" data-toggle="collapse"
 										data-target="#components" aria-expanded="false"
 										aria-controls="components"> <span class="nav-text">이력서
-												관리</span> <b class="caret"></b>
+												관리</span> 
 									</a>
-										<ul class="collapse" id="components">
-											<div class="sub-menu">
-
-												<li><a href="alert.html">Alert</a></li>
-												<li><a href="badge.html">Badge</a></li>
-												<li><a href="breadcrumb.html">Breadcrumb</a></li>
-											</div>
-										</ul></li>
+										</li>
 
 									<li class="has-sub"><a class="sidenav-item-link"
-										href="javascript:void(0)" data-toggle="collapse"
+										href="#" data-toggle="collapse"
 										data-target="#icons" aria-expanded="false"
 										aria-controls="icons"> <span class="nav-text">채용공고
 												관리</span> <b class="caret"></b>
 									</a>
-										<ul class="collapse" id="icons">
+						<!-- 			<ul class="collapse" id="icons">
 											<div class="sub-menu">
 
-												<li><a href="material-icon.html">Material Icon</a></li>
+												<li><a href="#">Material Icon</a></li>
 
-												<li><a href="flag-icon.html">Flag Icon</a></li>
+												<li><a href="#">Flag Icon</a></li>
 
 											</div>
-										</ul></li>
+										</ul> --></li>
 									<!-- 변경하실 수있도록 했어요 편하게 바꿔서 사용하세요 -->
 									<li class="has-sub"><a class="sidenav-item-link"
-										href="javascript:void(0)" data-toggle="collapse"
+										href="#" data-toggle="collapse"
 										data-target="#forms" aria-expanded="false"
-										aria-controls="forms"> <span class="nav-text">서비스
-												관리-변경1</span> <b class="caret"></b>
+										aria-controls="forms"> <span class="nav-text">상품 관리
+												</span> <b class="caret"></b>
 									</a>
 										<ul class="collapse" id="forms">
 											<div class="sub-menu">
-												<li><a href="basic-input.html">Basic Input</a></li>
-												<li><a href="input-group.html">Input Group</a></li>
-												<li><a href="checkbox-radio.html">Checkbox & Radio</a>
-												</li>
+												<li><a href="basic-input.html">상품 조회</a></li>
+												<li><a href="input-group.html">상품 등록</a></li>
 											</div>
 										</ul></li>
 
 									<li class="has-sub"><a class="sidenav-item-link"
 										href="javascript:void(0)" data-toggle="collapse"
 										data-target="#maps" aria-expanded="false" aria-controls="maps">
-											<span class="nav-text">서비스 관리-변경2</span> <b class="caret"></b>
+											<span class="nav-text">지원 관리</span> <b class="caret"></b>
 									</a>
-										<ul class="collapse" id="maps">
-											<div class="sub-menu">
-
-												<li><a href="google-map.html">Google Map</a></li>
-
-												<li><a href="vector-map.html">Vector Map</a></li>
-
-											</div>
-										</ul></li>
+										</li>
 								</div>
 							</ul></li>
 						<li class="has-sub"><a class="sidenav-item-link"
@@ -261,34 +244,8 @@
 
 											</div>
 										</ul></li>
-
-
-
-									<li class="has-sub"><a class="sidenav-item-link"
-										href="javascript:void(0)" data-toggle="collapse"
-										data-target="#others" aria-expanded="false"
-										aria-controls="others"> <span class="nav-text">Others</span>
-											<b class="caret"></b>
-									</a>
-										<ul class="collapse" id="others">
-											<div class="sub-menu">
-
-												<li><a href="invoice.html">invoice</a></li>
-
-												<li><a href="error.html">Error</a></li>
-
-											</div>
-										</ul></li>
-
-
-
 								</div>
 							</ul></li>
-
-
-
-
-
 						<li class="has-sub"><a class="sidenav-item-link"
 							href="javascript:void(0)" data-toggle="collapse"
 							data-target="#documentation" aria-expanded="false"
@@ -303,76 +260,25 @@
                               Getting Started
                             </li> -->
 
-									<li><a class="sidenav-item-link" href="introduction.html">
-											<span class="nav-text">결제 항목 관리</span>
+									<li><a class="sidenav-item-link" href="#">
+											<span class="nav-text">통합 관리</span>
 									</a></li>
 
-									<li><a class="sidenav-item-link" href="setup.html"> <span
+									<li><a class="sidenav-item-link" href="#"> <span
 											class="nav-text">결제 내역</span>
 
 									</a></li>
 
-									<li><a class="sidenav-item-link" href="customization.html">
-											<span class="nav-text">취소 요청</span>
+									<li><a class="sidenav-item-link" href="#">
+											<span class="nav-text">취소 요청 내역</span>
 									</a></li>
 
-									<li><a class="sidenav-item-link" href="customization.html">
+									<li><a class="sidenav-item-link" href="#">
 											<span class="nav-text">취소 내역</span>
 									</a></li>
-
-									<li class="has-sub"><a class="sidenav-item-link"
-										href="javascript:void(0)" data-toggle="collapse"
-										data-target="#headers" aria-expanded="false"
-										aria-controls="headers"> <span class="nav-text">변경5</span>
-											<b class="caret"></b>
-									</a>
-										<ul class="collapse" id="headers">
-											<div class="sub-menu">
-
-												<li><a href="header-fixed.html">Header Fixed</a></li>
-
-												<li><a href="header-static.html">Header Static</a></li>
-
-												<li><a href="header-light.html">Header Light</a></li>
-
-												<li><a href="header-dark.html">Header Dark</a></li>
-
-											</div>
-										</ul></li>
-
-
-
-
-									<li class="has-sub"><a class="sidenav-item-link"
-										href="javascript:void(0)" data-toggle="collapse"
-										data-target="#sidebar-navs" aria-expanded="false"
-										aria-controls="sidebar-navs"> <span class="nav-text">변경
-												7</span> <b class="caret"></b>
-									</a>
-										<ul class="collapse" id="sidebar-navs">
-											<div class="sub-menu">
-
-												<li><a href="sidebar-open.html">Sidebar Open</a></li>
-
-												<li><a href="sidebar-minimized.html">Sidebar
-														Minimized</a></li>
-
-												<li><a href="sidebar-offcanvas.html">Sidebar
-														Offcanvas</a></li>
-
-												<li><a href="sidebar-with-footer.html">Sidebar With
-														Footer</a></li>
-
-												<li><a href="sidebar-without-footer.html">Sidebar
-														Without Footer</a></li>
-
-												<li><a href="right-sidebar.html">Right Sidebar</a></li>
-
-											</div>
-										</ul></li>
-									<li><a class="sidenav-item-link" href="rtl.html"> <span
-											class="nav-text">변경 8</span>
-
+									
+									<li><a class="sidenav-item-link" href="#">
+											<span class="nav-text">취소 완료</span>
 									</a></li>
 
 
@@ -392,6 +298,29 @@
 									<li><a class="sidenav-item-link"
 										href="<c:url value='/manager/manager/managerList.do'/>"> <span
 											class="nav-text">조회</span>
+									</a></li>
+									<!-- <li><a class="sidenav-item-link" href="#"> <span
+											class="nav-text">권한 보기</span>
+									</a></li> -->
+
+								</div>
+							</ul></li>
+						<li class="has-sub"><a class="sidenav-item-link"
+							href="javascript:void(0)" data-toggle="collapse"
+							data-target="#popup" aria-expanded="false"
+							aria-controls="popup"> <i class="mdi mdi-chart-pie"></i> <span
+								class="nav-text">팝업관리</span> <b class="caret"></b>
+						</a>
+							<ul class="collapse" id="popup" data-parent="#sidebar-menu">
+								<div class="sub-menu">
+
+									<li><a class="sidenav-item-link"
+										href="#"> <span
+											class="nav-text">관리</span>
+									</a></li>
+									<li><a class="sidenav-item-link"
+										href="#"> <span
+											class="nav-text">등록</span>
 									</a></li>
 									<!-- <li><a class="sidenav-item-link" href="#"> <span
 											class="nav-text">권한 보기</span>
