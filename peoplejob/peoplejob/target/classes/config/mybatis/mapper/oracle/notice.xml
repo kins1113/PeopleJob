@@ -13,16 +13,16 @@
 
 	
 	
-	<select id="selectSearch" parameterType="searchVo" resultType="noticeVo">
+	<select id="selectSearch" parameterType="searchVo" resultType="map">
 		select *
 		from
 		(
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select notify_Code, notifytitle, notifycontent, readcount,notifydate,admin_code,
-					(sysdate-notifydate)*24 as new_Img_Term
-				from notice		
+		        select m.ADMINID, n.*, (sysdate-notifydate)*24 as new_Img_Term 
+		        from manager m join notice n 
+		        on m.ADMIN_CODE = n.ADMIN_CODE	
 				<if test="searchKeyword != null and searchKeyword != ''">
 					where ${searchCondition} like '%' || #{searchKeyword} || '%'
 				</if>		
@@ -62,6 +62,11 @@
 		delete from notice
 		where notify_Code=#{notifyCode}
 	</delete>
+	
+	<select id="">
+	
+	
+	</select>
 </mapper>
 
 
