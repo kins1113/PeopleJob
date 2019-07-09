@@ -121,9 +121,7 @@ textarea {
 <script type="text/javascript">
 $(function() {
 	
-	
-	
-	$('form[name=registerU]').submit(function(){
+	 $('form[name=registerU]').submit(function(){
 		
 		 if($('#memberid').val()==''){
 			alert('아이디를 입력해주세요');
@@ -155,11 +153,10 @@ $(function() {
 			$('#email').focus();
 			event.preventDefault();
 			return false;
-		}else if($('#emailcertificatenum').val()==''){
-			alert('이메일인증번호를 입력해주세요');
-			$('#emailcertificatenum').focus();
+		}else if($('#chkId').val()!='Y'){
+			alert('이메일 인증을 해주세요');
 			event.preventDefault();
-			return false;
+			$('#chkId').focus();
 		}else if($('input[type=checkbox]').is(":checked")==false){
 			alert('이용약관에 동의해주세요');
 			$('input[type=checkbox]').focus();
@@ -167,7 +164,7 @@ $(function() {
 			return false;
 		}
 		 
-	});
+	}); 
 	
 	
 	//핸드폰 정규식
@@ -175,6 +172,21 @@ $(function() {
 		var pattern=new RegExp(/^[0-9]*$/g);
 		return pattern.test(ph);
 	}
+	
+		$('#emailcertificate').click(function(){
+		var contextPath="/peoplejob";
+		var email=$('#email').val();
+		if(email==null || email==''){
+			alert('이메일을 입력해주세요!');
+			
+		}else{
+			window.open(contextPath+"/login/registeremail.do?email="+email,'emailcertificate',
+			'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+			
+		}
+	});
+	
+	
 });
 
 </script>
@@ -207,8 +219,8 @@ $(function() {
 									
 									<div class="form-group">
 									<div class="row">
-										<span id="availableId">사용가능한 아이디입니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
+										<!--<span id="availableId">사용가능한 아이디입니다.</span>
+									 <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
 										</div>
 									</div>
 									
@@ -277,6 +289,7 @@ $(function() {
 									<div class="form-group">
 										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
 									</div>
+									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일*" 
 										class="form-control infobox" style="width:300px" style="background-color: #50a954" title="이메일"  style="width: 250px">
@@ -286,11 +299,14 @@ $(function() {
 										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
-									<div class="form-group">
-										<input type="text" name="emailcertificatenum"  id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호*" style="width: 300px">
+								<	
+									<div class="form-group">나중에 hidden으로
+										<input type="text" name="chkId"  id="chkId" tabindex="1" 
+										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px"
+										value="">
 									</div>
-									
-									
+									 
+									 
 									<div class="form-group">
 				          <h3>이용약관 동의<input type="checkbox" name="chk" id="chk"></h3>
 						

@@ -13,15 +13,42 @@
 $(function() {
 	
 	$('form[name=updateU]').submit(function(){
-		$('.form-control infobox').each(function(){
+	/* 	$('.form-control infobox').each(function(){
 			if($(this).val().length<1){
 				var msg=$(this).attr('title');
 				alert(msg+"칸을 입력해주세요");
+				$(this).focus();
 				event.preventDefault();
 				return false;
 			}
 			
-		});
+		}); */
+			if($('#pwd').val()==''){
+				alert('비밀번호를 입력해주세요');
+				$('#pwd').focus();
+				event.preventDefault();
+				return false;
+			}else if($('#membername').val()==''){
+				alert('이름을 입력해주세요');
+				$('#membername').focus();
+				event.preventDefault();
+				return false;
+			}else if($('#tel').val()==''){
+				alert('전화번호를 입력해주세요');
+				$('#tel').focus();
+				event.preventDefault();
+				return false;
+			}else if($('#email').val()==''){
+				alert('이메일을 입력해주세요');
+				$('#email').focus();
+				event.preventDefault();
+				return false;
+			}else if($('#emailcertificatenum').val()==''){
+				alert('이메일인증번호를 입력해주세요');
+				$('#emailcertificatenum').focus();
+				event.preventDefault();
+				return false;
+			}
 		
 		 
 	});
@@ -42,25 +69,25 @@ $(function() {
 <div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="" action="<c:url value='/login/registerU.do'/> " 
+								<form action="<c:url value='/login/person_update.do'/> " 
 								method="post" role="form" style="display: block;" name="updateU">
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
-										class="form-control infobox" style="width:250px" title="아이디" value="${memberVo.memberid }">
+										class="form-control infobox" style="width:250px" title="아이디" value="${memberVo.memberid }" readonly>
 									</div>
 									
 									<div class="form-group">
 									<div class="row">
-										<span id="availableId">사용가능한 아이디입니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
+										<!--<span id="availableId">사용가능한 아이디입니다.</span>
+									 <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
 										</div>
 									</div>
 									
 									
 										<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호 *" 
-										class="form-control" style="width:250px" title="비밀번호">
+										class="form-control infobox" style="width:250px" title="비밀번호">
 									</div>
 									
 									<div class="form-group">
@@ -68,10 +95,6 @@ $(function() {
 										<!--<span id="availableId">필수입력정보입니다.</span>
 									 <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
 										</div>
-									</div>
-										<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="password" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인 *" 
-										class="form-control infobox" style="width:250px" title="비밀번호 확인">
 									</div>
 									
 									<div class="form-group">

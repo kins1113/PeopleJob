@@ -94,32 +94,41 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function managerAdd(){
-		var id=$("#validationServer01").val();
-		var pwd=$("#validationServer02").val();
-		var at=$("#exampleFormControlSelect1").val();
-		if(id.length < 1){
-			alert("아이디를 입력하세요");
-			event.prevantDefault();
-		}
-		if(pwd.length <1){
-			alert("비밀번호를 입력하세요");
-			event.prevantDefault();
-		}
-		if(at=="not"){
-			alert("권한을 선택하세요");
-			event.prevantDefault();
-		}		
-		$("input[name=close]").val("close");
-		$("form[name=managerAddForm]").submit();
-	}
 	$(function(){
+		$("#checkSpan").hide();
+		$("#managerChengPwd").click(function(){
+			if($("#newPwd1").val()==$("#newPwd2").val()){
+				$("form[name=managerAddForm]").attr("action","<c:url value='/manager/manger/managerChengPwd.do'/>");
+				$("form[name=managerAddForm]").submit();
+			}else{
+				$("#checkSpan").show();
+				event.prevantDefault();
+			}
+		});
+	});
+
+	function managerCheckPwd(){
+		var pwd=$("#validationServer02").val();
+			if(pwd.length <1){
+				alert("비밀번호를 입력하세요");
+				event.prevantDefault();
+			}
 		
-	})
+		$("form[name=managerAddForm]").attr("action","<c:url value='/manager/manger/managerCheckPwd.do'/>");
+		$("form[name=managerAddForm]").submit();
+		
+	}	
+	
+	function managerEdit(){
+		if(confirm("수정 하시겠습니까?")){
+			$("form[name=managerAddForm]").submit();
+		}
+	}
 	
 </script>
 </head>
 <body>
+
 
 	<div class="content-wrapper">
 		<div class="content">
@@ -127,52 +136,42 @@
 				<div class="col-lg-6">
 					<div class="card card-default">
 						<div class="card-header card-header-border-bottom">
-							<h2>관리자 추가 </h2>
-${param.close}${param.close}${param.close}${param.close}${param.close}${param.close}
+							<h2>관리자 비밀번호 수정</h2>
 						</div>
 	<div class="card-body">
-		<form action="<c:url value='/manager/manager/managerAdd.do'/>" 
+		<form action="<c:url value='/manager/manager/managerEdit.do'/>" 		
 				method="post" name="managerAddForm">
-				<!-- 창닫기를 하기위한 hidden -->
-				<input type="hidden" name="close"  value="${param.close}">
 			<div class="form-row">
-				<div class="col-md-12 mb-3">
-					<label for="validationServer01">아이디</label> 
-					<input
-						type="text" class="form-control managerAdd" id="validationServer01"
-						placeholder="Id"  name="adminid"
-						 >
-					<div class="valid-feedback">아이디를 입력하세요</div>
-				</div>
+			<!-- 비밀번호 체크 전 -->
+				<c:if test="${empty count or count!='1' }">
+				
 				<div class="col-md-12 mb-3">
 					<label for="validationServer02">비밀번호</label> <input
 						type="password" class="form-control managerAdd" id="validationServer02"
 						placeholder="Password"   name="adminpwd" 
 						>
-					<div class="valid-feedback">비밀번호를 입력하세요</div>
+					  <c:if test="${!empty count and count=='0'}">
+					  	<span>비밀번호가 틀립니다.</span>
+					  </c:if>
 				</div>
+				</c:if>
+			<!-- 비밀번호 체크 후 -->
+				<c:if test="${count=='1'}">
 				<div class="col-md-12 mb-3">
-				<div class="form-group">
-								<label for="exampleFormControlSelect1">Authority</label>
-								<select class="form-control" id="exampleFormControlSelect1"
-										name="authority" >
-									<option value="not">권한을 선택하세요</option>
-									<!-- <option value="GM">GM    : 최고관리자</option> -->
-									<option value="Master"
-									>Master: 중간관리자</option>
-									<option value="Admin" 
-									>Admin : 일반 관리자</option>
-								</select>
-							</div>
-					<!-- <label for="validationServerUsername">권한</label> <input
-						type="text" class="form-control"
-						id="validationServerUsername" placeholder="Authority"
-						aria-describedby="inputGroupPrepend3" > required -->
-					<div class="invalid-feedback">Please choose a username.
-					</div>
-				</div>
+					 <label for="newPwd1">비밀번호</label>
+					  <input type="text" class="form-control" name="newPwd1"	id="newPwd1" placeholder="Password"	aria-describedby="inputGroupPrepend3" >
+				</div> 
+				<div class="col-md-12 mb-3">
+					 <label for="newPwd2">비밀번호 확인</label>
+					  <input type="text" class="form-control" name="newPwd2"	id="newPwd2" placeholder="Password Check" aria-describedby="inputGroupPrepend3" ><br>
+					  <span id="checkSpan">비밀번호를 일치 시키세요...</span>
+				</div> 
+				</c:if>
 			</div>
-				<button class="btn btn-primary" type="button" onclick="managerAdd()">Add</button>
+			<c:if test="${empty count or count=='0'}">
+				<button class="btn btn-primary" type="button" onclick="managerCheckPwd()">비밀번호 체크</button>
+			</c:if>
+				<button class="btn btn-primary" type="button" id="managerChengPwd">변경</button>
 		</form>
 	</div>
 					</div>

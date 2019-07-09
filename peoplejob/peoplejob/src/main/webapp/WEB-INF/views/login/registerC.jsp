@@ -91,15 +91,34 @@ $(function() {
 				alert(msg+'칸을 입력해주세요	.');
 				$(this).focus();
 				event.preventDefault();
+				return false;
+			} else if($('#chkId').val()!='Y'){
+				alert('이메일 인증을 해주세요');
+				event.preventDefault();
+				$('#chkId').focus();
+				return false;
 			}else if($('input[type=checkbox]').is(":checked")==false){
 				alert('이용약관에 동의해주세요');
 				$('input[type=checkbox]').focus();
 				event.preventDefault();
 				return false;
 			}
-			/* else if(validate_phoneno($('#tel').val())) */
 		});
 	});
+	
+	 $('#emailcertificate').click(function(){
+		var contextPath="/peoplejob";
+		var email=$('#email').val();
+		if(email==null || email==''){
+			alert('이메일을 입력해주세요!');
+			
+		}else{
+			window.open(contextPath+"/login/registeremail.do?email="+email,'emailcertificate',
+			'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+			
+		}
+	}); 
+	
 	
 	//핸드폰 정규식
 	function validate_phoneno(ph){
@@ -116,7 +135,7 @@ $(function() {
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="<c:url value='/login/registerU.do'/>" id="">개인회원</a>
+								<a href="<c:url value='/login/registerU.do'/>">개인회원</a>
 							</div>
 							<div class="col-xs-6">
 								<a href="<c:url value='/login/registerC.do'/>"  style="color: green; font-size:1.2em;">기업회원</a>
@@ -130,6 +149,7 @@ $(function() {
 								
 								<form action="<c:url value='/login/registerC.do'/>" method="post" role="form" 
 								name="registerC" enctype="multipart/form-data">
+								
 									<input type="hidden" name="authorityCode" value=2>
 									<input type="hidden" name="zipcode">
 									<input type="hidden" name="address">
@@ -144,8 +164,8 @@ $(function() {
 									
 									<div class="form-group">
 									<div class="row">
-										<span id="availableId">사용가능한 아이디입니다.</span>
-									<!-- <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
+									<!-- 	<span id="availableId">사용가능한 아이디입니다.</span>
+									<span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
 										</div>
 									</div>
 									
@@ -197,7 +217,8 @@ $(function() {
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="emailcertificatenum"  id="emailcertificatenum" tabindex="1" class="form-control" placeholder="이메일 인증 번호" style="width:300px">
+										<input type="text" name="chkId"  id="chkId" tabindex="1" 
+										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px">
 									</div>
 									
 									<div class="form-group">

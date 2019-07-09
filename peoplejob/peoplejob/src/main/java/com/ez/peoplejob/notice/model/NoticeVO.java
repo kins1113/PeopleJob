@@ -1,6 +1,6 @@
 package com.ez.peoplejob.notice.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class NoticeVO {
 

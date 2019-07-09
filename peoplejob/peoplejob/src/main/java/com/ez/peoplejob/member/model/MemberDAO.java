@@ -6,4 +6,6 @@ public interface MemberDAO {
 	int dupUserid(String memberId);
 	MemberVO selectByUserid(String memberId);
 	int insertCompany(CompanyVO companyVo);
+	int updateMember(MemberVO memberVo);
+	int memberOut(String memberId);
 }

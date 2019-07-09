@@ -502,20 +502,19 @@
 							<li class="dropdown user-menu">
 								<button href="#" class="dropdown-toggle nav-link"
 									data-toggle="dropdown">
-									<img src="assets/img/user/user.png" class="user-image"
-										alt="User Image" /> <span class="d-none d-lg-inline-block">Abdus
-										Salam</span>
+									<!-- <img src="assets/img/user/user.png" class="user-image"
+										alt="User Image" /> --> <span class="d-none d-lg-inline-block">${sessionScope.adminid}님 안녕~!</span>
 								</button>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<!-- User image -->
-									<li class="dropdown-header"><img
+									<!-- <li class="dropdown-header"><img
 										src="assets/img/user/user.png" class="img-circle"
 										alt="User Image" />
 										<div class="d-inline-block">
 											Abdus Salam <small class="pt-1">abdus@gmail.com</small>
-										</div></li>
+										</div></li> -->
 
-									<li><a href="profile.html"> <i class="mdi mdi-account"></i>
+									<!-- <li><a href="profile.html"> <i class="mdi mdi-account"></i>
 											My Profile
 									</a></li>
 									<li><a href="email-inbox.html"> <i
@@ -524,18 +523,23 @@
 									<li><a href="#"> <i class="mdi mdi-diamond-stone"></i>
 											Projects
 									</a></li>
-									<li><a href="#"> <i class="mdi mdi-settings"></i>
-											Account Setting
-									</a></li>
+									-->
+									<li><a href="#" id="chengPwd"> <i class="mdi mdi-settings"></i>
+											비밀번호 변경
+									</a></li> 
 
-									<li class="dropdown-footer"><a href="signin.html"> <i
-											class="mdi mdi-logout"></i> Log Out
+									<li class="dropdown-footer"><a href="${pageContext.request.contextPath}/manager/logout.do"> <i
+											class="mdi mdi-logout"></i>로그아웃
 									</a></li>
 								</ul>
 							</li>
 						</ul>
 					</div>
 				</nav>
-
+<script type="text/javascript">
+	$("#chengPwd").click(function(){
+		open("${pageContext.request.contextPath}/manager/login/managerChengPwd.do","비밀번호 변경", "'status=no, height=500, width=500, left='300', top='30" );
+	})
+</script>
 
 			</header>

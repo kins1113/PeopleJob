@@ -1,6 +1,8 @@
 package com.ez.peoplejob.manager.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,10 +48,14 @@ public class ManagerController2 {
 			//로그인 성공
 			msg="로그인 성공!";
 			url="/manager/index.do";
-			//session에 저장 관리자 아이디만 저장.
+			ManagerVO vo= managerService.selectPwdById(adminid);
+			logger.info("로그인 정보 가져오기 vo={}",vo);
+			
+			//session에 저장 관리자 아이디 코드 저장.
 			HttpSession session=request.getSession();
 			session.setAttribute("adminid", adminid);
-
+			session.setAttribute("adminCode", vo.getAdminCode());
+			
 		}else if(result==managerService.LOGIN_ID_NOT) {
 			//아이디 가없을 때
 			msg="존제하지 않는 아이디 입니다.";
@@ -88,16 +94,18 @@ public class ManagerController2 {
 		logger.info("isAuthority={}",isAuthority);
 		if(!isAuthority) { 	//true면 가능
 			model.addAttribute("msg", "GM만이 관리자를 추가할 수 있습니다.");
-			model.addAttribute("url", "manager/manager/managerList.do");
-
+			model.addAttribute("url", "manager/manager/managerAdd.do");
+			model.addAttribute("close", "Y");
 			return "common/message";
 		}
 		return "manager/manager/managerAdd";	//여기서 관리자 삭제쪽으로 간다.
 	}
 
 	@RequestMapping(value= "/manager/manager/managerAdd.do", method = RequestMethod.POST)
-	public String managerAddPost(@ModelAttribute ManagerVO managerVo) {
-		logger.info("관리자 추가 처리 페이지, 파라미터 managerVo={}",managerVo);
+	public String managerAddPost(@ModelAttribute ManagerVO managerVo,
+				@RequestParam String close
+				) {
+		logger.info("관리자 추가 처리 페이지, 파라미터 managerVo={} close={}",managerVo,close);
 
 		//관리자가 아이디가 중복되면 안되게 처리
 		int chkId=managerService.selectIdChk(managerVo.getAdminid());
@@ -107,7 +115,7 @@ public class ManagerController2 {
 	
 		logger.info("관리자 추가 결과 result={}",result);
 		
-		return "manager/index";
+		return "manager/manager/managerAdd";
 	}
 	
 	
@@ -163,7 +171,46 @@ public class ManagerController2 {
 		return "common/message"; 
 	}
 	
+	@RequestMapping("/manager/logout.do")
+	public String managerLogOut(HttpSession session) {
+		logger.info("로그아웃 처리 ");
+		
+		session.removeAttribute("adminid");
+		
+		return "redirect:/manager/login/managerLogin.do";
+	}
 	
+	@RequestMapping(value="/manager/login/managerChengPwd.do",method = RequestMethod.GET)
+	public String managerChengPwd_get() {
+		logger.info("비밀번호 변경 페이지 보여주기");
+		
+		return "manager/manager/managerChengPwd";
+	}
 	
+	@RequestMapping(value="/manager/manger/managerCheckPwd.do",method=RequestMethod.POST)
+	public String managerCheckPwd(@RequestParam String adminpwd, HttpSession session,
+			Model model) {
+		String id=(String) session.getAttribute("adminid");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("pwd", adminpwd);
+		
+		int re=managerService.selectCheckPwd(map);
+
+		
+		logger.info("비밀번호 확인 결과 re={}",re);
+		
+		model.addAttribute("count", re);
+		
+		return "manager/manager/managerChengPwd";
+	}
+	
+	@RequestMapping("/manager/manger/managerChengPwd.do")
+	public String managerChengPwd(@RequestParam String newPwd1) {
+		
+		logger.info("비밀번호 변경 처리 파라미터 newPwd1={}",newPwd1);
+		
+		return "";
+	}
 }
 
