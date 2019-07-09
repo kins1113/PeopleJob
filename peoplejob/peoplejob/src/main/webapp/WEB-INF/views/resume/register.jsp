@@ -18,7 +18,7 @@
 <article>
 <div class="divForm">
 <form name="frm1" method="post" 
-	action="<c:url value='/resume/register.do'/>">
+	action="<c:url value='/resume/register.do'/>" enctype="multipart/form-data">
 <fieldset>
 	<legend style="font-weight: bold">이력서등록</legend>
 	
@@ -29,15 +29,23 @@
     <hr>
     <h3>기본정보</h3>
     <!-- hidden필드에 no 넣기 -->
-		<input type="hidden" name="memberCode" value="${param.memberCode }" />
-		<input type="hidden" name="langlicenceCode" value="${param.langlicenceCode}" />
-		<input type="hidden" name="licenceCode" value="${param.licenceCode }" />
-		<input type="hidden" name="dvCode" value="${param.dvCode }" />
-		<input type="hidden" name="academicCode" value="${param.academicCode }" />
-		<input type="hidden" name="desiredworkCode" value="${param.desiredworkCode }" />
+    
+    <input type="text" name="memberCode" value="${vo.memberCode }">
+    <input type="text" name="thirdCode" value="${vo.thirdCode }">
+    <input type="text" name="secondCode" value="${vo.secondCode }">
+    <input type="text" name="firstCode" value="${vo.firstCode }">
+    <input type="text" name="hopeworkCode" value="${vo.hopeworkCode }">
+    <input type="text" name="localCode" value="${vo.localCode }">
+    <input type="text" name="academicCode" value="${vo.academicCode }">
+    <input type="text" name="langlicenceCode" value="${vo.langlicenceCode }">
+    <input type="text" name="lNo" value="${vo.lNo }">
+    <input type="text" name="dvCode" value="${vo.dvCode }">
+    <input type="text" name="resumeCode" value="${vo.resumeCode }">
+        
+		
     <div>
     <!--이력서 사진  https://kuzuro.blogspot.com/2018/10/11.html-->
-    <img src="..." alt="..." class="img-thumbnail" name="picture">
+        <input type="text" class="form-control"  name="picture" id="picture"  style="ime-mode:active">
     </div>
     <div>        
         <label for="membername">이름</label>
@@ -57,7 +65,7 @@
             	</c:if>>여
 		</label>
     </div>
-    
+  
    
     <div>
         <label for="email">이메일 주소</label>
@@ -140,6 +148,16 @@
         </select>   
        </div>
        <div>
+       <label>전공</label>
+  		<input type="text"  class="form-control" name="major" id="major" >
+       
+       </div>
+       <div>
+       <label>학위</label>
+  		<input type="text"  class="form-control" name="degree" id="degree" >
+       
+       </div>
+       <div>
 		 <label for="graduate">졸업년도</label>&nbsp;
 		 <input type="text" class="form-control" name="graduate" id="graduate">
          <select class="form-control" name="graduatecheck" id="graduatecheck" >
@@ -213,8 +231,8 @@
         <input type="text" class="form-control"  name="language" id="language" style="ime-mode:active">
     </div>
      <div>
-        <label for="institution">발행처/기관</label>
-        <input type="text" class="form-control"  name="institution" id="institution" style="ime-mode:active">
+        <label for="institute">발행처/기관</label>
+        <input type="text" class="form-control"  name="institute" id="institute" style="ime-mode:active">
      </div>
      <div>
         <label for="langlicencename">시험종류</label>
@@ -317,21 +335,21 @@
         <div>
         <label for="jobtype">업/직종</label>
         
-        <input type="text" class="form-control"  name="jobtype" id="jobtype" style="ime-mode:active">
+        <input type="text" class="form-control"  name="jobtype" id="jobtype" value="IT컨설팅" style="ime-mode:active">
         </div>
         <div>
         <label for="firstname">직종1차</label>
-        <input type="text" class="form-control"  name="firstname" id="firstname" style="ime-mode:active">
+        <input type="text" class="form-control"  name="firstname" id="firstname" value="IT/인터넷" style="ime-mode:active">
      
         </div>
         <div>
         <label for="secondname">직종2차</label>
-        <input type="text" class="form-control"  name="secondname" id="secondname" style="ime-mode:active">
+        <input type="text" class="form-control"  name="secondname" id="secondname" value="IT/인터넷" style="ime-mode:active">
         	
         </div>
         <div>
         <label for="thirdname">직종3차</label>
-        <input type="text" class="form-control"  name="thirdname" id="thirdname" style="ime-mode:active">
+        <input type="text" class="form-control"  name="thirdname" id="thirdname" value="웹마스터" style="ime-mode:active">
         
         </div>
         <div>
