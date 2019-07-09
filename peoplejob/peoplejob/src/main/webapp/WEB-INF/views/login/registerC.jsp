@@ -198,11 +198,11 @@ $(function() {
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="대표자명" title="대표자명"  style="width: 300px">
+										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="담당자명" title="담당자명"  style="width: 300px">
 									</div>
 									
 									<div class="form-group">
-										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="전화번호" title="전화번호"  style="width: 300px">
+										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="담당자전화번호" title="담당자 전화번호"  style="width: 300px">
 									</div>
 									<div class="form-group">
 										<input type="text" name="companyname" id="companyname" tabindex="1" class="form-control" placeholder="기업명" style="width:300px" title="기업명">

@@ -4,7 +4,6 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
 
-	
 	<insert id="insertMember" parameterType="memberVo">
 	 
 		<selectKey keyProperty="memberCode" order="BEFORE" resultType="int">
@@ -15,7 +14,14 @@
 	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
 	#{birth},#{membergender},#{email},#{tel},#{authorityCode}, #{companyCode} )
 	</insert>
-
+	
+	<insert id="insertIndividaulMember" parameterType="memberVo">
+	
+	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
+	pwd, birth, membergender, email, tel, authority_code)
+	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
+	#{birth},#{membergender},#{email},#{tel},1)
+	</insert>
 	
 	<select id="dupUserid" resultType="int" parameterType="string">
 	select count(*) from member where memberid=#{memberid}
@@ -50,11 +56,3 @@
 		where memberid=#{memberid}
 	</update>
 </mapper>
-
-
-
-
-
-
-
-

@@ -1,7 +1,5 @@
 package com.ez.peoplejob.member.controller;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -58,13 +56,13 @@ public class MemberController {
 	@RequestMapping(value="/registerU.do", method = RequestMethod.POST)
 	public String register_post(@ModelAttribute MemberVO memberVo, Model model) {
 		logger.info("회원가입 등록 처리 파라미터 memberVo={}",memberVo);
-		memberVo.setAuthorityCode(1);
 		logger.info("회원가입 등록 파라미터, 권한번호 authority_code={}",memberVo.getAuthorityCode());
+		memberVo.setAuthorityCode(1);
 		
-		int cnt=memberService.insertMember(memberVo);
+		int cnt=memberService.insertIndividaulMember(memberVo);
 		logger.info("회원가입 등록 처리 결과 cnt={}",cnt);
 		
-		String msg="", url="/login/registerC.do";
+		String msg="", url="/login/registerU.do";
 		if(cnt>0) {
 			msg="회원가입이 완료되었습니다.";
 			url="/login/login.do";
@@ -80,44 +78,7 @@ public class MemberController {
 	@RequestMapping(value="/registerC.do", method = RequestMethod.POST)
 	public String register2_post( Model model,
 			@ModelAttribute CompanyVO companyVo, HttpServletRequest request, @ModelAttribute MemberVO memberVo) {
-		/*
-		memberVo.setAuthorityCode(2);
-		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
-		 
-		String imageURL="";
-		for(Map<String,Object>map:list) {
-			imageURL=(String)map.get("fileName");
-		}
-		
-		companyVo.setImage(imageURL);
-		
-		int cnt=memberService.insertMember(memberVo);
-		logger.info("기업회원가입 처리 결과 cnt={}",cnt);
-		
-		String msg="", url="/login/registerC.do";
-		
-		if(cnt>0) {
-			companyVo.setImage(imageURL);
-			int cnt2=memberService.insertCompany(companyVo);
-			logger.info("기업회원가입 처리 시, 회사등록 결과 cnt2={}",cnt2);
-			if(cnt2>0) {
-				msg="기업회원 회원가입이 완료되었습니다. "
-						+ "하루 뒤 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.";
-				url="/login/login.do";
-			}else {
-				msg="기업등록 실패";
-			}
-		}else {
-			msg="기업회원 회원가입 실패";
-		}
-		
-		
-		model.addAttribute("msg",msg);
-		model.addAttribute("url",url);
-		
-		return "common/message";
-		*/
-		
+	
 		logger.info("기업회원 등록 파라미터, companyVo={}",companyVo);
 		logger.info("기업회원 등록 파라미터, memberVo={}",memberVo);
 		

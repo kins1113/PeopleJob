@@ -211,7 +211,7 @@ $(function() {
 								<form id="login-form" action="<c:url value='/login/registerU.do'/> " 
 								method="post" role="form" style="display: block;" name="registerU">
 									<input type="hidden" name="authorityCode" value=1>
-									<input type="hidden" name="companyCode">
+									<!--  <input type="hidden" name="companyCode" id="companyCode">  -->
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
@@ -300,11 +300,10 @@ $(function() {
 										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
 										</div>
 									</div>
-								<	
+									
 									<div class="form-group">
-										<input type="hidden" name="chkId"  id="chkId" tabindex="1" 
-										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px"
-										value="">
+										<input type="text" name="chkId"  id="chkId" tabindex="1" 
+										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px">
 									</div>
 									 
 									 

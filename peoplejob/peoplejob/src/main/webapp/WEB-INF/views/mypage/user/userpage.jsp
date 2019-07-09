@@ -60,25 +60,7 @@
 		</li>
 	</ul>
 							</div>
-								<!-- <span class="f1-s-3 cl8 m-r-15">
-									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										by John Alvarado
-									</a>
-
-									<span class="m-rl-3">-</span>
-
-									<span>
-										Feb 18
-									</span>
-								</span>
-
-								<span class="f1-s-3 cl8 m-r-15">
-									5239 Views
-								</span>
-
-								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-									0 Comment
-								</a> -->
+							
 							</div>
 
 							<div class="wrap-pic-max-w p-b-30">
@@ -161,9 +143,16 @@
 
 							<ul class="p-t-35">
 								<li class="how-bor3 p-rl-4">
+									<c:if test="${sessionScope.author_code==1 }" >
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										이력서 관리
 									</a>
+									</c:if>
+									<c:if test="${sessionScope.author_code==2 }" >
+									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+										채용공고 관리
+									</a>
+									</c:if>
 								</li>
 
 								<li class="how-bor3 p-rl-4">
