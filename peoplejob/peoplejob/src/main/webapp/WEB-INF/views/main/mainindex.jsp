@@ -7,6 +7,39 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript">
+$(function() {
+
+	
+	$('form[name=loginform]').submit(function(){
+		
+		$('.getId').each(function(){
+			if($(this).val().length<1){
+				var msg=$(this).attr('title');
+				alert(msg+'를 입력하세요.');
+				event.preventDefault();
+				return false;
+			}
+			
+		});
+		/* if($('#memberId').val()==''){
+			alert('아이디를 입력하세요');
+			$('#memberId').focus();
+			event.preventDefault();
+			return false;
+		}else if($('#pwd').val()==''){
+			alert('비밀번호를 입력하세요');
+			$('#pwd').focus();
+			event.preventDefault();
+			return false;
+		} */
+	});
+
+});
+</script>
+
 <!------ Include the above in your HEAD tag ---------->
 <style type="text/css">
 /* .col-sm-6.p-r-25.p-r-15-sr991 {
@@ -280,7 +313,7 @@ button.btnLogin {
     height: 54px;
     background: white;
     margin-top: -54px;
-    margin-left: 175px;
+    margin-left: 171px;
 }
 
 .cnt {
@@ -321,19 +354,28 @@ span.tx {
 		<div class="loginWrap">
 		<c:if test="${empty sessionScope.memberid }">
 		<div class="cnt">
+		<form action="<c:url value='/login/mainlogin.do'/>" method="post" name="loginform">
                             <div class="inputWrap user-id">
-                                <input type="text" id="getId" class="getId" name="memberid" placeholder="아이디">
+                                <input type="text" id="getId" class="getId" name="memberId" placeholder="아이디" title="아이디">
                             </div>
                             <div class="inputWrap user-password">
-                                <input type="password" id="pwd" class="getId" name="pwd" placeholder="비밀번호">
+                                <input type="password" id="pwd" class="getId" name="pwd" placeholder="비밀번호" title="비밀번호">
                             </div>
-                            <button type="button" class="btnLogin">로그인</button>
+                            <button type="submit" class="btnLogin">로그인</button>
+                            <input type="checkbox" name="saveId" value="">
+            		<span>아이디 저장</span>
+            		 </form>
+            		 <a href="<c:url value='/login/registerU.do'/>" >
+                <strong>회원가입</strong></a>
+                <span class="idBx">
+                 <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
          </div>
          <ul class="memberType clear">
-            <li>
+          <!--   <li>
             		<input type="checkbox" name="saveId" value="">
             		<span>아이디 저장</span>
-            </li>
+            </li> 
+           
             <br>
             <li>
                     <span class="mbr dotum">
@@ -342,11 +384,15 @@ span.tx {
                 <span class="idBx">
                  <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
             </span>
-            </li>
+            </li>-->
         </ul>
         </c:if>
-        <c:if test="${!empty sessionScope.memberid }">
-        	${sessionScope.memberid }님, 환영합니다.
+        <c:if test="${!empty sessionScope.memberName }">
+        	${sessionScope.memberName }님, 환영합니다.
+        	<br><br>
+        	<a href="<c:url value='/login/logout.do'/>">로그아웃</a>
+        <%-- 	<a href="<c:url value='/login/logout.do'/>">
+        	<button value="로그아웃" name="logout"></button></a> --%>
         </c:if>
 	</div> <!-- loginWrap -->
 		</div>

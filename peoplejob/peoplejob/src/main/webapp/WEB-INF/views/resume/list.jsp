@@ -9,57 +9,52 @@
 </script>
 
 <div class="divList">
-<table class="box2"
-	
+	  <input type="hidden" name="resumeCode" value="${param.resumeCode }"/>
+<table class="table"
 	 	summary="이력서 현황에 관한 표로써, 이력서제목, 이력서 공개 설정, 내 이력서 열람 기업에 대한 정보를 제공합니다.">
-	<caption>이력서리스트</caption>
-	<colgroup>
-		<col style="width:60%;" />
-		<col style="width:10%;" />
-		<col style="width:20%;" />
-		<col style="width:10%;" />
-				
-	</colgroup>
-	<thead>
-	  <tr>
-	  <th> <input type="hidden" name="resumeCode" value="${param.resumeCode }"/></th>
-	    <th scope="col">이력서제목</th>
+	<h3>이력서리스트</h3>
+	
+	<button type="button" class="btn btn-success"><a href="<c:url value='/resume/register.do'/>">등록</a> 
+	    <c:if test="${!empty list }">
+	    <th scope="col"> 이력서제목</th>
 	    <th scope="col">이력서 공개 설정</th>
 	    <th scope="col">내 이력서 열람 기업</th>
 	    <th scope="col">등록일</th>
-	  </tr>
-	</thead> 
+		<c:forEach var="vo" items="${list }">					
+	    
+	  <!-- 반복문 시작  -->	  	
+			
+					<tr>
+					<!-- 제목이 긴 경우 30글자만 보여주기 -->
+					<td>
+					<a href="<c:url value='/resume/detail.do?resumeCode=${vo.resumeCode}'/>">
+					<c:if test="${fn:length(vo.resumeTitle) >=30 }">
+						${fn:substring(vo.resumeTitle, 0,30)}...
+					</c:if>
+					<c:if test="${fn:length(vo.resumeTitle) <30 }">					
+						${vo.resumeTitle}
+					</c:if>
+					</a></td>
+		
+	    <td>${vo.opencheck}</td>
+	   	
+	    <td>${vo.opencheck}</td><!--일단 멤버 네임으로  -->
+	    
+	    
+	    <td><fmt:formatDate value="${vo.resumeRegdate}" pattern="yyyy-MM-dd"/>
+				</td>
+				</tr>
+	    	</c:forEach>
+	</c:if>
+	   
+
+  <!--반복처리 끝  -->	
 	<tbody> 
 	<c:if test="${empty list }">	 
 	 	<tr>
 	 		<td colspan="5" class="align_center">데이터가 존재하지 않습니다.</td>
 	 	</tr>
 	</c:if> 	
-	<c:if test="${!empty list }">
-	  <!-- 반복문 시작  -->	  	
-		<c:forEach var="vo" items="${list }">					
-			<tr>
-				
-					<!-- 제목이 긴 경우 30글자만 보여주기 -->
-					<td><c:if test="${fn:length(vo.resumeTitle) >=30 }">
-						${fn:substring(vo.resumeTitle, 0,30)}...
-					</c:if>
-					<c:if test="${fn:length(vo.resumeTitle) <30 }">					
-						${vo.resumeTitle}
-					</c:if>
-					</td>
-				<td>${vo.opencheck}</td>
-					
-					
-				<td>${vo.membername}</td><!--일단 멤버 네임으로  -->
-				<td><fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
-				</td>
-				
-			</tr>			
-		</c:forEach>
-	</c:if>
-	
-	  <!--반복처리 끝  -->
 	  </tbody>
 </table>	   
 </div>
@@ -94,7 +89,7 @@
    	<form name="frmSearch" method="post" 
    		action='<c:url value="/resume/list.do"/>'>
    		<!-- 현재 페이지 hidden에 넣기 -->
-   		<input type="Text" name='currentPage' value="1">
+   		<input  type="hidden" name='currentPage' value="1">
         
     </form>
 </div>

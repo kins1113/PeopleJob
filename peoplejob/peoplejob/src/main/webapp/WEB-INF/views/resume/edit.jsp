@@ -32,7 +32,7 @@
 		</div>
 	<div>        
         <label for="resumeTitle">이력서 제목</label>
-        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox" value="${vo.memberTitle }"  style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox" value="${vo.resumeTitle }"  style="ime-mode:active">
     </div>
     <hr>
     <h3>기본정보</h3>

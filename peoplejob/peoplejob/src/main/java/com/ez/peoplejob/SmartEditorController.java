@@ -10,6 +10,10 @@ public class SmartEditorController {
 	public String smartEditorShow() {
 		return "manager/inc/incSE2";
 	}
+	@RequestMapping("/main/smarteditorTestjsp.do")
+	public String smartEditorShow_main() {
+		return "inc/incSE2";
+	}
 }
 /*
 param태그 name에 controller에서 받을 name을 입력해서 넣어준다. 
