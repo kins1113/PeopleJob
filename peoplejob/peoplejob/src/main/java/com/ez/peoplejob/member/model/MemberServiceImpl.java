@@ -69,6 +69,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public int insertIndividaulMember(MemberVO memberVo) {
+		return memberDao.insertIndividaulMember(memberVo);
+	}
+
+
 
 	
 

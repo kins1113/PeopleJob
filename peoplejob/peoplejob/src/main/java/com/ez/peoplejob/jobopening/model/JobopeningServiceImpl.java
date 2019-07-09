@@ -19,10 +19,7 @@ public class JobopeningServiceImpl implements JobopeningService{
 		return jobopeningDao.insertJobOpen(vo);
 	}
 
-	@Override
-	public List<JobopeningVO> selectJobOpen(SearchVO vo) {
-		return jobopeningDao.selectJobOpen(vo);
-	}
+		
 
 	@Override
 	public JobopeningVO selectJobOpenByNo(int jobopening) {
@@ -53,10 +50,19 @@ public class JobopeningServiceImpl implements JobopeningService{
 	public int selectTotalCount(Map<String,Object>map) {
 		return jobopeningDao.selectTotalCount(map);
 	}
+	@Override
+	public int selectTotalCount2(Map<String,Object>map) {
+		return jobopeningDao.selectTotalCount2(map);
+	}
 
 	@Override
 	public List<JobopeningVO> selectJobOpen2(Map<String, Object> map) {
 		return jobopeningDao.selectJobOpen2(map);
+	}
+
+	@Override
+	public List<JobopeningVO> selectJobOpen(Map<String, Object> map) {
+		return jobopeningDao.selectJobOpen(map);
 	}
 	
 }

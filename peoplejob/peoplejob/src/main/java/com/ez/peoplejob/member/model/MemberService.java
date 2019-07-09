@@ -17,4 +17,5 @@ public interface MemberService {
 	MemberVO selectByUserid(String memberId);
 	int updateMember(MemberVO memberVo);
 	int memberOut(String memberId);
+	int insertIndividaulMember(MemberVO memberVo);
 }

@@ -8,4 +8,6 @@ public interface MemberDAO {
 	int insertCompany(CompanyVO companyVo);
 	int updateMember(MemberVO memberVo);
 	int memberOut(String memberId);
+	
+	int insertIndividaulMember(MemberVO memberVo);
 }

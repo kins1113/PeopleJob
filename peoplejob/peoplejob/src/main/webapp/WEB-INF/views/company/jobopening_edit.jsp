@@ -71,19 +71,7 @@
                     <input id="workform" name="workform" class="form-control" type="text" value="${vo.workway }"/>
                 </div>
             </div>
-            <div class="form-group">
-               <div class="col-sm-offset-2 col-sm-10">
-                <label for="title" class="col-sm-2 control-label">근무기간(date)</label>
-                    <input id="workdate" name="workdate" class="form-control" type="text" value="${fn:substring(vo.workdate,0,10) }"/>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <label class="control-label">모집종료일(date) :</label> 
-                    <input id="end_date" name="endDate" class="form-control" type="text" value="${fn:substring(vo.endDate,0,10)}"/>
-                </div>
-            </div>
+             <c:import url="jobopening_date2.jsp"/>
             <!-- 
              <div class="form-group">
                 <label class="col-sm-2 control-label">근무기간</label>
@@ -341,6 +329,18 @@
 	            </span>
             </c:if>
 	            <input type="text" name="oldFileName" value="${vo.companyimage}" />
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <label class="control-label">활성화여부</label> 
+                    
+                    <input id="adminagree" name="adminagree"  type="radio" value="Y"
+                    <c:if test="${vo.adminagree='Y' }">checked</c:if>
+                    />Y
+                    <input id="adminagree" name="adminagree"  type="radio" value="N"
+                     <c:if test="${vo.adminagree='N' }">checked</c:if>
+                    />N 
+                </div>
             </div>
             <div class="form-group">
                 <div class="text-center">

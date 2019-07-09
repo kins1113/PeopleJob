@@ -2,9 +2,7 @@ package com.ez.peoplejob.notice.controller;
 
 
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
-import com.ez.peoplejob.manager.model.ManagerService;
-import com.ez.peoplejob.manager.model.ManagerVO;
 import com.ez.peoplejob.notice.model.NoticeService;
 import com.ez.peoplejob.notice.model.NoticeVO;
 
@@ -30,17 +26,14 @@ public class NoticeController {
 	private Logger logger=LoggerFactory.getLogger(NoticeController.class);
 
 	@Autowired private NoticeService noticeService;
-	@Autowired private ManagerService managerService;
 	
 	@RequestMapping(value="/manager/notice/write.do", method = RequestMethod.GET)
-	public String write_get(@RequestParam String adminid, HttpServletRequest requset) {
+	public String write_get() {
 		
 		//1
 		logger.info("공지사항 쓰기 화면 보여주기");
-		ManagerVO mvo=managerService.selectPwdById(adminid);
-		logger.info("관리자 아이디 가져오기 mvo={}",mvo);
-		HttpSession session=requset.getSession();
-		session.setAttribute("adminid", adminid);
+		
+	
 		
 		//2
 
@@ -98,7 +91,7 @@ public class NoticeController {
 		logger.info("셋팅 후 searchVo={}", searchVo);
 		
 		//[3] 조회처리
-		List<NoticeVO> list=noticeService.selectAll(searchVo);
+		List<Map<String, Object>> list=noticeService.selectAll(searchVo);
 		logger.info("공지 글 목록 결과, list.size={}",list.size());
 		
 		//[4] 전체 레코드 개수 조회

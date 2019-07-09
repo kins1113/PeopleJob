@@ -13,10 +13,10 @@
 		}); 
 		$("#wheresubmit").click(function(){
 			$("#where").hide();
-			$("#hi").val($("#localcheck").val());
+			/* $("#hi").val($("#localcheck").val());
 			$("#hi2").val($("#workway").val());
 			$("#hi3").val($("#payway").val());
-			$("#hi4").val($("#academicCondition").val());
+			$("#hi4").val($("#academicCondition").val()); */
 		}); 
 	});
 </script>
@@ -25,7 +25,7 @@
     <div class="col-md-9">
         <div class="page-header">
             <h3>채용공고</h3>
-        </div> 
+       
        <!--  지역<input type="text" name="hi" id="hi">
         근무방식<input type="text" name="hi2" id="hi2">
        	급여방식<input type="text" name="hi3" id="hi3">
@@ -35,7 +35,7 @@
 				검색어 : ${param.searchKeyword}, ${pagingInfo.totalRecord}건 검색되었습니다.
 			</p>
 		</c:if>
-		
+	 </div> 
 <div class="divSearch"> 
 	<!-- 페이징 처리에도 사용 -->
    	<form name="frmSearch" method="post" 
@@ -50,7 +50,7 @@
 		</div> 
         </div>
     </form>
-</div>
+
         <div>
         <c:if test="${empty list }">	 
 	 	<tr>
@@ -108,9 +108,14 @@
 </div>
 
         </div>
+       <!-- 기업회원(3)이면 글쓰기 나옴  -->
+         <c:if test="${mvo.authorityCode==1}">
         <div class="pull-right">
+            <a href="<c:url value='/company/my_jobopening_list.do?companycode1=1'/>" class="btn btn-primary" role="button">내가쓴 채용 정보</a>
             <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">글쓰기</a>
         </div>
+        </c:if>
+    </div>
     </div>
     </fieldset>
     </article>
