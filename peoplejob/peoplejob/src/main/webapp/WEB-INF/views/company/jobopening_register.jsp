@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../main/inc/top.jsp" %>
+
 <script type="text/javascript" src=<c:url value='/resources/js/jquery-3.4.1.min.js'/>></script>
 <script type="text/javascript">
-	$(document).ready(function(){
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
 		var a;
 		$("input[name='welfare1']").click(function(idx,item){
 			if($(this).is(':checked')){
@@ -14,6 +19,7 @@
 				$("input[name='welfare']").val(a); 
 			}
 		});
+		
 	});
 </script>
 <article>
@@ -60,7 +66,7 @@
                 </div>
             </div>
              
-              <div class="form-group">
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">역정보</label>
                     <input id="subwayinfo" name="subwayinfo" class="form-control" type="text" />
@@ -78,19 +84,7 @@
                 </select> -->
                 </div>
             </div>
-             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                <label class="control-label">근무기간(date)</label>
-                    <input id="workdate" name="workdate" class="form-control" type="text" />
-                </div>
-            </div>
-            
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                <label class="control-label">모집종료일(date) :</label> 
-                    <input id="end_date" name="endDate" class="form-control" type="text" />
-                </div>
-            </div>
+            <c:import url="jobopening_date.jsp"/>
             <!-- 
              <div class="form-group">
                 <label class="col-sm-2 control-label">근무기간</label>
