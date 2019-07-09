@@ -28,8 +28,8 @@
 		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int" >
 			select resume_seq.nextval from dual
 		</selectKey>
-		insert into resume(resume_code,resumeTitle,resumeRegdate,introduce,award,langlicence_code,licence_code,dv_code,academic_code,desiredwork_code,opencheck,member_code,picture)
-		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredWorkCode},#{opencheck},#{memberCode},#{picture})
+		insert into resume(resume_code,resumeTitle,resumeRegdate,introduce,award,opencheck,member_code,picture)
+		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{opencheck},#{memberCode},#{picture})
 	</insert>
 	
 	<insert id="insertLangcertification" parameterType="resumeVo">

@@ -34,7 +34,6 @@
     <input type="text" name="thirdCode" value="${vo.thirdCode }">
     <input type="text" name="secondCode" value="${vo.secondCode }">
     <input type="text" name="firstCode" value="${vo.firstCode }">
-    <input type="text" name="hopeworkCode" value="${vo.hopeworkCode }">
     <input type="text" name="localCode" value="${vo.localCode }">
     <input type="text" name="academicCode" value="${vo.academicCode }">
     <input type="text" name="langlicenceCode" value="${vo.langlicenceCode }">
