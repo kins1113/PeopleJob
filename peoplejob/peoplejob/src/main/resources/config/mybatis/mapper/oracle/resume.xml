@@ -106,7 +106,7 @@
 		    from
 		    (
 		        select 
-		        resume_code,resumetitle, resumeregdate, opencheck 
+		        resume_code,resumeTitle, resumeRegdate, opencheck 
 		        
 					
 				from resume		

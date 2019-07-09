@@ -41,9 +41,9 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute ResumeVO resumeVo,Model model) {
-		logger.info("이력서 등록화면 보여주기 매개변수 resumeVo{}=",resumeVo);
-		int cnt=resumeService.insertResume(resumeVo);
+	public String write_post(@ModelAttribute ResumeVO vo,Model model) {
+		logger.info("이력서 등록화면 보여주기 매개변수 vo{}=",vo);
+		int cnt=resumeService.insertResume(vo);
 		
 		logger.info("이력서 등록 결과 cnt ={}",cnt);
 		String msg="",url="/resume/register.do";
