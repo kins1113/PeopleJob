@@ -8,7 +8,36 @@
 	document.frmSearch.submit();
 }
 
-
+$(document).ready(function(){
+	$("#noticeCkAll").click(function(){
+		$("#noticeTable tbody input[name=noticeCheckBox]")
+			.prop("checked",this.checked);
+	});
+	//체크된것들 삭제
+	$("#checkDelete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+				var cnt=0;
+			$("input[name=noticeCheckBox]").each(function(){
+				if($(this).is(':checked')==true){
+					cnt=1;
+				}
+			})
+			if(cnt==0){
+				alert("하나라도 체크해야 합니다.");
+				event.preventDefault();
+				return false;
+			}else{
+				$("form[name=frmList]").attr("action",
+								'<c:url value="/manager/notice/delete.do"/>');
+				$("form[name=frmList]").submit();
+			}
+		
+		}
+	});
+	
+});
+	
+	
 </script>
 
 <Style type="text/css">
@@ -20,6 +49,10 @@
 }
 </Style>
 <!-- 디자인을 위해서 추가했습니다. - 옥환 -->
+
+<form name="frmList" method="post" 
+	action="<c:url value='/manager/notice/delete.do'/>">
+
 <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
@@ -29,9 +62,15 @@
 
 
 <div class="divList">
-<table class="table">
+<table class="table" id="noticeTable">
 	<thead class="thead-dark">
 		<tr>
+			<th>
+				<label class="control control-checkbox checkbox-primary"> 
+					<input type="checkbox" name=chk id="noticeCkAll" />
+					<div class="control-indicator"></div>
+				</label>
+			</th>
 			<th scope="col">공지번호</th>
 			<th scope="col">제목</th>
 			<th scope="col">작성자</th>
@@ -49,6 +88,14 @@
 			<!--  내용 반복 시작 -->
 			<c:forEach var="vo" items="${list }">
 				<tr>
+					<td>
+						<label class="control control-checkbox checkbox-primary"> 
+							<input type="checkbox" name="chk" 
+								value="${vo['NOTIFY_CODE'] }"/>
+							<div class="control-indicator"></div>
+						</label>
+					</td>
+				
 					<td>${vo['NOTIFY_CODE'] }</td>
 					<td><a href="<c:url value='/manager/notice/countUpdate.do?notifyCode=${vo["NOTIFY_CODE"]}'/>">
 							<!-- 제목이 긴경우 30글자만 보여주기 -->
@@ -160,12 +207,12 @@
 <div class="card-body">
 	<button type="button" class="mb-1 btn btn-danger"
 		onclick="location.href='write.do' ">공지등록</button>
-
+<input type="button" class="btn btn-secondary btn-default" id="checkDelete" value="선택한 것 삭제">
 </div>
 
 <!-- 디자인을 위해서 추가했습니다. - 옥환 -->
 </div></div></div></div></div></div>
 
-
+</form>
 
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

@@ -207,25 +207,24 @@ public class NoticeController {
 		return "manager/notice/delete";		
 	}
 	
-	@RequestMapping(value="/manager/notice/delete.do",method=RequestMethod.POST)
-	public String delete_post(@ModelAttribute NoticeVO noticeVo, Model model) {
-		logger.info("글 삭제 처리, 파라미터 noticeVo={}", noticeVo);
+	@RequestMapping("/manager/notice/delete.do")
+	public String delete (@RequestParam String[] chk,Model model) {
+		for(int i=0; i<chk.length;i++) {
+			logger.info("{}번째 넘어온 값={}",i,chk[i]);
+		}
+		int re=noticeService.deleteNotice(chk);
 		
-		String msg="", url="/manager/notice/delete.do?notifyCode="+noticeVo.getNotifyCode();
-		
-			int cnt=noticeService.deleteNotice(noticeVo.getNotifyCode());
-			if(cnt>0) {
-				msg="글 삭제되었습니다.";
-				url="/manager/notice/list.do";
-			}else {
-				msg="글 삭제 실패!";
-			}
-		
-		
+		String msg="", url="/manager/notice/list.do";
+		if(re>0) {
+			msg=re+"건 삭제 성공";
+		}else {
+			msg="삭제 실패";
+		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
 		return "common/message";
 	}
+	
 	
 }

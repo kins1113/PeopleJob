@@ -2,21 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
           
+          
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('form[name=noticeWrite]').submit(function(){
+			$('#notifytitle').each(function(idx, item){
+				if($(this).val().length<1){
+					alert($(this).prev().html()+'를 입력하세요');
+					$(this).focus();
+					
+					event.preventDefault();  //이벤트 진행을 막고
+					return false;  //each() 탈출
+				}
+			});	
+		});
+		
+	});
+</script>
+          
+          
           <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="card card-default">
-					<div class="card-header card-header-border-bottom">
-						<h2>공지사항</h2>
-					</div>
+
 					<div class="card-body">
 						<form name="noticeWrite" method="post"
 						action="<c:url value='/notice/write.do'/>" >
 							<div class="form-group">
 								<label for="notifytitle">제목</label> <input
 									type="text" class="form-control" id="notifytitle"
-									name="notifytitle" class="infobox" />
+									name="notifytitle"  />
 									 
 							</div>
 
