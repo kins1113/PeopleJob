@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('form[name=frmEdit]').submit(function(){
-			$('.infobox').each(function(idx, item){
+			$('#notifytitle').each(function(idx, item){
 				if($(this).val().length<1){
 					alert($(this).prev().html()+'를 입력하세요');
 					$(this).focus();
@@ -21,17 +21,24 @@
 	});
 </script>
 
-<div class="divForm">
+   <div class="content-wrapper">
+	<div class="content">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="card card-default">
+					<div class="card-header card-header-border-bottom">
+
+<div class="card-body">
 <form name="frmEdit" method="post" 
 	action="<c:url value='/manager/notice/edit.do'/>"> 
     <fieldset>
-	<legend>글수정</legend>
+	
 		<!-- hidden필드에 notifyCode 넣기 -->
 		<input type="hidden" name="notifyCode" value="${vo.notifyCode}" />
             	
-        <div class="firstDiv">
+        <div class="form-group">
             <label for="notifytitle">제목</label>
-            <input type="text" id="notifytitle" name="notifytitle" class="infobox"
+            <input type="text" id="notifytitle" name="notifytitle" class="form-control"
             	value="${vo.notifytitle}" />
         </div>
         <div>
@@ -39,19 +46,27 @@
             <input type="text" id="adminCode" name="adminCode" value="${vo.adminCode}"
             	class="infobox"/>
         </div>
-
+		<div class="form-group">
         <div>  
         	<label for="notifycontent">내용</label>        
- 			<textarea id="notifycontent" name="notifycontent" rows="12" cols="40">${vo.notifycontent}</textarea>
+ 			<textarea class="form-control" id="notifycontent" name="notifycontent" rows="12" cols="40">${vo.notifycontent}</textarea>
         </div>
-        <div class="center">
-            <input type = "submit" value="수정"/>
-            <input type = "Button" value="글목록" 
-            	onclick
-           ="location.href	='<c:url value='/manager/notice/list.do'/>'" />         
         </div>
+     
+        <div class="form-footer pt-4 pt-5 mt-4 border-top">
+			<button type="submit" class="btn btn-primary btn-default">수정하기</button>
+			<button type="Button" class="btn btn-primary btn-default" 
+			onclick  ="location.href	='<c:url value='/manager/notice/list.do'/>'">글목록</button>
+			</div>
+               
+
 	</fieldset>
 </form>    
 </div>
-
+				</div>
+				</div>
+          </div>
+          </div>
+          </div>
+          </div>
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

@@ -211,7 +211,6 @@ $(function() {
 								<form id="login-form" action="<c:url value='/login/registerU.do'/> " 
 								method="post" role="form" style="display: block;" name="registerU">
 									<input type="hidden" name="authorityCode" value=1>
-									<!--  <input type="hidden" name="companyCode" id="companyCode">  -->
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 

@@ -17,9 +17,12 @@ public class PostDAOMybatis implements PostDAO{
 	
 	private Logger logger=LoggerFactory.getLogger(PostDAOMybatis.class);
 	@Override
-	public List<Map<String, Object>> selectPostAll(PostVO postVO) {
-		logger.info("서비스에서 vo값 vo={}",postVO);
-		return sqlsession.selectList(namespace+"selectPostAll",postVO);
+	public List<Map<String, Object>> selectPostAll(Map<String, Object> map) {
+		logger.info("DAO에서 확인 map.stardDay={} endDay={}",map.get("startDay"),map.get("endDay"));
+		logger.info("DAO에서 확인 map.vo={}",map.get("postVo"));
+		
+		
+		return sqlsession.selectList(namespace+"selectPostAll",map);
 	}
 	@Override
 	public int gettotalRecord(PostVO postVO) {
