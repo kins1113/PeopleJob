@@ -2,10 +2,75 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
 
+<script type="text/javascript">
+	function pageFunc(curPage){
+	document.frmSearch.currentPage.value=curPage;
+	document.frmSearch.submit();
+}
+
+$(document).ready(function(){
+	$("#noticeCkAll").click(function(){
+		$("#noticeTable tbody input[name=noticeCheckBox]")
+			.prop("checked",this.checked);
+	});
+	//체크된것들 삭제
+	$("#checkDelete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+				var cnt=0;
+			$("input[name=noticeCheckBox]").each(function(){
+				if($(this).is(':checked')==true){
+					cnt=1;
+				}
+			})
+			if(cnt==0){
+				alert("하나라도 체크해야 합니다.");
+				event.preventDefault();
+				return false;
+			}else{
+				$("form[name=frmList]").attr("action",
+								'<c:url value="/manager/notice/delete.do"/>');
+				$("form[name=frmList]").submit();
+			}
+		
+		}
+	});
+	
+});
+	
+	
+</script>
+
+<Style type="text/css">
+/* 
+부트스트랩 pagination 가운데 정렬하기
+ ul에 justify-content: center; 써주면 됩니다.  -영현 */
+.pagination {
+   justify-content: center;
+}
+</Style>
+<!-- 디자인을 위해서 추가했습니다. - 옥환 -->
+
+<form name="frmList" method="post" 
+	action="<c:url value='/manager/notice/delete.do'/>">
+
+<div class="content-wrapper">
+	<div class="content">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-default">
+					<div class="card-body">
+
+
 <div class="divList">
-<table class="table">
+<table class="table" id="noticeTable">
 	<thead class="thead-dark">
 		<tr>
+			<th>
+				<label class="control control-checkbox checkbox-primary"> 
+					<input type="checkbox" name=chk id="noticeCkAll" />
+					<div class="control-indicator"></div>
+				</label>
+			</th>
 			<th scope="col">공지번호</th>
 			<th scope="col">제목</th>
 			<th scope="col">작성자</th>
@@ -23,26 +88,34 @@
 			<!--  내용 반복 시작 -->
 			<c:forEach var="vo" items="${list }">
 				<tr>
-					<td>${vo.notifyCode }</td>
-					<td><a href="<c:url value='/notice/countUpdate.do?notifyCode=${vo.notifyCode}'/>">
+					<td>
+						<label class="control control-checkbox checkbox-primary"> 
+							<input type="checkbox" name="chk" 
+								value="${vo['NOTIFY_CODE'] }"/>
+							<div class="control-indicator"></div>
+						</label>
+					</td>
+				
+					<td>${vo['NOTIFY_CODE'] }</td>
+					<td><a href="<c:url value='/manager/notice/countUpdate.do?notifyCode=${vo["NOTIFY_CODE"]}'/>">
 							<!-- 제목이 긴경우 30글자만 보여주기 -->
-						 <c:if test="${fn:length(vo.notifytitle ) >=30}">
-  							${fn:substring(vo.notifytitle,0,30)}...
+						 <c:if test="${fn:length(vo['NOTIFYTITLE'] ) >=30}">
+  							${fn:substring(vo['NOTIFYTITLE'],0,30)}...
   						</c:if> 
-  					<c:if test="${fn:length(vo.notifytitle)<30 }">
-  				${vo.notifytitle}
+  					<c:if test="${fn:length(vo['NOTIFYTITLE'])<30 }">
+  				${vo['NOTIFYTITLE']}
   					</c:if> 
   			<!-- 24시간 이내 글인 경우 new 이미지 보여주기 --> 
-  					<c:if test="${vo.newImgTerm<24 }">
+  					<c:if test="${vo['NEW_IMG_TERM']<24 }">
 					<img src="<c:url value='/resources/images/new.gif'/>"
 									alt="new이미지">
 					</c:if>
 					</a></td>
 					<!-- adminid로 찍어주기 -->
-					<td>${vo.adminCode}</td>
-					<td><fmt:formatDate value="${vo.notifydate}"
+					<td>${vo['ADMINID']}</td>
+					<td><fmt:formatDate value="${vo['NOTIFYDATE']}"
 							pattern="yyyy-MM-dd" /></td>
-					<td>${vo.readcount}</td>
+					<td>${vo['READCOUNT']}</td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -52,37 +125,64 @@
 
 </div>
 <div class="divPage">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
 	<!-- 이전블럭으로 이동하기 -->
-	<c:if test="${pagingInfo.firstPage>1 }">	
-		<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">
-			<img src="<c:url value='/resources/images/first.JPG'/>" alt="이전블럭으로 이동">
-		</a>	
+<li class="page-item">
+	<c:if test="${pagingInfo.firstPage>1 }">
+	<li class="page-item">
+		<a class="page-link" href="#" aria-label="Previous" onclick="pageFunc(${pagingInfo.firstPage-1})">
+			<span aria-hidden="true" class="mdi mdi-chevron-left"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		</li>
 	</c:if>
+</li>
 	<!-- 페이지 번호 추가 -->
 	<!-- [1][2][3][4][5][6][7][8][9][10] -->
 	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
 		<c:if test="${i==pagingInfo.currentPage }">
-			<span style="color:blue;font-size: 1em">${i }</span>
+				<li class="page-item active">
+						<a class="page-link" href="#">${i}</a>
+				</li>
 		</c:if>
+		
 		<c:if test="${i!=pagingInfo.currentPage }">
-			<a href="#" onclick="pageFunc(${i})">[${i}]</a>
+			<li class="page-item">
+				<a class="page-link" href="#" onclick="pageFunc(${i})">${i}</a>
+			</li>
 		</c:if>
 	</c:forEach>
 	<!--  페이지 번호 끝 -->
 	
+									
+													
+
+											
+												
+											
+	
+	
+	
 	<!-- 다음 블럭으로 이동하기 -->
-	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">	
-		<a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">
-			<img src="<c:url value='/resources/images/last.JPG'/>" alt="다음블럭으로 이동">
-		</a>
-	</c:if>
+			<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">	
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage+1})">
+						<span aria-hidden="true" class="mdi mdi-chevron-right"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</li>
+			</c:if>
+	</ul>
+</nav>
+	
 </div>
 <div class="divSearch">
 	<!-- 페이징 처리에도 사용 -->
    	<form name="frmSearch" method="post" 
    		action='<c:url value="/manager/notice/list.do"/>'>
    		<!-- 현재 페이지 hidden에 넣기 -->
-   		<input type="Text" name='currentPage' value="1">
+   		<input type="hidden" name='currentPage' value="1">
    		
         <select name="searchCondition">
             <option value="notifytitle" 
@@ -107,7 +207,12 @@
 <div class="card-body">
 	<button type="button" class="mb-1 btn btn-danger"
 		onclick="location.href='write.do' ">공지등록</button>
-
+<input type="button" class="btn btn-secondary btn-default" id="checkDelete" value="선택한 것 삭제">
 </div>
+
+<!-- 디자인을 위해서 추가했습니다. - 옥환 -->
+</div></div></div></div></div></div>
+
+</form>
 
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

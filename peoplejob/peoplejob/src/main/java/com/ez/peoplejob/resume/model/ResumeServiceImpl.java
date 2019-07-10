@@ -1,16 +1,33 @@
 package com.ez.peoplejob.resume.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ez.peoplejob.common.SearchVO;
 
 @Service
 public class ResumeServiceImpl implements ResumeService{
 	@Autowired
 	private ResumeDAO resumeDao;
 	@Override
+	@Transactional
 	public int insertResume(ResumeVO vo) {
+		int cnt=resumeDao.insertThird(vo);
+		cnt=resumeDao.insertSecond(vo);
+		cnt=resumeDao.insertFirst(vo);
+		cnt=resumeDao.insertHopeWorking(vo);
+		cnt=resumeDao.insertLocation(vo);
+		cnt=resumeDao.insertEducation(vo);
+		cnt=resumeDao.insertLangcertification(vo);
+		cnt=resumeDao.insertCertificate(vo);
+		cnt=resumeDao.insertCareer(vo);
+		cnt=resumeDao.insertResume(vo);
 		
-		return resumeDao.insertResume(vo);
+		
+		return cnt;
 	}
 	@Override
 	public ResumeVO selectResumeByNo(int resumeCode) {
@@ -23,6 +40,78 @@ public class ResumeServiceImpl implements ResumeService{
 	@Override
 	public int updateResume(ResumeVO vo) {
 		return resumeDao.updateResume(vo);
+	}
+	@Override
+	public int insertLangcertification(ResumeVO vo) {
+		return resumeDao.insertLangcertification(vo);
+	}
+	@Override
+	public int insertCertificate(ResumeVO vo) {
+		return resumeDao.insertCertificate(vo);
+	}
+	@Override
+	public int insertCareer(ResumeVO vo) {
+		return resumeDao.insertCareer(vo);
+	}
+	@Override
+	public int insertEducation(ResumeVO vo) {
+		return resumeDao.insertEducation(vo);
+	}
+	@Override
+	public int insertHopeWorking(ResumeVO vo) {
+		return resumeDao.insertHopeWorking(vo);
+	}
+	@Override
+	public int insertFirst(ResumeVO vo) {
+		return resumeDao.insertFirst(vo);
+	}
+	@Override
+	public int insertSecond(ResumeVO vo) {
+		return resumeDao.insertSecond(vo);
+	}
+	@Override
+	public int insertThird(ResumeVO vo) {
+		return resumeDao.insertThird(vo);
+	}
+	@Override
+	public int insertLocation(ResumeVO vo) {
+		return resumeDao.insertLocation(vo);
+	}
+	@Override
+	public ResumeVO selectByMemverid(String memberid) {
+		return resumeDao.selectByMemverid(memberid);
+	}
+	@Override
+	public List<ResumeVO> selectAll(SearchVO searscVo) {
+		return resumeDao.selectAll(searscVo);
+	}
+	@Override
+	public int insertMember2(ResumeVO vo) {
+		return resumeDao.insertMember2(vo);
+	}
+	@Override
+	public ResumeVO selectBylanglicenceCode(int langlicenceCode) {
+		return resumeDao.selectBylanglicenceCode(langlicenceCode);
+	}
+	@Override
+	public ResumeVO selectBylicenceCode(int licenceCode) {
+		return resumeDao.selectBylicenceCode(licenceCode);
+	}
+	@Override
+	public ResumeVO selectBydvCode(int dvCode) {
+		return resumeDao.selectBydvCode(dvCode);
+	}
+	@Override
+	public ResumeVO selectByacademicCode(int academicCode) {
+		return resumeDao.selectByacademicCode(academicCode);
+	}
+	@Override
+	public ResumeVO selectBydesiredWorkCode(int desiredWorkCode) {
+		return resumeDao.selectBydesiredWorkCode(desiredWorkCode);
+	}
+	@Override
+	public ResumeVO selectBymemberCode(int memberCode) {
+		return resumeDao.selectBymemberCode(memberCode);
 	}
 
 }

@@ -110,13 +110,19 @@
 			alert("권한을 선택하세요");
 			event.prevantDefault();
 		}		
+		$("input[name=close]").val("close");
 		$("form[name=managerAddForm]").submit();
 	}
+	$(function(){
+		if($("input[name=close]").val()=="close"){
+			opener.parent.location.reload();
+			window.close();		
+		};
+	})
 	
 </script>
 </head>
 <body>
-
 
 	<div class="content-wrapper">
 		<div class="content">
@@ -129,6 +135,8 @@
 	<div class="card-body">
 		<form action="<c:url value='/manager/manager/managerAdd.do'/>" 
 				method="post" name="managerAddForm">
+				<!-- 창닫기를 하기위한 hidden -->
+				<input type="hidden" name="close"  value="${param.close}">
 			<div class="form-row">
 				<div class="col-md-12 mb-3">
 					<label for="validationServer01">아이디</label> 

@@ -1,5 +1,8 @@
 package com.ez.peoplejob.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 public interface MemberService {
 	//아이디 중복확인에서 사용하는 final변수
 	int USEFUL_USERID=1;  //사용가능한 아이디
@@ -15,4 +18,16 @@ public interface MemberService {
 	int dupUserid(String memberId);
 	int loginCheck(String memberid, String pwd);
 	MemberVO selectByUserid(String memberId);
+	int updateMember(MemberVO memberVo);
+	int memberOut(String memberId);
+	int insertIndividaulMember(MemberVO memberVo);
+	int updateCompany(CompanyVO companyVo);
+	CompanyVO selectCompanyById(String memberId);
+	
+	int updatePwd(String memberId, String pwd);
+	
+	
+	//관리자용 전체 조회 	- 옥환
+	List<MemberVO> selectAllManager(Map<String, Object> map);
+	int getTotalRecord(Map<String, Object>map);	// 관리자용 totalRecord 구하는 메서드 -옥환
 }

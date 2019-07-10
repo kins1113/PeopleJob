@@ -2,7 +2,9 @@ package com.ez.peoplejob.member.model;
 
 import java.sql.Timestamp;
 
-public class MemberVO {
+import com.ez.peoplejob.common.SearchVO;
+
+public class MemberVO extends SearchVO{
 	private String memberid;
 	private Timestamp regdate;
 	private String membername;
@@ -17,6 +19,7 @@ public class MemberVO {
 	private String email;
 	private String tel;
 	private int authorityCode;
+	private int companyCode;
 	
 	
 	public String getMemberid() {
@@ -105,14 +108,20 @@ public class MemberVO {
 	public void setAuthorityCode(int authorityCode) {
 		this.authorityCode = authorityCode;
 	}
+	public int getCompanyCode() {
+		return companyCode;
+	}
+	public void setCompanyCode(int companyCode) {
+		this.companyCode = companyCode;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [memberid=" + memberid + ", regdate=" + regdate + ", membername=" + membername + ", zipcode="
 				+ zipcode + ", address=" + address + ", addressdetail=" + addressdetail + ", memberCode=" + memberCode
 				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
-				+ membergender + ", email=" + email + ", tel=" + tel + ", authorityCode=" + authorityCode + "]";
+				+ membergender + ", email=" + email + ", tel=" + tel + ", authorityCode=" + authorityCode
+				+ ", companyCode=" + companyCode + ", toString()=" + super.toString() + "]";
 	}
-	
 	
 	
 	

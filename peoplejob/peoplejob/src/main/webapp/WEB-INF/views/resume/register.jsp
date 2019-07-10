@@ -4,92 +4,7 @@
 <%@include file="../main/inc/top.jsp" %>
 
 
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script>
-    $.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd',
-        prevText: '이전 달',
-        nextText: '다음 달',
-        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-        showMonthAfterYear: true,
-        yearSuffix: 'Year'
-    });
- 
-    $(function() {
-        $("#datepicker1").datepicker();
-    });
- 
-</script>
- 
 
-
-
-<script type="text/javascript">
-
-var rangeDate = 31; // set limit day
-var setSdate, setEdate;
-$("#jobdate1").datepicker({
-    dateFormat: 'yy-mm-dd',
-    minDate: 0,
-    onSelect: function(selectDate){
-        var stxt = selectDate.split("-");
-            stxt[1] = stxt[1] - 1;
-        var sdate = new Date(stxt[0], stxt[1], stxt[2]);
-        var edate = new Date(stxt[0], stxt[1], stxt[2]);
-            edate.setDate(sdate.getDate() + rangeDate);
-        
-        $('#jobdate2').datepicker('option', {
-            minDate: selectDate,
-            beforeShow : function () {
-                $("#jobdate2").datepicker( "option", "maxDate", edate );                
-                setSdate = selectDate;
-                console.log(setSdate)
-        }});
-        //to 설정
-    }
-    //from 선택되었을 때
-});
-            
-$("#jobdate2").datepicker({ 
-    dateFormat: 'yy-mm-dd',
-    onSelect : function(selectDate){
-        setEdate = selectDate;
-        console.log(setEdate)
-    }
-});
-$('.btn').on('click', function(e){
-    if($('input#jobdate1').val() == ''){
-        alert('시작일을 선택해주세요.');
-        $('input#jobdate1').focus();
-        return false;
-    }else if($('input#jobdate2').val() == ''){
-        alert('종료일을 선택해주세요.');
-        $('input#jobdate2').focus();
-        return false;
-    }
-
-    var t1 = $('input#jobdate1').val().split("-");
-    var t2 = $('input#jobdate2').val().split("-");
-    var t1date = new Date(t1[0], t1[1], t1[2]);
-    var t2date = new Date(t2[0], t2[1], t2[2]);
-    var diff = t2date - t1date;
-    var currDay = 24 * 60 * 60 * 1000;
-    if(parseInt(diff/currDay) > rangeDate){
-        alert('로그 조회 기간은 ' + rangeDate + '일을 초과할 수 없습니다.');        
-        return false;
-    }
-
-    alert("성공")
-});
-//조회 버튼 클릭
-	
-
-
-</script>
 
 
 <style type="text/css">
@@ -98,55 +13,81 @@ $('.btn').on('click', function(e){
     margin: 0 auto;
 }
 </style>
-<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 </script>
 <article>
 <div class="divForm">
 <form name="frm1" method="post" 
-	action="<c:url value='/resume/register.do'/>">
+	action="<c:url value='/resume/register.do'/>" enctype="multipart/form-data">
 <fieldset>
-	<legend>이력서등록</legend>
+	<legend style="font-weight: bold">이력서등록</legend>
 	
 	<div>        
         <label for="resumeTitle">이력서 제목</label>
-        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="resumeTitle" style="ime-mode:active">
+        <input type="text" class="form-control" placeholder="이력서 제목을 입력하세요" name="resumeTitle" id="infobox"  style="ime-mode:active">
     </div>
     <hr>
     <h3>기본정보</h3>
+    <!-- hidden필드에 no 넣기 -->
+    
+    <input type="hidden" name="memberCode" value="${vo.memberCode }">
+    <input type="hidden" name="thirdCode" value="${vo.thirdCode }">
+    <input type="hidden" name="secondCode" value="${vo.secondCode }">
+    <input type="hidden" name="firstCode" value="${vo.firstCode }">
+    <input type="hidden" name="localCode" value="${vo.localCode }">
+    <input type="hidden" name="academicCode" value="${vo.academicCode }">
+    <input type="hidden" name="langlicenceCode" value="${vo.langlicenceCode }">
+    <input type="hidden" name="lNo" value="${vo.lNo }">
+    <input type="hidden" name="dvCode" value="${vo.dvCode }">
+    <input type="hidden" name="resumeCode" value="${vo.resumeCode }">
+        
+		
+    <div>
+    <!--이력서 사진  https://kuzuro.blogspot.com/2018/10/11.html-->
+        <input type="text" class="form-control"  name="picture" id="picture"  style="ime-mode:active">
+    </div>
     <div>        
         <label for="membername">이름</label>
-        <input type="text" class="form-control"  name="membername" id="membername" style="ime-mode:active">
+        <input type="text" class="form-control"  name="membername" id="membername" value="${vo.membername }" style="ime-mode:active">
     </div>
     <div>        
         <label for="birth">생년월일</label>
-        <input type="text" class="form-control"  name="birth" id="birth" style="ime-mode:active">
-    	
+        <input type="text" class="form-control"  name="birth" id="birth" value="${vo.birth}" style="ime-mode:active">
+    	<label class="radio-inline">
+  		<input type="radio" name="membergender" id="membergender" value="남" <c:if test="${vo.membergender=='남'}">            	
+            		checked="checked"
+            	</c:if>>남
+		</label>
+    	<label class="radio-inline">
+  		<input type="radio" name="membergender" id="membergender" value="여" <c:if test="${vo.membergender=='여'}">            	
+            		checked="checked"
+            	</c:if>>여
+		</label>
     </div>
-    
+  
    
     <div>
         <label for="email">이메일 주소</label>
-        <input type="text" class="form-control"  name="email"  id="email" title="이메일주소 앞자리">
+        <input type="text" class="form-control"  name="email"  id="email" value="${vo.email }" title="이메일주소 앞자리">
     </div>
     
     <div>
         <label for="address">주소</label>
         <input type="text" class="form-control"  name="zipcode" id="zipcode" ReadOnly  
-        	title="우편번호" class="width_80">
+        	title="우편번호" class="width_80" value="${vo.zipcode}">
         
         <button type="button" class="btn btn-success" value="우편번호 찾기" id="btnZipcode" 
         title="새창열림">우편번호찾기</button>
         <br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control" name="address" ReadOnly title="주소"  class="width_350"><br />
+        <input type="text"  class="form-control" id="address" name="address" value="${vo.address }" ReadOnly title="주소"  class="width_350"><br />
         <span class="sp1">&nbsp;</span>
-        <input type="text"  class="form-control"  name="addressdetail" title="상세주소"  class="width_350">
+        <input type="text"  class="form-control" id="addressdetail" name="addressdetail" value="${vo.addressdetail }" title="상세주소"  class="width_350">
     </div>
     <div>
         <label for="tel">핸드폰</label>&nbsp;
        
-        <input type="text"  class="form-control"   name="tel" id="tel" maxlength="4" title="휴대폰 번호"
+        <input type="text"  class="form-control"   name="tel" id="tel" value="${vo.tel}" maxlength="4" title="휴대폰 번호"
         	class="width_80">
     </div>
     
@@ -206,8 +147,17 @@ $('.btn').on('click', function(e){
         </select>   
        </div>
        <div>
-		 <label for="graduate">졸업년도</label>&nbsp;
-		 <input type="text" class="form-control" name="graduate" id="datepicker1">
+       <label>전공</label>
+  		<input type="text"  class="form-control" name="major" id="major" >
+       
+       </div>
+       <div>
+       <label>학위</label>
+  		<input type="text"  class="form-control" name="degree" id="degree" >
+       
+       </div>
+       <div>
+		 <c:import url="resume_date2.jsp"/>
          <select class="form-control" name="graduatecheck" id="graduatecheck" >
         	<option value="졸업여부">졸업여부</option>
         	<option value="졸업">졸업</option>
@@ -233,9 +183,7 @@ $('.btn').on('click', function(e){
         <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="companyname" style="ime-mode:active">
     </div>
     <div>
-        <label for="workterm">근무기간</label>
-		<input type="text" class="form-control" name="workterm" id="workterm1">~ 
-  		<input type="text" class="form-control" name="workterm" id="workterm2">
+        <c:import url="resume_date.jsp"/>
   		&nbsp;
 		<select class="form-control" name="workcondition" id="workcondition" >
         	<option value="재직중">재직중</option>
@@ -243,26 +191,24 @@ $('.btn').on('click', function(e){
         </select>
 	</div>
 	<div>
-        <label for="companyname">직종</label>
+        <label for="chargework">직종</label>
         <input type="text" class="form-control"  name="chargework" id="chargework" style="ime-mode:active">
     </div>	
     <div>
-        <label for="companyname">직급</label>
+        <label for="jobgrade">직급</label>
         <input type="text" class="form-control"  name="jobgrade" id="jobgrade" style="ime-mode:active">
    </div>
   
-    	
-    <h3>자격증/어학/수상 내역</h3>	
-   <div>
+
+   
+    <h3>자격증/어학</h3>	
         <label for="certificationtype">항목선택</label>
         <select class="form-control" name="certificationtype" id="certificationtype" >
         	<option value="자격증/면허증">자격증/면허증</option>
         	<option value="어학시험">어학시험</option>
-        	<option value="수상내역">수상내역</option>
         </select>
-   </div>&nbsp;&nbsp;
-   <h5>자격증/면허증</h5>
      <div>
+   <h5>자격증/면허증</h5>
         <label for="lName">자격증명</label>
         <input type="text" class="form-control"  name="lName" id="lName" style="ime-mode:active">
     </div>
@@ -271,19 +217,17 @@ $('.btn').on('click', function(e){
         <input type="text" class="form-control"  name="lInstitution" id="lInstitution" style="ime-mode:active">
     </div>
     <div>
-        <label for="lGetdate">취득일</label>
-        <input type="text" class="form-control"  name="lGetdate" id="lGetdate" style="ime-mode:active">
+        <c:import url="resume_date3.jsp"/>
     </div> 
-    
     &nbsp;
-    <h5>어학시험</h5>  
     <div>	
+    <h5>어학시험</h5>  
         <label for="language">언어</label>
         <input type="text" class="form-control"  name="language" id="language" style="ime-mode:active">
     </div>
      <div>
-        <label for="institution">발행처/기관</label>
-        <input type="text" class="form-control"  name="institution" id="institution" style="ime-mode:active">
+        <label for="institute">발행처/기관</label>
+        <input type="text" class="form-control"  name="institute" id="institute" style="ime-mode:active">
      </div>
      <div>
         <label for="langlicencename">시험종류</label>
@@ -299,22 +243,31 @@ $('.btn').on('click', function(e){
         <input type="text" class="form-control"  name="langGrade" id="langGrade" style="ime-mode:active">
      </div>
      <div>             
-        <label for="langGetdate">취득일</label>
-        <input type="text" class="form-control"  name="langGetdate" id="langGetdate" style="ime-mode:active">
-     </div>
+         <c:import url="resume_date4.jsp"/>
+	</div>
      &nbsp;
+
+  <div class="well">
      <h5>수상내역</h5>
       <label for="award">수상명</label>
         <input type="text" class="form-control"  name="award" id="award" style="ime-mode:active">
+  </div>
      &nbsp;
+
      <h3>자기소개서</h3>
       <div>	
-    	<label for="introduce">자기소개서</label>
-        <textarea class="form-control" rows="3"></textarea>
+    	<!-- <label for="introduce">자기소개서</label>
+        <textarea class="form-control" rows="3"></textarea> -->
+        
+        <c:import url="/main/smarteditorTestjsp.do">
+			<c:param name="name" value="introduce"></c:param>
+		</c:import>
+        
+        
       </div>
       &nbsp;
       <h3>희망근무 선택</h3>
-      <div>	
+      <div>
     	<label for="hopeworkform">근무형태</label>
     	<select class="form-control" name="hopeworkform" id="hopeworkform" >
         	<option value="근무형태 선택">근무형태 선택</option>
@@ -376,21 +329,21 @@ $('.btn').on('click', function(e){
         <div>
         <label for="jobtype">업/직종</label>
         
-        <input type="text" class="form-control"  name="jobtype" id="jobtype" style="ime-mode:active">
+        <input type="text" class="form-control"  name="jobtype" id="jobtype" value="IT컨설팅" style="ime-mode:active">
         </div>
         <div>
         <label for="firstname">직종1차</label>
-        <input type="text" class="form-control"  name="firstname" id="firstname" style="ime-mode:active">
+        <input type="text" class="form-control"  name="firstname" id="firstname" value="IT/인터넷" style="ime-mode:active">
      
         </div>
         <div>
         <label for="secondname">직종2차</label>
-        <input type="text" class="form-control"  name="secondname" id="secondname" style="ime-mode:active">
+        <input type="text" class="form-control"  name="secondname" id="secondname" value="IT/인터넷" style="ime-mode:active">
         	
         </div>
         <div>
         <label for="thirdname">직종3차</label>
-        <input type="text" class="form-control"  name="thirdname" id="thirdname" style="ime-mode:active">
+        <input type="text" class="form-control"  name="thirdname" id="thirdname" value="웹마스터" style="ime-mode:active">
         
         </div>
         <div>
@@ -414,6 +367,7 @@ $('.btn').on('click', function(e){
     </div>
     <br>
     <input type="submit" value="이력서 저장"/>
+    
 </fieldset> 
 </form>
 </div>       

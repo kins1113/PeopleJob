@@ -1,6 +1,7 @@
 package com.ez.peoplejob.manager.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,15 +10,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ManagerServiceImpl implements ManagerService{
+	
+
 	private Logger logger = LoggerFactory.getLogger(ManagerServiceImpl.class);
 	@Autowired
 	private ManagerDAO managerDao;
 	
+	public ManagerVO selectPwdById(String adminid) {
+		return managerDao.selectPwdById(adminid);
+	}
+	
 	//아이디를 가지고 페스워드 체크하는 메서드 - 옥환
 	public int selectPwdById(String adminid,String adminpwd) {
-		String dbPwd=managerDao.selectPwdById(adminid);
+		ManagerVO managerVo=managerDao.selectPwdById(adminid);
 		int result=0;
-		logger.info("ManagerServiceImpl에서  dbPwd={} adminpwd={}",dbPwd,adminpwd);
+		logger.info("ManagerServiceImpl에서  dbPwd={} adminpwd={}",managerVo.getAdminpwd(),adminpwd);
+		String dbPwd=managerVo.getAdminpwd();
 		if(dbPwd!=null && !dbPwd.isEmpty()){
 		//비밀번호가 있을때   
 			if(dbPwd.equals(adminpwd)) {
@@ -72,6 +80,10 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public int updateManager(ManagerVO managerVo) {
 		return managerDao.updateManager(managerVo);
+	}
+	@Override
+	public int selectCheckPwd(Map<String, String> map) {
+		return managerDao.selectCheckPwd(map);
 	}
 	
 }

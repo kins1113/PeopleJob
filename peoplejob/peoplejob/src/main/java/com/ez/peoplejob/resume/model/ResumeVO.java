@@ -16,15 +16,14 @@ public class ResumeVO {
 	private String opencheck;
 	private int memberCode;
 	private String langlicencename;
-	private Timestamp langGetdate;
-	private Timestamp getdate;
+	private String langGetdate;
 	private String institute;
 	private String companyname;
-	private Timestamp workterm;
+	private String workterm;
 	private String chargework;
-	private int lNO;
+	private int lNo;
 	private String lName;
-	private Timestamp lGetdate;
+	private String lGetdate;
 	private String lInstitution;
 	private int hopeworkCode;
 	private String jobtype;  
@@ -46,18 +45,18 @@ public class ResumeVO {
 	private String email;
 	private String picture;
 	private String tel;
-	private String companyCode;
+	private int authority_code;
 	private String sido;
 	private String gugun;
 	private int firstCode;
 	private String firstname;
 	private int secondCode;
-	private int secondname;
+	private String secondname;
 	private int thirdCode;
 	private String thirdname;
 	private String schoolname;
 	private String graduatecheck;
-	private Timestamp graduate;
+	private String graduate;
 	private String graduatetype;
 	private String schoollocal;
 	private String workcheck;
@@ -67,6 +66,38 @@ public class ResumeVO {
 	private String language;
 	private String langpoint;
 	private String langGrade;
+	private String major;
+	private String degree;
+	private String workterm2;
+	private String graduate2;
+	
+	
+	
+	public String getWorkterm2() {
+		return workterm2;
+	}
+	public void setWorkterm2(String workterm2) {
+		this.workterm2 = workterm2;
+	}
+	
+	public String getGraduate2() {
+		return graduate2;
+	}
+	public void setGraduate2(String graduate2) {
+		this.graduate2 = graduate2;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
 	public int getResumeCode() {
 		return resumeCode;
 	}
@@ -145,18 +176,13 @@ public class ResumeVO {
 	public void setLanglicencename(String langlicencename) {
 		this.langlicencename = langlicencename;
 	}
-	public Timestamp getLangGetdate() {
+	public String getLangGetdate() {
 		return langGetdate;
 	}
-	public void setLangGetdate(Timestamp langGetdate) {
+	public void setLangGetdate(String langGetdate) {
 		this.langGetdate = langGetdate;
 	}
-	public Timestamp getGetdate() {
-		return getdate;
-	}
-	public void setGetdate(Timestamp getdate) {
-		this.getdate = getdate;
-	}
+
 	public String getInstitute() {
 		return institute;
 	}
@@ -169,10 +195,10 @@ public class ResumeVO {
 	public void setCompanyname(String companyname) {
 		this.companyname = companyname;
 	}
-	public Timestamp getWorkterm() {
+	public String getWorkterm() {
 		return workterm;
 	}
-	public void setWorkterm(Timestamp workterm) {
+	public void setWorkterm(String workterm) {
 		this.workterm = workterm;
 	}
 	public String getChargework() {
@@ -181,11 +207,11 @@ public class ResumeVO {
 	public void setChargework(String chargework) {
 		this.chargework = chargework;
 	}
-	public int getlNO() {
-		return lNO;
+	public int getlNo() {
+		return lNo;
 	}
-	public void setlNO(int lNO) {
-		this.lNO = lNO;
+	public void setlNo(int lNo) {
+		this.lNo = lNo;
 	}
 	public String getlName() {
 		return lName;
@@ -193,10 +219,10 @@ public class ResumeVO {
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
-	public Timestamp getlGetdate() {
+	public String getlGetdate() {
 		return lGetdate;
 	}
-	public void setlGetdate(Timestamp lGetdate) {
+	public void setlGetdate(String lGetdate) {
 		this.lGetdate = lGetdate;
 	}
 	public String getlInstitution() {
@@ -325,11 +351,12 @@ public class ResumeVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getCompanyCode() {
-		return companyCode;
+	
+	public int getAuthority_code() {
+		return authority_code;
 	}
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
+	public void setAuthority_code(int authority_code) {
+		this.authority_code = authority_code;
 	}
 	public String getSido() {
 		return sido;
@@ -361,10 +388,10 @@ public class ResumeVO {
 	public void setSecondCode(int secondCode) {
 		this.secondCode = secondCode;
 	}
-	public int getSecondname() {
+	public String getSecondname() {
 		return secondname;
 	}
-	public void setSecondname(int secondname) {
+	public void setSecondname(String secondname) {
 		this.secondname = secondname;
 	}
 	public int getThirdCode() {
@@ -391,10 +418,10 @@ public class ResumeVO {
 	public void setGraduatecheck(String graduatecheck) {
 		this.graduatecheck = graduatecheck;
 	}
-	public Timestamp getGraduate() {
+	public String getGraduate() {
 		return graduate;
 	}
-	public void setGraduate(Timestamp graduate) {
+	public void setGraduate(String graduate) {
 		this.graduate = graduate;
 	}
 	public String getGraduatetype() {
@@ -451,30 +478,33 @@ public class ResumeVO {
 	public void setLangGrade(String langGrade) {
 		this.langGrade = langGrade;
 	}
+	
 	@Override
 	public String toString() {
 		return "ResumeVO [resumeCode=" + resumeCode + ", resumeTitle=" + resumeTitle + ", resumeRegdate="
 				+ resumeRegdate + ", introduce=" + introduce + ", award=" + award + ", langlicenceCode="
 				+ langlicenceCode + ", licenceCode=" + licenceCode + ", dvCode=" + dvCode + ", academicCode="
 				+ academicCode + ", desiredWorkCode=" + desiredWorkCode + ", opencheck=" + opencheck + ", memberCode="
-				+ memberCode + ", langlicencename=" + langlicencename + ", langGetdate=" + langGetdate + ", getdate="
-				+ getdate + ", institute=" + institute + ", companyname=" + companyname + ", workterm=" + workterm
-				+ ", chargework=" + chargework + ", lNO=" + lNO + ", lName=" + lName + ", lGetdate=" + lGetdate
-				+ ", lInstitution=" + lInstitution + ", hopeworkCode=" + hopeworkCode + ", jobtype=" + jobtype
-				+ ", hopeworkdate=" + hopeworkdate + ", hopepay=" + hopepay + ", hopeworkform=" + hopeworkform
-				+ ", localCode=" + localCode + ", firstjobCode=" + firstjobCode + ", memberid=" + memberid
-				+ ", regdate=" + regdate + ", membername=" + membername + ", zipcode=" + zipcode + ", address="
-				+ address + ", addressdetail=" + addressdetail + ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd
-				+ ", birth=" + birth + ", membergender=" + membergender + ", email=" + email + ", picture=" + picture
-				+ ", tel=" + tel + ", companyCode=" + companyCode + ", sido=" + sido + ", gugun=" + gugun
-				+ ", firstCode=" + firstCode + ", firstname=" + firstname + ", secondCode=" + secondCode
-				+ ", secondname=" + secondname + ", thirdCode=" + thirdCode + ", thirdname=" + thirdname
-				+ ", schoolname=" + schoolname + ", graduatecheck=" + graduatecheck + ", graduate=" + graduate
-				+ ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal + ", workcheck=" + workcheck
-				+ ", jobgrade=" + jobgrade + ", workcondition=" + workcondition + ", certificationtype="
-				+ certificationtype + ", language=" + language + ", langpoint=" + langpoint + ", langGrade=" + langGrade
-				+ "]";
+				+ memberCode + ", langlicencename=" + langlicencename + ", langGetdate=" + langGetdate + ", institute="
+				+ institute + ", companyname=" + companyname + ", workterm=" + workterm + ", chargework=" + chargework
+				+ ", lNo=" + lNo + ", lName=" + lName + ", lGetdate=" + lGetdate + ", lInstitution=" + lInstitution
+				+ ", hopeworkCode=" + hopeworkCode + ", jobtype=" + jobtype + ", hopeworkdate=" + hopeworkdate
+				+ ", hopepay=" + hopepay + ", hopeworkform=" + hopeworkform + ", localCode=" + localCode
+				+ ", firstjobCode=" + firstjobCode + ", memberid=" + memberid + ", regdate=" + regdate + ", membername="
+				+ membername + ", zipcode=" + zipcode + ", address=" + address + ", addressdetail=" + addressdetail
+				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
+				+ membergender + ", email=" + email + ", picture=" + picture + ", tel=" + tel + ", authority_code="
+				+ authority_code + ", sido=" + sido + ", gugun=" + gugun + ", firstCode=" + firstCode + ", firstname="
+				+ firstname + ", secondCode=" + secondCode + ", secondname=" + secondname + ", thirdCode=" + thirdCode
+				+ ", thirdname=" + thirdname + ", schoolname=" + schoolname + ", graduatecheck=" + graduatecheck
+				+ ", graduate=" + graduate + ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal
+				+ ", workcheck=" + workcheck + ", jobgrade=" + jobgrade + ", workcondition=" + workcondition
+				+ ", certificationtype=" + certificationtype + ", language=" + language + ", langpoint=" + langpoint
+				+ ", langGrade=" + langGrade + ", major=" + major + ", degree=" + degree + ", workterm2=" + workterm2
+				+ ", graduate2=" + graduate2 + "]";
 	}
+	
+	
 	
 
 	

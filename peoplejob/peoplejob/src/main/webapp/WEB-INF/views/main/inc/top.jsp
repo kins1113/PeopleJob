@@ -184,7 +184,7 @@ button {
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">인재정보</a>
+								<a href="<c:url value='/peopleinfo/peopleinfolist.do'/>">인재정보</a>
 							</li>
 
 							<li>
@@ -197,7 +197,7 @@ button {
 							</li>
 
 							<li class="mega-menu-item">
-								<a href="category-01.html">이력서관리</a>
+								<a href="<c:url value='/resume/list.do'/>">이력서관리</a>
 
 							</li>
 
@@ -215,14 +215,54 @@ button {
 								</ul>
 							</li>
 							
-								<a href="<c:url value='/mypage/user/userpage.do'/>"><img src="<c:url value='/resources/main/images/icons/my.png'/>" 
-								name="mypage" style="width: 40px;margin-left: 65px;"></a>
+							<li>
+								<a href="<c:url value='/mypage/user/userpage.do'/>">
+								<img src="<c:url value='/resources/main/images/icons/my.png'/>" 
+								name="mypage" style="width: 40px;margin-left: 65px;">
+								</a>
 								<ul class="sub-menu">
-									<li><a href="category-01.html">자유게시판</a></li>
-									<li><a href="category-02.html">QnA</a></li>
-									<li><a href="category-02.html">공지사항</a></li>
+								<c:if test="${!empty sessionScope.memberid }">
+									<li style="text-align: center">${sessionScope.memberName }님, 환영합니다</li>
+									<li><a href="<c:url value='/login/logout.do'/>">로그아웃</a></li>
+								</c:if>
+								<c:if test="${empty sessionScope.memberid }">
+									<li><a href="<c:url value='/login/login.do'/>">로그인</a></li>
+									<li><a href="<c:url value='/login/registerU.do'/>">회원가입</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==1 }">
+									<li><a href="#">이력서 관리</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==2 }">
+									<li><a href="#">채용공고 관리</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==1 }">
+									<li><a href="#">지원현황</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==2 }">
+									<li><a href="#">결제 내역</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==1 }">
+									<li><a href="<c:url value='/login/person_update.do'/>">내 정보 관리</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==2 }">
+									<li><a href="<c:url value='/login/c_update.do'/>">기업 정보 관리</a></li>
+								</c:if>
+									<li><a href="<c:url value='/login/changePwd.do'/>">비밀번호 변경</a></li>
+									<li><a href="<c:url value='/login/memberOut.do'/>">회원 탈퇴</a></li>
 								</ul>
-								
+							</li>
+							<%-- 
+								<a href="<c:url value='/mypage/user/userpage.do'/>">
+								<img src="<c:url value='/resources/main/images/icons/my.png'/>" 
+								name="mypage" style="width: 40px;margin-left: 65px;"></a>
+								 --%>
+								<li>
+									<ul class="sub-menu">
+										<li><a href="category-01.html">자유게시판</a></li>
+										<li><a href="category-02.html">QnA</a></li>
+										<li><a href="category-02.html">공지사항</a></li>
+									</ul>
+								</li>
 						</ul>
 					</nav>
 				</div>

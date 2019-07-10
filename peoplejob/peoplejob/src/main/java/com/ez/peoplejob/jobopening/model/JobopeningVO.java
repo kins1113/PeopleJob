@@ -1,7 +1,8 @@
 package com.ez.peoplejob.jobopening.model;
 
+import com.ez.peoplejob.common.SearchVO;
 
-public class JobopeningVO {
+public class JobopeningVO extends SearchVO{
 	public int jobopening;
 	public String jobtitle;
 	public String localcheck;

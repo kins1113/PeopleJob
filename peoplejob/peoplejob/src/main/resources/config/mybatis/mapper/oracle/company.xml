@@ -10,14 +10,16 @@
 		insert into jobopening
 		 values(
 		 #{jobopening},#{jobtitle},#{localcheck},#{subwayinfo},#{workway},
-		 #{workdate},#{dayofweek},#{worktime},#{payway},#{pay},#{workform},	#{welfare},
+		 #{workdate},#{dayofweek},#{worktime},#{payway},#{pay},#{workform},	
+					#{welfare}
+		 ,
 		 #{gender},#{agelimit},#{academicCondition},#{career},#{sweetener},#{recruit},
 		 #{recruitmentTarget},#{endDate},#{receiveway},#{submit},#{applicationhandbook},
-		 sysdate,0,'N','N',#{category},#{companyimage},#{companyCode}
+		 sysdate,0,'N',#{adminagree},#{category},#{companyimage},#{companyCode}
 		 )
 	</insert>
 		
-	<select id="selectJobOpen" parameterType="searchVo" resultType="jobOpeningVO">
+	<select id="selectJobOpen2" parameterType="map" resultType="jobOpeningVO">
 		
 		
 		select *
@@ -27,14 +29,88 @@
 		    from
 		    (
 		        select * from jobopening where adminagree='Y' 	
-				<if test="searchKeyword != null and searchKeyword != ''">
-					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+				<if test="localcheck1 != null">
+				and localcheck IN 
+				<foreach collection="localcheck1" item="localcheck" 
+					index="index" open="(" close=")" separator=",">
+				#{localcheck}
+				</foreach>
+				</if>
+				<if test="workway1 != null">
+					and workway IN 
+					<foreach collection="workway1" item="workway" 
+						index="index" open="(" close=")" separator=",">
+					#{workway}
+					</foreach>
+				</if>
+				<if test="payway1 != null">
+					and payway IN 
+					<foreach collection="payway1" item="payway" 
+						index="index" open="(" close=")" separator=",">
+					#{payway}
+					</foreach>
+				</if>		
+				<if test="academicCondition1 != null">
+					and academicCondition IN 
+					<foreach collection="academicCondition1" item="academicCondition" 
+						index="index" open="(" close=")" separator=",">
+					#{academicCondition}
+					</foreach>
 				</if>		
 				order by jobregdate desc
 		    ) A
 		)
-		<![CDATA[ where RNUM>#{firstRecordIndex}  
+		<where>
+		<![CDATA[ RNUM>#{firstRecordIndex}  
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+		</where>
+	</select>
+	
+	<select id="selectJobOpen" parameterType="map" resultType="JobopeningVO">
+		
+		
+		select *
+		from
+		(
+		    select A.*, rownum as RNUM 
+		    from
+		    (
+		        select * from jobopening where company_code =#{companycode1}
+				<if test="localcheck1 != null">
+				and localcheck IN 
+				<foreach collection="localcheck1" item="localcheck" 
+					index="index" open="(" close=")" separator=",">
+				#{localcheck}
+				</foreach>
+				</if>
+				<if test="workway1 != null">
+					and workway IN 
+					<foreach collection="workway1" item="workway" 
+						index="index" open="(" close=")" separator=",">
+					#{workway}
+					</foreach>
+				</if>
+				<if test="payway1 != null">
+					and payway IN 
+					<foreach collection="payway1" item="payway" 
+						index="index" open="(" close=")" separator=",">
+					#{payway}
+					</foreach>
+				</if>		
+				<if test="academicCondition1 != null">
+					and academicCondition IN 
+					<foreach collection="academicCondition1" item="academicCondition" 
+						index="index" open="(" close=")" separator=",">
+					#{academicCondition}
+					</foreach>
+				</if>		
+				order by jobregdate desc
+		    ) A
+		)
+		<where>
+		<![CDATA[ RNUM>#{firstRecordIndex}  
+		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+		</where>
 	</select>
 	
 	<select id="selectJobOpenByNo" resultType="jobOpeningVO" parameterType="int">
@@ -62,12 +138,75 @@
 		update jobopening
 		set adminagree='N'
 		where jobopening=#{jobopening}
+		
 	</update>
-	<select id="selectTotalCount" resultType="int" parameterType="SearchVo">
-	select count(*) from jobopening
-	<if test="searchKeyword != null and searchKeyword != ''">
-			where ${searchCondition} like '%' || #{searchKeyword} || '%'
-	</if>
+	<select id="selectTotalCount" resultType="int" parameterType="map">
+	select count(*) from jobopening where adminagree='Y' 	
+				<if test="localcheck1 != null">
+				and localcheck IN 
+				<foreach collection="localcheck1" item="localcheck" 
+					index="index" open="(" close=")" separator=",">
+				#{localcheck}
+				</foreach>
+				</if>
+				<if test="workway1 != null">
+					and workway IN 
+					<foreach collection="workway1" item="workway" 
+						index="index" open="(" close=")" separator=",">
+					#{workway}
+					</foreach>
+				</if>
+				<if test="payway1 != null">
+					and payway IN 
+					<foreach collection="payway1" item="payway" 
+						index="index" open="(" close=")" separator=",">
+					#{payway}
+					</foreach>
+				</if>		
+				<if test="academicCondition1 != null">
+					and academicCondition IN 
+					<foreach collection="academicCondition1" item="academicCondition" 
+						index="index" open="(" close=")" separator=",">
+					#{academicCondition}
+					</foreach>
+				</if>		
+				order by jobregdate desc
+	</select>
+	<select id="selectTotalCount2" resultType="int" parameterType="map">
+	select count(*) from jobopening where company_code=#{companycode1} 	
+				
+				<if test="localcheck1 != null">
+				and localcheck IN 
+				<foreach collection="localcheck1" item="localcheck" 
+					index="index" open="(" close=")" separator=",">
+				#{localcheck}
+				</foreach>
+				</if>
+				<if test="workway1 != null">
+					and workway IN 
+					<foreach collection="workway1" item="workway" 
+						index="index" open="(" close=")" separator=",">
+					#{workway}
+					</foreach>
+				</if>
+				<if test="payway1 != null">
+					and payway IN 
+					<foreach collection="payway1" item="payway" 
+						index="index" open="(" close=")" separator=",">
+					#{payway}
+					</foreach>
+				</if>		
+				<if test="academicCondition1 != null">
+					and academicCondition IN 
+					<foreach collection="academicCondition1" item="academicCondition" 
+						index="index" open="(" close=")" separator=",">
+					#{academicCondition}
+					</foreach>
+				</if>		
+				order by jobregdate desc
+	</select>
+	<select id="selectcompany" parameterType="int" resultType="companyvo">
+	select* from company where company_code=#{companyCode}
 	</select>
 </mapper>
 
