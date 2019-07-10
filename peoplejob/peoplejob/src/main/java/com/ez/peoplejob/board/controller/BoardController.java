@@ -181,6 +181,13 @@ public class BoardController {
 		model.addAttribute("BKList", BKList);
 		
 		return "manager/board/boardEdit";
-		}
+		
+	}
 	
+	@RequestMapping("/manager/board/boardKindChange.do")
+	public String boardKindChange(@RequestParam String useCk ,@RequestParam int typeCode) {
+		logger.info("카테고리 사용 미사용처리 파라미터 useCk={}, typeCode={}",useCk,typeCode);
+		
+		return "manager/board/boardAdd";
+	}
 }

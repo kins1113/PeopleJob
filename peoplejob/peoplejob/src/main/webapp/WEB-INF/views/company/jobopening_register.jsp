@@ -45,8 +45,7 @@
         <form id="boardForm" class="form-horizontal" role="form" method="post" action="<c:url value='/company/jobopening_register.do'/>"
         enctype="multipart/form-data">
         <!-- ${company_code} -->
-        	히든으로 숨길예정
-        <input type="text" name="companyCode" value="1">
+        <input type="hidden" name="companyCode" value="${mvo.companyCode }"> 
 
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -168,7 +167,7 @@
                     <label><input type="checkbox" name="welfare1" id="welfare1"value="교통비"onclick="javascript_:s_it()"/> 교통비</label>
                     <label><input type="checkbox" name="welfare1" id="welfare1"value="통신비" onclick="javascript_:s_it()"/> 통신비</label><br>
                     <label><input type="checkbox" name="welfare1" id="welfare1"value="퇴직금"onclick="javascript_:s_it()"/> 퇴직금</label>
-                   <input type="text" id="welfare" name="welfare"  class="form-control">
+                   <input type="hidden" id="welfare" name="welfare"  class="form-control">
                 </div>
             </div>
              <div class="form-group">

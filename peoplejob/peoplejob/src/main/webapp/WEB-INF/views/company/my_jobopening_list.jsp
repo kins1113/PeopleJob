@@ -24,7 +24,7 @@
 	<fieldset>
     <div class="col-md-9">
         <div class="page-header">
-            <h3>채용공고</h3>
+            <h3>내가 쓴 채용공고</h3> 
        
        <!--  지역<input type="text" name="hi" id="hi">
         근무방식<input type="text" name="hi2" id="hi2">
@@ -62,7 +62,7 @@
 	        <div class="list-group">
 	            <div class="list-group-item">
 	                <h4 class="list-group-item-heading"><a href="<c:url value='/company/jobopening_upHit.do?jobopening=${vo.jobopening }'/>">공고제목:${vo.jobtitle }</a></h4>
-	                <p class="list-group-item-text">회사이름으로 바꾸기(나중에) | 지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
+	                <p class="list-group-item-text">${vo.companyCode }| 지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
 	                | <small>등록일 : ${fn:substring(vo.jobregdate,0,10)}</small> 
 	                | <small>근무방식 : ${vo.workway }</small>
 	                | <small>급여방식 : ${vo.payway }</small>

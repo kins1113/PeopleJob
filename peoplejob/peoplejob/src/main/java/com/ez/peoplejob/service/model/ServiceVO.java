@@ -1,4 +1,4 @@
-package com.ez.peoplejob.payment.model;
+package com.ez.peoplejob.service.model;
 
 public class ServiceVO {
 	private int serviceCode;

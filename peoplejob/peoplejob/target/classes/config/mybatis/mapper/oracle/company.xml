@@ -205,6 +205,9 @@
 				</if>		
 				order by jobregdate desc
 	</select>
+	<select id="selectcompany" parameterType="int" resultType="companyvo">
+	select* from company where company_code=#{companyCode}
+	</select>
 </mapper>
 
 

@@ -25,6 +25,8 @@ import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
+import com.ez.peoplejob.member.model.CompanyService;
+import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.member.model.MemberVO;
 
@@ -35,9 +37,13 @@ public class JobopeningController {
 	@Autowired JobopeningService jobopeningService;
 	@Autowired private FileUploadUtility fileUploadUtil;
 	@Autowired MemberService memberService;
+	@Autowired CompanyService companyService;
 	@RequestMapping(value="/jobopening_register.do",method = RequestMethod.GET)
-	public String jobopening_register_get() {
+	public String jobopening_register_get(HttpSession session,Model model) {
+		String id=(String)session.getAttribute("memberid");
 		logger.info("채용공고폼");
+		MemberVO mvo=memberService.selectByUserid(id);
+		model.addAttribute("mvo",mvo);
 		return "company/jobopening_register";
 		
 	}
@@ -85,7 +91,7 @@ public class JobopeningController {
 			@ModelAttribute SearchVO searchVo,Model model) {
 		String id=(String)session.getAttribute("memberid");
 		if(id==null) {
-			id="1";
+			id="비회원";
 		}
 		MemberVO mvo=memberService.selectByUserid(id);
 		logger.info("로그인한 회원정보 mvo={}",mvo);
@@ -114,11 +120,15 @@ public class JobopeningController {
 			map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
 			logger.info("map={}",map);
 		list = jobopeningService.selectJobOpen2(map);
-		logger.debug("상품 검색 결과: list.size()={}",list.size());		
-		
+		logger.debug("상품 검색 결과: list.size()={}",list.size());
 		//list=jobopeningService.selectJobOpen(searchVo);
 		//logger.info("공고 list.size={}",list.size());
-		 
+		List<CompanyVO> clist=new ArrayList<CompanyVO>();
+		for(int i=0;i<list.size();i++){
+			clist.add(companyService.selectcompany(list.get(i).getCompanyCode()));
+			logger.info("clist[{}]={}",i,clist.get(i).getCompanyname());
+		}
+		logger.info("clist.size={}",clist.size());
 		int totalRecord=0;
 		totalRecord=jobopeningService.selectTotalCount(map);
 		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
@@ -128,6 +138,7 @@ public class JobopeningController {
 		//3
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
+		model.addAttribute("clist",clist);
 		model.addAttribute("mvo", mvo);
 		return "company/jobopening_list";
 	}
@@ -169,6 +180,7 @@ public class JobopeningController {
 		map.put("companycode1", companycode1);
 		logger.info("map={}",map);
 		list = jobopeningService.selectJobOpen(map);
+		CompanyVO cvo=companyService.selectcompany(mvo.getCompanyCode());
 		logger.debug("상품 검색 결과: list.size()={}",list.size());		
 		
 		//list=jobopeningService.selectJobOpen(searchVo);
@@ -192,13 +204,15 @@ public class JobopeningController {
 		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
 		String id=(String)session.getAttribute("memberid");
 		if(id==null) {
-			id="1";
+			id="비회원";
 		}
 		MemberVO mvo=memberService.selectByUserid(id);
+		CompanyVO cvo=companyService.selectcompany(vo.getCompanyCode());
 		logger.info("로그인한 회원 정보 mvo={}",mvo);
 		logger.info("자세히보기 변수 vo=",vo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("mvo", mvo);
+		model.addAttribute("cvo", cvo);
 		return "company/jobopening_view";
 	}
 	@RequestMapping("/jobopening_where.do")
