@@ -55,4 +55,66 @@
 		set WITHDRAWALDATE=sysdate
 		where memberid=#{memberid}
 	</update>
+	
+	<select id="selectAllManager" parameterType="map" resultType="memberVo">
+		select * from 
+		(
+			select A.*, rownum as RNUM from 
+			( 
+			select * from member
+				<where>
+					<if test="memberVo.searchCondition!= null and memberVo.searchCondition!=''
+								and memberVo.searchKeyword!= null and memberVo.searchKeyword!=''">
+							
+							<if test='memberVo.searchCondition=="memberid"'>
+									 memberid like  '%' || #{memberVo.searchKeyword} || '%'
+							</if>
+							<if test='memberVo.searchCondition=="membername"'>
+									 membername like  '%' || #{memberVo.searchKeyword}  || '%'
+							</if>
+							<if test='memberVo.searchCondition=="tel"'>
+									 tel like  '%' || #{memberVo.searchKeyword} || '%'
+							</if>
+							<if test='memberVo.searchCondition=="email"'>
+									 email like  '%' || #{memberVo.searchKeyword} || '%'
+							</if>
+							<if test="startDay!=null and startDay !=''">
+								 <![CDATA[regdate > #{startDay} and regdate <=to_date(#{endDay})+1]]>
+							</if>
+					</if>				
+				</where>
+				 order by member_code desc
+	 		) A
+		) 
+		<![CDATA[where RNUM>#{memberVo.firstRecordIndex}  
+		and RNUM<=#{memberVo.firstRecordIndex} + #{memberVo.recordCountPerPage}]]> 
+	</select>
+	
+	<select id="getTotalRecord" parameterType="map" resultType="int">
+		select count(*) from member
+		<where>
+			<if test="memberVo.searchCondition!= null and memberVo.searchCondition!=''
+								and memberVo.searchKeyword!= null and memberVo.searchKeyword!=''">
+			
+				<if test='memberVo.searchCondition=="memberid"'>
+						 memberid like  '%' || #{memberVo.searchKeyword} || '%'
+				</if>
+				<if test='memberVo.searchCondition=="membername"'>
+						 membername like  '%' || #{memberVo.searchKeyword}  || '%'
+				</if>
+				<if test='memberVo.searchCondition=="tel"'>
+						 tel like  '%' || #{memberVo.searchKeyword} || '%'
+				</if>
+				<if test='memberVo.searchCondition=="email"'>
+						 email like  '%' || #{memberVo.searchKeyword} || '%'
+				</if>
+				<if test="startDay!=null and startDay !=''">
+					 <![CDATA[regdate > #{startDay} and regdate <=to_date(#{endDay})+1]]>
+				</if>
+			</if>				
+		</where>
+		
+		 order by member_code desc
+		
+	</select>
 </mapper>

@@ -12,8 +12,8 @@ public class PostServiceImpl implements PostService{
 	@Autowired private PostDAO postDao;
 
 	@Override
-	public List<Map<String, Object>> selectPostAll(PostVO postVO) {
-		return postDao.selectPostAll(postVO);
+	public List<Map<String, Object>> selectPostAll(Map<String, Object> map) {
+		return postDao.selectPostAll(map);
 	}
 	@Override
 	public int gettotalRecord(PostVO postVo) {
