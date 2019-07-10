@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">회사이름</label>
                 <div class="col-sm-5">
-                    <p class="form-control-static">${vo.companyCode }회사이름으로 바꾸기</p> 
+                    <p class="form-control-static">${cvo.companyname }</p> 
                 </div>
             </div>
             <div class="form-group">
@@ -128,14 +128,16 @@
         <form id="removeForm" method="post">
             <input type="hidden" name="_method" value="delete"/>
             <div class="pull-right">
-               <!-- 기업회원(3)이면 글쓰기 나옴  -->
+               <!-- 기업회원(3)이면 글쓰기 나옴  --> 
         		 <c:if test="${mvo.authorityCode==3}">
                 <a href="<c:url value='/company/jobopening_del.do?jobopening=${vo.jobopening}'/>"><input type="button" id="deleteBtn" class="btn btn-default btn-mg" role="button" value="삭제"></a>
                 <a href="<c:url value='/company/jobopening_edit.do?jobopening=${vo.jobopening }'/>"><input type="button" id="modifyBtn" class="btn btn-default btn-mg" role="button" value="수정"></a>
                 <a href="<c:url value='/company/jobopening_agreeEdit.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="활성화 수정"></a>
                 </c:if>
                 <!-- 일반회원일경우 -->
-                <a href="<c:url value='/scrap/insertscrap.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
+                <c:if test="${mvo.authorityCode==1}">
+                <a href="<c:url value='/scrap/insertscrap.do?jobopening=${vo.jobopening}&member_code=${mvo.memberCode }'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="스크랩"></a>
+                </c:if>
                 <a href="<c:url value='/company/jobopening_list.do'/>"><input type="button" id="listBtn" class="btn btn-default btn-mg" role="button" value="목록"></a>
             </div>
         </form>
