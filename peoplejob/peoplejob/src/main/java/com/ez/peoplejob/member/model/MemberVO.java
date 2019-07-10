@@ -2,7 +2,9 @@ package com.ez.peoplejob.member.model;
 
 import java.sql.Timestamp;
 
-public class MemberVO {
+import com.ez.peoplejob.common.SearchVO;
+
+public class MemberVO extends SearchVO{
 	private String memberid;
 	private Timestamp regdate;
 	private String membername;
@@ -118,7 +120,7 @@ public class MemberVO {
 				+ zipcode + ", address=" + address + ", addressdetail=" + addressdetail + ", memberCode=" + memberCode
 				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
 				+ membergender + ", email=" + email + ", tel=" + tel + ", authorityCode=" + authorityCode
-				+ ", companyCode=" + companyCode + "]";
+				+ ", companyCode=" + companyCode + ", toString()=" + super.toString() + "]";
 	}
 	
 	

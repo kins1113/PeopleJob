@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ez.peoplejob.common.SearchVO;
 
@@ -12,9 +13,21 @@ public class ResumeServiceImpl implements ResumeService{
 	@Autowired
 	private ResumeDAO resumeDao;
 	@Override
+	@Transactional
 	public int insertResume(ResumeVO vo) {
+		int cnt=resumeDao.insertThird(vo);
+		cnt=resumeDao.insertSecond(vo);
+		cnt=resumeDao.insertFirst(vo);
+		cnt=resumeDao.insertHopeWorking(vo);
+		cnt=resumeDao.insertLocation(vo);
+		cnt=resumeDao.insertEducation(vo);
+		cnt=resumeDao.insertLangcertification(vo);
+		cnt=resumeDao.insertCertificate(vo);
+		cnt=resumeDao.insertCareer(vo);
+		cnt=resumeDao.insertResume(vo);
 		
-		return resumeDao.insertResume(vo);
+		
+		return cnt;
 	}
 	@Override
 	public ResumeVO selectResumeByNo(int resumeCode) {
@@ -75,6 +88,30 @@ public class ResumeServiceImpl implements ResumeService{
 	@Override
 	public int insertMember2(ResumeVO vo) {
 		return resumeDao.insertMember2(vo);
+	}
+	@Override
+	public ResumeVO selectBylanglicenceCode(int langlicenceCode) {
+		return resumeDao.selectBylanglicenceCode(langlicenceCode);
+	}
+	@Override
+	public ResumeVO selectBylicenceCode(int licenceCode) {
+		return resumeDao.selectBylicenceCode(licenceCode);
+	}
+	@Override
+	public ResumeVO selectBydvCode(int dvCode) {
+		return resumeDao.selectBydvCode(dvCode);
+	}
+	@Override
+	public ResumeVO selectByacademicCode(int academicCode) {
+		return resumeDao.selectByacademicCode(academicCode);
+	}
+	@Override
+	public ResumeVO selectBydesiredWorkCode(int desiredWorkCode) {
+		return resumeDao.selectBydesiredWorkCode(desiredWorkCode);
+	}
+	@Override
+	public ResumeVO selectBymemberCode(int memberCode) {
+		return resumeDao.selectBymemberCode(memberCode);
 	}
 
 }

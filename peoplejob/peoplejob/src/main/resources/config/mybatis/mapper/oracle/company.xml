@@ -10,10 +10,12 @@
 		insert into jobopening
 		 values(
 		 #{jobopening},#{jobtitle},#{localcheck},#{subwayinfo},#{workway},
-		 #{workdate},#{dayofweek},#{worktime},#{payway},#{pay},#{workform},	#{welfare},
+		 #{workdate},#{dayofweek},#{worktime},#{payway},#{pay},#{workform},	
+					#{welfare}
+		 ,
 		 #{gender},#{agelimit},#{academicCondition},#{career},#{sweetener},#{recruit},
 		 #{recruitmentTarget},#{endDate},#{receiveway},#{submit},#{applicationhandbook},
-		 sysdate,0,'N','N',#{category},#{companyimage},#{companyCode}
+		 sysdate,0,'N',#{adminagree},#{category},#{companyimage},#{companyCode}
 		 )
 	</insert>
 		
@@ -27,10 +29,6 @@
 		    from
 		    (
 		        select * from jobopening where adminagree='Y' 	
-				<if test="searchKeyword != null and searchKeyword != ''">
-					and ${searchCondition} like '%' || #{searchKeyword} || '%'
-				</if>
-				
 				<if test="localcheck1 != null">
 				and localcheck IN 
 				<foreach collection="localcheck1" item="localcheck" 
@@ -77,15 +75,42 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-		        select * from jobopening where adminagree='Y' 	
-				<if test="searchKeyword != null and searchKeyword != ''">
-					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+		        select * from jobopening where company_code =#{companycode1}
+				<if test="localcheck1 != null">
+				and localcheck IN 
+				<foreach collection="localcheck1" item="localcheck" 
+					index="index" open="(" close=")" separator=",">
+				#{localcheck}
+				</foreach>
+				</if>
+				<if test="workway1 != null">
+					and workway IN 
+					<foreach collection="workway1" item="workway" 
+						index="index" open="(" close=")" separator=",">
+					#{workway}
+					</foreach>
+				</if>
+				<if test="payway1 != null">
+					and payway IN 
+					<foreach collection="payway1" item="payway" 
+						index="index" open="(" close=")" separator=",">
+					#{payway}
+					</foreach>
+				</if>		
+				<if test="academicCondition1 != null">
+					and academicCondition IN 
+					<foreach collection="academicCondition1" item="academicCondition" 
+						index="index" open="(" close=")" separator=",">
+					#{academicCondition}
+					</foreach>
 				</if>		
 				order by jobregdate desc
 		    ) A
 		)
-		<![CDATA[ where RNUM>#{firstRecordIndex}  
+		<where>
+		<![CDATA[ RNUM>#{firstRecordIndex}  
 		and RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+		</where>
 	</select>
 	
 	<select id="selectJobOpenByNo" resultType="jobOpeningVO" parameterType="int">
@@ -117,9 +142,38 @@
 	</update>
 	<select id="selectTotalCount" resultType="int" parameterType="map">
 	select count(*) from jobopening where adminagree='Y' 	
-				<if test="searchKeyword != null and searchKeyword != ''">
-					and ${searchCondition} like '%' || #{searchKeyword} || '%'
+				<if test="localcheck1 != null">
+				and localcheck IN 
+				<foreach collection="localcheck1" item="localcheck" 
+					index="index" open="(" close=")" separator=",">
+				#{localcheck}
+				</foreach>
 				</if>
+				<if test="workway1 != null">
+					and workway IN 
+					<foreach collection="workway1" item="workway" 
+						index="index" open="(" close=")" separator=",">
+					#{workway}
+					</foreach>
+				</if>
+				<if test="payway1 != null">
+					and payway IN 
+					<foreach collection="payway1" item="payway" 
+						index="index" open="(" close=")" separator=",">
+					#{payway}
+					</foreach>
+				</if>		
+				<if test="academicCondition1 != null">
+					and academicCondition IN 
+					<foreach collection="academicCondition1" item="academicCondition" 
+						index="index" open="(" close=")" separator=",">
+					#{academicCondition}
+					</foreach>
+				</if>		
+				order by jobregdate desc
+	</select>
+	<select id="selectTotalCount2" resultType="int" parameterType="map">
+	select count(*) from jobopening where company_code=#{companycode1} 	
 				
 				<if test="localcheck1 != null">
 				and localcheck IN 
@@ -150,6 +204,9 @@
 					</foreach>
 				</if>		
 				order by jobregdate desc
+	</select>
+	<select id="selectcompany" parameterType="int" resultType="companyvo">
+	select* from company where company_code=#{companyCode}
 	</select>
 </mapper>
 

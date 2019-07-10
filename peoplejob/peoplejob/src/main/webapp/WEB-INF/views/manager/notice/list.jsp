@@ -11,6 +11,14 @@
 
 </script>
 
+<Style type="text/css">
+/* 
+부트스트랩 pagination 가운데 정렬하기
+ ul에 justify-content: center; 써주면 됩니다.  -영현 */
+.pagination {
+   justify-content: center;
+}
+</Style>
 <!-- 디자인을 위해서 추가했습니다. - 옥환 -->
 <div class="content-wrapper">
 	<div class="content">
@@ -70,37 +78,64 @@
 
 </div>
 <div class="divPage">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
 	<!-- 이전블럭으로 이동하기 -->
-	<c:if test="${pagingInfo.firstPage>1 }">	
-		<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">
-			<img src="<c:url value='/resources/images/first.JPG'/>" alt="이전블럭으로 이동">
-		</a>	
+<li class="page-item">
+	<c:if test="${pagingInfo.firstPage>1 }">
+	<li class="page-item">
+		<a class="page-link" href="#" aria-label="Previous" onclick="pageFunc(${pagingInfo.firstPage-1})">
+			<span aria-hidden="true" class="mdi mdi-chevron-left"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		</li>
 	</c:if>
+</li>
 	<!-- 페이지 번호 추가 -->
 	<!-- [1][2][3][4][5][6][7][8][9][10] -->
 	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
 		<c:if test="${i==pagingInfo.currentPage }">
-			<span style="color:blue;font-size: 1em">${i }</span>
+				<li class="page-item active">
+						<a class="page-link" href="#">${i}</a>
+				</li>
 		</c:if>
+		
 		<c:if test="${i!=pagingInfo.currentPage }">
-			<a href="#" onclick="pageFunc(${i})">[${i}]</a>
+			<li class="page-item">
+				<a class="page-link" href="#" onclick="pageFunc(${i})">${i}</a>
+			</li>
 		</c:if>
 	</c:forEach>
 	<!--  페이지 번호 끝 -->
 	
+									
+													
+
+											
+												
+											
+	
+	
+	
 	<!-- 다음 블럭으로 이동하기 -->
-	<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">	
-		<a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">
-			<img src="<c:url value='/resources/images/last.JPG'/>" alt="다음블럭으로 이동">
-		</a>
-	</c:if>
+			<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">	
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next" onclick="pageFunc(${pagingInfo.lastPage+1})">
+						<span aria-hidden="true" class="mdi mdi-chevron-right"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</li>
+			</c:if>
+	</ul>
+</nav>
+	
 </div>
 <div class="divSearch">
 	<!-- 페이징 처리에도 사용 -->
    	<form name="frmSearch" method="post" 
    		action='<c:url value="/manager/notice/list.do"/>'>
    		<!-- 현재 페이지 hidden에 넣기 -->
-   		<input type="Text" name='currentPage' value="1">
+   		<input type="hidden" name='currentPage' value="1">
    		
         <select name="searchCondition">
             <option value="notifytitle" 

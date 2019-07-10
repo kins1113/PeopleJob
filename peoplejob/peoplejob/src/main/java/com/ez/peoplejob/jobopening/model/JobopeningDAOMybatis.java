@@ -1,6 +1,5 @@
 package com.ez.peoplejob.jobopening.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +18,7 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 	public int insertJobOpen(JobopeningVO vo) {
 		return sqlSession.insert(namespace+"insertJobOpen",vo);
 	}
-	@Override
-	public List<JobopeningVO> selectJobOpen(SearchVO vo) {
-		return sqlSession.selectList(namespace+"selectJobOpen",vo);
-	}
+	
 	@Override
 	public JobopeningVO selectJobOpenByNo(int jobopening) {
 		return sqlSession.selectOne(namespace+"selectJobOpenByNo",jobopening);
@@ -48,9 +44,19 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 		return sqlSession.selectOne(namespace+"selectTotalCount",map);
 	}
 	@Override
+	public int selectTotalCount2(Map<String,Object>map) {
+		return sqlSession.selectOne(namespace+"selectTotalCount2",map);
+	}
+	@Override
 	public List<JobopeningVO> selectJobOpen2(Map<String, Object> map) {
 		return sqlSession.selectList(namespace+"selectJobOpen2",map);
 	}
+
+	@Override
+	public List<JobopeningVO> selectJobOpen(Map<String, Object> map) {
+		return sqlSession.selectList(namespace+"selectJobOpen",map);
+	}
+
 	         
 	
 }

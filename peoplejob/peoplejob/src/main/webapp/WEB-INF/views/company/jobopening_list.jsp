@@ -58,24 +58,35 @@
 	 	</tr>
 		</c:if>
 		<c:if test="${!empty list }">
-			<c:forEach var="vo" items="${list }">
-	        <div class="list-group">
+			<c:forEach var="vo" items="${list }"> 
+			<c:set var="loop_flag" value="false" /> 
+	        <div class="list-group"> 
 	            <div class="list-group-item">
 	                <h4 class="list-group-item-heading"><a href="<c:url value='/company/jobopening_upHit.do?jobopening=${vo.jobopening }'/>">공고제목:${vo.jobtitle }</a></h4>
-	                <p class="list-group-item-text">회사이름으로 바꾸기(나중에) | 지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
+	                <p class="list-group-item-text">
+	                <c:forEach var="cvo" items="${clist }">
+	                 <c:if test="${not loop_flag }">
+				        <c:if test="${vo.companyCode==cvo.companyCode}">
+			                ${cvo.companyname}
+				            <c:set var="loop_flag" value="true" />
+				        </c:if>
+				    </c:if>
+	                </c:forEach>
+	                 | 지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
 	                | <small>등록일 : ${fn:substring(vo.jobregdate,0,10)}</small> 
 	                | <small>근무방식 : ${vo.workway }</small>
 	                | <small>급여방식 : ${vo.payway }</small>
 	                | <small>조회수 : ${vo.hits }</small>
+	                
 	                </p> 
 	                <span class="label label-info">
 					<img src="<c:url value='/peoplejob_upload/${vo.companyimage }'/>" 
 							alt="공고이미지" width="50">
 					
 					</span> <span class="label label-info">복리후생 : ${vo.welfare }</span>
-	            </div>
+	            </div> 
 	        </div>
-			</c:forEach>
+	        </c:forEach>
 		</c:if>
 		</div>
         <div class="pull-left">
@@ -108,9 +119,13 @@
 </div>
 
         </div>
-        <div class="pull-right">
+       <!-- 기업회원(3)이면 글쓰기 나옴  -->
+         <c:if test="${mvo.authorityCode==3}"> 
+        <div class="pull-right"> 
+            <a href="<c:url value='/company/my_jobopening_list.do?companycode1=${mvo.companyCode}'/>" class="btn btn-primary" role="button">내가쓴 채용 정보</a>
             <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">글쓰기</a>
         </div>
+        </c:if>
     </div>
     </div>
     </fieldset>
