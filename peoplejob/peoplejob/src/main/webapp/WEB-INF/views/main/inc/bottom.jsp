@@ -1,51 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <footer>
-		<!-- <div class="bg2 p-t-40 p-b-25" style="padding-top: 0px">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 p-b-20">
-						<div class="size-h-3 flex-s-c">
-						</div>
-
-						<div>
-							<p class="f1-s-1 cl11 p-b-16">
-							PEOPLEJOB 회사정보
-							</p>
-
-							<div class="p-t-15">
-								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-facebook-f"></span>
-								</a>
-
-								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-twitter"></span>
-								</a>
-
-								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-pinterest-p"></span>
-								</a>
-
-								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-vimeo-v"></span>
-								</a>
-
-								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-									<span class="fab fa-youtube"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					
-					</div>
-				</div>
-			</div> -->
-		</div>
-
 		<div class="bg11">
 			<div class="container size-h-4 flex-c-c p-tb-15">
-				<span class="f1-s-1 cl0 txt-center">
+				<span class="f1-s-1 cl0 txt-center" style="color:white">
 					<a href="#">회사소개</a>
 					<a href="#">광고문의</a>
 					<a href="#">공지사항</a>

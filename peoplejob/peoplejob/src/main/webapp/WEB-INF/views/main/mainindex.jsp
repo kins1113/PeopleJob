@@ -24,17 +24,7 @@ $(function() {
 			}
 			
 		});
-		/* if($('#memberId').val()==''){
-			alert('아이디를 입력하세요');
-			$('#memberId').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#pwd').val()==''){
-			alert('비밀번호를 입력하세요');
-			$('#pwd').focus();
-			event.preventDefault();
-			return false;
-		} */
+		
 	});
 
 });
@@ -632,10 +622,38 @@ span.tx {
 
 							</ul>	
 						</div>
-							
+							<div class="p-b-23">
+							<div class="how2 how2-cl4 flex-s-c m-b-35">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									마감임박 공채
+								</h3>
+							</div>
+							<ul class="p-t-35" style="padding-top: 0px">
+								<li style="margin-bottom: 5px">
+									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+										&nbsp;삼성전자 공개채용 (~2019/07/07)
+									</a>
+								</li>
+
+								<li style="margin-bottom: 5px">
+									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+										&nbsp;삼성전자 공개채용 (~2019/07/07)
+									</a>
+								</li>
+
+								<li style="margin-bottom: 5px">
+									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+										&nbsp;삼성전자 공개채용 (~2019/07/07)
+									</a>
+								</li>
+
+							</ul>	
+						</div>
 						
 					</div>
 				</div> 
+				
+				
 				<!-- 공지사항 -->
 				<%-- <div class="col-md-10 col-lg-4">
 					<img alt="사이드배너" src="<c:url value='/resources/main/images/skybanner.png'/>">
@@ -839,7 +857,8 @@ span.tx {
 					
 					
 				</div>
-
+	
+		
 				</div>
 			</div>
 		</div>

@@ -518,8 +518,11 @@ public class MemberController {
 		logger.info("비밀번호 변경 처리 파라미터, pwd={}",pwd);
 		String memberId=(String) session.getAttribute("memberid");
 		
-		int cnt=memberService.updatePwd(memberId, pwd);
-		logger.info("비밀번호 변경 결과 cnt={]",cnt);
+		MemberVO memberVo=new MemberVO();
+		memberVo.setMemberid(memberId);
+		memberVo.setPwd(pwd);
+		int cnt=memberService.updatePwd(memberVo);
+		logger.info("비밀번호 변경 결과 cnt={}",cnt);
 		
 		String msg="", url="/login/changePwd.do";
 		if(cnt>0) {

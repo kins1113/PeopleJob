@@ -21,7 +21,7 @@
 				alert('비밀번호를 입력하세요');
 				$('#pwd').focus();
 				event.preventDefault();
-			}else if(!confirm('회원탈퇴하시겠습니까?')){
+			}else if(!confirm('비밀번호를 변경하시겠습니까?')){
 				event.preventDefault();
 			}
 			
@@ -37,7 +37,7 @@
 						<div class="row">
 						
 							<div class="col-xs-6">
-								<a href="<c:url value='/login/changePwd.do'/>"  style="color: green; font-size:1.2em;">회원탈퇴</a>
+								<a href=""  style="color: green; font-size:1.2em;">회원탈퇴</a>
 							</div>
 						</div>
 						<hr>
@@ -57,7 +57,7 @@
 
 </pre>
 							<p class="p">비밀번호를 변경하시겠습니까?</p>
-	<form name="frmOut" method="post" action="<c:url value='/login/memberOut.do'/>">
+	<form name="frmOut" method="post" action="<c:url value='/login/changePwd.do'/>">
 		<fieldset>
 			<div class="form-group" >
 				<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Password"
@@ -67,7 +67,7 @@
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="login-submit" id="login-submit" 
-												tabindex="4" class="form-control btn btn-register" value="회원탈퇴">
+												tabindex="4" class="form-control btn btn-register" value="비밀번호 변경하기">
 											</div>
 										</div>
 									</div>

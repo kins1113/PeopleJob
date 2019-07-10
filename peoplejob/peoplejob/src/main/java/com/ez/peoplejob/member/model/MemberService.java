@@ -24,7 +24,7 @@ public interface MemberService {
 	int updateCompany(CompanyVO companyVo);
 	CompanyVO selectCompanyById(String memberId);
 	
-	int updatePwd(String memberId, String pwd);
+	int updatePwd(MemberVO memberVo);
 	
 	
 	//관리자용 전체 조회 	- 옥환

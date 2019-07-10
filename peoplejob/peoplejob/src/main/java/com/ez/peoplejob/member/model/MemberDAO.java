@@ -16,7 +16,7 @@ public interface MemberDAO {
 
 	int updateCompany(CompanyVO companyVo);
 	CompanyVO selectCompanyById(String memberId);
-	int updatePwd(String memberId, String pwd);
+	int updatePwd(MemberVO memberVo);
 
 	
 	

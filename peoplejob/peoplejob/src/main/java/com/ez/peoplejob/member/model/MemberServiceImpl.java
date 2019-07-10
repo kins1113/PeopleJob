@@ -100,16 +100,11 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public int updatePwd(String memberId, String pwd) {
-		return memberDao.updatePwd(memberId, pwd);
+	public int updatePwd(MemberVO memberVo) {
+		return memberDao.updatePwd(memberVo);
 	}
 
 
 
-
-
-
-
-	
 
 }
