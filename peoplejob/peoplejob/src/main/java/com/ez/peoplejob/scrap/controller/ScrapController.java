@@ -21,6 +21,8 @@ import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
 import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
+import com.ez.peoplejob.member.model.CompanyService;
+import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.scrap.model.ScrapService;
@@ -32,6 +34,7 @@ public class ScrapController {
 	@Autowired ScrapService scrapService;
 	@Autowired MemberService memberService;
 	@Autowired JobopeningService jobopeningService;
+	@Autowired CompanyService companyService;
 	@RequestMapping("/insertscrap.do")
 	public String insert_scrap(@RequestParam int jobopening,
 			@RequestParam int member_code,
@@ -86,6 +89,7 @@ public class ScrapController {
 		logger.info("셋팅 후 serchVo={}",searchVo);
 		List<JobopeningVO> list=new ArrayList<JobopeningVO>();
 		int totalRecord=0;
+		List<CompanyVO> clist=new ArrayList<CompanyVO>();
 		if(slist.size()!=0) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			logger.info("localcheck1={},workway1={}",localcheck1,workway1);
@@ -102,7 +106,10 @@ public class ScrapController {
 			logger.info("map={}",map);
 			list = scrapService.selectScrapJobOpen(map);
 			logger.debug("상품 검색 결과: list.size()={}",list.size());		
-			
+			for(int i=0;i<list.size();i++){
+				clist.add(companyService.selectcompany(list.get(i).getCompanyCode()));
+				logger.info("clist[{}]={}",i,clist.get(i).getCompanyname());
+			}
 			//list=jobopeningService.selectJobOpen(searchVo);
 			//logger.info("공고 list.size={}",list.size());
 			totalRecord=scrapService.selectTotalCount(map);
@@ -119,6 +126,7 @@ public class ScrapController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("list",list);
 		model.addAttribute("mvo", mvo);
+		model.addAttribute("clist",clist);
 		return "scrap/scrap_list";
 	}
 	

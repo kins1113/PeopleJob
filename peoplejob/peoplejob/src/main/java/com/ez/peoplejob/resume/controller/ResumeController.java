@@ -31,10 +31,18 @@ public class ResumeController {
 	private Logger logger = LoggerFactory.getLogger(ResumeController.class);
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
-	public String register_get(HttpSession session, Model model) {
+	public String register_get(ResumeVO vo,HttpSession session, Model model) {
+	int cnt=1;
+		vo=resumeService.selectBydesiredWorkCode(cnt);
+		vo=resumeService.selectByacademicCode(cnt);
+		vo=resumeService.selectBydvCode(cnt);
+		vo=resumeService.selectBylanglicenceCode(cnt);
+		vo=resumeService.selectBylicenceCode(cnt);
+		vo=resumeService.selectBymemberCode(cnt);
+		model.addAttribute("vo", vo);
 		String memberid=(String) session.getAttribute("memberid");
 		logger.info("이력서등록 화면 보여주기");
-		ResumeVO vo=resumeService.selectByMemverid(memberid);
+		vo=resumeService.selectByMemverid(memberid);
 		logger.info("회원정보 조회vo={}",vo);
 		model.addAttribute("vo", vo);
 		return "resume/register";
@@ -42,9 +50,9 @@ public class ResumeController {
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
 	public String write_post(@ModelAttribute ResumeVO resumeVo,Model model) {
-		logger.info("이력서 등록화면 보여주기 매개변수 resumeVo{}=",resumeVo);
-		int cnt=resumeService.insertResume(resumeVo);
 		
+		logger.info("이력서 등록화면 보여주기 매개변수 vo={}",resumeVo);
+		int cnt=resumeService.insertResume(resumeVo);
 		logger.info("이력서 등록 결과 cnt ={}",cnt);
 		String msg="",url="/resume/register.do";
 		if(cnt>0) {
@@ -101,10 +109,10 @@ public class ResumeController {
 			return "common/message";
 		}
 		
-		ResumeVO resumeVo=resumeService.selectResumeByNo(resumeCode);
-		logger.info("상세보기 결과 vo={}", resumeVo);
+		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
+		logger.info("상세보기 결과 vo={}", vo);
 		
-		model.addAttribute("vo", resumeVo);
+		model.addAttribute("vo", vo);
 		
 		return "resume/detail";
 	}

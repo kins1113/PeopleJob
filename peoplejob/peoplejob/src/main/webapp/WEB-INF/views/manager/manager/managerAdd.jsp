@@ -114,7 +114,10 @@
 		$("form[name=managerAddForm]").submit();
 	}
 	$(function(){
-		
+		if($("input[name=close]").val()=="close"){
+			opener.parent.location.reload();
+			window.close();		
+		};
 	})
 	
 </script>
@@ -128,7 +131,6 @@
 					<div class="card card-default">
 						<div class="card-header card-header-border-bottom">
 							<h2>관리자 추가 </h2>
-${param.close}${param.close}${param.close}${param.close}${param.close}${param.close}
 						</div>
 	<div class="card-body">
 		<form action="<c:url value='/manager/manager/managerAdd.do'/>" 

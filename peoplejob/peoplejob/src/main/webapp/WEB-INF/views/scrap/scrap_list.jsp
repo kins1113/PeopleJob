@@ -84,12 +84,22 @@
 	 	</tr>
 		</c:if>
 		<c:if test="${!empty list }">
-			<c:forEach var="vo" items="${list }">
-	        <div class="list-group">
+		<c:forEach var="vo" items="${list }"> 
+			<c:set var="loop_flag" value="false" /> 
+	        <div class="list-group"> 
 	            <div class="list-group-item">
 	            	<input type="checkbox" name="jobopening1" id="jobopening1" value="${vo.jobopening }" onclick="javascript_:s_it()"> 
 	                <h4 class="list-group-item-heading"><a href="<c:url value='/company/jobopening_upHit.do?jobopening=${vo.jobopening }'/>">공고제목:${vo.jobtitle }</a></h4>
-	                <p class="list-group-item-text">회사이름으로 바꾸기(나중에) | 지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
+	                <p class="list-group-item-text">
+	                <c:forEach var="cvo" items="${clist }">
+	                 <c:if test="${not loop_flag }">
+				        <c:if test="${vo.companyCode==cvo.companyCode}">
+			                ${cvo.companyname}
+				            <c:set var="loop_flag" value="true" />
+				        </c:if>
+				    </c:if>
+	                </c:forEach>
+	                 |지역:${vo.localcheck} | 기간 : ${fn:substring(vo.workdate,0,10) }~${fn:substring(vo.endDate,0,10)} 
 	                | <small>등록일 : ${fn:substring(vo.jobregdate,0,10)}</small> 
 	                | <small>근무방식 : ${vo.workway }</small>
 	                | <small>급여방식 : ${vo.payway }</small>
@@ -136,7 +146,7 @@
 
         </div>
        <!-- 기업회원(3)이면 글쓰기 나옴  -->
-       <input type="text" name="jobopening" id="jobopening">
+       <input type="hidden" name="jobopening" id="jobopening">
          <c:if test="${mvo.authorityCode==1}"> 
         <div class="pull-right">
         	<input type="button" id="del" name="del" class="btn btn-primary" role="button" value="삭제하기">

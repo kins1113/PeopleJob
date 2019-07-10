@@ -17,12 +17,11 @@ public class ResumeVO {
 	private int memberCode;
 	private String langlicencename;
 	private String langGetdate;
-	private String getdate;
 	private String institute;
 	private String companyname;
 	private String workterm;
 	private String chargework;
-	private int lNO;
+	private int lNo;
 	private String lName;
 	private String lGetdate;
 	private String lInstitution;
@@ -67,14 +66,22 @@ public class ResumeVO {
 	private String language;
 	private String langpoint;
 	private String langGrade;
-	private String institution;
+	private String major;
+	private String degree;
 	
 	
-	public String getInstitution() {
-		return institution;
+	
+	public String getDegree() {
+		return degree;
 	}
-	public void setInstitution(String institution) {
-		this.institution = institution;
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
 	}
 	public int getResumeCode() {
 		return resumeCode;
@@ -160,12 +167,7 @@ public class ResumeVO {
 	public void setLangGetdate(String langGetdate) {
 		this.langGetdate = langGetdate;
 	}
-	public String getGetdate() {
-		return getdate;
-	}
-	public void setGetdate(String getdate) {
-		this.getdate = getdate;
-	}
+
 	public String getInstitute() {
 		return institute;
 	}
@@ -190,11 +192,11 @@ public class ResumeVO {
 	public void setChargework(String chargework) {
 		this.chargework = chargework;
 	}
-	public int getlNO() {
-		return lNO;
+	public int getlNo() {
+		return lNo;
 	}
-	public void setlNO(int lNO) {
-		this.lNO = lNO;
+	public void setlNo(int lNo) {
+		this.lNo = lNo;
 	}
 	public String getlName() {
 		return lName;
@@ -468,23 +470,22 @@ public class ResumeVO {
 				+ resumeRegdate + ", introduce=" + introduce + ", award=" + award + ", langlicenceCode="
 				+ langlicenceCode + ", licenceCode=" + licenceCode + ", dvCode=" + dvCode + ", academicCode="
 				+ academicCode + ", desiredWorkCode=" + desiredWorkCode + ", opencheck=" + opencheck + ", memberCode="
-				+ memberCode + ", langlicencename=" + langlicencename + ", langGetdate=" + langGetdate + ", getdate="
-				+ getdate + ", institute=" + institute + ", companyname=" + companyname + ", workterm=" + workterm
-				+ ", chargework=" + chargework + ", lNO=" + lNO + ", lName=" + lName + ", lGetdate=" + lGetdate
-				+ ", lInstitution=" + lInstitution + ", hopeworkCode=" + hopeworkCode + ", jobtype=" + jobtype
-				+ ", hopeworkdate=" + hopeworkdate + ", hopepay=" + hopepay + ", hopeworkform=" + hopeworkform
-				+ ", localCode=" + localCode + ", firstjobCode=" + firstjobCode + ", memberid=" + memberid
-				+ ", regdate=" + regdate + ", membername=" + membername + ", zipcode=" + zipcode + ", address="
-				+ address + ", addressdetail=" + addressdetail + ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd
-				+ ", birth=" + birth + ", membergender=" + membergender + ", email=" + email + ", picture=" + picture
-				+ ", tel=" + tel + ", authority_code=" + authority_code + ", sido="
-				+ sido + ", gugun=" + gugun + ", firstCode=" + firstCode + ", firstname=" + firstname + ", secondCode="
-				+ secondCode + ", secondname=" + secondname + ", thirdCode=" + thirdCode + ", thirdname=" + thirdname
-				+ ", schoolname=" + schoolname + ", graduatecheck=" + graduatecheck + ", graduate=" + graduate
-				+ ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal + ", workcheck=" + workcheck
-				+ ", jobgrade=" + jobgrade + ", workcondition=" + workcondition + ", certificationtype="
-				+ certificationtype + ", language=" + language + ", langpoint=" + langpoint + ", langGrade=" + langGrade
-				+ ", institution=" + institution + "]";
+				+ memberCode + ", langlicencename=" + langlicencename + ", langGetdate=" + langGetdate + ", institute="
+				+ institute + ", companyname=" + companyname + ", workterm=" + workterm + ", chargework=" + chargework
+				+ ", lNo=" + lNo + ", lName=" + lName + ", lGetdate=" + lGetdate + ", lInstitution=" + lInstitution
+				+ ", hopeworkCode=" + hopeworkCode + ", jobtype=" + jobtype + ", hopeworkdate=" + hopeworkdate
+				+ ", hopepay=" + hopepay + ", hopeworkform=" + hopeworkform + ", localCode=" + localCode
+				+ ", firstjobCode=" + firstjobCode + ", memberid=" + memberid + ", regdate=" + regdate + ", membername="
+				+ membername + ", zipcode=" + zipcode + ", address=" + address + ", addressdetail=" + addressdetail
+				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
+				+ membergender + ", email=" + email + ", picture=" + picture + ", tel=" + tel + ", authority_code="
+				+ authority_code + ", sido=" + sido + ", gugun=" + gugun + ", firstCode=" + firstCode + ", firstname="
+				+ firstname + ", secondCode=" + secondCode + ", secondname=" + secondname + ", thirdCode=" + thirdCode
+				+ ", thirdname=" + thirdname + ", schoolname=" + schoolname + ", graduatecheck=" + graduatecheck
+				+ ", graduate=" + graduate + ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal
+				+ ", workcheck=" + workcheck + ", jobgrade=" + jobgrade + ", workcondition=" + workcondition
+				+ ", certificationtype=" + certificationtype + ", language=" + language + ", langpoint=" + langpoint
+				+ ", langGrade=" + langGrade + ", major=" + major + ", degree=" + degree + "]";
 	}
 	
 	

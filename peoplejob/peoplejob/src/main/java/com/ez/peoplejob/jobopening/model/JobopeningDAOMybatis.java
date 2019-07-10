@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ez.peoplejob.common.SearchVO;
+import com.ez.peoplejob.member.model.MemberVO;
 
 @Repository
 public class JobopeningDAOMybatis implements JobopeningDAO{
@@ -36,8 +37,8 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 		return sqlSession.delete(namespace+"deleteJobOpen",jobopening);
 	}
 	@Override
-	public int updateAdminagree(int jobopening) {
-		return sqlSession.update(namespace+"updateAdminagree",jobopening);
+	public int updateAdminagree(JobopeningVO vo) {
+		return sqlSession.update(namespace+"updateAdminagree",vo);
 	}
 	@Override
 	public int selectTotalCount(Map<String,Object>map) {
@@ -55,6 +56,10 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 	@Override
 	public List<JobopeningVO> selectJobOpen(Map<String, Object> map) {
 		return sqlSession.selectList(namespace+"selectJobOpen",map);
+	}
+	@Override
+	public int selectPwdCheck(Map<String,Object>map) {
+		return sqlSession.selectOne(namespace+"selectPwdCheck",map);
 	}
 
 	         

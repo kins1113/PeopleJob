@@ -39,7 +39,7 @@
         <form id="boardForm" class="form-horizontal" role="form" method="post" action="<c:url value='/company/jobopening_edit.do'/>"
         enctype="multipart/form-data">
         <!-- ${company_code} -->
-        <input type="text" name="companyCode" value="${vo.companyCode}">
+        <input type="hidden" name="companyCode" value="${vo.companyCode}">
 		<input type="hidden" name="jobopening" value="${vo.jobopening}">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -213,7 +213,7 @@
                     /> 퇴직금</label>
                 </div>
             </div>
-                    <input type="text" id="welfare" name="welfare" value="${vo.welfare }">
+                    <input type="hidden" id="welfare" name="welfare" value="${vo.welfare }">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                 <label for="title" class="col-sm-2 control-label">성별</label>

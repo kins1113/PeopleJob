@@ -9,6 +9,8 @@ public class NoticeCmt2VO {
 	private int notifyCode;
 	private Clob comcontent;
 	private Timestamp comregdate;
+	
+	
 	public int getCommentCode() {
 		return commentCode;
 	}

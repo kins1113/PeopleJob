@@ -1,13 +1,10 @@
 package com.ez.peoplejob.jobopening.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ez.peoplejob.common.SearchVO;
 
 @Service
 public class JobopeningServiceImpl implements JobopeningService{
@@ -41,10 +38,6 @@ public class JobopeningServiceImpl implements JobopeningService{
 		return jobopeningDao.deleteJobOpen(jobopening);
 	}
 
-	@Override
-	public int updateAdminagree(int jobopening) {
-		return jobopeningDao.updateAdminagree(jobopening);
-	}
 
 	@Override
 	public int selectTotalCount(Map<String,Object>map) {
@@ -64,5 +57,22 @@ public class JobopeningServiceImpl implements JobopeningService{
 	public List<JobopeningVO> selectJobOpen(Map<String, Object> map) {
 		return jobopeningDao.selectJobOpen(map);
 	}
+
+
+
+	@Override
+	public int updateAdminagree(JobopeningVO vo) {
+		return jobopeningDao.updateAdminagree(vo);
+	}
+
+
+
+	@Override
+	public int selectPwdCheck(Map<String,Object>map) {
+		return jobopeningDao.selectPwdCheck(map);
+	}
+
+
+
 	
 }

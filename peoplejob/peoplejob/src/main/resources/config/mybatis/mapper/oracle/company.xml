@@ -134,11 +134,15 @@
 		delete jobopening
 		where jobopening=#{jobopening}
 	</delete>
-	<update id="updateAdminagree" parameterType="int">
+	<update id="updateAdminagree" parameterType="jobopeningvo">
 		update jobopening
+		<if test="adminagree=='Y'.toString()">
 		set adminagree='N'
+		</if>
+		<if test="adminagree=='N'.toString()">
+		set adminagree='Y'
+		</if>
 		where jobopening=#{jobopening}
-		
 	</update>
 	<select id="selectTotalCount" resultType="int" parameterType="map">
 	select count(*) from jobopening where adminagree='Y' 	
@@ -204,6 +208,13 @@
 					</foreach>
 				</if>		
 				order by jobregdate desc
+	</select>
+	<select id="selectcompany" parameterType="int" resultType="companyvo">
+	select* from company where company_code=#{companyCode}
+	</select>
+	<select id="selectPwdCheck" parameterType="map" resultType="int">
+		select count(*) from member
+		where company_code=#{companyCode} and pwd=#{pwd}
 	</select>
 </mapper>
 

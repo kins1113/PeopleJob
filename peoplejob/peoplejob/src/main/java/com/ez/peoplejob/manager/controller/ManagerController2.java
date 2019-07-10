@@ -132,12 +132,14 @@ public class ManagerController2 {
 	
 	@RequestMapping(value= "/manager/manager/managerEdit.do",method = RequestMethod.POST)
 	public String managerEdit(@RequestParam String adminid, @RequestParam String adminpwd,
-			@RequestParam String authority, Model model) {
+			@RequestParam String authority,
+			@RequestParam String close,
+			Model model) {
 		logger.info("수정 처리 화면 , 파라미터 adminid={}, adminpwd={}",adminid,adminpwd);
-		logger.info("authority={}",authority);
+		logger.info("authority={} close={}",authority,close);
 		
 		int result=managerService.selectPwdById(adminid,adminpwd);
-		String url="/manager/manager/managerList.do", msg="";
+		String url="/manager/manager/managerEdit.do?close=close", msg="";
 		if(result==managerService.LOGIN_OK) {
 			//수정 성공
 			msg="수정 성공";
