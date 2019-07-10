@@ -19,7 +19,7 @@
 	
 	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
 	pwd, birth, membergender, email, tel, authority_code)
-	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
+	values(member_seq.nextval, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
 	#{birth},#{membergender},#{email},#{tel},1)
 	</insert>
 	
@@ -42,6 +42,12 @@
 	where memberid=#{memberid}
 	</update>
 	
+	<update id="memberOut" parameterType="string">
+		update member
+		set WITHDRAWALDATE=sysdate
+		where memberid=#{memberid}
+	</update>
+	
 	<insert id="insertCompany" parameterType="companyVo">
 	<selectKey keyProperty="companyCode" order="BEFORE" resultType="int">
 		select company_seq.nextval from dual
@@ -50,9 +56,20 @@
 	values(#{companyCode}, #{companyname},#{businessNumber})
 	</insert>
 	
-	<update id="memberOut" parameterType="string">
+	<select id="selectCompanyById" resultType="companyVo" parameterType="string">
+		select * from company
+		where company_code=(select company_code from member where memberid=#{memberid})
+	</select>
+	
+	<update id="updateCompany" parameterType="companyVo">
+	update company
+	set image=#{image}, company_zipcode=#{companyZipcode}, company_address=#{companyAddress},company_addressdetail=#{companyAddressdetail}
+	where company_code=#{companyCode}
+	</update>
+	
+	<update id="updatePwd" parameterType="memberVo">
 		update member
-		set WITHDRAWALDATE=sysdate
+		set pwd=#{pwd}
 		where memberid=#{memberid}
 	</update>
 </mapper>

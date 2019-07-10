@@ -75,6 +75,28 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public int updateCompany(CompanyVO companyVo) {
+		return memberDao.updateCompany(companyVo);
+	}
+
+
+	@Override
+	public CompanyVO selectCompanyById(String memberId) {
+		return memberDao.selectCompanyById(memberId);
+	}
+
+
+	@Override
+	public int updatePwd(String memberId, String pwd) {
+		return memberDao.updatePwd(memberId, pwd);
+	}
+
+
+
+
+
+
 
 	
 

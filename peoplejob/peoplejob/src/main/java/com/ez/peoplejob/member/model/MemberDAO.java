@@ -10,4 +10,7 @@ public interface MemberDAO {
 	int memberOut(String memberId);
 	
 	int insertIndividaulMember(MemberVO memberVo);
+	int updateCompany(CompanyVO companyVo);
+	CompanyVO selectCompanyById(String memberId);
+	int updatePwd(String memberId, String pwd);
 }
