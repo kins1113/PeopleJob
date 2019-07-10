@@ -53,7 +53,7 @@
 		select career_seq.nextval from dual
 		</selectKey>
 		insert into career
-		values(#{dvCode},#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{workcondition})
+		values(#{dvCode},#{companyname},#{chargework},#{workcheck},#{jobgrade},#{workcondition},#{workterm},#{workterm2})
 		
 	</insert>
 	
@@ -62,7 +62,7 @@
 		select education_seq.nextval from dual
 		</selectKey>
 		insert into education
-		values(#{academicCode},#{schoolname},#{major},#{degree},#{graduate},#{graduatecheck},#{schoollocal},#{graduatetype})
+		values(#{academicCode},#{schoolname},#{major},#{degree},#{graduatecheck},#{schoollocal},#{graduatetype},#{graduate},#{graduate2})
 		
 	</insert>
 	
@@ -135,22 +135,8 @@
 		select * from member where memberid=#{memberid}
 	</select>
 	
-		<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
-		select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
-    	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
-    	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
-    	hopeworkform,memberid,membername,zipcode,address,addressdetail,birth,
-    	membergender,email,picture,tel,sido,gugun,firstname,secondname,thirdname
-
-		from resume r,langcertification la,career ca,
-    	certificate ce,education ed,Hope_working ho,
-    	member m,location lo,first f,second s ,third t
-
-		where r.langlicence_code=la.langlicence_code and r.LICENCE_CODE=ce.L_NO and 
-    	r.DV_CODE = ca.DV_CODE and r.ACADEMIC_CODE=ed.ACADEMIC_CODE and 
-    	r.DESIREDWORK_CODE=ho.HOPEWORK_CODE and m.MEMBER_CODE = r.MEMBER_CODE and 
-    	ho.LOCAL_CODE=lo.LOCAL_CODE and ho.FIRSTJOB_CODE=f.FIRST_CODE and 
-    	f.SECOND_CODE = s.SECOND_CODE and s.THIRD_CODE = t.THIRD_CODE and resume_code=#{resumeCode}
+	<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
+		select * from resume where resume_code=#{resumeCode}
 	</select>
 		
 		<delete id="deleteResumeByNo" parameterType="int">
@@ -182,6 +168,23 @@
 			 
 		where resume_code=#{resumeCode}
 	</update>
+<!-- 		<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
+		select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
+    	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
+    	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
+    	hopeworkform,memberid,membername,zipcode,address,addressdetail,birth,
+    	membergender,email,picture,tel,sido,gugun,firstname,secondname,thirdname
+
+		from resume r,langcertification la,career ca,
+    	certificate ce,education ed,Hope_working ho,
+    	member m,location lo,first f,second s ,third t
+
+		where r.langlicence_code=la.langlicence_code and r.LICENCE_CODE=ce.L_NO and 
+    	r.DV_CODE = ca.DV_CODE and r.ACADEMIC_CODE=ed.ACADEMIC_CODE and 
+    	r.DESIREDWORK_CODE=ho.HOPEWORK_CODE and m.MEMBER_CODE = r.MEMBER_CODE and 
+    	ho.LOCAL_CODE=lo.LOCAL_CODE and ho.FIRSTJOB_CODE=f.FIRST_CODE and 
+    	f.SECOND_CODE = s.SECOND_CODE and s.THIRD_CODE = t.THIRD_CODE and resume_code=#{resumeCode}
+	</select> -->
 	
 	<!-- <insert id="insertResume" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="resumeCode,langlicenceCode,dvCode,licenceCode,academicCode,desiredworkCode,memberCode" resultType="hashmap">
