@@ -4,21 +4,32 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.resume">
 	
-	<insert id="insertMember2" parameterType="resumeVo">
-		<selectKey keyProperty="memberCode" order="BEFORE" resultType="int">
-			select member_seq.nextval from dual
-		</selectKey>
-	insert into member(member_code, membername, zipcode, address, addressdetail, birth, membergender, email, tel)
-	values(#{memberCode},  #{membername},#{zipcode},#{address},#{addressdetail}, 
-	#{birth},#{membergender},#{email},#{tel})
-	</insert>	
-		
+	<select id="selectBylanglicenceCode" parameterType="int" resultType="resumeVo">
+		select * from langcertification where langlicence_code=#{langlicenceCode}
+	</select>
+	<select id="selectBylicenceCode" parameterType="int" resultType="resumeVo">
+		select * from certificate where l_no=#{l_no}
+	</select>
+	<select id="selectBydvCode" parameterType="int" resultType="resumeVo">
+		select * from career where dv_code=#{dvCode}
+	</select>
+	<select id="selectByacademicCode" parameterType="int" resultType="resumeVo">
+		select * from education where academic_code=#{academicCode}
+	</select>
+	<select id="selectBydesiredWorkCode" parameterType="int" resultType="resumeVo">
+		select * from hope_working where hopework_code=#{hopeworkCode}
+	</select>
+	<select id="selectBymemberCode" parameterType="int" resultType="resumeVo">
+		select * from member where member_code=#{memberCode}
+	</select>
+	
+
 	<insert id="insertResume" parameterType="resumeVo">
-		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int">
-		select resume_seq.nextval from dual
+		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int" >
+			select resume_seq.nextval from dual
 		</selectKey>
-		insert into resume(resume_code,resumeTitle,resumeRegdate,introduce,award,langlicence_code,licence_code,dv_code,academic_code,desiredwork_code,opencheck,member_code,picture)
-		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredworkCode},#{opencheck},#{memberCode},#{picture})
+		insert into resume(resume_code,resumeTitle,resumeRegdate,introduce,award,opencheck,member_code,picture)
+		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{opencheck},#{memberCode},#{picture})
 	</insert>
 	
 	<insert id="insertLangcertification" parameterType="resumeVo">
@@ -34,7 +45,7 @@
 		select certificate_seq.nextval from dual
 		</selectKey>
 		insert into certificate(l_no,l_name,l_getdate,l_institution)
-		values(#{lNo},#{lName},#{lGetdate},#{lInstitute})
+		values(#{lNo},#{lName},#{lGetdate},#{lInstitution})
 	</insert>
 	
 	<insert id="insertCareer" parameterType="resumeVo">
@@ -59,8 +70,8 @@
 		<selectKey order="BEFORE" keyProperty="hopeworkCode" resultType="int">
 		select hope_working_seq.nextval from dual
 		</selectKey>
-		insert into hope_working 
-		values(#{hopeworkCode},#{jobtype},#{hopepay},#{hopeworkform},#{localCode},#{firstjobCode},#{hopeworkdate})
+		insert into hope_working (hopework_code,jobtype,hopepay,hopeworkform,firstjob_code,hopeworkdate)
+		values(#{hopeworkCode},#{jobtype},#{hopepay},#{hopeworkform},#{firstjobCode},#{hopeworkdate})
 		
 	</insert>
 	
@@ -91,7 +102,7 @@
 		
 	</insert>
 	<insert id="insertThird" parameterType="resumeVo">
-		<selectKey order="BEFORE" keyProperty="thirdCode" resultType="int">
+	<selectKey order="BEFORE" keyProperty="thirdCode" resultType="int">
 		select third_seq.nextval from dual
 		</selectKey>
 		insert into third
@@ -106,7 +117,7 @@
 		    from
 		    (
 		        select 
-		        resume_code,resumetitle, resumeregdate, opencheck 
+		        resume_code,resumeTitle, resumeRegdate, opencheck 
 		        
 					
 				from resume		

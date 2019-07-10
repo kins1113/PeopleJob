@@ -64,8 +64,19 @@
 		$("#goToBoardList").click(function(){
 			location.href="<c:url value='/manager/board/boardList.do'/>";
 		});
+		
 	})
+	//카테고리 사용중 / 미사용중
+	function boardKindChange(useCk,typeCode){
+		$("input[name=useCk]").val(useCk);
+		$("input[name=typeCode]").val(typeCode);
+		$("#BKChange").submit();
+	}
 </script>
+<form id="BKChange" action="<c:url value='/manager/board/boardKindChange.do'/>" method="post"> 
+	<input type="hidden" name="useCk">
+	<input type="hidden" name="typeCode">
+</form>
  <div class="content-wrapper">
           <div class="content">		
           	<div class="breadcrumb-wrapper">
@@ -78,13 +89,13 @@
 		<div class="card-body">
 			<ul class="nav nav-pills nav-justified nav-style-fill" id="myTab" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link active" id="home3-tab" data-toggle="tab" href="#home3" role="tab" aria-controls="home3" aria-selected="true">게시판 추가</a>
+					<a class="nav-link " id="home3-tab" data-toggle="tab" href="#home3" role="tab" aria-controls="home3" aria-selected="true">게시판 추가</a>
 				</li>
 				<li class="nav-item" >
 					<a class="nav-link" id="profile3-tab" data-toggle="tab" href="#profile3" role="tab" aria-controls="profile3" aria-selected="false">카테고리 추가</a>
 				</li>
 			</ul>
-			<div class="tab-content" id="myTabContent4">
+			<div class="tab-content active" id="myTabContent4">
 				<div class="tab-pane pt-3 fade show active" id="home3" role="tabpanel" aria-labelledby="home3-tab">
 					<!-- 게시판 추가 -->
 					
@@ -190,10 +201,10 @@
 														<td scope="row">${vo.type }</td>
 														<td>
 														<c:if test="${vo.usage=='Y' }">
-															사용중
+															<a href="#" onclick="boardKindChange('${vo.usage }','${vo.typeCode}')">사용중</a>
 														</c:if>
 														<c:if test="${vo.usage!='Y' }">
-															미사용
+															<a href="#" onclick="boardKindChange('${vo.usage }','${vo.typeCode }')">미사용</a>
 														</c:if>
 														</td>
 														<td>

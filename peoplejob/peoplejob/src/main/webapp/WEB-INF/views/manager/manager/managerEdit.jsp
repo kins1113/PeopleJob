@@ -115,13 +115,19 @@
 	
 	function managerEdit(){
 		if(confirm("수정 하시겠습니까?")){
+			$("input[name=close]").val("close");
 			$("form[name=managerAddForm]").submit();
 		}
 	}
+	$(function(){
+		if($("input[name=close]").val()=="close"){
+			opener.parent.location.reload();
+			window.close();
+		}
+	});
 </script>
 </head>
 <body>
-
 
 	<div class="content-wrapper">
 		<div class="content">
@@ -130,11 +136,13 @@
 					<div class="card card-default">
 						<div class="card-header card-header-border-bottom">
 							<h2>관리자 수정</h2>
+							${close }${close }${close }${close }${close }${param.close }${param.close }${param.close }
 						</div>
 	<div class="card-body">
 		<form 
 				action="<c:url value='/manager/manager/managerEdit.do'/>" 		
 				method="post" name="managerAddForm">
+				<input type="hidden" name="close"  value="${param.close}">
 			<div class="form-row">
 				<div class="col-md-12 mb-3">
 					<label for="validationServer01">아이디</label> 

@@ -61,7 +61,7 @@ public class ManagerEmailController {
 		  
 		  //보내는 사람 쪽의 메일 정보
 		  String host     = "smtp.naver.com";
-		  final String user   = "kins1113";
+		  final String user   = "kins1113@naver.com";
 		  final String password  = "kimok1277!";
 		  //받는 사람 메일 주소
 		  String to     =emailAddress;

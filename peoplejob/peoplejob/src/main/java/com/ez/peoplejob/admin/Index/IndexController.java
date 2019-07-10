@@ -14,4 +14,10 @@ public class IndexController {
 		logger.info("index 화면 보여주기");
 		return "manager/index";
 	}
+	
+	@RequestMapping("/manager/company/companyList.do")
+	public String manager_companyList() {
+		logger.info("기업회원 관리 보여주기");
+		return "manager/company/companyList";
+	}
 }

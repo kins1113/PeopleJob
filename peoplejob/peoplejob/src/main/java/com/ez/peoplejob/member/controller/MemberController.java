@@ -1,5 +1,8 @@
 package com.ez.peoplejob.member.controller;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -57,7 +60,6 @@ public class MemberController {
 	public String register_post(@ModelAttribute MemberVO memberVo, Model model) {
 		logger.info("회원가입 등록 처리 파라미터 memberVo={}",memberVo);
 		logger.info("회원가입 등록 파라미터, 권한번호 authority_code={}",memberVo.getAuthorityCode());
-		memberVo.setAuthorityCode(1);
 		
 		int cnt=memberService.insertIndividaulMember(memberVo);
 		logger.info("회원가입 등록 처리 결과 cnt={}",cnt);
@@ -415,4 +417,110 @@ public class MemberController {
 		
 		
 	}
-} 
+	
+	@RequestMapping(value="/c_update.do", method = RequestMethod.GET)
+	public String c_update(HttpSession session, Model model, HttpServletRequest request) {
+		logger.info("기업정보 수정 화면 보여주기");
+		String memberId=(String) session.getAttribute("memberid");
+		MemberVO memberVo=memberService.selectByUserid(memberId);
+		logger.info("아이디로 member select 결과 memberVo={}",memberVo);
+		
+		CompanyVO companyVo=memberService.selectCompanyById(memberId);
+		logger.info("아이디로 company select 결과 companyVo={}",companyVo);
+		
+		String fileInfo
+		=fileUploadUtil.getFileInfo(companyVo.getImage(), 1, request);
+		model.addAttribute("fileInfo", fileInfo);
+		
+		model.addAttribute("memberVo",memberVo);
+		model.addAttribute("companyVo",companyVo);
+		return "login/c_update";
+	}
+	
+	@RequestMapping(value="/c_update.do", method = RequestMethod.POST)
+	public String c_update(@ModelAttribute CompanyVO companyVo, Model model, HttpServletRequest request
+			, @RequestParam String oldFileName, HttpSession session, @ModelAttribute MemberVO memVo) {
+		
+		logger.info("기업정보 수정 화면 처리 파라미터, companyVo={}, oldfileName={}",companyVo,oldFileName);
+		logger.info("가져온 memVo={}", memVo);
+		String memberId=(String)session.getAttribute("memberid");
+		
+		//아이디로 memberVo가져오기 (비밀번호 가져오기)
+		MemberVO memberVo=memberService.selectByUserid(memberId);
+		logger.info("아이디로 memberVo 가져오기 결과 memberVo={}",memberVo);
+		
+		//파일이 있을 경우 파일 업로드
+		List<Map<String,Object>>list=fileUploadUtil.fileUpload(request);
+		String imageURL="";
+		for(Map<String,Object>map:list) {
+			imageURL=(String)map.get("fileName");
+		}
+		
+		companyVo.setImage(imageURL);
+		
+		//수정처리 전 비밀번호 체크
+		int result=memberService.loginCheck(memberId, memVo.getPwd());
+		logger.info("로그인 체크  결과 result={}",result);
+		
+		String msg="", url="/login/c_update.do";
+		if(result==MemberService.LOGIN_OK) {
+			int cnt=memberService.updateCompany(companyVo);
+			logger.info("기업정보 수정 처리 결과 cnt={}",cnt);
+			
+		if(cnt>0) {
+			msg="기업정보 수정이 완료되었습니다.";
+			url="/mypage/user/userpage.do";
+			if(imageURL!=null && !imageURL.isEmpty()) {
+				if(oldFileName!=null && !oldFileName.isEmpty()) {
+					String path=fileUploadUtil.getUploadPath(request);
+					File oldFile=new File(path, oldFileName);
+					if(oldFile.exists()) {
+						boolean bool=oldFile.delete();
+						logger.info("기존 파일 삭제 여부={}", bool);
+					}
+				}
+			}//기존 image가 있을 때 삭제
+		
+	}else {
+		msg="기업정보 수정 실패";
+	}
+		}else if(result==MemberService.PWD_DISAGREE) {
+		msg="비밀번호가 일치하지 않습니다.";
+		
+	}else {
+		msg="비밀번호를 입력해 주세요";
+	}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
+	
+	} 
+	
+	@RequestMapping(value="/changePwd.do",method = RequestMethod.GET)
+	public String changePwd() {
+		logger.info("비밀번호 변경 화면 보여주기");
+		return "login/changePwd";
+	}
+	
+	@RequestMapping(value="/changePwd.do",method = RequestMethod.POST)
+	public String changePwd(@RequestParam String pwd,Model model,HttpSession session) {
+		logger.info("비밀번호 변경 처리 파라미터, pwd={}",pwd);
+		String memberId=(String) session.getAttribute("memberid");
+		
+		int cnt=memberService.updatePwd(memberId, pwd);
+		logger.info("비밀번호 변경 결과 cnt={]",cnt);
+		
+		String msg="", url="/login/changePwd.do";
+		if(cnt>0) {
+			msg="비밀번호가 수정되었습니다.";
+			url="/mypage/user/userpage.do";
+		}else {
+			msg="비밀번호 수정 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
+	}
+	
+}
