@@ -84,6 +84,9 @@ public class JobopeningController {
 			@RequestParam(required=false) String[] academicCondition1, HttpSession session,
 			@ModelAttribute SearchVO searchVo,Model model) {
 		String id=(String)session.getAttribute("memberid");
+		if(id==null) {
+			id="1";
+		}
 		MemberVO mvo=memberService.selectByUserid(id);
 		logger.info("로그인한 회원정보 mvo={}",mvo);
 		logger.info("채용공고 리스트");
@@ -188,6 +191,9 @@ public class JobopeningController {
 		logger.info("채용공고뷰보기 파라미터 jobopening={}",jobopening);
 		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
 		String id=(String)session.getAttribute("memberid");
+		if(id==null) {
+			id="1";
+		}
 		MemberVO mvo=memberService.selectByUserid(id);
 		logger.info("로그인한 회원 정보 mvo={}",mvo);
 		logger.info("자세히보기 변수 vo=",vo);

@@ -8,7 +8,7 @@
 </script>
 
 <script type="text/javascript">
-$(document).ready(function(){
+/* $(document).ready(function(){
 		var a;
 		$("input[name='welfare1']").click(function(idx,item){
 			if($(this).is(':checked')){
@@ -20,7 +20,21 @@ $(document).ready(function(){
 			}
 		});
 		
-	});
+	}); */
+	function s_it()
+	{
+	  var total_str = "";
+	  var obj = document.getElementsByName("welfare1");
+
+	  for (i=0; i < obj.length; i++)
+	  {
+	    if (obj[i].checked == true)
+	    {
+	      total_str += (total_str != "") ? "," + obj[i].value : obj[i].value;
+	    }
+	  }
+	  document.getElementById("welfare").value = total_str;
+	}
 </script>
 <article>
 <fieldset>
@@ -144,16 +158,16 @@ $(document).ready(function(){
                 <div class="col-sm-offset-2 col-sm-10">
                 <label class="control-label">복리후생</label>
                 <br>  
-                    <label><input type="checkbox" name="welfare1" id="welfare1" value="국민연금" /> 국민연금</label>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="건강보험" /> 건강보험</label>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="고용보험" /> 고용보험</label><br>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="산재보험" /> 산재보험</label>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="야근수당"/> 야근수당</label>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="식대(점심)"/> 식대(점심)</label><br>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="식대(저녁)"/> 식대(저녁)</label>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="교통비"/> 교통비</label>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="통신비" /> 통신비</label><br>
-                    <label><input type="checkbox" name="welfare1" id="welfare1"value="퇴직금"/> 퇴직금</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1" value="국민연금" onclick="javascript_:s_it()"/> 국민연금</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="건강보험" onclick="javascript_:s_it()"/> 건강보험</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="고용보험" onclick="javascript_:s_it()"/> 고용보험</label><br>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="산재보험" onclick="javascript_:s_it()"/> 산재보험</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="야근수당"onclick="javascript_:s_it()"/> 야근수당</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="식대(점심)"onclick="javascript_:s_it()"/> 식대(점심)</label><br>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="식대(저녁)"onclick="javascript_:s_it()"/> 식대(저녁)</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="교통비"onclick="javascript_:s_it()"/> 교통비</label>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="통신비" onclick="javascript_:s_it()"/> 통신비</label><br>
+                    <label><input type="checkbox" name="welfare1" id="welfare1"value="퇴직금"onclick="javascript_:s_it()"/> 퇴직금</label>
                    <input type="text" id="welfare" name="welfare"  class="form-control">
                 </div>
             </div>
