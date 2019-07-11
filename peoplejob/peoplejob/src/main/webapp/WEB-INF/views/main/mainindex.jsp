@@ -328,6 +328,49 @@ button.btnLogin {
 span.tx {
     margin-left: -120px;
 }
+
+input[type="checkbox"] {
+    display: inline;
+}
+.p-t-35{
+	margin-left: -34px;
+}
+
+.rankingColumn {
+    margin-top: -45px;
+    border: 1px solid #dbe0e9;
+    background-color: #fff;
+    box-sizing: border-box;
+    width: 280px;
+    float: right;
+    
+}
+
+.rankListWap {
+    position: relative;
+}
+
+/* 페이지수 */
+.rankListWap .carousel-pagination {
+    position: absolute;
+    top: 16px;
+    right: 65px;
+    font: 11px verdana, sans-serif;
+    color: #999;
+}
+
+/* 리스트 패딩 */
+.rankListWap .infoList {
+    font-size: 13px;
+    padding: 12px 14px 10px 16px;
+}
+
+/* 더보기 */
+.rankListWap .btnMore {
+    margin: 3px 14px 0 0;
+    text-align: right;
+}
+
 </style>
 </head>
 <body class="animsition">
@@ -343,7 +386,7 @@ span.tx {
 	<!-- Post -->
 
 	<!-- Banner -->
-	<div class="container" style="max-width: 105%">
+	<div class="container" style="max-width: 105%;  /*   border-top: 3px solid seagreen */">
 		<div class="flex-c-c" style="margin-top: 10px">
 			<a href="#">
 				 <img class="max-w-full" src="<c:url value='/resources/main/images/190125_apple_752x110.png'/>" alt="IMG"> 
@@ -398,7 +441,7 @@ span.tx {
 		</div>
 
 	<!-- Latest -->
-	<section class="bg0 p-t-60 p-b-35" style="margin-top: -40px;">
+	<section class="bg0 p-t-60 p-b-35" style="margin-top: -40px;" >
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 col-lg-8 p-b-20">
@@ -407,7 +450,7 @@ span.tx {
 							채용정보
 						</h3>
 						<h5> VVIP</h5>
-						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
+						<h5 style="margin-left: 510px;"><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
 					</div>
 
 					<div class="row p-t-35" style="padding-top: 0px;margin-left: 0px;width: 109%;">
@@ -636,6 +679,68 @@ span.tx {
 						
 					</div>
 				</div> 
+				<div class="devRankingWrap devStarter" style="display:block;">
+
+<div class="rankingColumn devRanking" id="ranking_carousel_1">
+    <h3 class="blind">신입 랭킹</h3>
+    <div id="ranking_carousel" class="rankListWap">
+        <div class="carousel-pagination">
+            <!-- <span class="carousel-pagination-current">3</span>/<span class="carousel-pagination-total">4</span> -->
+        </div>
+        <ul class="carousel-wrapper">
+                
+
+               <li class="carousel-slide on">
+                    <h4 class="hd_4">마감 임박 공채</h4>
+                    <ul class="infoList endList">
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">㈜GS리테일</a></span>
+                                <span class="txBx">~16시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">호텔신라</a></span>
+                                <span class="txBx">~17시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">에스케이이노베이션</a></span>
+                                <span class="txBx">~24시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">한국국제협력단</a></span>
+                                <span class="txBx">~15시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">주식회사 캠시스</a></span>
+                                <span class="txBx">~07.08</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">대한무역투자진흥공사</a></span>
+                                <span class="txBx">~24시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank"> 한국건설기술연구원</a></span>
+                                <span class="txBx">~24시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="_blank">(재)씨젠의료재단</a></span>
+                                <span class="txBx">~24시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="<c:url value='https://www.naver.com'/>" class="devClick devHref" data-click-value="98" target="_blank">(재)전라북도생물산업진흥원</a></span>
+                                <span class="txBx">~18시</span>
+                            </li>
+                            <li>
+                                <span class="titBx"><a href="#" class="devClick devHref" data-click-value="98" target="">위본건설㈜</a></span>
+                                <span class="txBx">~24시</span>
+                            </li>
+                    </ul>
+                </li>
+                   
+        </ul>
+      
+    </div>
+</div>
+    </div>
 				<!-- 공지사항 -->
 				<%-- <div class="col-md-10 col-lg-4">
 					<img alt="사이드배너" src="<c:url value='/resources/main/images/skybanner.png'/>">
@@ -648,7 +753,7 @@ span.tx {
 							채용정보
 						</h3>
 						<h5> VIP </h5>
-						<h5><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
+						<h5 style="margin-left: 525px;"><a href="<c:url value='/service/payment.do'/> "> >상품문의 </a></h5>
 					</div>
 
 					<div class="row p-t-35" style="padding-top: 0px;margin-left: 0px;width: 109%;">

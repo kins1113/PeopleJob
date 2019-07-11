@@ -221,7 +221,7 @@ $(function() {
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="text" name="chkId"  id="chkId" tabindex="1" 
+										<input type="hidden" name="chkId"  id="chkId" tabindex="1" 
 										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px">
 									</div>
 									

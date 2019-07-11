@@ -57,7 +57,7 @@
 
 </pre>
 							<p class="p">비밀번호를 변경하시겠습니까?</p>
-	<form name="frmOut" method="post" action="<c:url value='/login/memberOut.do'/>">
+	<form name="frmOut" method="post" action="<c:url value='/login/changePwd.do'/>">
 		<fieldset>
 			<div class="form-group" >
 				<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Password"
