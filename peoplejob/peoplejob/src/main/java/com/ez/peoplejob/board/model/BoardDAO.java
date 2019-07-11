@@ -9,4 +9,5 @@ public interface BoardDAO {
 	int boardUpdate(Map<String, Object> map);
 	int deleteMultDelete(Map<String, int[]> map);
 	public List<BoardVO> selectByCodeVariable(Map<String, int[]> map);
+	int boardEdit(BoardVO boardVo);
 }

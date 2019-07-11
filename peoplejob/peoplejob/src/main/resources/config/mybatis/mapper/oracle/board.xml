@@ -62,6 +62,12 @@
 		</foreach>
 	</select>
 
+	<update id="boardEdit" parameterType="boardVo" >
+		update board
+		set boardname=#{boardname}, boardupdate = sysdate , last_admin= #{lastAdmin} , usage='Y' , 
+			commentage=#{commentage}, upage=#{upage}, upnumage=#{upnumage} ,upsizeage=#{upsizeage} , type_code=#{typeCode}
+		where board_code1=#{boardCode1}
+	</update>
 </mapper>
 
 
