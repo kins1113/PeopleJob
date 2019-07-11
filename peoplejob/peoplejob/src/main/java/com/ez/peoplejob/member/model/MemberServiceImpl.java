@@ -1,8 +1,5 @@
 package com.ez.peoplejob.member.model;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,15 +74,6 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.insertIndividaulMember(memberVo);
 	}
 
-	@Override	// 관리자용 전체 조회 메서드 -옥환
-	public List<MemberVO> selectAllManager(Map<String, Object> map) {
-		return memberDao.selectAllManager(map);
-	}
-	@Override	// 관리자용 totalRecord 구하는 메서드 -옥환
-	public int getTotalRecord(Map<String, Object> map) {
-		return memberDao.getTotalRecord(map);
-	}
-
 
 	@Override
 	public int updateCompany(CompanyVO companyVo) {
@@ -106,5 +94,8 @@ public class MemberServiceImpl implements MemberService{
 
 
 
+
+
+	
 
 }

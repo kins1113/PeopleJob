@@ -19,7 +19,7 @@
 	
 	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
 	pwd, birth, membergender, email, tel, authority_code)
-	values(member_seq.nextval, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
+	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
 	#{birth},#{membergender},#{email},#{tel},1)
 	</insert>
 	
@@ -40,12 +40,6 @@
 	set zipcode=#{zipcode}, address=#{address}, addressdetail=#{addressdetail},
 	birth=#{birth},membergender=#{membergender},email=#{email},tel=#{tel}
 	where memberid=#{memberid}
-	</update>
-	
-	<update id="memberOut" parameterType="string">
-		update member
-		set WITHDRAWALDATE=sysdate
-		where memberid=#{memberid}
 	</update>
 	
 	<insert id="insertCompany" parameterType="companyVo">
@@ -69,71 +63,15 @@
 	where company_code=#{companyCode}
 	</update>
 	
-	<update id="updatePwd" parameterType="memberVo">
+	 <update id="updatePwd" parameterType="memberVo">
 		update member
 		set pwd=#{pwd}
 		where memberid=#{memberid}
+	</update> 
+	
+	<update id="memberOut" parameterType="string">
+		update member
+		set WITHDRAWALDATE=sysdate
+		where memberid=#{memberid}
 	</update>
-	
-	<select id="selectAllManager" parameterType="map" resultType="memberVo">
-		select * from 
-		(
-			select A.*, rownum as RNUM from 
-			( 
-			select * from member
-				<where>
-					<if test="memberVo.searchCondition!= null and memberVo.searchCondition!=''
-								and memberVo.searchKeyword!= null and memberVo.searchKeyword!=''">
-							
-							<if test='memberVo.searchCondition=="memberid"'>
-									 memberid like  '%' || #{memberVo.searchKeyword} || '%'
-							</if>
-							<if test='memberVo.searchCondition=="membername"'>
-									 membername like  '%' || #{memberVo.searchKeyword}  || '%'
-							</if>
-							<if test='memberVo.searchCondition=="tel"'>
-									 tel like  '%' || #{memberVo.searchKeyword} || '%'
-							</if>
-							<if test='memberVo.searchCondition=="email"'>
-									 email like  '%' || #{memberVo.searchKeyword} || '%'
-							</if>
-							<if test="startDay!=null and startDay !=''">
-								 <![CDATA[regdate > #{startDay} and regdate <=to_date(#{endDay})+1]]>
-							</if>
-					</if>				
-				</where>
-				 order by member_code desc
-	 		) A
-		) 
-		<![CDATA[where RNUM>#{memberVo.firstRecordIndex}  
-		and RNUM<=#{memberVo.firstRecordIndex} + #{memberVo.recordCountPerPage}]]> 
-	</select>
-	
-	<select id="getTotalRecord" parameterType="map" resultType="int">
-		select count(*) from member
-		<where>
-			<if test="memberVo.searchCondition!= null and memberVo.searchCondition!=''
-								and memberVo.searchKeyword!= null and memberVo.searchKeyword!=''">
-			
-				<if test='memberVo.searchCondition=="memberid"'>
-						 memberid like  '%' || #{memberVo.searchKeyword} || '%'
-				</if>
-				<if test='memberVo.searchCondition=="membername"'>
-						 membername like  '%' || #{memberVo.searchKeyword}  || '%'
-				</if>
-				<if test='memberVo.searchCondition=="tel"'>
-						 tel like  '%' || #{memberVo.searchKeyword} || '%'
-				</if>
-				<if test='memberVo.searchCondition=="email"'>
-						 email like  '%' || #{memberVo.searchKeyword} || '%'
-				</if>
-				<if test="startDay!=null and startDay !=''">
-					 <![CDATA[regdate > #{startDay} and regdate <=to_date(#{endDay})+1]]>
-				</if>
-			</if>				
-		</where>
-		
-		 order by member_code desc
-		
-	</select>
 </mapper>

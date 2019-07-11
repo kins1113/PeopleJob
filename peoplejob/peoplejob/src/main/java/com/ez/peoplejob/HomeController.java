@@ -35,9 +35,5 @@ public class HomeController {
 		
 		return "home";
 	}
-	@RequestMapping("/inc/searchDate.do")
-	public void searchDate() {
-		
-	}
 	
 }

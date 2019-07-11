@@ -13,7 +13,7 @@
 $(function() {
 	
 	$('form[name=updateU]').submit(function(){
-	 	$('.form-control infobox').each(function(){
+	/* 	$('.form-control infobox').each(function(){
 			if($(this).val().length<1){
 				var msg=$(this).attr('title');
 				alert(msg+"칸을 입력해주세요");
@@ -22,11 +22,8 @@ $(function() {
 				return false;
 			}
 			
-		}); 
-	 	
-	 	//membergender가 '남'이면 radio첫번째 체크되게, 아니면 두번째 체크되게
-	 	
-			/* if($('#pwd').val()==''){
+		}); */
+			if($('#pwd').val()==''){
 				alert('비밀번호를 입력해주세요');
 				$('#pwd').focus();
 				event.preventDefault();
@@ -51,7 +48,7 @@ $(function() {
 				$('#emailcertificatenum').focus();
 				event.preventDefault();
 				return false;
-			} */
+			}
 		
 		 
 	});

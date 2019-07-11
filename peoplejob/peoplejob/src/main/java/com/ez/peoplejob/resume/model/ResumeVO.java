@@ -68,24 +68,9 @@ public class ResumeVO {
 	private String langGrade;
 	private String major;
 	private String degree;
-	private String workterm2;
-	private String graduate2;
 	
 	
 	
-	public String getWorkterm2() {
-		return workterm2;
-	}
-	public void setWorkterm2(String workterm2) {
-		this.workterm2 = workterm2;
-	}
-	
-	public String getGraduate2() {
-		return graduate2;
-	}
-	public void setGraduate2(String graduate2) {
-		this.graduate2 = graduate2;
-	}
 	public String getDegree() {
 		return degree;
 	}
@@ -500,8 +485,7 @@ public class ResumeVO {
 				+ ", graduate=" + graduate + ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal
 				+ ", workcheck=" + workcheck + ", jobgrade=" + jobgrade + ", workcondition=" + workcondition
 				+ ", certificationtype=" + certificationtype + ", language=" + language + ", langpoint=" + langpoint
-				+ ", langGrade=" + langGrade + ", major=" + major + ", degree=" + degree + ", workterm2=" + workterm2
-				+ ", graduate2=" + graduate2 + "]";
+				+ ", langGrade=" + langGrade + ", major=" + major + ", degree=" + degree + "]";
 	}
 	
 	

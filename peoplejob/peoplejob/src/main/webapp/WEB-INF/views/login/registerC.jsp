@@ -149,9 +149,10 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-									<form action="<c:url value='/login/registerC.do'/>" method="post"
-								name="registerC" enctype="multipart/form-data">
-
+							
+								 <form id="" action="<c:url value='/login/registerC.do'/> " 
+								method="post" role="form" style="display: block;" name="registerC"  enctype="multipart/form-data">
+								
 									<input type="hidden" name="authorityCode" value=2>
 									<input type="hidden" name="zipcode">
 									<input type="hidden" name="address">

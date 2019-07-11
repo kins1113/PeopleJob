@@ -14,7 +14,7 @@
 </style>  
 </head>
 <body>
-	<h2>이력서 상세보기</h2>
+	<h2>글 상세보기</h2>
 	<div class="divForm">
 
 		<div class="firstDiv">

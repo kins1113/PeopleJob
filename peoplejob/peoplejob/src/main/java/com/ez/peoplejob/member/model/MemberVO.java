@@ -6,6 +6,7 @@ import com.ez.peoplejob.common.SearchVO;
 
 public class MemberVO extends SearchVO{
 	private int memberCode;
+
 	private String memberid;
 	private Timestamp regdate;
 	private String membername;
@@ -120,7 +121,7 @@ public class MemberVO extends SearchVO{
 				+ zipcode + ", address=" + address + ", addressdetail=" + addressdetail + ", memberCode=" + memberCode
 				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
 				+ membergender + ", email=" + email + ", tel=" + tel + ", authorityCode=" + authorityCode
-				+ ", companyCode=" + companyCode + ", toString()=" + super.toString() + "]";
+				+ ", companyCode=" + companyCode + "]";
 	}
 	
 	

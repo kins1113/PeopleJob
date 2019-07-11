@@ -98,24 +98,18 @@ public class ResumeController {
 	
 	
 	@RequestMapping("/detail.do")
-	public String detail(@ModelAttribute ResumeVO resumeVo, 
-			Model model) {
-		logger.info("이력서 상세보기, 파라미터 resumeCode={}", resumeVo);
+	public String detail(@RequestParam(defaultValue = "0") int resumeCode, 
+			ModelMap model) {
+		logger.info("글 상세보기, 파라미터 resumeCode={}", resumeCode);
 		
-		if(resumeVo.getResumeCode()==0) {
+		if(resumeCode==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/resume/list.do");
 			
 			return "common/message";
 		}
 		
-		ResumeVO vo=resumeService.selectBymemberCode(resumeVo.getMemberCode());
-		vo=resumeService.selectByacademicCode(resumeVo.getAcademicCode());
-		vo=resumeService.selectBydvCode(resumeVo.getDvCode());
-		vo=resumeService.selectBylicenceCode(resumeVo.getLicenceCode());
-		vo=resumeService.selectBylanglicenceCode(resumeVo.getLanglicenceCode());
-		vo=resumeService.selectBydesiredWorkCode(resumeVo.getDesiredWorkCode());
-		vo=resumeService.selectResumeByNo(resumeVo.getResumeCode());
+		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
 		logger.info("상세보기 결과 vo={}", vo);
 		
 		model.addAttribute("vo", vo);

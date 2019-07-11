@@ -61,6 +61,7 @@ public class MemberController {
 	public String register_post(@ModelAttribute MemberVO memberVo, Model model) {
 		logger.info("회원가입 등록 처리 파라미터 memberVo={}",memberVo);
 		logger.info("회원가입 등록 파라미터, 권한번호 authority_code={}",memberVo.getAuthorityCode());
+		memberVo.setAuthorityCode(1);
 		
 		int cnt=memberService.insertIndividaulMember(memberVo);
 		logger.info("회원가입 등록 처리 결과 cnt={}",cnt);
@@ -96,18 +97,7 @@ public class MemberController {
 		
 		String msg="",url="/login/registerC.do";
 		
-		String imageURL="";
 		if(cnt>0) {
-			companyVo.setImage(imageURL);
-			int cnt2=memberService.insertCompany(companyVo);
-			logger.info("기업회원가입 처리 시, 회사등록 결과 cnt2={}",cnt2);
-			if(cnt2>0) {
-				msg="기업회원 회원가입이 완료되었습니다. "
-						+ "관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.";
-				url="/login/login.do";
-			}else {
-				msg="기업등록 실패";
-			}
 			msg="기업회원 회원가입이 완료되었습니다. "
 					+ "하루 뒤 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.";
 			url="/login/login.do";
@@ -572,3 +562,4 @@ public class MemberController {
 	}
 	
 }
+

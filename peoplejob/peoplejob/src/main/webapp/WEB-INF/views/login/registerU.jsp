@@ -309,21 +309,23 @@ textarea {
 					</div>
 					<hr>
 				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-lg-12">
-							<form id="login-form"
-								action="<c:url value='/login/registerU.do'/> " method="post"
-								role="form" style="display: block;" name="registerU">
-								<input type="hidden" name="authorityCode" value=1>
-
-								<div class="form-group" style="float: left; margin-right: 30px;">
-									<input type="text" name="memberid" id="memberid" tabindex="1"
-										placeholder="아이디 *" class="form-control infobox"
-										style="width: 250px" title="아이디">
-								</div>
+			
 
 								<div class="form-group">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form id="login-form" action="<c:url value='/login/registerU.do'/> " 
+								method="post" role="form" style="display: block;" name="registerU">
+									<input type="hidden" name="authorityCode" value=1>
+									<!--  <input type="hidden" name="companyCode" id="companyCode">  -->
+									
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
+										class="form-control infobox" style="width:250px" title="아이디">
+									</div>
+									
+									<div class="form-group">
 									<div class="row">
 										<span class="error"></span>
 									</div>
@@ -535,6 +537,7 @@ textarea {
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <%@include file="../main/inc/bottom.jsp"%>

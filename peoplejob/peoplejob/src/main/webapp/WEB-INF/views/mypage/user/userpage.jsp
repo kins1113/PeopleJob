@@ -64,7 +64,7 @@
 							</div>
 
 							<div class="wrap-pic-max-w p-b-30">
-							이력서 리스트 띄우기
+								<img src="images/blog-list-01.jpg" alt="IMG">
 							</div>
 
 							<p class="f1-s-11 cl6 p-b-25">
@@ -148,7 +148,7 @@
 										이력서 관리
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<c:if test="${sessionScope.author_code==2 }" >
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										채용공고 관리
 									</a>
@@ -162,33 +162,19 @@
 								</li>
 
 								<li class="how-bor3 p-rl-4">
-									<c:if test="${sessionScope.author_code==1 }" >
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										지원 현황
+										지원 현황 ?
 									</a>
-									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										결제 내역
-									</a>
-									</c:if>
 								</li>
 
 								<li class="how-bor3 p-rl-4">
-										<c:if test="${sessionScope.author_code==1 }" >
 									<a href="<c:url value='/login/person_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										내 정보 관리
 									</a>
-									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										기업정보 관리
-									</a>
-									</c:if>
 								</li>
 
 								<li class="how-bor3 p-rl-4">
-									<a href="<c:url value='/login/changePwd.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										비밀번호 변경
 									</a>
 								</li>
@@ -197,8 +183,6 @@
 									<a href="<c:url value='/login/memberOut.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										회원 탈퇴
 									</a>
-									
-									<!-- 기업회원이 탈퇴할 경우 채용공고가 사라진다는 경고창or 글 -->
 								</li>
 							</ul>
 						</div>

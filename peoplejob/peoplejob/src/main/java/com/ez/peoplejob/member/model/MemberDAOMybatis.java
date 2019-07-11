@@ -1,8 +1,5 @@
 package com.ez.peoplejob.member.model;
 
-import java.util.List;
-import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -63,17 +60,6 @@ public class MemberDAOMybatis implements MemberDAO{
 		return sqlSession.selectOne(namespace+"selectCompanyById",memberId);
 	}
 
-	
-
-	@Override	//관리자용 전체 조회
-	public List<MemberVO> selectAllManager(Map<String, Object> map) {
-		return sqlSession.selectList(namespace+"selectAllManager", map);
-	}
-
-	@Override	// 관리자용 totalRecord 구하는 메서드 -옥환
-	public int getTotalRecord(Map<String, Object> map) {
-		return sqlSession.selectOne(namespace+"getTotalRecord", map);
-	}
 
 	@Override
 	public int updatePwd(MemberVO memberVo) {

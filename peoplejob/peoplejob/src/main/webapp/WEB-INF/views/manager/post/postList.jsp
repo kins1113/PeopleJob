@@ -11,13 +11,9 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #cardBoduPostList {margin: 0 5px 5px 5px;padding: 0 5px 5px 5px;}
 #btGroup {margin-right: 20px;}
 #pageSize {	float: left;margin-left: 20px;margin-top: 9px;}
-input#datepicker1 {width: 130px;}
-input#datepicker2 {width: 130px;}
-.btn-group{    MARGIN-TOP: 4PX;  MARGIN-RIGHT: 5PX;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
-		//검색하면 값을 뿌려주기
 		//맨위에 체크박스 누르면 전체 선택
 		$("#postCkAll").click(function(){
 			$("input[name=postCheck]").prop("checked",this.checked)
@@ -44,7 +40,6 @@ input#datepicker2 {width: 130px;}
 			
 			$("form[name=postList]").submit();
 		});
-		
 	});
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
@@ -57,8 +52,6 @@ input#datepicker2 {width: 130px;}
 		$("form[name=postList]").attr("action","<c:url value='/manager/post/postList.do?deleteChange=Y'/>")
 		$("form[name=postList]").submit();
 	}
-	
-	
 </script>
 <form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
 <!-- 페이지 처리를 위한 hidden  -->
@@ -115,34 +108,16 @@ input#datepicker2 {width: 130px;}
 							selected="selected"
 						</c:if>>카테고리
 						</option>
+	<!-- 날짜가 선택되면 달력이 나오도록 처리-->
+						<option value="boardname"
+							<c:if test="${param.key=='boardname' }">
+							selected="selected"
+				</c:if>>날짜</option>
 					</select>
 				</div>
-				<!-- 여기서 부터가 날짜입니다 -->
 				<div class="form-group serDiv">
-					<c:import url="/inc/searchDate.do">
-						<c:param name="id" value="datepicker1"></c:param>
-						<c:param name="name" value="endDay"></c:param>
-						<c:param name="date" value="${param.endDay}"></c:param>
-					</c:import>					
+					<c:import url="/inc/searchDate.do"></c:import>					
 				</div>
-				<div class="form-group serDiv">
-								<br><b>  ~  </b>
-				</div>
-				<div class="form-group serDiv">
-					<c:import url="/inc/searchDate.do">
-						<c:param name="id" value="datepicker2"></c:param>
-						<c:param name="name" value="startDay"></c:param>
-						<c:param name="date" value="${param.startDay}"></c:param>
-					</c:import>					
-				</div>
-				<!-- <div class="form-group serDiv">
-					<div class="btn-group" role="group" aria-label="Basic example">
-						<button type="button" class="btn btn-outline-primary" id="btWeek">1주</button>
-						<button type="button" class="btn btn-outline-primary" id="btMonth1">1달</button>
-						<button type="button" class="btn btn-outline-primary" id="btMonth3">3달</button>
-					</div> 
-				</div>-->
-				<!-- 날짜 끝 -->
 				<div class="form-group" id='pageSize'>
 					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
 						<option value="10"

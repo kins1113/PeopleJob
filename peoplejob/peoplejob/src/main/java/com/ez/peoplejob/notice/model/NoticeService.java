@@ -12,6 +12,6 @@ public interface NoticeService {
 	public int updateReadCount(int notifyCode);
 	public NoticeVO selectByNo(int notifyCode);
 	public int updateNotice(NoticeVO vo);
-	public int deleteNotice(String[] list);
+	public int deleteNotice(int notifyCode);
 	
 }

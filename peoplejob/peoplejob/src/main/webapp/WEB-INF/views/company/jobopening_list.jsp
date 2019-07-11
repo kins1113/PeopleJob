@@ -84,6 +84,10 @@
 							alt="공고이미지" width="50">
 					
 					</span> <span class="label label-info">복리후생 : ${vo.welfare }</span>
+					<br> 
+					<c:if test="${mvo.authorityCode==1 }"> 
+					<input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원">
+					</c:if>
 	            </div> 
 	        </div>
 	        </c:forEach>

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface PostDAO {
 	
-	List<Map<String, Object>> selectPostAll(Map<String, Object> map);
+	List<Map<String, Object>> selectPostAll(PostVO postVO);
 	int gettotalRecord(PostVO postVO);
 	int updateDelete(Map<String, int[]> map);
 	int changeDelete(Map<String, Object> map);

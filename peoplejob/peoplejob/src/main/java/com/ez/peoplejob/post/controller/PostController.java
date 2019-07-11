@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,18 +26,17 @@ import com.ez.peoplejob.post.model.PostVO;
 public class PostController {
 	private Logger logger=LoggerFactory.getLogger(PostController.class);
 	@Autowired private PostService postService;
+	@Autowired private BoardKindService boardKindService;
+	@Autowired private BoardService boardService;
 
 	@RequestMapping(value="/postList.do", method = {RequestMethod.POST, RequestMethod.GET})	//게시글 보여주는 핸들러
 	public String postList(@ModelAttribute PostVO postVo,
 			@RequestParam(required = false) String deleteChange,
 			@RequestParam(required = false) String deletecheck,
-			@RequestParam(required = false) String startDay,
-			@RequestParam(required = false) String endDay,
 			Model model) {
 		logger.info("게시글 보여주기 삭제 처리를 위한 deleteChange={} postVo.getBoardCode2()={}",
 						deleteChange, postVo.getBoardCode2());
 		logger.info("deletecheck={}",deletecheck);
-		logger.info("endDay={}, startDay={}",endDay,startDay);
 		
 		//삭제를 누르면 바뀌도록
 		if(deleteChange!=null) {
@@ -62,15 +62,7 @@ public class PostController {
 		postVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 
 		logger.info("게시글 보여주기, 파라미터  postVo={}",postVo);
-		
-		//조회하기
-		//startDay랑 endDay 추가하기
-		Map<String , Object> map=new HashMap<String, Object>();
-		map.put("endDay", endDay);
-		map.put("startDay", startDay);
-		map.put("postVo", postVo);
-		
-		List<Map<String, Object>>postList = postService.selectPostAll(map);
+		List<Map<String, Object>>postList = postService.selectPostAll(postVo);
 		logger.info("게시글 조회 결과 postList.size={}",postList.size());
 
 		//총 레코드 수
