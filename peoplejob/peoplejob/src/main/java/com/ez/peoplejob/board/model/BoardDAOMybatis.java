@@ -32,5 +32,9 @@ public class BoardDAOMybatis implements BoardDAO{
 	public List<BoardVO> selectByCodeVariable(Map<String, int[]> map) {
 		return sqlSession.selectList(namespase+"selectByCodeVariable", map);
 	}
+	@Override
+	public int boardEdit(BoardVO boardVo) {
+		return sqlSession.update(namespase+"boardEdit", boardVo);
+	}
 	
 }

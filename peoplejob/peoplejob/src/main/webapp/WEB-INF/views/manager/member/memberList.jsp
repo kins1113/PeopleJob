@@ -12,6 +12,43 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #cardBoduPostList {margin: 0 5px 5px 5px;padding: 0 5px 5px 5px;}
 #btGroup {margin-right: 20px;}
 #pageSize {	float: left;margin-left: 20px;margin-top: 9px;}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+/* The Close Button */
+ .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+} */
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -53,6 +90,29 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		$("form[name=postList]").attr("action","<c:url value='/manager/post/postList.do?deleteChange=Y'/>")
 		$("form[name=postList]").submit();
 	}
+	
+		  
+	    $("#myBtn").click(function() {
+	      $("#myModal").css({
+	        "display": "block"
+	      });
+	    });
+	 
+	    $(".closeModel").click(function() {
+	      $("#myModal").css({
+	        "display": "none"
+	      });
+	    });
+	 
+	    $("html").click(function(event) {
+	      if (event.target.id === "myModal") {
+	        $("#myModal").css({
+	          "display": "none"
+	        });
+	      }
+	    });
+	});
+		 
 </script>
 <form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
 <!-- 페이지 처리를 위한 hidden  -->
@@ -83,6 +143,11 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<input type="button" class="btn btn-secondary btn-default" id="boardAdd" value="등록"> 
 					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="아직 기능 미정"> 
 					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택한 것 삭제">
+<<<<<<< HEAD
+					<input type="button"class="btn btn-secondary btn-default" id="myBtn"value="메일"> 
+					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="엑셀처리"> 
+=======
+>>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
 				</div>
 				<div class="form-group serDiv">
 					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
@@ -206,6 +271,49 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			</div>
 		</div>
 </form>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+	<!-- Modal content -->
+	<div id="modal-content" class="modal-content">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-default">
+				
+				<div class="card-header card-header-border-bottom">
+						<h2>메일 보내기</h2>
+					</div>
+					<div class="card-body">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">메일 주소</label> <input
+									type="email" name="emailAddress" class="form-control" 
+									placeholder="Email Address"> <span class="mt-2 d-block">입력하세요.</span>
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlPassword">메일 제목</label> <input
+									type="text" class="form-control"
+									name="title" placeholder="title">
+							</div>
+							<div>
+								<c:import url="/manager/smarteditorTestjsp.do">
+									<c:param name="name" value="coment"></c:param>
+								</c:import>
+								<input type="file" name="sendFile"> 
+							</div>
+							<div>
+								<input type="submit" class="btn btn-primary btn-default" value="보내기">
+								<input type="reset" class="btn btn-secondary btn-default closeModel" value="취소">
+							</div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
 
 
 

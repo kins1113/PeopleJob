@@ -5,17 +5,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ez.peoplejob.board.model.BoardKindService;
 import com.ez.peoplejob.board.model.BoardKindVO;
@@ -166,7 +167,7 @@ public class BoardController {
 		return "redirect:/manager/board/boardList.do";
 	}
 	
-	@RequestMapping("/boardEdit.do")
+	@RequestMapping(value="/boardEdit.do",method = RequestMethod.POST)
 	public String boardEdit(@RequestParam int[] boardCheckBox, Model model) {
 		Map<String, int[]> map=new HashMap<String, int[]>();
 		for(int i=0; i<boardCheckBox.length ;i++) {
@@ -184,10 +185,30 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping("/manager/board/boardKindChange.do")
+	@RequestMapping("/boardKindChange.do")
 	public String boardKindChange(@RequestParam String useCk ,@RequestParam int typeCode) {
 		logger.info("카테고리 사용 미사용처리 파라미터 useCk={}, typeCode={}",useCk,typeCode);
 		
 		return "manager/board/boardAdd";
 	}
+	
+	@RequestMapping(value="/boardEdit.do", method = RequestMethod.GET)
+	@ResponseBody
+	public BoardVO boardEdit(@ModelAttribute BoardVO boardVo, HttpSession session) {
+		logger.info("수정처리 파라미터 boardVo={}",boardVo);
+		String adminid=(String)session.getAttribute("adminid");
+		
+		boardVo.setLastAdmin(adminid);
+		if(boardVo.getUpage()==null) {
+			boardVo.setUpage("N");
+		}
+		if(boardVo.getCommentage()==null) {
+			boardVo.setCommentage("N");
+		}
+		int re = boardService.boardEdit(boardVo);
+		logger.info("수정 결과 : re={}",re);
+		
+		return boardVo;
+	}
+	
 }

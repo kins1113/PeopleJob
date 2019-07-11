@@ -37,5 +37,9 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> selectByCodeVariable(Map<String, int[]> map) {
 		return boardDao.selectByCodeVariable(map);
 	}
+	@Override
+	public int boardEdit(BoardVO boardVo) {
+		return boardDao.boardEdit(boardVo);
+	}
 
 }
