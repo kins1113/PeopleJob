@@ -1,319 +1,445 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@include file="../main/inc/top.jsp"%>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/login.css'/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/main/css/login.css'/>" />
 
 <style type="text/css">
-input[type=button]{
-	    height: 44px;
-    font-size: small;
+input[type=button] {
+	height: 44px;
+	font-size: small;
 }
 
-span{
-	color:red;
+span {
+	color: red;
 	margin-top: 12px;
 }
 
-
 /*체크박스 디자인*/
 .checkbox.custom {
-  float: left;
-  margin: 0;
-  padding: 0;
-  display: block;
-  width: 100%;
-  margin-bottom: 20px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
 input[type="checkbox"].custom {
-  margin-left: 0;
-  padding: 0;
+	margin-left: 0;
+	padding: 0;
 }
 
 input[type=checkbox].css-checkbox {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0px;
-  border: 0;
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0px;
+	border: 0;
 }
 
-input[type=checkbox].css-checkbox+label.css-label{
-  padding-left: 70px;
-  height: 65px;
-  display: inline-block;
-  line-height: 70px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  font-size: 15px;
-  vertical-align: middle;
-  cursor: pointer;
-  opacity: 1;
+input[type=checkbox].css-checkbox+label.css-label {
+	padding-left: 70px;
+	height: 65px;
+	display: inline-block;
+	line-height: 70px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 15px;
+	vertical-align: middle;
+	cursor: pointer;
+	opacity: 1;
 }
 
-
-input[type=checkbox].css-checkbox:checked+label.css-label{
-  background-position: 0 -66px;
+input[type=checkbox].css-checkbox:checked+label.css-label {
+	background-position: 0 -66px;
 }
 
 .css-label {
-  background-image: url(http://codeopus.net/file/blog/check1.png);
+	background-image: url(http://codeopus.net/file/blog/check1.png);
 }
 
 div#faq1 {
-    margin-left: -50px;
+	margin-left: -50px;
 }
 
 textarea {
-    margin-left: 14px;
-    border: 1px solid lightgray;
+	margin-left: 14px;
+	border: 1px solid lightgray;
+}
+
+.error {
+	display: none;
+	color: red;
+	font-weight: bold;
 }
 </style>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
- 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
- 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){
-                    fullRoadAddr += extraRoadAddr;
-                }
- 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('roadAddress').value = fullRoadAddr;
-            }
-        }).open();
-    }
-</script>
-<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
-<script type="text/javascript">
-$(function() {
-	
-	 $('form[name=registerU]').submit(function(){
-		
-		 if($('#memberid').val()==''){
-			alert('아이디를 입력해주세요');
-			$('#memberid').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#pwd').val()==''){
-			alert('비밀번호를 입력해주세요');
-			$('#pwd').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#pwd2').val()==''){
-			alert('비밀번호 확인칸을 입력해주세요');
-			$('#pwd2').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#membername').val()==''){
-			alert('이름을 입력해주세요');
-			$('#membername').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#tel').val()==''){
-			alert('전화번호를 입력해주세요');
-			$('#tel').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#email').val()==''){
-			alert('이메일을 입력해주세요');
-			$('#email').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#chkId').val()!='Y'){
-			alert('이메일 인증을 해주세요');
-			event.preventDefault();
-			$('#chkId').focus();
-		}else if($('input[type=checkbox]').is(":checked")==false){
-			alert('이용약관에 동의해주세요');
-			$('input[type=checkbox]').focus();
-			event.preventDefault();
-			return false;
-		}
-		 
-	}); 
-	
-	
-	//핸드폰 정규식
-	function validate_phoneno(ph){
-		var pattern=new RegExp(/^[0-9]*$/g);
-		return pattern.test(ph);
-	}
-	
-		$('#emailcertificate').click(function(){
-		var contextPath="/peoplejob";
-		var email=$('#email').val();
-		if(email==null || email==''){
-			alert('이메일을 입력해주세요!');
-			
-		}else{
-			window.open(contextPath+"/login/registeremail.do?email="+email,'emailcertificate',
-			'left=300, top=300, location=yes, width=500, height=300, resizable=no');
-			
-		}
-	});
-	
-	
-});
+	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+					extraRoadAddr += data.bname;
+				}
+				// 건물명이 있고, 공동주택일 경우 추가한다.
+				if (data.buildingName !== '' && data.apartment === 'Y') {
+					extraRoadAddr += (extraRoadAddr !== '' ? ', '
+							+ data.buildingName : data.buildingName);
+				}
+				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+				if (extraRoadAddr !== '') {
+					extraRoadAddr = ' (' + extraRoadAddr + ')';
+				}
+				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+				if (fullRoadAddr !== '') {
+					fullRoadAddr += extraRoadAddr;
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+				document.getElementById('roadAddress').value = fullRoadAddr;
+			}
+		}).open();
+	}
+</script>
+<script type="text/javascript"
+	src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript">
+	$(function() {
+
+		$('form[name=registerU]').submit(function() {
+
+			if ($('#memberid').val() == '') {
+				alert('아이디를 입력해주세요');
+				$('#memberid').focus();
+				event.preventDefault();
+				return false;
+			} else if ($('#memberid').val() != 'Y') {
+				alert('아이디 중복확인을 하세요');
+				event.preventDefault();
+				$('#memberid').focus();
+			} else if ($('#pwd').val() == '') {
+				alert('비밀번호를 입력해주세요');
+				$('#pwd').focus();
+				event.preventDefault();
+				return false;
+			} else if ($('#pwd2').val() == '') {
+				alert('비밀번호 확인칸을 입력해주세요');
+				$('#pwd2').focus();
+				event.preventDefault();
+				return false;
+			} else if ($('#chkpwd').val() != 'Y') {
+				alert('비밀번호가 일치하지 않습니다.');
+				event.preventDefault();
+				$('#pwd2').focus();
+			} else if ($('#membername').val() == '') {
+				alert('이름을 입력해주세요');
+				$('#membername').focus();
+				event.preventDefault();
+				return false;
+			} else if ($('#tel').val() == '') {
+				alert('전화번호를 입력해주세요');
+				$('#tel').focus();
+				event.preventDefault();
+				return false;
+			} else if (!validate_phoneno($('#tel').val())) {
+				alert('휴대폰번호를 다시 입력해주세요');
+				$('#tel').focus();
+				event.preventDefault();
+				return false;
+			} else if ($('#email').val() == '') {
+				alert('이메일을 입력해주세요');
+				$('#email').focus();
+				event.preventDefault();
+				return false;
+			} else if ($('#chkId').val() != 'Y') {
+				alert('이메일 인증을 해주세요');
+				event.preventDefault();
+				$('#chkId').focus();
+			} else if ($('input[type=checkbox]').is(":checked") == false) {
+				alert('이용약관에 동의해주세요');
+				$('input[type=checkbox]').focus();
+				event.preventDefault();
+				return false;
+			}
+
+		});
+
+		$('#memberid').keyup(function() {
+					if (validate_userid($('#memberid').val())&& $('#memberid').val().length >= 2) {
+						//정상일 때
+
+						$.ajax({
+							url : "<c:url value='/login/ajaxDupUserid.do'/>",
+							type : "get",
+							data : "memberid=" + $('#memberid').val(),
+							success : function(res) {
+								var str = "";
+								if (res) {
+									str = "사용가능한 아이디";
+									$('#chkmemberid').val('Y');
+								} else {
+									str = "이미 등록된 아이디";
+									$('#chkmemberid').val('N');
+								}
+								$('.error').html(str);
+								$('.error').show();
+
+							},
+							error : function(xhr, status, error) {
+								alert(status + ":" + error);
+							}
+						});
+
+					} else {
+						$('.error').html("아이디 규칙에 맞지 않습니다.");
+						$('.error').show();
+						$('#chkmemberid').val('N');
+					}
+				});
+
+		//비밀번호 일치하는지
+		$('#pwd2').keyup(function() {
+					if (validate_pwd($('#pwd2').val()) && $('#pwd2').val().length >= 4) {
+						//정상일 때
+
+						var pwd=$('#pwd').val();
+						var pwd2=$('#pwd2').val(); 
+						$.ajax({
+							
+							url : "<c:url value='/login/ajaxchkPwd.do'/>",
+							type : "get",
+							data : {"pwd":pwd, "pwd2":pwd2},
+							success : function(res) {
+								var str = "";
+								if (res) {
+									str = "비밀번호 일치";
+									$('#chkpwd').val('Y');
+								} else {
+									str = "비밀번호 불일치";
+									$('#chkpwd').val('N');
+								}
+								$('.pwderror').html(str);
+								$('.pwderror').show();
+
+							},
+							error : function(xhr, status, error) {
+								alert(status + ":" + error);
+							}
+						});
+
+					} else {
+						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+						$('.pwderror').show();
+						$('#chkpwd').val('N');
+					}
+				});
+
+		//핸드폰 정규식
+		function validate_phoneno(ph) {
+			var pattern = new RegExp(/^[0-9]*$/g);
+			return pattern.test(ph);
+		}
+
+		//아이디 정규식
+		function validate_userid(userid) {
+			var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+			return pattern.test(userid);
+		}
+		
+		//비밀번호 정규식
+		function validate_pwd(pwd) {
+			var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
+			return pattern.test(pwd);
+		}
+
+		//이메일 인증용
+		$('#emailcertificate').click(function() {
+							var contextPath = "/peoplejob";
+							var email = $('#email').val();
+							if (email == null || email == '') {
+								alert('이메일을 입력해주세요!');
+
+							} else {
+								window.open(contextPath+ "/login/registeremail.do?email="+ email,'emailcertificate',
+												'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+
+							}
+						});
+
+	});
 </script>
 <div class="container">
-    	<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="panel panel-login">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-xs-6">
-								<a href="<c:url value='/login/registerU.do'/>" style="color: green; font-size:1.2em;">개인회원</a>
-							</div>
-							<div class="col-xs-6">
-								<a href="<c:url value='/login/registerC.do'/>" id="">기업회원</a>
-							</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-login">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-6">
+							<a href="<c:url value='/login/registerU.do'/>"
+								style="color: green; font-size: 1.2em;">개인회원</a>
 						</div>
-						<hr>
+						<div class="col-xs-6">
+							<a href="<c:url value='/login/registerC.do'/>" id="">기업회원</a>
+						</div>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<form id="login-form" action="<c:url value='/login/registerU.do'/> " 
-								method="post" role="form" style="display: block;" name="registerU">
-									<input type="hidden" name="authorityCode" value=1>
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
-										class="form-control infobox" style="width:250px" title="아이디">
-									</div>
-									
-									<div class="form-group">
+					<hr>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<form id="login-form"
+								action="<c:url value='/login/registerU.do'/> " method="post"
+								role="form" style="display: block;" name="registerU">
+								<input type="hidden" name="authorityCode" value=1>
+
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="text" name="memberid" id="memberid" tabindex="1"
+										placeholder="아이디 *" class="form-control infobox"
+										style="width: 250px" title="아이디">
+								</div>
+
+								<div class="form-group">
 									<div class="row">
-										<!--<span id="availableId">사용가능한 아이디입니다.</span>
-									 <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
-										</div>
+										<span class="error"></span>
 									</div>
-									
-									
-										<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호 *" 
-										class="form-control" style="width:250px" title="비밀번호">
-									</div>
-									
-									<div class="form-group">
+								</div>
+
+								<input type="text" name="chkmemberid" id="chkmemberid">
+
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="password" name="pwd" id="pwd" tabindex="1"
+										placeholder="비밀번호 *" class="form-control" style="width: 250px"
+										title="비밀번호">
+								</div>
+
+								
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="password" name="pwd2" id="pwd2" tabindex="1"
+										placeholder="비밀번호 확인 *" class="form-control infobox"
+										style="width: 250px" title="비밀번호 확인">
+								</div>
+
+								<div class="form-group">
 									<div class="row">
-										<!--<span id="availableId">필수입력정보입니다.</span>
-									 <span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
-										</div>
+										<span id="pwderror" class="pwderror"></span>
 									</div>
-										<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="password" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인 *" 
-										class="form-control infobox" style="width:250px" title="비밀번호 확인">
-									</div>
-									
-									<div class="form-group">
+								</div>
+								
+								<div class="form-group">
 									<div class="row">
-										<!-- <span id="availableId">비밀번호가 일치하지 않습니다.</span> -->
-										</div>
+										<input type="text" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
 									</div>
-									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control infobox" placeholder="이름*" title="이름" style="width: 250px">
-									</div>
- 
-									<div class="form-group">
-										<table>
-											<tr style="font-size:1.3em">
-												<td>성별</td>
-												<td>&nbsp;&nbsp;</td>
-												<td rowspan="3"><input type="radio" name="membergender" id="selectgender" value="남" checked>남</td>
-												<td>&nbsp;&nbsp;</td>
-												<td rowspan="3"><input type="radio" name="membergender" id="selectgender" value="여">여</td>
-											</tr>
-										</table>
-									</div>
-									<div class="form-group">
-										<input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="생년월일"  style="width: 300px">
-									</div>
-									<div class="form-group">
+								</div>
+								<div class="form-group">
+									<input type="text" name="membername" id="membername"
+										tabindex="1" class="form-control infobox" placeholder="이름*"
+										title="이름" style="width: 250px">
+								</div>
+
+								<div class="form-group">
+									<table>
+										<tr style="font-size: 1.3em">
+											<td>성별</td>
+											<td>&nbsp;&nbsp;</td>
+											<td rowspan="3"><input type="radio" name="membergender"
+												id="selectgender" value="남" checked>남</td>
+											<td>&nbsp;&nbsp;</td>
+											<td rowspan="3"><input type="radio" name="membergender"
+												id="selectgender" value="여">여</td>
+										</tr>
+									</table>
+								</div>
+								<div class="form-group">
+									<input type="text" name="birth" id="birth" tabindex="1"
+										class="form-control" placeholder="생년월일" style="width: 300px">
+								</div>
+								<div class="form-group">
 									<div class="row">
-										<span id="availableId" style="color: gray;">예) 19950812</span>
+										<span id="" style="color: gray;">예) 19950812</span>
 									</div>
-									</div>
-									<div class="form-group">
-										<input type="text" name="tel" id="tel" tabindex="1" class="form-control infobox" placeholder="전화번호" title="전화번호" style="width: 300px">
-										
-									</div>
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="zipcode" id="zipcode" tabindex="1" placeholder="우편번호" 
-										class="form-control" style="width:150px" style="background-color: #50a954" readonly>
-									</div>
-									<div class="form-group">
+								</div>
+								<div class="form-group">
+									<input type="text" name="tel" id="tel" tabindex="1"
+										class="form-control infobox" placeholder="전화번호" title="전화번호"
+										style="width: 300px">
+
+								</div>
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="text" name="zipcode" id="zipcode" tabindex="1"
+										placeholder="우편번호" class="form-control" style="width: 150px"
+										style="background-color: #50a954" readonly>
+								</div>
+								<div class="form-group">
 									<div class="row">
 										<input type="button" value="우편번호 찾기" class="btn btn-register"
-										onclick="execDaumPostcode()">
-										</div>
+											onclick="execDaumPostcode()">
 									</div>
-									<div class="form-group">
-										<input type="text" name="address" id="roadAddress" tabindex="1" class="form-control" placeholder="주소" readonly>
-									</div>
-									<div class="form-group">
-										<input type="text" name="addressdetail" id="addressdetail" tabindex="1" class="form-control" placeholder="상세주소">
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일*" 
-										class="form-control infobox" style="width:300px" style="background-color: #50a954" title="이메일"  style="width: 250px">
-									</div>
-									<div class="form-group">
+								</div>
+								<div class="form-group">
+									<input type="text" name="address" id="roadAddress" tabindex="1"
+										class="form-control" placeholder="주소" readonly>
+								</div>
+								<div class="form-group">
+									<input type="text" name="addressdetail" id="addressdetail"
+										tabindex="1" class="form-control" placeholder="상세주소">
+								</div>
+
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="text" name="email" id="email" tabindex="1"
+										placeholder="이메일*" class="form-control infobox"
+										style="width: 300px" style="background-color: #50a954"
+										title="이메일" style="width: 250px">
+								</div>
+								<div class="form-group">
 									<div class="row">
-										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
-										</div>
+										<input type="button" value="이메일 인증" class="btn btn-register"
+											id="emailcertificate">
 									</div>
-									
-									<div class="form-group">
-										<input type="text" name="chkId"  id="chkId" tabindex="1" 
-										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px">
-									</div>
-									 
-									 
-									<div class="form-group">
-				          <h3>이용약관 동의<input type="checkbox" name="chk" id="chk"></h3>
-						
-				        <ul id="faq-list" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-				          <li>
-				            <!-- <a data-toggle="collapse" class="collapsed" href="#faq1">이용약관 보기▽ <i class="ion-android-remove"></i></a> -->
-				            <div id="faq1">
-				            <textarea rows="10" cols="65">
+								</div>
+
+								<div class="form-group">
+									<input type="text" name="chkId" id="chkId" tabindex="1"
+										class="form-control" placeholder="이메일 인증 확인용"
+										style="width: 300px">
+								</div>
+
+
+								<div class="form-group">
+									<h3>
+										이용약관 동의<input type="checkbox" name="chk" id="chk">
+									</h3>
+
+									<ul id="faq-list" class="wow fadeInUp"
+										style="visibility: visible; animation-name: fadeInUp;">
+										<li>
+											<!-- <a data-toggle="collapse" class="collapsed" href="#faq1">이용약관 보기▽ <i class="ion-android-remove"></i></a> -->
+											<div id="faq1">
+												<textarea rows="10" cols="65">
 개인 회원 약관 (개정 및 적용 2019. 08. 01)
 제1조 (목적)
 본 약관은 ㈜PEOPLEJOB(이하 "회사")이 운영하는 웹사이트(이하 “사이트”)를 통해 인터넷 관련 서비스를 제공함에 있어, 회사가 제공하는 서비스와 관련하여, 이를 이용하는 가입자(이하 “회원” 또는 “개인회원”)의 이용조건 및 제반 절차, 기타 필요한 사항을 규정함을 목적으로 한다.
@@ -377,36 +503,38 @@ $(function() {
 ② 회사는 제휴를 통해 타 사이트 및 매체에 등록될 수 있음을 고지하고 동의를 받아야 하며, 제휴 사이트 전체 목록을 사이트내에서 상시 열람할 수 있도록 해야 한다.
 				            	
 				            </textarea>
-				            
-				            </div>
-				          </li>
-				
-				        </ul>
-				
-				      
-   				 </div>
-									
-									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="registersubmit" id="registersubmit" 
-												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
+
+											</div>
+										</li>
+
+									</ul>
+
+
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-6 col-sm-offset-3">
+										<input type="submit" name="registersubmit" id="registersubmit"
+											tabindex="4" class="form-control btn btn-register"
+											value="가입하기" style="background-color: #50a954">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-6 col-sm-offset-3">
+										<div class="text-center">
+											<a href="<c:url value='/login/login.do'/>" tabindex="5"
+												class="forgot-password">로그인하기</a>
 										</div>
 									</div>
-									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<div class="text-center">
-													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
-												</div>
-											</div>
-									</div>
-								</form>
-								
-							</div>
+								</div>
+							</form>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-<%@include file="../main/inc/bottom.jsp" %>
+<%@include file="../main/inc/bottom.jsp"%>

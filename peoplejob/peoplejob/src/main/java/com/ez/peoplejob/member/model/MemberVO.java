@@ -5,13 +5,13 @@ import java.sql.Timestamp;
 import com.ez.peoplejob.common.SearchVO;
 
 public class MemberVO extends SearchVO{
+	private int memberCode;
 	private String memberid;
 	private Timestamp regdate;
 	private String membername;
 	private String zipcode;
 	private String address;
 	private String addressdetail;
-	private int memberCode;
 	private Timestamp withdrawaldate;
 	private String pwd;
 	private String birth;

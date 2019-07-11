@@ -9,6 +9,17 @@ public class CompanyVO {
 	private String companyAddress;
 	private String companyAddressdetail;
 	
+	//9개 추가
+	private int womannum; //남녀사원수
+	private int mannum;
+	private String establishyear; //설립년도
+	private String companytype; //기업형태
+	private String site;	//홈페이지 주소
+	private int sales;	//매출액
+	private int capital;	//자본금
+	private String majorbusiness;	//주요사업
+	private String introduction;	//기업소개
+	
 	public int getCompanyCode() {
 		return companyCode;
 	}
@@ -52,12 +63,73 @@ public class CompanyVO {
 	public void setCompanyAddressdetail(String companyAddressdetail) {
 		this.companyAddressdetail = companyAddressdetail;
 	}
+	
+	public String getSite() {
+		return site;
+	}
+	public void setSite(String site) {
+		this.site = site;
+	}
+	public int getSales() {
+		return sales;
+	}
+	public void setSales(int sales) {
+		this.sales = sales;
+	}
+	public int getCapital() {
+		return capital;
+	}
+	public void setCapital(int capital) {
+		this.capital = capital;
+	}
+	
+	public int getWomannum() {
+		return womannum;
+	}
+	public void setWomannum(int womannum) {
+		this.womannum = womannum;
+	}
+	public int getMannum() {
+		return mannum;
+	}
+	public void setMannum(int mannum) {
+		this.mannum = mannum;
+	}
+	public String getEstablishyear() {
+		return establishyear;
+	}
+	public void setEstablishyear(String establishyear) {
+		this.establishyear = establishyear;
+	}
+	public String getCompanytype() {
+		return companytype;
+	}
+	public void setCompanytype(String companytype) {
+		this.companytype = companytype;
+	}
+	public String getMajorbusiness() {
+		return majorbusiness;
+	}
+	public void setMajorbusiness(String majorbusiness) {
+		this.majorbusiness = majorbusiness;
+	}
+	
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
 	@Override
 	public String toString() {
 		return "CompanyVO [companyCode=" + companyCode + ", companyname=" + companyname + ", businessNumber="
 				+ businessNumber + ", image=" + image + ", companyZipcode=" + companyZipcode + ", companyAddress="
-				+ companyAddress + ", companyAddressdetail=" + companyAddressdetail + "]";
+				+ companyAddress + ", companyAddressdetail=" + companyAddressdetail + ", womannum=" + womannum
+				+ ", mannum=" + mannum + ", establishyear=" + establishyear + ", companytype=" + companytype + ", site="
+				+ site + ", sales=" + sales + ", capital=" + capital + ", majorbusiness=" + majorbusiness
+				+ ", introduction=" + introduction + "]";
 	}
+	
 	
 
 	

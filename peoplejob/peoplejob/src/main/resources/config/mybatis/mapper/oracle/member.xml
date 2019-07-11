@@ -63,7 +63,9 @@
 	
 	<update id="updateCompany" parameterType="companyVo">
 	update company
-	set image=#{image}, company_zipcode=#{companyZipcode}, company_address=#{companyAddress},company_addressdetail=#{companyAddressdetail}
+	set image=#{image}, company_zipcode=#{companyZipcode}, company_address=#{companyAddress},company_addressdetail=#{companyAddressdetail},
+	womannum=#{womannum} , mannum=#{mannum}, establishyear=#{establishyear}, companytype=#{companytype}, site=#{site}, 
+	sales=#{sales}, capital=#{capital}, majorbusiness=#{majorbusiness} , introduction=#{introduction}  
 	where company_code=#{companyCode}
 	</update>
 	

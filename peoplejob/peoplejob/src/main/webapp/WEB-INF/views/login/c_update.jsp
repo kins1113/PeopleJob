@@ -79,7 +79,12 @@ $(function() {
 				$('#tel').focus();
 				event.preventDefault();
 				return false;
-			}else if($('#email').val()==''){
+			} else if (!validate_phoneno($('#tel').val())) {
+				alert('휴대폰번호를 다시 입력해주세요');
+				$('#tel').focus();
+				event.preventDefault();
+				return false;
+			} else if($('#email').val()==''){
 				alert('이메일을 입력해주세요');
 				$('#email').focus();
 				event.preventDefault();
@@ -112,27 +117,34 @@ $(function() {
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
 										class="form-control infobox" style="width:250px" title="아이디" value="${memberVo.memberid }" readonly>
 									</div>
-									
-									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control infobox" 
-										title="대표자명" style="width: 250px" value="${memberVo.membername }" readonly>
-									</div>
-									
 										<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호 *" 
 										class="form-control infobox" style="width:250px" title="비밀번호">
 									</div>
 									
 									<div class="form-group">
+										<input type="text" name="membername" id="membername" tabindex="1" class="form-control infobox" 
+										title="대표자명" style="width: 250px" value="${memberVo.membername }" readonly>
+									</div>
+									
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="email" id="email" tabindex="1" placeholder="담당자 이메일" 
+										class="form-control infobox" style="width:300px" style="background-color: #50a954" title="이메일"  style="width: 250px" value="${memberVo.email }">
+									</div>
+									
+									
+									<div class="form-group">
 										<input type="text" name="tel" id="tel" tabindex="1" class="form-control infobox" placeholder="전화번호" title="전화번호" style="width: 300px" value="${memberVo.tel }">
+										
+									</div>
+									
+									<!-- 회사정보 -->
+									<div class="form-group">
+										<input type="text" name="businessNumber" id="businessNumber" tabindex="1" class="form-control infobox" placeholder="전화번호" title="전화번호" style="width: 300px" value="${companyVo.businessNumber }" readonly>
 										
 									</div>
 									<div class="form-group">
 										<input type="text" name="companyname" id="companyname" tabindex="1" class="form-control infobox" placeholder="기업명" title="전화번호" style="width: 300px" value="${companyVo.companyname }" readonly>
-										
-									</div>
-									<div class="form-group">
-										<input type="text" name="businessNumber" id="businessNumber" tabindex="1" class="form-control infobox" placeholder="전화번호" title="전화번호" style="width: 300px" value="${companyVo.businessNumber }" readonly>
 										
 									</div>
 									<div class="form-group" style="float: left; margin-right:30px;" >
@@ -151,9 +163,37 @@ $(function() {
 									<div class="form-group">
 										<input type="text" name="companyAddressdetail" id="companyAddressdetail" tabindex="1" class="form-control" placeholder="회사 상세주소" value="${companyVo.companyAddressdetail }">
 									</div>
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="email" id="email" tabindex="1" placeholder="담당자 이메일" 
-										class="form-control infobox" style="width:300px" style="background-color: #50a954" title="이메일"  style="width: 250px" value="${memberVo.email }">
+									
+									
+									<!-- 9개 추가 -->
+									<div class="form-group">
+										<input type="text" name="establishyear" id="establishyear" tabindex="1" class="form-control" placeholder="설립년도" value="${companyVo.establishyear }">
+									</div>
+									<div class="form-group">
+										<input type="text" name="womannum" id="womannum" tabindex="1" class="form-control" placeholder="여자사원 수">
+									</div>
+									<div class="form-group">
+										<input type="text" name="mannum" id="mannum" tabindex="1" class="form-control" placeholder="남자사원 수">
+									</div>
+									<div class="form-group">
+										<input type="text" name="companytype" id="companytype" tabindex="1" class="form-control" placeholder="회사 기업형태" value="${companyVo.companytype }">
+									</div>
+									<div class="form-group">
+										<input type="text" name="site" id="site" tabindex="1" class="form-control" placeholder="회사 site" value="${companyVo.site }">
+									</div>
+									<div class="form-group">
+										<input type="text" name="sales" id="sales" tabindex="1" class="form-control" placeholder="매출액">
+										<!-- value="${companyVo.sales }" -->
+									</div>
+									<div class="form-group">
+										<input type="text" name="capital" id="capital" tabindex="1" class="form-control" placeholder="자본금">
+										<!--  value="${companyVo.capital }" -->
+									</div>
+									<div class="form-group">
+										<input type="text" name="majorbusiness" id="majorbusiness" tabindex="1" class="form-control" placeholder="주요사업" value="${companyVo.majorbusiness }">
+									</div>
+									<div class="form-group">
+										<input type="text" name="introduction" id="introduction" tabindex="1" class="form-control" placeholder="기업소개" value="${companyVo.introduction }">
 									</div>
 									
 									   <div class="form-group"><br>

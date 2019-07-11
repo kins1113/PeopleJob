@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ez.peoplejob.common.FileUploadUtility;
 import com.ez.peoplejob.common.WebUtility;
@@ -535,6 +536,39 @@ public class MemberController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		return "common/message";
+	}
+	
+	@RequestMapping("/ajaxDupUserid.do")
+	@ResponseBody
+	public Boolean ajaxDupUserid(@RequestParam String memberid) {
+		logger.info("아이디 중복확인 파라미터,memberid={}",memberid);
+		int cnt=memberService.dupUserid(memberid);
+		logger.info("아이디 중복확인 결과 cnt={}",cnt);
+		
+		Boolean bool=false;
+		if(cnt==MemberService.USEFUL_USERID) {
+			bool=true;
+		}else if(cnt==MemberService.NON_USEFUL_USERID) {
+			bool=false;
+		}
+		return bool;
+		
+	}
+	
+	@RequestMapping("/ajaxchkPwd.do")
+	@ResponseBody
+	public Boolean ajaxchkPwd(@RequestParam String pwd, @RequestParam String pwd2) {
+		logger.info("비밀번호 일치 확인 파라미터 pwd={}, pwd2={}",pwd,pwd2);
+		
+		Boolean bool=false;
+		if(pwd.equals(pwd2)) {
+			bool=true;
+			logger.info("비밀번호 일치할 때 bool={}",bool);
+		}else {
+			bool=false;
+			logger.info("비밀번호 일치하지 않을때 bool={}",bool);
+		}
+		return bool;
 	}
 	
 }
