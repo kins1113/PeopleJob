@@ -6,7 +6,6 @@
 
 
 
-
 <style type="text/css">
 .divForm {
     width: 700px;
@@ -30,16 +29,16 @@
     <h3>기본정보</h3>
     <!-- hidden필드에 no 넣기 -->
     
-    <input type="text" name="memberCode" value="${vo.memberCode }">
-    <input type="text" name="thirdCode" value="${vo.thirdCode }">
-    <input type="text" name="secondCode" value="${vo.secondCode }">
-    <input type="text" name="firstCode" value="${vo.firstCode }">
-    <input type="text" name="localCode" value="${vo.localCode }">
-    <input type="text" name="academicCode" value="${vo.academicCode }">
-    <input type="text" name="langlicenceCode" value="${vo.langlicenceCode }">
-    <input type="text" name="lNo" value="${vo.lNo }">
-    <input type="text" name="dvCode" value="${vo.dvCode }">
-    <input type="text" name="resumeCode" value="${vo.resumeCode }">
+    <input type="hidden" name="memberCode" value="${vo.memberCode }">
+    <input type="hidden" name="thirdCode" value="${vo.thirdCode }">
+    <input type="hidden" name="secondCode" value="${vo.secondCode }">
+    <input type="hidden" name="firstCode" value="${vo.firstCode }">
+    <input type="hidden" name="localCode" value="${vo.localCode }">
+    <input type="hidden" name="academicCode" value="${vo.academicCode }">
+    <input type="hidden" name="langlicenceCode" value="${vo.langlicenceCode }">
+    <input type="hidden" name="lNo" value="${vo.lNo }">
+    <input type="hidden" name="dvCode" value="${vo.dvCode }">
+    <input type="hidden" name="resumeCode" value="${vo.resumeCode }">
         
 		
     <div>
@@ -157,8 +156,7 @@
        
        </div>
        <div>
-		 <label for="graduate">졸업년도</label>&nbsp;
-		 <input type="text" class="form-control" name="graduate" id="graduate">
+		 <c:import url="resume_date2.jsp"/>
          <select class="form-control" name="graduatecheck" id="graduatecheck" >
         	<option value="졸업여부">졸업여부</option>
         	<option value="졸업">졸업</option>
@@ -184,9 +182,7 @@
         <input type="text" class="form-control" placeholder="회사명 입력" name="companyname" id="companyname" style="ime-mode:active">
     </div>
     <div>
-        <label for="workterm">근무기간</label>
-		<input type="text" class="form-control" name="workterm" id="workterm1">~ 
-  		<input type="text" class="form-control" name="workterm" id="workterm2">
+        <c:import url="resume_date.jsp"/>
   		&nbsp;
 		<select class="form-control" name="workcondition" id="workcondition" >
         	<option value="재직중">재직중</option>
@@ -204,7 +200,7 @@
   
 
    
-    <h3>자격증/어학</h3>	
+   <h3>자격증/어학</h3>
         <label for="certificationtype">항목선택</label>
         <select class="form-control" name="certificationtype" id="certificationtype" >
         	<option value="자격증/면허증">자격증/면허증</option>
@@ -220,8 +216,7 @@
         <input type="text" class="form-control"  name="lInstitution" id="lInstitution" style="ime-mode:active">
     </div>
     <div>
-        <label for="lGetdate">취득일</label>
-        <input type="text" class="form-control"  name="lGetdate" id="lGetdate" style="ime-mode:active">
+    	<c:import url="resume_date3.jsp"/>
     </div> 
     &nbsp;
     <div>	
@@ -246,9 +241,8 @@
         <label for="langGrade">급수</label>
         <input type="text" class="form-control"  name="langGrade" id="langGrade" style="ime-mode:active">
      </div>
-     <div>             
-        <label for="langGetdate">취득일</label>
-        <input type="text" class="form-control"  name="langGetdate" id="langGetdate" style="ime-mode:active">
+     <div>
+     	<c:import url="resume_date4.jsp"/>             
 	</div>
      &nbsp;
 
@@ -332,23 +326,33 @@
         </div>
         
         <div>
-        <label for="jobtype">업/직종</label>
+        <label for="jobtype">업종1차</label>
         
-        <input type="text" class="form-control"  name="jobtype" id="jobtype" value="IT컨설팅" style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename1" id="btypename1" value="${list.btypename1 }"  style="ime-mode:active">
+        </div>
+        <div>
+        <label for="jobtype">업종2차</label>
+        
+        <input type="text" class="form-control"  name="btypename2" id="btypename2" value="${list.btypename2 }"  style="ime-mode:active">
+        </div>
+        <div>
+        <label for="jobtype">업종3차</label>
+        
+        <input type="text" class="form-control"  name="btypename3" id="btypename3" value="${list.btypename3 }"  style="ime-mode:active">
         </div>
         <div>
         <label for="firstname">직종1차</label>
-        <input type="text" class="form-control"  name="firstname" id="firstname" value="IT/인터넷" style="ime-mode:active">
+        <input type="text" class="form-control"  name="firstname" id="firstname" style="ime-mode:active">
      
         </div>
         <div>
         <label for="secondname">직종2차</label>
-        <input type="text" class="form-control"  name="secondname" id="secondname" value="IT/인터넷" style="ime-mode:active">
+        <input type="text" class="form-control"  name="secondname" id="secondname"  style="ime-mode:active">
         	
         </div>
         <div>
         <label for="thirdname">직종3차</label>
-        <input type="text" class="form-control"  name="thirdname" id="thirdname" value="웹마스터" style="ime-mode:active">
+        <input type="text" class="form-control"  name="thirdname" id="thirdname"  style="ime-mode:active">
         
         </div>
         <div>

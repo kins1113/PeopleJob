@@ -401,5 +401,85 @@ public class JobopeningController {
 		model.addAttribute("vo", vo);
 		return "company/jobopening_deleteck";
 	}
-	
+	@RequestMapping(value="/jobopening_agreeeditck.do", method = RequestMethod.GET)
+	public String jobopening_agreeeditck_get(@RequestParam int jobopening,Model model) {
+		logger.info("본인이 쓴 글인지 체크 jobopening={}",jobopening);
+		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
+		model.addAttribute("vo", vo);
+		return "company/jobopening_agreeeditck";
+	}
+	@RequestMapping(value="/jobopening_agreeeditck.do", method = RequestMethod.POST)
+	public String jobopening_agreeeditck_post(@ModelAttribute JobopeningVO vo,@RequestParam String pwd,HttpSession session,HttpServletRequest request,Model model) {
+		logger.info("본인확인처리 vo={}, pwd={}",vo,pwd);
+		String id=(String)session.getAttribute("memberid");
+		if(id==null) {
+			id="비회원";
+		}
+		String msg="본인의 공고만 수정할 수 있습니다." ,url="/company/jobopening_agreeeditck.do?jobopening="+vo.getJobopening();
+		MemberVO mvo=memberService.selectByUserid(id);
+		logger.info("로그인한 회원 mvo={}",mvo);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("companyCode", mvo.getCompanyCode());
+		map.put("pwd", pwd);
+		logger.info("map={}",map);
+		int cnt2=0;
+		if(mvo.getCompanyCode()==vo.getCompanyCode()) {
+			cnt2=jobopeningService.selectPwdCheck(map);
+		}
+		logger.info("본인확인결과={}",cnt2);
+		if(cnt2>0) {
+			msg="본인확인성공";
+			url="/company/jobopening_agreeEdit.do?jobopening="+vo.getJobopening();
+		}else {
+			if(mvo.getCompanyCode()==vo.getCompanyCode()) {
+				msg="비밀번호 틀림.";
+			}
+			else {
+				msg="본인의 공고만 수정할 수 있습니다.";
+			}
+		}
+		model.addAttribute("url",url);
+		model.addAttribute("msg",msg);
+		return "common/message";
+	}
+	@RequestMapping(value="/jobopening_editck.do",method = RequestMethod.GET)
+	public String jobopening_editck_get(@RequestParam int jobopening,Model model) {
+		logger.info("본인이 쓴 글인지 체크 jobopening={}",jobopening);
+		JobopeningVO vo=jobopeningService.selectJobOpenByNo(jobopening);
+		model.addAttribute("vo", vo);
+		return "company/jobopening_editck";
+	}
+	@RequestMapping(value="/jobopening_editck.do",method = RequestMethod.POST)
+	public String jobopening_editck_post(@ModelAttribute JobopeningVO vo,@RequestParam String pwd,HttpSession session,HttpServletRequest request,Model model) {
+		logger.info("본인확인처리 vo={}, pwd={}",vo,pwd);
+		String id=(String)session.getAttribute("memberid");
+		if(id==null) {
+			id="비회원";
+		}
+		String msg="본인의 공고만 수정할 수 있습니다.",url="/company/jobopening_editck.do?jobopening="+vo.getJobopening();
+		MemberVO mvo=memberService.selectByUserid(id);
+		logger.info("로그인한 회원 mvo={}",mvo);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("companyCode", mvo.getCompanyCode());
+		map.put("pwd", pwd);
+		logger.info("map={}",map);
+		int cnt2=0;
+		if(mvo.getCompanyCode()==vo.getCompanyCode()) {
+			cnt2=jobopeningService.selectPwdCheck(map);
+		}
+		logger.info("본인확인결과={}",cnt2);
+		if(cnt2>0) {
+			msg="본인확인성공";
+			url="/company/jobopening_edit.do?jobopening="+vo.getJobopening();
+		}else {
+			if(mvo.getCompanyCode()==vo.getCompanyCode()) {
+				msg="비밀번호 틀림.";
+			}
+			else {
+			}
+		}
+		model.addAttribute("url",url);
+		model.addAttribute("msg",msg);
+		return "common/message";
+	}
 }

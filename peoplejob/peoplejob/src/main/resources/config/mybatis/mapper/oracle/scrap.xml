@@ -52,7 +52,7 @@
 					</foreach>
 				</if>		
 				<if test="academicCondition1 != null">
-					and academicCondition IN 
+					and academic_Condition IN  
 					<foreach collection="academicCondition1" item="academicCondition" 
 						index="index" open="(" close=")" separator=",">
 					#{academicCondition}
@@ -97,7 +97,7 @@
 					</foreach>
 				</if>		
 				<if test="academicCondition1 != null">
-					and academicCondition IN 
+					and academic_Condition IN  
 					<foreach collection="academicCondition1" item="academicCondition" 
 						index="index" open="(" close=")" separator=",">
 					#{academicCondition}
