@@ -331,7 +331,7 @@ textarea {
 									</div>
 								</div>
 
-								<input type="text" name="chkmemberid" id="chkmemberid">
+								<input type="hidden" name="chkmemberid" id="chkmemberid">
 
 								<div class="form-group" style="float: left; margin-right: 30px;">
 									<input type="password" name="pwd" id="pwd" tabindex="1"
@@ -354,7 +354,7 @@ textarea {
 								
 								<div class="form-group">
 									<div class="row">
-										<input type="text" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
+										<input type="hidden" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
 									</div>
 								</div>
 								<div class="form-group">
@@ -425,7 +425,7 @@ textarea {
 								</div>
 
 								<div class="form-group">
-									<input type="text" name="chkId" id="chkId" tabindex="1"
+									<input type="hidden" name="chkId" id="chkId" tabindex="1"
 										class="form-control" placeholder="이메일 인증 확인용"
 										style="width: 300px">
 								</div>

@@ -14,6 +14,21 @@
 <script type="text/javascript">
 $(function() {
 
+    $('#login-form-link').click(function(e) {
+		$("#login-form").delay(100).fadeIn(100);
+ 		$("#register-form").fadeOut(100);
+		$('#register-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+	$('#register-form-link').click(function(e) {
+		$("#register-form").delay(100).fadeIn(100);
+ 		$("#login-form").fadeOut(100);
+		$('#login-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+	
 	$('input[type=submit]').click(function(){
 		if($('#memberId').val()==''){
 			alert('아이디를 입력하세요');
@@ -37,9 +52,11 @@ $(function() {
 				<div class="panel panel-login">
 					<div class="panel-heading">
 						<div class="row">
-						
-							<div class="col-xs-6" style="text-align: center;font-weight: bold;color: green;  margin: 0 auto;font-size: 1.5em;">
-								로그인
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">개인회원 로그인</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">기업회원 로그인</a>
 							</div>
 						</div>
 						<hr>
