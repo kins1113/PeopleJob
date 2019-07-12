@@ -130,7 +130,17 @@ $(function() {
 				$(this).focus();
 				event.preventDefault();
 				return false;
-			} 
+			}else if ($('#chkpwd').val() != 'Y') {
+				alert('비밀번호가 일치하지 않습니다.');
+				event.preventDefault();
+				$('#pwd2').focus();
+				return false;
+			} else if (!validate_phoneno($('#tel').val())) {
+				alert('휴대폰번호를 다시 입력해주세요');
+				$('#tel').focus();
+				event.preventDefault();
+				return false;
+			}
 			if($('#chkId').val()!='Y'){
 				alert('이메일 인증을 해주세요');
 				event.preventDefault();
@@ -166,6 +176,102 @@ $(function() {
 		var pattern=new RegExp(/^[0-9]*$/g);
 		return pattern.test(ph);
 	}
+	
+	//아이디 정규식
+	function validate_userid(userid) {
+		var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+		return pattern.test(userid);
+	}
+	
+	//비밀번호 정규식
+	function validate_pwd(pwd) {
+		var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
+		return pattern.test(pwd);
+	}
+	
+	$('#memberid').keyup(function() {
+		if (validate_userid($('#memberid').val())&& $('#memberid').val().length >= 2) {
+			//정상일 때
+
+			$.ajax({
+				url : "<c:url value='/login/ajaxDupUserid.do'/>",
+				type : "get",
+				data : "memberid=" + $('#memberid').val(),
+				success : function(res) {
+					var str = "";
+					if (res) {
+						str = "사용가능한 아이디";
+						$('#chkmemberid').val('Y');
+					} else {
+						str = "이미 등록된 아이디";
+						$('#chkmemberid').val('N');
+					}
+					$('.error').html(str);
+					$('.error').show();
+
+				},
+				error : function(xhr, status, error) {
+					alert(status + ":" + error);
+				}
+			});
+
+		} else {
+			$('.error').html("아이디 규칙에 맞지 않습니다.");
+			$('.error').show();
+			$('#chkmemberid').val('N');
+		}
+	});
+	
+	//비밀번호 일치하는지
+	$('#pwd2').keyup(function() {
+				if (validate_pwd($('#pwd2').val()) && $('#pwd2').val().length >= 4) {
+					//정상일 때
+
+					var pwd=$('#pwd').val();
+					var pwd2=$('#pwd2').val(); 
+					$.ajax({
+						
+						url : "<c:url value='/login/ajaxchkPwd.do'/>",
+						type : "get",
+						data : {"pwd":pwd, "pwd2":pwd2},
+						success : function(res) {
+							var str = "";
+							if (res) {
+								str = "비밀번호 일치";
+								$('#chkpwd').val('Y');
+							} else {
+								str = "비밀번호 불일치";
+								$('#chkpwd').val('N');
+							}
+							$('.pwderror').html(str);
+							$('.pwderror').show();
+
+						},
+						error : function(xhr, status, error) {
+							alert(status + ":" + error);
+						}
+					});
+
+				} else {
+					$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+					$('.pwderror').show();
+					$('#chkpwd').val('N');
+				}
+			});
+
+	//이메일 인증용
+	$('#emailcertificate').click(function() {
+						var contextPath = "/peoplejob";
+						var email = $('#email').val();
+						if (email == null || email == '') {
+							alert('이메일을 입력해주세요!');
+
+						} else {
+							window.open(contextPath+ "/login/registeremail.do?email="+ email,'emailcertificate',
+											'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+
+						}
+					});
 });
 
 </script>
@@ -216,30 +322,35 @@ $(function() {
 
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디" 
-										class="form-control" style="width:250px" title="아이디" >
-									</div>
-									
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호" 
-										class="form-control" style="width:250px" title="비밀번호">
+										class="form-control" style="width:250px" title="아이디" >아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
 									</div>
 									
 									<div class="form-group">
 									<div class="row">
-										<!-- <span id="necessary">필수입력정보입니다.</span> -->
-										</div>
+										<span class="error"></span>
 									</div>
+								</div>
+									
+									<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호" 
+										class="form-control" style="width:250px" title="비밀번호">비밀번호는 4글자 이상, 영문자와 숫자로 만들어주세요.
+									</div>
+									
 										<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="password" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인" 
 										class="form-control" style="width:250px" title="비밀번호 확인">
 									</div>
-									
 									<div class="form-group">
 									<div class="row">
-										<!-- <span id="availableId">비밀번호가 일치하지 않습니다.</span> -->
-										</div>
+										<input type="hidden" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
 									</div>
+								</div>
+									<div class="form-group">
+									<div class="row">
+										<span id="pwderror" class="pwderror"></span>
+									</div>
+								</div>
+									
 									<div class="form-group">
 										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="담당자명" title="담당자명"  style="width: 300px">
 									</div>

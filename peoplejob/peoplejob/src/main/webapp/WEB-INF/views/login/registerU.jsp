@@ -322,7 +322,7 @@ textarea {
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
-										class="form-control infobox" style="width:250px" title="아이디">
+										class="form-control infobox" style="width:250px" title="아이디">아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
 									</div>
 									
 									<div class="form-group">
@@ -336,7 +336,7 @@ textarea {
 								<div class="form-group" style="float: left; margin-right: 30px;">
 									<input type="password" name="pwd" id="pwd" tabindex="1"
 										placeholder="비밀번호 *" class="form-control" style="width: 250px"
-										title="비밀번호">
+										title="비밀번호">비밀번호는 4글자 이상, 영문자와 숫자로 만들어주세요.
 								</div>
 
 								
