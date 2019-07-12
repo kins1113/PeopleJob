@@ -26,11 +26,14 @@ public class ResumeVO {
 	private String lGetdate;
 	private String lInstitution;
 	private int hopeworkCode;
-	private String jobtype;  
+	private int btypeCode3;  
+	private int btypeCode2;  
+	private int btypeCode1;  
 	private String hopeworkdate;
 	private String hopepay;
 	private String hopeworkform;
 	private int localCode;
+	private int localCode2;
 	private int firstjobCode; 
 	private String memberid;
 	private Timestamp regdate;
@@ -68,19 +71,32 @@ public class ResumeVO {
 	private String langGrade;
 	private String major;
 	private String degree;
+	private String workterm2;
+	private String graduate2;
+	private String btypename1;
+	private String btypename2;
+	private String btypename3;
 	
-	
-	public String getDegree() {
-		return degree;
+
+	public String getBtypename1() {
+		return btypename1;
 	}
-	public void setDegree(String degree) {
-		this.degree = degree;
+	public void setBtypename1(String btypename1) {
+		this.btypename1 = btypename1;
 	}
-	public String getMajor() {
-		return major;
+	public String getBtypename2() {
+		return btypename2;
 	}
-	public void setMajor(String major) {
-		this.major = major;
+	public void setBtypename2(String btypename2) {
+		this.btypename2 = btypename2;
+	}
+	public String getBtypename3() {
+		return btypename3;
+
+	}
+
+	public void setBtypename3(String btypename3) {
+		this.btypename3 = btypename3;
 	}
 	public int getResumeCode() {
 		return resumeCode;
@@ -166,7 +182,6 @@ public class ResumeVO {
 	public void setLangGetdate(String langGetdate) {
 		this.langGetdate = langGetdate;
 	}
-
 	public String getInstitute() {
 		return institute;
 	}
@@ -221,11 +236,23 @@ public class ResumeVO {
 	public void setHopeworkCode(int hopeworkCode) {
 		this.hopeworkCode = hopeworkCode;
 	}
-	public String getJobtype() {
-		return jobtype;
+	public int getBtypeCode3() {
+		return btypeCode3;
 	}
-	public void setJobtype(String jobtype) {
-		this.jobtype = jobtype;
+	public void setBtypeCode3(int btypeCode3) {
+		this.btypeCode3 = btypeCode3;
+	}
+	public int getBtypeCode2() {
+		return btypeCode2;
+	}
+	public void setBtypeCode2(int btypeCode2) {
+		this.btypeCode2 = btypeCode2;
+	}
+	public int getBtypeCode1() {
+		return btypeCode1;
+	}
+	public void setBtypeCode1(int btypeCode1) {
+		this.btypeCode1 = btypeCode1;
 	}
 	public String getHopeworkdate() {
 		return hopeworkdate;
@@ -250,6 +277,12 @@ public class ResumeVO {
 	}
 	public void setLocalCode(int localCode) {
 		this.localCode = localCode;
+	}
+	public int getLocalCode2() {
+		return localCode2;
+	}
+	public void setLocalCode2(int localCode2) {
+		this.localCode2 = localCode2;
 	}
 	public int getFirstjobCode() {
 		return firstjobCode;
@@ -335,7 +368,6 @@ public class ResumeVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
 	public int getAuthority_code() {
 		return authority_code;
 	}
@@ -462,6 +494,30 @@ public class ResumeVO {
 	public void setLangGrade(String langGrade) {
 		this.langGrade = langGrade;
 	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	public String getWorkterm2() {
+		return workterm2;
+	}
+	public void setWorkterm2(String workterm2) {
+		this.workterm2 = workterm2;
+	}
+	public String getGraduate2() {
+		return graduate2;
+	}
+	public void setGraduate2(String graduate2) {
+		this.graduate2 = graduate2;
+	}
 	
 	@Override
 	public String toString() {
@@ -472,8 +528,9 @@ public class ResumeVO {
 				+ memberCode + ", langlicencename=" + langlicencename + ", langGetdate=" + langGetdate + ", institute="
 				+ institute + ", companyname=" + companyname + ", workterm=" + workterm + ", chargework=" + chargework
 				+ ", lNo=" + lNo + ", lName=" + lName + ", lGetdate=" + lGetdate + ", lInstitution=" + lInstitution
-				+ ", hopeworkCode=" + hopeworkCode + ", jobtype=" + jobtype + ", hopeworkdate=" + hopeworkdate
-				+ ", hopepay=" + hopepay + ", hopeworkform=" + hopeworkform + ", localCode=" + localCode
+				+ ", hopeworkCode=" + hopeworkCode + ", btypeCode3=" + btypeCode3 + ", btypeCode2=" + btypeCode2
+				+ ", btypeCode1=" + btypeCode1 + ", hopeworkdate=" + hopeworkdate + ", hopepay=" + hopepay
+				+ ", hopeworkform=" + hopeworkform + ", localCode=" + localCode + ", localCode2=" + localCode2
 				+ ", firstjobCode=" + firstjobCode + ", memberid=" + memberid + ", regdate=" + regdate + ", membername="
 				+ membername + ", zipcode=" + zipcode + ", address=" + address + ", addressdetail=" + addressdetail
 				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
@@ -484,12 +541,17 @@ public class ResumeVO {
 				+ ", graduate=" + graduate + ", graduatetype=" + graduatetype + ", schoollocal=" + schoollocal
 				+ ", workcheck=" + workcheck + ", jobgrade=" + jobgrade + ", workcondition=" + workcondition
 				+ ", certificationtype=" + certificationtype + ", language=" + language + ", langpoint=" + langpoint
-				+ ", langGrade=" + langGrade + ", major=" + major + ", degree=" + degree + "]";
+				+ ", langGrade=" + langGrade + ", major=" + major + ", degree=" + degree + ", workterm2=" + workterm2
+				+ ", graduate2=" + graduate2 + ", btypename1=" + btypename1 + ", btypename2=" + btypename2
+				+ ", btypename3=" + btypename3 + "]";
 	}
 	
 	
 	
 
+	
+	
+	
 	
 	
 	
