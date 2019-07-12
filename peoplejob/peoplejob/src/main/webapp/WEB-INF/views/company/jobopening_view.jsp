@@ -131,8 +131,8 @@
                <!-- 기업회원(3)이면 글쓰기 나옴  --> 
         		 <c:if test="${mvo.authorityCode==3}">
                 <a href="<c:url value='/company/jobopening_deleteck.do?jobopening=${vo.jobopening}'/>"><input type="button" id="deleteBtn" class="btn btn-default btn-mg" role="button" value="삭제"></a>
-                <a href="<c:url value='/company/jobopening_edit.do?jobopening=${vo.jobopening }'/>"><input type="button" id="modifyBtn" class="btn btn-default btn-mg" role="button" value="수정"></a>
-                <a href="<c:url value='/company/jobopening_agreeEdit.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="활성화 수정"></a>
+                <a href="<c:url value='/company/jobopening_editck.do?jobopening=${vo.jobopening }'/>"><input type="button" id="modifyBtn" class="btn btn-default btn-mg" role="button" value="수정"></a>
+                <a href="<c:url value='/company/jobopening_agreeeditck.do?jobopening=${vo.jobopening}'/>"><input type="button" class="btn btn-default btn-mg" role="button" value="활성화 수정"></a>
                 </c:if>
                 <!-- 일반회원일경우 -->
                 <c:if test="${mvo.authorityCode==1}">

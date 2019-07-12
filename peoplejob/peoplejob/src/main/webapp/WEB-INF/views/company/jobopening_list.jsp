@@ -77,8 +77,6 @@
 	                | <small>근무방식 : ${vo.workway }</small>
 	                | <small>급여방식 : ${vo.payway }</small>
 	                | <small>조회수 : ${vo.hits }</small>
-	                
-	                </p> 
 	                <span class="label label-info">
 					<img src="<c:url value='/peoplejob_upload/${vo.companyimage }'/>" 
 							alt="공고이미지" width="50">
@@ -86,7 +84,7 @@
 					</span> <span class="label label-info">복리후생 : ${vo.welfare }</span>
 					<br> 
 					<c:if test="${mvo.authorityCode==1 }"> 
-					<input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원">
+					<a href="<c:url value='/apply/insertapply.do?jobopening=${vo.jobopening}'/>"><input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원"></a>
 					</c:if>
 	            </div> 
 	        </div>
@@ -127,7 +125,7 @@
          <c:if test="${mvo.authorityCode==3}"> 
         <div class="pull-right"> 
             <a href="<c:url value='/company/my_jobopening_list.do?companycode1=${mvo.companyCode}'/>" class="btn btn-primary" role="button">내가쓴 채용 정보</a>
-            <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">글쓰기</a>
+            <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">공고등록</a>
         </div>
         </c:if>
     </div>

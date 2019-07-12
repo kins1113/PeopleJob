@@ -2,7 +2,9 @@ package com.ez.peoplejob.tableaply.model;
 
 import java.sql.Timestamp;
 
-public class TableaplyVO {
+import com.ez.peoplejob.common.SearchVO;
+
+public class TableaplyVO extends SearchVO{
 	private int applyCode ;
 	private Timestamp applydate;
 	private String applylist;
