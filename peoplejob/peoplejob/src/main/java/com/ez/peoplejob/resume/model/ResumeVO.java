@@ -70,23 +70,7 @@ public class ResumeVO {
 	private String degree;
 	
 	
-<<<<<<< HEAD
-	public String getWorkterm2() {
-		return workterm2;
-	}
-	public void setWorkterm2(String workterm2) {
-		this.workterm2 = workterm2;
-	}
-	
-	public String getGraduate2() {
-		return graduate2;
-	}
-	public void setGraduate2(String graduate2) {
-		this.graduate2 = graduate2;
-	}
-=======
-	
->>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
+
 	public String getDegree() {
 		return degree;
 	}
