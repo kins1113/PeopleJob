@@ -117,11 +117,11 @@ public class MemberVO extends SearchVO{
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [memberid=" + memberid + ", regdate=" + regdate + ", membername=" + membername + ", zipcode="
-				+ zipcode + ", address=" + address + ", addressdetail=" + addressdetail + ", memberCode=" + memberCode
-				+ ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth + ", membergender="
-				+ membergender + ", email=" + email + ", tel=" + tel + ", authorityCode=" + authorityCode
-				+ ", companyCode=" + companyCode + "]";
+		return "MemberVO [memberCode=" + memberCode + ", memberid=" + memberid + ", regdate=" + regdate
+				+ ", membername=" + membername + ", zipcode=" + zipcode + ", address=" + address + ", addressdetail="
+				+ addressdetail + ", withdrawaldate=" + withdrawaldate + ", pwd=" + pwd + ", birth=" + birth
+				+ ", membergender=" + membergender + ", email=" + email + ", tel=" + tel + ", authorityCode="
+				+ authorityCode + ", companyCode=" + companyCode + ", toString()=" + super.toString() + "]";
 	}
 	
 	

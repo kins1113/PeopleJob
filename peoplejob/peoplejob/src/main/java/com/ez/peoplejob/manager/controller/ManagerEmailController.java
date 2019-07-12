@@ -13,7 +13,6 @@ import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -53,11 +52,11 @@ public class ManagerEmailController {
 			Model model) {
 		  logger.info("파라미터 title={}, coment={}",title,coment);
 		  logger.info("파라미터 emailAddress={}",emailAddress);
+		  logger.info("파라미터  coment={}",coment);
 		  
-		  coment=coment.replace("<p>", "");
-		  coment=coment.replace("</p>", "\n");
-		  coment=coment.replace("&nbsp;", "");
-		  logger.info("파라미터 변경후  coment={}",coment);
+		  //coment=coment.replace("<p>", "");
+		  //coment=coment.replace("</p>", "\n");
+		  //coment=coment.replace("&nbsp;", "");
 		  
 		  //보내는 사람 쪽의 메일 정보
 		  String host     = "smtp.naver.com";
@@ -74,7 +73,9 @@ public class ManagerEmailController {
 
 		  Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 		   protected PasswordAuthentication getPasswordAuthentication() {
+			   
 		    return new PasswordAuthentication(user, password);
+		    
 		   }
 		  });
 
@@ -99,7 +100,7 @@ public class ManagerEmailController {
 			}
 		   
 		   MimeBodyPart mbp1=new MimeBodyPart();
-		   mbp1.setText(coment);
+		   mbp1.setContent(coment,"text/html; charset=utf-8");
 		   
 		   File file=new File(fileUtility.getUploadPath(request),fileName);
 		   
@@ -114,7 +115,7 @@ public class ManagerEmailController {
 		   message.setContent(mp);
 		   }else {
 			// Text 메일 내용
-			   message.setText(coment);
+			   message.setContent(coment,"text/html; charset=utf-8");
 		   }
 		   // send the message 메일 보내기
 		   Transport.send(message);
@@ -134,8 +135,24 @@ public class ManagerEmailController {
 	
 	
 	@RequestMapping(value = "/emailMultWrite.do",method = RequestMethod.GET)
-	public String emailMultWrite_get() {
+	public String emailMultWrite_get(@RequestParam(required = false)String[] memberCk, Model model) {
 		logger.info("이메일 다중 보내기 화면 보여주기입니다.");
+		
+		String result="";
+		if(memberCk!=null && memberCk.length>0) {
+			for(int i=0; i<memberCk.length;i++) {
+				logger.info("{}",memberCk.length);
+				if(i==memberCk.length-1) {
+					result+=memberCk[i];
+				}else {
+					result+=memberCk[i]+",";
+				}
+			}
+		}
+		logger.info("체크된 메일주소 result={}",result);
+		if(memberCk!=null && memberCk.length>0) {
+			model.addAttribute("result", result);
+		}
 		
 		return "manager/email_sms/emailMultWrite";
 	}
@@ -211,7 +228,7 @@ public class ManagerEmailController {
 				
 			
 			MimeBodyPart mbp1=new MimeBodyPart();
-			mbp1.setText(coment);
+			mbp1.setContent(coment,"text/html; charset=utf-8");
 			
 			File file=new File(fileUtility.getUploadPath(request),fileName);
 			
@@ -228,7 +245,7 @@ public class ManagerEmailController {
 			}else {
 				message.setSubject(title);
 			   // Text 메일 내용
-			   message.setText(coment);
+				 message.setContent(coment,"text/html; charset=utf-8");
 				
 			}
 			// send the message 메일 보내기

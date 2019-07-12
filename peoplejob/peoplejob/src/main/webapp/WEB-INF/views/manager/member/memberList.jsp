@@ -53,68 +53,49 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 <script type="text/javascript">
 	$(document).ready(function (){
 		//맨위에 체크박스 누르면 전체 선택
-		$("#postCkAll").click(function(){
-			$("input[name=postCheck]").prop("checked",this.checked)
+		$("#memberCkAll").click(function(){
+			$("input[name=memberCk]").prop("checked",this.checked)
 		});
 		$("#pageSize select[name=recordCountPerPage]").change(function(){
 			$("form[name=postList]").submit();
 		});
-		//선택한것 삭제 처리
-		$("#checkDelete").click(function(){
-			$("form[name=postList]").attr("action","<c:url value='/manager/post/postCheckDelete.do'/>");
-			$("form[name=postList]").submit();
-		});
 		//필터링
-		$(".fileterCode").click(function(){
-			$("input[name=filterCode]").val($(this).attr("id"));
-
-			if($("form[name=postList] input[name=filterKey]").val()=="N"){
-				$("form[name=postList] input[name=filterKey]").val("Y");
-			}else if($("form[name=postList] input[name=filterKey]").val()=="Y"){
-				$("form[name=postList] input[name=filterKey]").val("N");
-			}else{
-				$("form[name=postList] input[name=filterKey]").val("Y");
-			}
-			
-			$("form[name=postList]").submit();
+		$(".fileterCode").each(function(){
+			$(this).click(function(){
+				var filterCode=$(this).attr("id");
+				$("input[name=filterCode]").val(filterCode);
+				var filterKey=$("input[name=filterKey]").val();
+		
+				if(filterKey!=''){
+					if(filterKey=='Y'){
+						$("input[name=filterKey]").val("N");
+					}else if(filterKey=='N'){
+						$("input[name=filterKey]").val("Y");
+					}
+				}else{
+						$("input[name=filterKey]").val("Y");
+				}
+	    	$("form[name=memberList]").submit();	    	
+			})
 		});
+		
+		//체크된것 메일 보내기
+	    $("#btMultMail").click(function(){
+	    	$("form[name=memberList]").attr("action","<c:url value='/manager/email_sms/emailMultWrite.do'/>")
+	    		.attr("method",'get');
+	    	$("form[name=memberList]").submit();	    	
+	    });
+		
 	});
+	    
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
-		$("form[name=postList]").submit();
+		$("form[name=memberList]").submit();
 	}
-	//삭제 버튼 누르면 삭제=> 미삭제  미삭제 => 삭제로 변경 
-	function changeDelete(delCheck, boardCode){
-		$("input[name=deletecheck]").val(delCheck);
-		$("input[name=boardCode2]").val(boardCode);
-		$("form[name=postList]").attr("action","<c:url value='/manager/post/postList.do?deleteChange=Y'/>")
-		$("form[name=postList]").submit();
-	}
-	
 		  
-	    $("#myBtn").click(function() {
-	      $("#myModal").css({
-	        "display": "block"
-	      });
-	    });
-	 
-	    $(".closeModel").click(function() {
-	      $("#myModal").css({
-	        "display": "none"
-	      });
-	    });
-	 
-	    $("html").click(function(event) {
-	      if (event.target.id === "myModal") {
-	        $("#myModal").css({
-	          "display": "none"
-	        });
-	      }
-	    });
-	});
-		 
+	   
 </script>
-<form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
+<form action="<c:url value='/manager/member/memberList.do'/>" name="memberList" method="post" >
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
@@ -140,14 +121,10 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
 				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button" class="btn btn-secondary btn-default" id="boardAdd" value="등록"> 
-					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="아직 기능 미정"> 
-					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택한 것 삭제">
-<<<<<<< HEAD
-					<input type="button"class="btn btn-secondary btn-default" id="myBtn"value="메일"> 
-					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="엑셀처리"> 
-=======
->>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
+					<input type="button" class="btn btn-secondary btn-default" id="" value="등록"> 
+					<input type="button"class="btn btn-secondary btn-default" id="" value="아직 기능 미정"> 
+					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="선택한 메일">
+					<input type="button"class="btn btn-secondary btn-default" id="btExceil"value="엑셀처리"> 
 				</div>
 				<div class="form-group serDiv">
 					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
@@ -158,31 +135,46 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				</div>
 				<div class="form-group serDiv">
 					<select class="custom-select my-1 mr-sm-2" name="searchCondition">
-						<option value="">선택</option>
-						<option value="boardTitle,boardcontent"
-							<c:if test="${param.searchCondition=='boardTitle,boardcontent' }">
-							selected="selected"
-							</c:if>>아이디
-						</option>
+						<option value="all">통합검색</option>
 						<option value="memberid"
 							<c:if test="${param.searchCondition=='memberid' }">
 							selected="selected"
+							</c:if>>아이디
+						</option>
+						<option value="membername"
+							<c:if test="${param.searchCondition=='membername' }">
+							selected="selected"
 							</c:if>>이름
 						</option>
-						<option value="type"
-							<c:if test="${param.searchCondition=='type' }">
+						<option value="address,addressdetail"
+							<c:if test="${param.searchCondition=='address,addressdetail' }">
 							selected="selected"
 						</c:if>>주소
 						</option>
-	<!-- 날짜가 선택되면 달력이 나오도록 처리-->
-						<option value="boardname"
-							<c:if test="${param.key=='boardname' }">
+						<option value="tel"
+							<c:if test="${param.key=='tel' }">
 							selected="selected"
-				</c:if>>날짜</option>
+						</c:if>>번호</option>
+						<option value="email"
+							<c:if test="${param.key=='email' }">
+							selected="selected"
+						</c:if>>메일</option>
 					</select>
 				</div>
 				<div class="form-group serDiv">
-					<c:import url="/inc/searchDate.do"></c:import>					
+					<c:import url="../../inc/date.jsp">
+						<c:param name="name" value="startDay"></c:param>
+						<c:param name="id" value="workdate1"></c:param>
+					</c:import>					
+				</div>
+				<div class="form-group serDiv">
+					<br><b> ~ </b>
+				</div>
+				<div class="form-group serDiv">
+					<c:import url="../../inc/date.jsp">
+						<c:param name="name" value="endDay"></c:param>
+						<c:param name="id" value="workdate2"></c:param>
+					</c:import>					
 				</div>
 				<div class="form-group" id='pageSize'>
 					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
@@ -215,26 +207,48 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<thead>
 						<tr>
 							<th><label class="control control-checkbox checkbox-primary">
-									<input type="checkbox" name="postCheckAll" id="postCkAll" />
+									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
 									<div class="control-indicator"></div>
 							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="TYPE">회원 코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardregdate2">생년월일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardhits">성별</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">이메일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">전화번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">이력서</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">비고</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="memberCode">회원 코드</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="address">주소</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="birth">생년월일</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="membergender">성별</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="email">이메일</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="tel">전화번호</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="authorityCode">이력서</a></th>
+							<th scope="col">비고</th>
 						</tr>
 					</thead>
 					<tbody>
 					<!--  반복 시작  -->
+					<c:if test="${empty list }">
+						<td colspan="11" align="center">만족하는 사용자가 없습니다....</td>
+					</c:if>
+					<c:if test="${!empty list }">
+						<c:forEach var="memberVo" items="${list}">
 							<tr>
-							
+								<td>
+									<label class="control control-checkbox checkbox-primary">
+											<input type="checkbox" name="memberCk" id="memberCk" value="${memberVo.email}" />
+											<div class="control-indicator"></div>
+									</label>
+								</td>
+								<td>${memberVo.memberCode}</td>
+								<td>${memberVo.memberid}</td>
+								<td>${memberVo.membername}</td>
+								<td>${memberVo.address} - ${memberVo.addressdetail }</td>
+								<td>${memberVo.birth}</td>
+								<td>${memberVo.membergender}</td>
+								<td>${memberVo.email}</td>
+								<td>${memberVo.tel}</td>
+								<td><a href="#">${memberVo.authorityCode}</a></td>
+								<td>무엇을 넣을까?</td>
 							</tr>
+						</c:forEach>
+					</c:if>
 					<!-- 반복 끝 -->
 					</tbody>
 				</table>
@@ -271,50 +285,5 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			</div>
 		</div>
 </form>
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-	<!-- Modal content -->
-	<div id="modal-content" class="modal-content">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="card card-default">
-				
-				<div class="card-header card-header-border-bottom">
-						<h2>메일 보내기</h2>
-					</div>
-					<div class="card-body">
-							<div class="form-group">
-								<label for="exampleFormControlInput1">메일 주소</label> <input
-									type="email" name="emailAddress" class="form-control" 
-									placeholder="Email Address"> <span class="mt-2 d-block">입력하세요.</span>
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlPassword">메일 제목</label> <input
-									type="text" class="form-control"
-									name="title" placeholder="title">
-							</div>
-							<div>
-								<c:import url="/manager/smarteditorTestjsp.do">
-									<c:param name="name" value="coment"></c:param>
-								</c:import>
-								<input type="file" name="sendFile"> 
-							</div>
-							<div>
-								<input type="submit" class="btn btn-primary btn-default" value="보내기">
-								<input type="reset" class="btn btn-secondary btn-default closeModel" value="취소">
-							</div>
-					</div>
-				
-				</div>
-			</div>
-		</div>
-
-	</div>
-
-</div>
-
-
 
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>

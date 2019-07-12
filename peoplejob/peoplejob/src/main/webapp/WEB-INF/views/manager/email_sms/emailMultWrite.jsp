@@ -19,6 +19,7 @@
 								<span style="font-size: 0.8em">각각의 주소 를 , 로 구분하세요</span>
 								 <input
 									type="text" name="emailAddress" class="form-control"  id="email"
+									value="${result }"
 									placeholder="Email Address"> <span class="mt-2 d-block">입력하세요.</span>
 							</div>
 							<div class="form-group">
