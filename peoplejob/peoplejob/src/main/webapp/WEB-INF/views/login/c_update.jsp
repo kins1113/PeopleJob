@@ -112,7 +112,7 @@ $(function() {
 							<div class="col-lg-12">
 								<form action="<c:url value='/login/c_update.do'/> " 
 								method="post" role="form" style="display: block;" name="updateC" enctype="multipart/form-data">
-									<input type="text" name="companyCode" id="companyCode" value="${companyVo.companyCode }">
+									<input type="hidden" name="companyCode" id="companyCode" value="${companyVo.companyCode }">
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
 										class="form-control infobox" style="width:250px" title="아이디" value="${memberVo.memberid }" readonly>

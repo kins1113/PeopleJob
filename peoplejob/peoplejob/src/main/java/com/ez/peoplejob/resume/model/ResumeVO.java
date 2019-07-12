@@ -70,7 +70,6 @@ public class ResumeVO {
 	private String degree;
 	
 	
-	
 	public String getDegree() {
 		return degree;
 	}

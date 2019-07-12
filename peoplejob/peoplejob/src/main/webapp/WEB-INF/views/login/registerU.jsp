@@ -138,7 +138,7 @@ textarea {
 				$('#memberid').focus();
 				event.preventDefault();
 				return false;
-			} else if ($('#memberid').val() != 'Y') {
+			} else if ($('#chkmemberid').val() != 'Y') {
 				alert('아이디 중복확인을 하세요');
 				event.preventDefault();
 				$('#memberid').focus();
@@ -322,7 +322,7 @@ textarea {
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
-										class="form-control infobox" style="width:250px" title="아이디">
+										class="form-control infobox" style="width:250px" title="아이디">아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
 									</div>
 									
 									<div class="form-group">
@@ -331,12 +331,12 @@ textarea {
 									</div>
 								</div>
 
-								<input type="text" name="chkmemberid" id="chkmemberid">
+								<input type="hidden" name="chkmemberid" id="chkmemberid">
 
 								<div class="form-group" style="float: left; margin-right: 30px;">
 									<input type="password" name="pwd" id="pwd" tabindex="1"
 										placeholder="비밀번호 *" class="form-control" style="width: 250px"
-										title="비밀번호">
+										title="비밀번호">비밀번호는 4글자 이상, 영문자와 숫자로 만들어주세요.
 								</div>
 
 								
@@ -354,7 +354,7 @@ textarea {
 								
 								<div class="form-group">
 									<div class="row">
-										<input type="text" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
+										<input type="hidden" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
 									</div>
 								</div>
 								<div class="form-group">
@@ -425,7 +425,7 @@ textarea {
 								</div>
 
 								<div class="form-group">
-									<input type="text" name="chkId" id="chkId" tabindex="1"
+									<input type="hidden" name="chkId" id="chkId" tabindex="1"
 										class="form-control" placeholder="이메일 인증 확인용"
 										style="width: 300px">
 								</div>

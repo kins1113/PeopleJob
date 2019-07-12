@@ -10,13 +10,13 @@ public class CompanyVO {
 	private String companyAddressdetail;
 	
 	//9개 추가
-	private int womannum; //남녀사원수
-	private int mannum;
+	private String womannum; //남녀사원수
+	private String mannum;
 	private String establishyear; //설립년도
 	private String companytype; //기업형태
 	private String site;	//홈페이지 주소
-	private int sales;	//매출액
-	private int capital;	//자본금
+	private String sales;	//매출액
+	private String capital;	//자본금
 	private String majorbusiness;	//주요사업
 	private String introduction;	//기업소개
 	
@@ -70,30 +70,30 @@ public class CompanyVO {
 	public void setSite(String site) {
 		this.site = site;
 	}
-	public int getSales() {
-		return sales;
-	}
-	public void setSales(int sales) {
-		this.sales = sales;
-	}
-	public int getCapital() {
-		return capital;
-	}
-	public void setCapital(int capital) {
-		this.capital = capital;
-	}
 	
-	public int getWomannum() {
+	public String getWomannum() {
 		return womannum;
 	}
-	public void setWomannum(int womannum) {
+	public void setWomannum(String womannum) {
 		this.womannum = womannum;
 	}
-	public int getMannum() {
+	public String getMannum() {
 		return mannum;
 	}
-	public void setMannum(int mannum) {
+	public void setMannum(String mannum) {
 		this.mannum = mannum;
+	}
+	public String getSales() {
+		return sales;
+	}
+	public void setSales(String sales) {
+		this.sales = sales;
+	}
+	public String getCapital() {
+		return capital;
+	}
+	public void setCapital(String capital) {
+		this.capital = capital;
 	}
 	public String getEstablishyear() {
 		return establishyear;

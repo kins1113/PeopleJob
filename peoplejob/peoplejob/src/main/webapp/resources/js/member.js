@@ -1,33 +1,42 @@
 /**
  * member.js
  */
-	var contextPath="/herb";
+	var contextPath="/peoplejob";
 
-	$(function(){
-		$('#email2').change(function(){
-			if($(this).val()=='etc'){
-				$('#email3').css('visibility','visible');
-				$('#email3').focus();
-				$('#email3').val("");
-			}else{
-				$('#email3').css('visibility','hidden');
-			}
-		});
-				
-		
-		$('#btnZipcode').click(function(){
-			window.open(contextPath+"/zipcode/zipcode.do","zip",
-		"left=0,top=0,width=500px,height=450px,location=yes,resizable=yes");
-		});
-		
-		$('#btnChkId').click(function(){
-			var userid=$('#userid').val();
-			
-			open(contextPath+"/member/checkUserid.do?userid="+userid,"chk",
-				"width=400,height=300,location=yes,resizable=yes");	
-		});
-		
+	//아이디
+	$('#memberid').keyup(function() {
+		if (validate_userid($('#memberid').val())&& $('#memberid').val().length >= 2) {
+			//정상일 때
+
+			$.ajax({
+				url : "<c:url value='/login/ajaxDupUserid.do'/>",
+				type : "get",
+				data : "memberid=" + $('#memberid').val(),
+				success : function(res) {
+					var str = "";
+					if (res) {
+						str = "사용가능한 아이디";
+						$('#chkmemberid').val('Y');
+					} else {
+						str = "이미 등록된 아이디";
+						$('#chkmemberid').val('N');
+					}
+					$('.error').html(str);
+					$('.error').show();
+
+				},
+				error : function(xhr, status, error) {
+					alert(status + ":" + error);
+				}
+			});
+
+		} else {
+			$('.error').html("아이디 규칙에 맞지 않습니다.");
+			$('.error').show();
+			$('#chkmemberid').val('N');
+		}
 	});
+
 	
 	function validate_hp(hp){
 		var pattern=new RegExp(/^[0-9]*$/g);
@@ -48,3 +57,25 @@
 		닫기 대괄호(]) 뒤의 + 기호는 이 패턴이 한 번 또는 그 이상 반복된다는 의미 */
 
 	}
+	
+	//비밀번호 정규식
+	function validate_pwd(pwd) {
+		var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
+		return pattern.test(pwd);
+	}
+	
+	//이메일 인증용
+	$('#emailcertificate').click(function() {
+						var contextPath = "/peoplejob";
+						var email = $('#email').val();
+						if (email == null || email == '') {
+							alert('이메일을 입력해주세요!');
+
+						} else {
+							window.open(contextPath+ "/login/registeremail.do?email="+ email,'emailcertificate',
+											'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+
+						}
+					});
+	
+	
