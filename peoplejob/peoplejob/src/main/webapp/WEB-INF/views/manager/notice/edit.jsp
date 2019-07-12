@@ -21,37 +21,38 @@
 	});
 </script>
 
-<div class="divForm">
+          <div class="content-wrapper">
+	<div class="content">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card card-default">
+					<div class="card-header card-header-border-bottom">
+
+<div class="card-body">
 <form name="frmEdit" method="post" 
 	action="<c:url value='/manager/notice/edit.do'/>"> 
     <fieldset>
-	<legend>글수정</legend>
+	
 		<!-- hidden필드에 notifyCode 넣기 -->
 		<input type="hidden" name="notifyCode" value="${vo.notifyCode}" />
             	
-        <div class="firstDiv">
+        <div class="form-group">
             <label for="notifytitle">제목</label>
-            <input type="text" id="notifytitle" name="notifytitle" class="infobox"
+            <input type="text" id="notifytitle" name="notifytitle" class="form-control"
             	value="${vo.notifytitle}" />
         </div>
-        <div>
-            <label for="adminCode">관리자코드</label>
-            <input type="text" id="adminCode" name="adminCode" value="${vo.adminCode}"
-            	class="infobox"/>
-        </div>
 
-        <div>  
+
+        <div class="form-group">  
         	<label for="notifycontent">내용</label>        
- 			<textarea id="notifycontent" name="notifycontent" rows="12" cols="40">${vo.notifycontent}</textarea>
+ 			<textarea class="form-control" id="notifycontent" name="notifycontent" rows="10" cols="30">${vo.notifycontent}</textarea>
         </div>
-        <div class="center">
-            <input type = "submit" value="수정"/>
-            <input type = "Button" value="글목록" 
-            	onclick
-           ="location.href	='<c:url value='/manager/notice/list.do'/>'" />         
-        </div>
+     
+            <button class="btn btn-primary btn-default" type = "submit">수정</button>
+            <button class="btn btn-primary btn-default" onclick="location.href='list.do' ">목록</button>      
+      
 	</fieldset>
 </form>    
 </div>
-
+</div></div></div></div></div></div>
 <%@include file="/WEB-INF/views/manager/inc/adminBottom.jsp"%>
