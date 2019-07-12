@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/login.css'/>" />
 
 <style type="text/css">
+
 input[type=button]{
 	    height: 44px;
     font-size: small;
@@ -37,7 +38,7 @@ input[type="checkbox"].custom {
 }
 
 input[type=checkbox].css-checkbox {
-  position: absolute;
+  position: relative; /* 원래 absolute */
   overflow: hidden;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -78,7 +79,45 @@ textarea {
     border: 1px solid lightgray;
 }
 </style>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+	function execDaumPostcode() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+					extraRoadAddr += data.bname;
+				}
+				// 건물명이 있고, 공동주택일 경우 추가한다.
+				if (data.buildingName !== '' && data.apartment === 'Y') {
+					extraRoadAddr += (extraRoadAddr !== '' ? ', '
+							+ data.buildingName : data.buildingName);
+				}
+				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+				if (extraRoadAddr !== '') {
+					extraRoadAddr = ' (' + extraRoadAddr + ')';
+				}
+				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+				if (fullRoadAddr !== '') {
+					fullRoadAddr += extraRoadAddr;
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
+				document.getElementById('roadAddress').value = fullRoadAddr;
+			}
+		}).open();
+	}
+</script>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
@@ -92,7 +131,17 @@ $(function() {
 				$(this).focus();
 				event.preventDefault();
 				return false;
-			} 
+			}else if ($('#chkpwd').val() != 'Y') {
+				alert('비밀번호가 일치하지 않습니다.');
+				event.preventDefault();
+				$('#pwd2').focus();
+				return false;
+			} else if (!validate_phoneno($('#tel').val())) {
+				alert('휴대폰번호를 다시 입력해주세요');
+				$('#tel').focus();
+				event.preventDefault();
+				return false;
+			}
 			if($('#chkId').val()!='Y'){
 				alert('이메일 인증을 해주세요');
 				event.preventDefault();
@@ -128,6 +177,102 @@ $(function() {
 		var pattern=new RegExp(/^[0-9]*$/g);
 		return pattern.test(ph);
 	}
+	
+	//아이디 정규식
+	function validate_userid(userid) {
+		var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+		return pattern.test(userid);
+	}
+	
+	//비밀번호 정규식
+	function validate_pwd(pwd) {
+		var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
+		return pattern.test(pwd);
+	}
+	
+	$('#memberid').keyup(function() {
+		if (validate_userid($('#memberid').val())&& $('#memberid').val().length >= 2) {
+			//정상일 때
+
+			$.ajax({
+				url : "<c:url value='/login/ajaxDupUserid.do'/>",
+				type : "get",
+				data : "memberid=" + $('#memberid').val(),
+				success : function(res) {
+					var str = "";
+					if (res) {
+						str = "사용가능한 아이디";
+						$('#chkmemberid').val('Y');
+					} else {
+						str = "이미 등록된 아이디";
+						$('#chkmemberid').val('N');
+					}
+					$('.error').html(str);
+					$('.error').show();
+
+				},
+				error : function(xhr, status, error) {
+					alert(status + ":" + error);
+				}
+			});
+
+		} else {
+			$('.error').html("아이디 규칙에 맞지 않습니다.");
+			$('.error').show();
+			$('#chkmemberid').val('N');
+		}
+	});
+	
+	//비밀번호 일치하는지
+	$('#pwd2').keyup(function() {
+				if (validate_pwd($('#pwd2').val()) && $('#pwd2').val().length >= 4) {
+					//정상일 때
+
+					var pwd=$('#pwd').val();
+					var pwd2=$('#pwd2').val(); 
+					$.ajax({
+						
+						url : "<c:url value='/login/ajaxchkPwd.do'/>",
+						type : "get",
+						data : {"pwd":pwd, "pwd2":pwd2},
+						success : function(res) {
+							var str = "";
+							if (res) {
+								str = "비밀번호 일치";
+								$('#chkpwd').val('Y');
+							} else {
+								str = "비밀번호 불일치";
+								$('#chkpwd').val('N');
+							}
+							$('.pwderror').html(str);
+							$('.pwderror').show();
+
+						},
+						error : function(xhr, status, error) {
+							alert(status + ":" + error);
+						}
+					});
+
+				} else {
+					$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+					$('.pwderror').show();
+					$('#chkpwd').val('N');
+				}
+			});
+
+	//이메일 인증용
+	$('#emailcertificate').click(function() {
+						var contextPath = "/peoplejob";
+						var email = $('#email').val();
+						if (email == null || email == '') {
+							alert('이메일을 입력해주세요!');
+
+						} else {
+							window.open(contextPath+ "/login/registeremail.do?email="+ email,'emailcertificate',
+											'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+
+						}
+					});
 });
 
 </script>
@@ -163,40 +308,50 @@ $(function() {
 									<input type="hidden" name="companyZipcode">
 									<input type="hidden" name="companyAddress">
 									<input type="hidden" name="companyAddressdetail">
-									
+
+									<!-- 9개 추가 -->									
+									<input type="hidden" name="womannum">
+									<input type="hidden" name="mannum">
+									<input type="hidden" name="establishyear">
+									<input type="hidden" name="companytype">
+									<input type="hidden" name="site">
+									<input type="hidden" name="sales">
+									<input type="hidden" name="capital">
+									<input type="hidden" name="majorbusiness">
+									<input type="hidden" name="introduction">
+
+
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디" 
-										class="form-control" style="width:250px" title="아이디" >
+										class="form-control" style="width:250px" title="아이디" >아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
 									</div>
 									
 									<div class="form-group">
 									<div class="row">
-									<!-- 	<span id="availableId">사용가능한 아이디입니다.</span>
-									<span id="unavailableId">이미 사용중인 아이디입니다.</span> -->
-										</div>
+										<span class="error"></span>
 									</div>
-									
+								</div>
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호" 
-										class="form-control" style="width:250px" title="비밀번호">
+										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호" 
+										class="form-control" style="width:250px" title="비밀번호">비밀번호는 4글자 이상, 영문자와 숫자로 만들어주세요.
 									</div>
 									
-									<div class="form-group">
-									<div class="row">
-										<!-- <span id="necessary">필수입력정보입니다.</span> -->
-										</div>
-									</div>
 										<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인" 
+										<input type="password" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인" 
 										class="form-control" style="width:250px" title="비밀번호 확인">
 									</div>
-									
 									<div class="form-group">
 									<div class="row">
-										<!-- <span id="availableId">비밀번호가 일치하지 않습니다.</span> -->
-										</div>
+										<input type="hidden" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
 									</div>
+								</div>
+									<div class="form-group">
+									<div class="row">
+										<span id="pwderror" class="pwderror"></span>
+									</div>
+								</div>
+									
 									<div class="form-group">
 										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="담당자명" title="담당자명"  style="width: 300px">
 									</div>

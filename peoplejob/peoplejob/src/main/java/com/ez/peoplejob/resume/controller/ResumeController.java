@@ -32,14 +32,8 @@ public class ResumeController {
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
 	public String register_get(ResumeVO vo,HttpSession session, Model model) {
-	int cnt=1;
-		vo=resumeService.selectBydesiredWorkCode(cnt);
-		vo=resumeService.selectByacademicCode(cnt);
-		vo=resumeService.selectBydvCode(cnt);
-		vo=resumeService.selectBylanglicenceCode(cnt);
-		vo=resumeService.selectBylicenceCode(cnt);
-		vo=resumeService.selectBymemberCode(cnt);
-		model.addAttribute("vo", vo);
+		List<ResumeVO> list=resumeService.selectAllBtype();
+		model.addAttribute("list", list);
 		String memberid=(String) session.getAttribute("memberid");
 		logger.info("이력서등록 화면 보여주기");
 		vo=resumeService.selectByMemverid(memberid);
@@ -50,12 +44,21 @@ public class ResumeController {
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
 	public String write_post(@ModelAttribute ResumeVO resumeVo,Model model) {
+		int cnt=1;
+		resumeVo=resumeService.selectBydesiredWorkCode(cnt);
+		resumeVo=resumeService.selectByacademicCode(cnt);
+		resumeVo=resumeService.selectBydvCode(cnt);
+		resumeVo=resumeService.selectBylanglicenceCode(cnt);
+		resumeVo=resumeService.selectBylicenceCode(cnt);
+		resumeVo=resumeService.selectBymemberCode(cnt);
+		
+		model.addAttribute("vo", resumeVo);
 		
 		logger.info("이력서 등록화면 보여주기 매개변수 vo={}",resumeVo);
-		int cnt=resumeService.insertResume(resumeVo);
+		int result=resumeService.insertResume(resumeVo);
 		logger.info("이력서 등록 결과 cnt ={}",cnt);
 		String msg="",url="/resume/register.do";
-		if(cnt>0) {
+		if(result>0) {
 			msg="이력서 등록 성공";
 			url="/resume/list.do";
 		}else {

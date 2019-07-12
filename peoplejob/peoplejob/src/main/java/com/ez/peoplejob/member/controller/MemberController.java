@@ -259,11 +259,7 @@ public class MemberController {
 		return "redirect:/login/login.do";
 	}
 	
-	@RequestMapping("/findId.do")
-	public String findId() {
-		logger.info("아이디/비밀번호 찾기 화면 보여주기");
-		return "login/findId";
-	}
+	
 	
 	//마이페이지-회원정보 관리(수정)
 	@RequestMapping(value="/person_update.do", method = RequestMethod.POST)
@@ -561,5 +557,31 @@ public class MemberController {
 		return bool;
 	}
 	
+	@RequestMapping("/findId.do")
+	public String findId() {
+		logger.info("아이디찾기 화면 보여주기");
+		return "login/findId";
+	}
+	
+	@RequestMapping("/findPwd.do")
+	public String findPwd() {
+		logger.info("비밀번호 찾기 화면 보여주기");
+		return "login/findPwd";
+	}
+	
+
+	@RequestMapping("/ajaxfindId.do")
+	@ResponseBody
+	public String ajaxfindId(@RequestParam String membername, @RequestParam String email) {
+		logger.info("아이디 찾기 파라미터 membername={}, email={}",membername,email);
+		MemberVO memberVo=new MemberVO();
+		memberVo.setMembername(membername);
+		memberVo.setEmail(email);
+		String memberid=memberService.findId(memberVo);
+		logger.info("아이디 찾기 결과 memberid={}",memberid);
+		
+		return memberid;
+		
+	}
 }
 

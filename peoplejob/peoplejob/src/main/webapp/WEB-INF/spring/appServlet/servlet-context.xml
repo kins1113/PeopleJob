@@ -49,6 +49,8 @@
 		
 		<interceptor>
 		<mapping path="/mypage/**"/>
+		<mapping path="/login/changePwd.do"/>
+		<mapping path="/login/memberOut.do"/>
 			<beans:ref bean="memberInterceptor"/>			
 	</interceptor>
 	</interceptors> 

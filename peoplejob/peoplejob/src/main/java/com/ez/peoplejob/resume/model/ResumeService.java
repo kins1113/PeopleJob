@@ -37,6 +37,6 @@ public interface ResumeService {
 	public ResumeVO selectByacademicCode(int academicCode);
 	public ResumeVO selectBydesiredWorkCode(int desiredWorkCode);
 	public ResumeVO selectBymemberCode(int memberCode);
-	
+	public List<ResumeVO>selectAllBtype();
 	
 }

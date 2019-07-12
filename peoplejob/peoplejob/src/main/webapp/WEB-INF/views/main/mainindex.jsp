@@ -46,6 +46,9 @@ $(function() {
     border: 1px solid lightgray;
 } */
 
+/* body{
+	min-height:100vh;
+} */
 .logo img {
     max-width: 300%;
     max-height: 50%;
@@ -950,7 +953,7 @@ input[type="checkbox"] {
 		</div>
 	</section>
 </div>
-
+</body>
 	<!-- Footer -->
 <%@include file="../main/inc/bottom.jsp" %>
 	

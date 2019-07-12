@@ -146,4 +146,10 @@ public class ResumeDAOMybatis implements ResumeDAO {
 		ResumeVO vo=sqlsession.selectOne(namespace+"selectBymemberCode", memberCode );
 		return vo;
 	}
+
+	@Override
+	public List<ResumeVO> selectAllBtype() {
+		List<ResumeVO> list=sqlsession.selectList(namespace+"selectAllBtype");
+		return list;
+	}
 }

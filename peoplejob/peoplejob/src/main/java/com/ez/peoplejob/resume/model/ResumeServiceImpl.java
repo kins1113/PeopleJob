@@ -113,5 +113,10 @@ public class ResumeServiceImpl implements ResumeService{
 	public ResumeVO selectBymemberCode(int memberCode) {
 		return resumeDao.selectBymemberCode(memberCode);
 	}
+	@Override
+	public List<ResumeVO> selectAllBtype() {
+		
+		return resumeDao.selectAllBtype();
+	}
 
 }
