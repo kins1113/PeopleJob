@@ -136,4 +136,9 @@
 		 order by member_code desc
 		
 	</select>
+	
+	<select id="findId" parameterType="memberVo" resultType="string">
+		select memberid from member
+		where membername=#{membername} and email=#{email}
+	</select>
 </mapper>

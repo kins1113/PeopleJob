@@ -143,11 +143,8 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<input type="button" class="btn btn-secondary btn-default" id="boardAdd" value="등록"> 
 					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="아직 기능 미정"> 
 					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택한 것 삭제">
-<<<<<<< HEAD
 					<input type="button"class="btn btn-secondary btn-default" id="myBtn"value="메일"> 
 					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="엑셀처리"> 
-=======
->>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
 				</div>
 				<div class="form-group serDiv">
 					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;

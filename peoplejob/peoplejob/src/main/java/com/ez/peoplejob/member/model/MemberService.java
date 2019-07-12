@@ -21,4 +21,5 @@ public interface MemberService {
 	int updateCompany(CompanyVO companyVo);
 	CompanyVO selectCompanyById(String memberId);
 	int updatePwd(MemberVO memberVo);
+	String findId(MemberVO memberVo);
 }

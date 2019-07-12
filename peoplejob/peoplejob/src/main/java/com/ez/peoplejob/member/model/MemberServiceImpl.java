@@ -93,6 +93,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public String findId(MemberVO memberVo) {
+		return memberDao.findId(memberVo);
+	}
+
+
 
 
 

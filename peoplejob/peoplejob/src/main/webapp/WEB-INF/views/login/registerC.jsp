@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/login.css'/>" />
 
 <style type="text/css">
+
 input[type=button]{
 	    height: 44px;
     font-size: small;
@@ -37,7 +38,7 @@ input[type="checkbox"].custom {
 }
 
 input[type=checkbox].css-checkbox {
-  position: absolute;
+  position: relative; /* 원래 absolute */
   overflow: hidden;
   clip: rect(0 0 0 0);
   height: 1px;

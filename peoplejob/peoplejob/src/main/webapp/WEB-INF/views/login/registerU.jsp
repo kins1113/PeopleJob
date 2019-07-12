@@ -14,6 +14,8 @@
 	href="<c:url value='/resources/main/css/login.css'/>" />
 
 <style type="text/css">
+
+
 input[type=button] {
 	height: 44px;
 	font-size: small;
