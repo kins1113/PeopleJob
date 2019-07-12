@@ -19,7 +19,7 @@
 	
 	insert into member(member_code, memberid, membername, zipcode, address, addressDetail, 
 	pwd, birth, membergender, email, tel, authority_code)
-	values(#{memberCode}, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
+	values(member_seq.nextval, #{memberid}, #{membername},#{zipcode},#{address},#{addressdetail}, #{pwd},
 	#{birth},#{membergender},#{email},#{tel},1)
 	</insert>
 	

@@ -138,7 +138,7 @@ textarea {
 				$('#memberid').focus();
 				event.preventDefault();
 				return false;
-			} else if ($('#memberid').val() != 'Y') {
+			} else if ($('#chkmemberid').val() != 'Y') {
 				alert('아이디 중복확인을 하세요');
 				event.preventDefault();
 				$('#memberid').focus();
