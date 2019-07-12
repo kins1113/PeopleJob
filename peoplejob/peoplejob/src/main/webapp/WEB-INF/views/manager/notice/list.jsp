@@ -37,7 +37,6 @@
 
 
 
-<!-- 디자인을 위해서 추가했습니다. - 옥환 -->
 <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
@@ -204,7 +203,7 @@
 
 
 
-					<!-- 디자인을 위해서 추가했습니다. - 옥환 -->
+					
 				</div>
 			</div>
 		</div>
