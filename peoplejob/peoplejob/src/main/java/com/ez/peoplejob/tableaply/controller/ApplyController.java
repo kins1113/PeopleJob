@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
+import com.ez.peoplejob.jobopening.model.JobopeningService;
 import com.ez.peoplejob.jobopening.model.JobopeningVO;
 import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberService;
@@ -30,6 +31,7 @@ import com.ez.peoplejob.tableaply.model.TableaplyVO;
 @RequestMapping("/apply")
 public class ApplyController {
 	private Logger logger=LoggerFactory.getLogger(ApplyController.class);
+	@Autowired JobopeningService jobopeningService;
 	@Autowired TableaplyService tableaplyService;
 	@Autowired MemberService memberService;
 	@RequestMapping("/insertapply.do")
@@ -118,5 +120,51 @@ public class ApplyController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url",url);
 		return "common/message";
+	}
+	
+	@RequestMapping("/Capply_list.do")
+	public String Capply_list(HttpSession session,
+			@ModelAttribute SearchVO searchVo,
+			Model model) {
+		String id=(String)session.getAttribute("memberid");
+		MemberVO mvo=memberService.selectByUserid(id);
+		logger.info("로그인한 회원정보 mvo={}",mvo);
+		logger.info("지원현황 리스트");
+		//1]PaginationInfo 객체 생성
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(WebUtility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//2]SearchVo에 페이징 관련 변수 세팅
+		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("셋팅 후 serchVo={}",searchVo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		logger.info("searchVo.getFirstRecordIndex()={},getRecordCountPerPage={}",searchVo.getFirstRecordIndex(),searchVo.getRecordCountPerPage());
+		map.put("firstRecordIndex", searchVo.getFirstRecordIndex());
+		map.put("recordCountPerPage", searchVo.getRecordCountPerPage());
+		map.put("memberCode",mvo.getMemberCode());
+		List<JobopeningVO> list2=jobopeningService.selectJobopeningBycomcode(mvo.getMemberCode());
+		logger.info("로그인한 회원의 작성한 채용공고 사이즈list2.size={}",list2.size());
+		
+		
+		
+		
+		logger.info("map={}",map);
+		List<TableaplyVO> list=tableaplyService.selectapplyComp(map);
+		logger.info("지원현황 조회결과{}",list);
+		int totalRecord=0;
+		totalRecord=tableaplyService.selectapplyCount(map);
+		logger.info("전체 레코드 개수 조회 결과, totalRecord={}",totalRecord);
+		
+		//5]PaginationInfo에 totalRecord값셋팅
+		pagingInfo.setTotalRecord(totalRecord);
+		//3
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("list",list);
+		model.addAttribute("mvo", mvo);
+		return "apply/Capply_list";
 	}
 }

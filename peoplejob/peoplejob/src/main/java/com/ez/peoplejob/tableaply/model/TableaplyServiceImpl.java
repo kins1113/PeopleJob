@@ -30,5 +30,9 @@ public class TableaplyServiceImpl implements TableaplyService{
 	public int deleteJobOpen(Map<String, Object> map) {
 		return tableaplyDao.deleteapply(map);
 	}
+	@Override
+	public List<TableaplyVO> selectapplyComp(Map<String, Object> map) {
+		return tableaplyDao.selectapplyComp(map);
+	}
 
 }

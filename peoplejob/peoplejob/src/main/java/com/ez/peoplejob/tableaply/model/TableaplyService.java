@@ -9,4 +9,5 @@ public interface TableaplyService {
 	int selectapplyCount(Map<String,Object> map);
 	int dupapply(int jobopening);
 	int deleteJobOpen(Map<String,Object>map);
+	List<TableaplyVO> selectapplyComp(Map<String,Object> map);
 }
