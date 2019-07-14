@@ -9,4 +9,5 @@ public interface TableaplyDAO {
 	int selectapplyCount(Map<String,Object> map);
 	int dupapply(int jobopening);
 	int deleteapply(Map<String,Object>map);
+	List<TableaplyVO> selectapplyComp(Map<String,Object> map);
 }
