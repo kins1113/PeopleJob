@@ -216,6 +216,9 @@
 		select count(*) from member
 		where company_code=#{companyCode} and pwd=#{pwd}
 	</select>
+	<select id="selectJobopeningBycomcode" parameterType="int" resultType="JobopeningVo">
+	select * from jobopening where company_code=${companyCode}
+	</select>
 </mapper>
 
 
