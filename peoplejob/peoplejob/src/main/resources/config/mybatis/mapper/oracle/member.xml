@@ -190,4 +190,17 @@
 		select memberid from member
 		where membername=#{membername} and email=#{email}
 	</select>
+	
+	<select id="selectPayInfo" parameterType="string" resultType="map">
+	
+	select c.company_zipcode, c.company_address, m.email, m.tel
+	from company c join member m 
+	on c.COMPANY_CODE = m.COMPANY_CODE
+	where m.membername=#{membername}
+	</select>
+	
+	<select id="findPwd" parameterType="memberVo" resultType="int">
+		select count(pwd) from member
+		where memberid=#{memberid} and membername=#{membername} and email=#{email}
+	</select>
 </mapper>

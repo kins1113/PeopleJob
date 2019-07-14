@@ -17,8 +17,7 @@
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
-	$('input[type=submit]').click(function(){
-		
+	$('#frmfindid').submit(function(){
 			var membername=$('#membername').val();
 			var email=$('#email').val();
 			
@@ -27,7 +26,9 @@ $(function() {
 					url : "<c:url value='/login/ajaxfindId.do'/>",
 					type : "post",
 					dataType:"json",
+					//data: $('#frmfindid').serialize(),
 					data : {"membername":membername, "email":email},
+					//contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(res) {
 						/* var str = "";
 						if (res) {
@@ -47,11 +48,23 @@ $(function() {
 				});
 
 			} else {
-				$('.error').html("아이디 규칙에 맞지 않습니다.");
-				$('.error').show();
+				if(membername==''){
+					alert('이름을 입력해주세요!');
+					event.preventDefault();
+					return false;
+				}else if(email.length<1){
+					alert('비밀번호를 입력해주세요');
+					event.preventDefault();
+					return false;
+				}else{
+					$('.error').html("아이디가 없습니다.");
+					$('.error').show();
+					event.preventDefault();
+					return false;					
+				}
 			}
 		});
-
+	event.preventDefault();
 
 });
 </script>
@@ -74,7 +87,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="<c:url value='/login/findPwd.do'/>" method="post" role="form" style="display: block;">
+								<form id="frmfindid" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="이름">
 									</div>

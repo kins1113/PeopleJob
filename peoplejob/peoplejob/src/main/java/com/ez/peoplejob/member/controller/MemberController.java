@@ -296,7 +296,7 @@ public class MemberController {
 	
 	@RequestMapping("/emailcertificate.do")
 	public String emailcertificate() {
-		logger.info("이메일 인증번호 전송 완료 후, 인증번호 입력하는 창 보여주기");
+		logger.info(" 인증번호 전송 완료 후, 인증번호 입력하는 창 보여주기");
 		
 		return "login/emailcertificate";
 		
@@ -563,7 +563,7 @@ public class MemberController {
 		return "login/findId";
 	}
 	
-	@RequestMapping("/findPwd.do")
+	@RequestMapping(value="/findPwd.do",method = RequestMethod.GET)
 	public String findPwd() {
 		logger.info("비밀번호 찾기 화면 보여주기");
 		return "login/findPwd";
@@ -572,8 +572,9 @@ public class MemberController {
 
 	@RequestMapping("/ajaxfindId.do")
 	@ResponseBody
-	public String ajaxfindId(@RequestParam String membername, @RequestParam String email) {
+	public String ajaxfindId(@RequestParam String membername, @RequestParam String email, HttpServletResponse response) {
 		logger.info("아이디 찾기 파라미터 membername={}, email={}",membername,email);
+		//response.setCharacterEncoding("UTF-8");
 		MemberVO memberVo=new MemberVO();
 		memberVo.setMembername(membername);
 		memberVo.setEmail(email);
@@ -582,6 +583,86 @@ public class MemberController {
 		
 		return memberid;
 		
+	}
+	
+	@RequestMapping(value="/findPwd.do", method = RequestMethod.POST)
+	public String findPwd_post(@RequestParam String membername, @RequestParam String memberid, @RequestParam String email,Model model) {
+		logger.info("비밀번호 찾기 파라미터 membername={},email={}",membername,email );
+		logger.info("비밀번호 찾기 파라미터 아이디={}",memberid);
+		
+		MemberVO memberVo=memberService.selectByUserid(memberid);
+		String msg="", url="/login/findPwd.do";
+		if(memberVo==null) {
+			msg="해당 아이디가 없습니다.";
+		}else if(!membername.equals(memberVo.getMembername()) || !email.equals(memberVo.getEmail())) {
+			msg="입력하신 정보와 일치하는 회원이 없습니다.";
+		}else {
+			
+			//이메일 보내기
+			//보내는 사람 쪽의 메일 정보
+			String host     = "smtp.naver.com";
+			final String user   = "kins1113";
+			final String password  = "kimok1277!";
+			
+			//받는 사람 메일 주소
+			String to     =email;
+			
+			String authNum=WebUtility.RandomNum();
+			String coment="임시비밀번호 = "+authNum;
+			logger.info("랜덤생성한 수 authNum={}",authNum);
+			
+			// Get the session object
+			Properties props = new Properties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.auth", "true");
+			
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user, password);
+				}
+			});
+			
+			// Compose the message
+			try {
+			
+				MimeMessage message = new MimeMessage(session);
+					message.setFrom(new InternetAddress(user));
+				
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+				// Subject 메일 제목
+				message.setSubject("PEOPLEJOB 비밀번호 찾기 - 임시비밀번호 입니다.");
+				// Text 메일 내용
+				message.setText(coment);
+					
+				// send the message 메일 보내기
+				Transport.send(message);
+				
+			   logger.info("임시 비밀번호 message sent successfully...");
+				 
+			} catch (AddressException e) {
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+				
+			
+			msg="해당 이메일로 임시 비밀번호가 전송되었습니다. 로그인 후 비밀번호를 변경해주세요";
+			url="/login/login.do";
+			model.addAttribute("authNum",authNum);
+			
+			//성공 후 dbPwd를 임시 비밀번호로 변경
+			MemberVO memVo=new MemberVO();
+			memVo.setMemberid(memberid);
+			memVo.setPwd(authNum);
+			int cnt=memberService.updatePwd(memVo);
+			logger.info("임시 비밀번호로 변경 결과 cnt={}",cnt);
+		
+		} //else
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 }
 
