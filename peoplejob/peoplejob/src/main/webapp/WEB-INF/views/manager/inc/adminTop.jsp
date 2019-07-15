@@ -122,9 +122,9 @@
 										href="#"> <span class="nav-text">통합 관리</span>
 									</a></li> -->
 									<li class="active"><a class="sidenav-item-link"
-										href="${pageContext.request.contextPath}/manager/member/memberList.do"> <span class="nav-text">일반 회원</span>
+										href="${pageContext.request.contextPath}/manager/member/memberList.do?authorityCk=member"> <span class="nav-text">일반 회원</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/company/companyList.do">
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/member/memberList.do?authorityCk=company">
 											<span class="nav-text">기업 회원</span>
 											 <!-- <span	class="badge badge-success">new</span> -->
 
@@ -173,7 +173,7 @@
 										<ul class="collapse" id="forms">
 											<div class="sub-menu">
 												<li><a href="basic-input.html">상품 조회</a></li>
-												<li><a href="input-group.html">상품 등록</a></li>
+												<li><a href="${pageContext.request.contextPath}/manager/service/register.do">상품 등록</a></li>
 											</div>
 										</ul></li>
 

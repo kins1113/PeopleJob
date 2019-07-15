@@ -152,12 +152,12 @@
 
         </div>
        <!-- 기업회원(3)이면 글쓰기 나옴  -->  
-       <input type="text" name="jobopening" id="jobopening"> 
+       <input type="hidden" name="jobopening" id="jobopening"> 
          <c:if test="${mvo.authorityCode==3}">
         <div class="pull-right">
         	<input type="button" id="del" name="del" class="btn btn-primary" role="button" value="삭제하기">
             <a href="<c:url value='/company/jobopening_list.do'/>" class="btn btn-primary" role="button">채용정보로 돌아가기</a>
-            <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">글쓰기</a>
+            <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">공고등록</a>
         </div>
         </c:if>
     </div>

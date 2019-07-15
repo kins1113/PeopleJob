@@ -29,9 +29,62 @@ $(function() {
 	});
 
 });
-</script>
 
-<div class="container">
+public JsonNode getAccessToken(String autorize_code) {
+	 
+    final String RequestUrl = "https://kauth.kakao.com/oauth/token";
+
+    final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+
+    postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
+
+    postParams.add(new BasicNameValuePair("client_id", " dceec860a1bc965e16c45d03200ab183"));
+
+    postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:9090/peoplejob/oauth"));
+
+    postParams.add(new BasicNameValuePair("code", autorize_code));
+
+    final HttpClient client = HttpClientBuilder.create().build();
+
+    final HttpPost post = new HttpPost(RequestUrl);
+
+    JsonNode returnNode = null;
+
+    try {
+
+        post.setEntity(new UrlEncodedFormEntity(postParams));
+
+        final HttpResponse response = client.execute(post);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        returnNode = mapper.readTree(response.getEntity().getContent());
+
+    } catch (UnsupportedEncodingException e) {
+
+        e.printStackTrace();
+
+    } catch (ClientProtocolException e) {
+
+        e.printStackTrace();
+
+    } catch (IOException e) {
+
+        e.printStackTrace();
+
+    } finally {
+
+    }
+
+    return returnNode;
+
+}
+
+
+</script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<div class="container" style="min-height: 550px;padding:8px;">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -90,51 +143,34 @@ $(function() {
 											</div>
 										</div>
 									</div>
-								</form>
-								<form id="register-form" action="" method="post" role="form" style="display: none;">
-								<input type="Text" value="기업회원 로그인">
-									<div class="form-group">
-										<input type="text" name="memberId" id="memberId" tabindex="1" class="form-control" placeholder="ID" value="">
-									</div>
-									<div class="form-group">
-										<input type="password" name="pwd" id="pwd" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-									<div class="row" style="margin-left:-1px">
-										<input type="checkbox" name="saveId" id="saveId">&nbsp;아이디 저장
-										
-										<c:if test="${!empty cookie.ck_userid }">
-											checked="checked"
-										</c:if>
-				
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인">
-											</div>
-										</div>
-									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="<c:url value='/login/findId.do'/>" tabindex="5" class="forgot-password">ID/PW찾기</a>
+													 <a id="kakao-login-btn"></a>
+    												<a href="http://developers.kakao.com/logout"></a>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="text-center">
-													<a href="<c:url value='/login/selectregister.do'/>" tabindex="5" class="forgot-password">회원가입</a>
-												</div>
-											</div>
-										</div>
-									</div>
+									<script type='text/javascript'>
+        //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('34a7df4396a5b761fba0670df9faaecf');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function (authObj) {
+                alert(JSON.stringify(authObj));
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+      //]]>
+    </script>
 								</form>
+								
 							</div>
 						</div>
 					</div>

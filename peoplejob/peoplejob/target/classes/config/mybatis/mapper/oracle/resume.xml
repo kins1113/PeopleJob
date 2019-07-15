@@ -22,14 +22,18 @@
 	<select id="selectBymemberCode" parameterType="int" resultType="resumeVo">
 		select * from member where member_code=#{memberCode}
 	</select>
+	<select id="selectAllBtype" resultType="resumeVo">
+		select b1.BTYPENAME1,b2.BTYPENAME2,b3.BTYPENAME3 from 
+		btype1 b1,btype2 b2,btype3 b3
+		where b1.btype_code1=b2.BTYPE_CODE1 and b2.BTYPE_CODE2 = b3.BTYPE_CODE2
+	</select>
 	
-
 	<insert id="insertResume" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="resumeCode" resultType="int" >
 			select resume_seq.nextval from dual
 		</selectKey>
-		insert into resume(resume_code,resumeTitle,resumeRegdate,introduce,award,opencheck,member_code,picture)
-		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{opencheck},#{memberCode},#{picture})
+		insert into resume
+		values(#{resumeCode},#{resumeTitle},sysdate,#{introduce},#{award},#{langlicenceCode},#{licenceCode},#{dvCode},#{academicCode},#{desiredWorkCode},#{opencheck},#{memberCode},#{picture})
 	</insert>
 	
 	<insert id="insertLangcertification" parameterType="resumeVo">
@@ -53,8 +57,7 @@
 		select career_seq.nextval from dual
 		</selectKey>
 		insert into career
-		values(#{dvCode},#{companyname},#{workterm},#{chargework},#{workcheck},#{jobgrade},#{workcondition})
-		
+		values(#{dvCode},#{companyname},#{chargework},#{workcheck},#{jobgrade},#{workcondition},#{workterm},#{workterm2})
 	</insert>
 	
 	<insert id="insertEducation" parameterType="resumeVo">
@@ -62,7 +65,7 @@
 		select education_seq.nextval from dual
 		</selectKey>
 		insert into education
-		values(#{academicCode},#{schoolname},#{major},#{degree},#{graduate},#{graduatecheck},#{schoollocal},#{graduatetype})
+		values(#{academicCode},#{schoolname},#{major},#{degree},#{graduatecheck},#{schoollocal},#{graduatetype},#{graduate},#{graduate2})
 		
 	</insert>
 	
@@ -70,45 +73,27 @@
 		<selectKey order="BEFORE" keyProperty="hopeworkCode" resultType="int">
 		select hope_working_seq.nextval from dual
 		</selectKey>
-		insert into hope_working (hopework_code,jobtype,hopepay,hopeworkform,firstjob_code,hopeworkdate)
-		values(#{hopeworkCode},#{jobtype},#{hopepay},#{hopeworkform},#{firstjobCode},#{hopeworkdate})
+		insert into hope_working
+		values(#{hopeworkCode},#{hopeworkdate},#{hopepay},#{hopeworkform},#{localCode},#{btypeCode3},#{thirdCode})
 		
 	</insert>
 	
-	<insert id="insertLocation" parameterType="resumeVo">
-		<selectKey order="BEFORE" keyProperty="localCode" resultType="int">
-		select location_seq.nextval from dual
-		</selectKey>
+<insert id="insertLocation" parameterType="resumeVo">
+		
 		insert into location
-		values(#{localCode},#{sido},#{gugun})
+		select * from location
+		where local_code=#{localCode};
 		
 	</insert>
 	
-	<insert id="insertFirst" parameterType="resumeVo">
-		<selectKey order="BEFORE" keyProperty="firstCode" resultType="int">
-		select first_seq.nextval from dual
-		</selectKey>
-		insert into first
-		values(#{firstCode},#{firstname},#{secondCode})
-		
-	</insert>
-	
-	<insert id="insertSecond" parameterType="resumeVo">
-		<selectKey order="BEFORE" keyProperty="secondCode" resultType="int">
-		select second_seq.nextval from dual
-		</selectKey>
-		insert into second
-		values(#{secondCode},#{secondname},#{thirdCode})
-		
-	</insert>
+
+
 	<insert id="insertThird" parameterType="resumeVo">
-	<selectKey order="BEFORE" keyProperty="thirdCode" resultType="int">
-		select third_seq.nextval from dual
-		</selectKey>
+
 		insert into third
-		values(#{thirdCode},#{thirdname})
+		select * from third
 		
-	</insert>
+	</insert> 
 	<select id="selectSearch" parameterType="searchVo" resultType="resumeVo">
 		select *
 		from
@@ -135,7 +120,11 @@
 		select * from member where memberid=#{memberid}
 	</select>
 	
-		<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
+	
+	<select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
+		select * from resume where resume_code=#{resumeCode}
+	</select>
+		<!-- <select id="selectResumeByNo" resultType="resumeVo" parameterType="int">
 		select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
     	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
     	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
@@ -151,7 +140,7 @@
     	r.DESIREDWORK_CODE=ho.HOPEWORK_CODE and m.MEMBER_CODE = r.MEMBER_CODE and 
     	ho.LOCAL_CODE=lo.LOCAL_CODE and ho.FIRSTJOB_CODE=f.FIRST_CODE and 
     	f.SECOND_CODE = s.SECOND_CODE and s.THIRD_CODE = t.THIRD_CODE and resume_code=#{resumeCode}
-	</select>
+	</select> -->
 		
 		<delete id="deleteResumeByNo" parameterType="int">
 		delete from resume where resume_code=#{resumeCode}

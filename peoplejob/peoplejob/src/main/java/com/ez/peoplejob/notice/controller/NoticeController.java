@@ -191,41 +191,29 @@ public class NoticeController {
 			return "common/message";
 		}
 		
-	
-	
-	@RequestMapping(value="/manager/notice/delete.do",method = RequestMethod.GET)
-	public String delete_get(@RequestParam(defaultValue = "0") int notifyCode,
-			Model model) {
-		logger.info("삭제 화면 파라미터 notifyCode={}", notifyCode);
+	@RequestMapping("/manager/notice/noticeDel.do")
+		public String noticeDel(@RequestParam String[] noChk, Model model) {
 		
-		if(notifyCode==0) {
-			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/manager/notice/list.do");
-			return "common/message";
+		for(int i=0; i<noChk.length;i++) {
+			logger.info("{}번째 넘어온값={}",i,noChk[i]);
 		}
+		int cnt=noticeService.deleteNotice(noChk);
+		String msg="", url="/manager/notice/list.do";
 		
-		return "manager/notice/delete";		
-	}
-	
-	@RequestMapping(value="/manager/notice/delete.do",method=RequestMethod.POST)
-	public String delete_post(@ModelAttribute NoticeVO noticeVo, Model model) {
-		logger.info("글 삭제 처리, 파라미터 noticeVo={}", noticeVo);
-		
-		String msg="", url="/manager/notice/delete.do?notifyCode="+noticeVo.getNotifyCode();
-		
-			int cnt=noticeService.deleteNotice(noticeVo.getNotifyCode());
-			if(cnt>0) {
-				msg="글 삭제되었습니다.";
-				url="/manager/notice/list.do";
-			}else {
-				msg="글 삭제 실패!";
-			}
-		
-		
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
+		if(cnt>0) {
+			msg=cnt+"건 삭제 성공";
+		}else {
+			msg="삭제 실패";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
 		
 		return "common/message";
+		
 	}
 	
-}
+
+	
+	
+	}
+

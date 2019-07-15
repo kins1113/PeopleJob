@@ -1,5 +1,7 @@
 package com.ez.peoplejob.notice.model;
 
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,6 @@ public interface NoticeService {
 	public int updateReadCount(int notifyCode);
 	public NoticeVO selectByNo(int notifyCode);
 	public int updateNotice(NoticeVO vo);
-	public int deleteNotice(int notifyCode);
+	public int deleteNotice(String[] list);
 	
 }

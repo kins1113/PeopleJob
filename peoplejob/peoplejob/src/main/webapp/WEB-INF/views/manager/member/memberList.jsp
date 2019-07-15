@@ -5,50 +5,15 @@
 <style type="text/css">
 a{color: black;}
 #pageDiv {width: 30%;}
-.serDiv {float: right;margin-top: 9px;}
+.serDiv {float: right;margin-top: 9px;font-size: 9px;}
 input.form-control {	margin-top: 4px;}
 input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #boardTable {font-size: 1.0em;}
 #cardBoduPostList {margin: 0 5px 5px 5px;padding: 0 5px 5px 5px;}
 #btGroup {margin-right: 20px;}
 #pageSize {	float: left;margin-left: 20px;margin-top: 9px;}
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-}
-
-/* The Close Button */
- .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-} */
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
+#startDay, #endDay{width: 120px;}
+#btGroup button{margin-top: 4px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
@@ -75,6 +40,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				}else{
 						$("input[name=filterKey]").val("Y");
 				}
+			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=member'/>");
 	    	$("form[name=memberList]").submit();	    	
 			})
 		});
@@ -87,15 +53,31 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 	    });
 		
 	});
-	    
+	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
+		$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=member'/>");
 		$("form[name=memberList]").submit();
 	}
-		  
-	   
+	//엑셀 다운로드 함수
+	function doExcelDownloadProcess(ckAll){
+		if(ckAll=="all"){
+		//전체 회원 엑셀다운 처리
+			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileMember.do?all=all'/>");
+	        $("form[name=memberList]").submit();
+		}else{
+		//지금 화면에 있는 회원만 엑셀 다운
+			if($("input[name=searchKeyword]")==''){
+				$("input[name=searchCondition]").val('');
+			}
+	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileMember.do'/>");
+	        $("form[name=memberList]").submit();
+		}
+		
+    }
 </script>
-<form action="<c:url value='/manager/member/memberList.do'/>" name="memberList" method="post" >
+<form name="memberList" method="post" 
+		 enctype="multipart/form-data" >
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
@@ -105,6 +87,9 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		value='1';
 	</c:if>
  >
+ 
+<!-- 회사인지 일반인지 구분하기 위한 hidden -->
+<input type="hidden" name="authorityCk" value="${param.authorityCk }">
 <!-- 필터링을 위한 hidden -->
 <input type="hidden" name="filterCode" value="${param.filterCode }">
 <input type="hidden" name="filterKey" value="${param.filterKey}">
@@ -121,10 +106,9 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
 				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button" class="btn btn-secondary btn-default" id="" value="등록"> 
-					<input type="button"class="btn btn-secondary btn-default" id="" value="아직 기능 미정"> 
 					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="선택한 메일">
-					<input type="button"class="btn btn-secondary btn-default" id="btExceil"value="엑셀처리"> 
+					<input type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('all')" id="" value="전체회원 엑셀"> 
+					<button type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('')" id="btExceil">엑셀 다운</button> 
 				</div>
 				<div class="form-group serDiv">
 					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
@@ -161,20 +145,20 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 						</c:if>>메일</option>
 					</select>
 				</div>
-				<div class="form-group serDiv">
-					<c:import url="../../inc/date.jsp">
-						<c:param name="name" value="startDay"></c:param>
-						<c:param name="id" value="workdate1"></c:param>
-					</c:import>					
+				<div class="form-group serDiv incDate" id="endDay">
+					 <c:import url="../../inc/date.jsp">
+						<c:param name="name" value="endDay"></c:param>
+						<c:param name="id" value="workdate2"></c:param>
+					</c:import> 				
 				</div>
 				<div class="form-group serDiv">
 					<br><b> ~ </b>
 				</div>
-				<div class="form-group serDiv">
-					<c:import url="../../inc/date.jsp">
-						<c:param name="name" value="endDay"></c:param>
-						<c:param name="id" value="workdate2"></c:param>
-					</c:import>					
+				<div class="form-group serDiv incDate" id="startDay">
+					 <c:import url="../../inc/date.jsp">
+						<c:param name="name" value="startDay"></c:param>
+						<c:param name="id" value="workdate1"></c:param>
+					</c:import>				
 				</div>
 				<div class="form-group" id='pageSize'>
 					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
@@ -210,7 +194,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
 									<div class="control-indicator"></div>
 							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberCode">회원 코드</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원 코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="address">주소</a></th>
@@ -218,7 +202,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 							<th scope="col"><a href="#" class="fileterCode" id="membergender">성별</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="email">이메일</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="tel">전화번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="authorityCode">이력서</a></th>
+							<th scope="col">이력서</th>
 							<th scope="col">비고</th>
 						</tr>
 					</thead>
@@ -239,7 +223,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 								<td>${memberVo.memberCode}</td>
 								<td>${memberVo.memberid}</td>
 								<td>${memberVo.membername}</td>
-								<td>${memberVo.address} - ${memberVo.addressdetail }</td>
+								<td>${memberVo.address} ${memberVo.addressdetail }</td>
 								<td>${memberVo.birth}</td>
 								<td>${memberVo.membergender}</td>
 								<td>${memberVo.email}</td>

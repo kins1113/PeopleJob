@@ -2,13 +2,78 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../main/inc/top.jsp" %>
 <style type="text/css">
-.square{
+/* .square{
 	width: 700px;
     height: 150px;
     border: 1px solid lightgray;
     margin-top: 30px;
 }
+ */
+ .dashboard{
+ 	    border: 1px solid lightgray;
+ 	    margin-top: 30px;
+ 	    height: 170px;
+ }
+ 
+.summary_wrap .dashboard .activity_list li {
+    display: inline-block;
+    margin: 0 10px;
+    padding-top: 20px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+a{
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: inherit;
+}
+
+.img{
+	position: relative;
+    float: left;
+    margin-right: 34px;
+    text-align: center;
+}
+.text{
+	position: absolute;
+    top: 30%;
+    left: 25%;
+    font-weight: bold; 
+    font-size: 1.1em;
+}
+.doing {
+    display: block;
+}
+
+span.sname {
+    font-size: 1.3em;
+    font-family: monospace;
+}
 </style>
+<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript">
+
+var author_code="${sessionScope.author_code}";
+function jobopening(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/company/my_jobopening_list.do?companycode1=${memberVo.companyCode}'/>";
+	}
+} 
+
+function company(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 기업정보를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/login/c_update.do'/>";
+	}
+} 
+</script>
 	<!-- Content -->
 	<section class="bg0 p-b-140 p-t-10">
 		<div class="container">
@@ -19,49 +84,56 @@
 						
 						<div class="p-b-70">
 						
-							<div class="flex-wr-s-s p-b-40">
-							<div class="square">
-								<ul>
-		<li>
-			<a href="http://www.incruit.com/resume/resumelist.asp" onclick="return goCL(this,'18672','www','상단_이력서관리');">
-				<strong>이력서 관리</strong>
-				<em><span id="Mh_ResumePoint">6%</span></em>
-			</a>
-		</li>
-		<li>
-			<a href="http://www.incruit.com/applymng/applystatus.asp" onclick="return goCL(this,'18672','www','상단_입사지원');">
-				<strong>입사지원</strong>
-				<em><span id="Mh_ApplyCnt">0</span></em>
-			</a>
-		</li>
-		<li>
-			<a href="http://www.incruit.com/applymng/resumeviewlist.asp" onclick="return goCL(this,'18672','www','상단_이력서열람');">
-				<strong>이력서 열람</strong>
-				<em><span id="Mh_ResumeOpenCnt">0</span></em>
-			</a>
-		</li>
-		<li>
-			<a href="http://www.incruit.com/applymng/applysendlist.asp?mode=2" onclick="return goCL(this,'18672','www','상단_면접제의');">
-				<strong>면접제의</strong>
-				<em><span id="Mh_InterviewCnt">0</span></em>
-			</a>
-		</li>
-		<li>
-			<a href="http://www.incruit.com/matchjob/scrapjob.asp" onclick="return goCL(this,'18672','www','상단_스크랩');">
-				<strong>스크랩</strong>
-				<em><span id="Mh_ScrapCnt">0</span></em>
-			</a>
-		</li>
-		<li>
-			<a href="http://www.incruit.com/matchjob/scrapcompany.asp" onclick="return goCL(this,'18672','www','상단_관심기업');">
-				<strong>관심기업</strong>
-				<em><span id="Mh_ScrapCorpCnt">0</span></em>
-			</a>
-		</li>
-	</ul>
-							</div>
-							
-							</div>
+							<div class="dashboard">
+            <ul class="activity_list">
+                   <li class="img">
+                        <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
+                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
+                           <div class="text">
+                            <span class="doing"><em>2</em> / 10</span>
+                            <span class="sname">이력서</span>
+                           </div>
+                        </a>
+                    </li>
+                        <li class="img">
+                        <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
+                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
+                           <div class="text">
+                            <span class="doing"><em> 0</em> </span>
+                            <span class="sname">스크랩</span>
+                           </div>
+                        </a>
+                    </li> 
+                    
+                    <li class="img">
+                        <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
+                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
+                           <div class="text">
+                           <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+                            <span class="doing"><em> 0 </em> /10</span>
+                            <span class="sname">결제내역</span>
+                            </c:if>
+                             <c:if test="${sessionScope.author_code==1 }">
+                            <span class="doing"><em> 0 </em> </span>
+                            <span class="sname">지원현황</span>
+                            </c:if>
+                           </div>
+                        </a>
+                    </li>
+                                   
+                                   
+                     <li class="img">
+                        <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
+                           <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
+                           <div class="text">
+                            <span class="doing"><em> 0</em></span>
+                            <span class="sname">스크랩</span>
+                           </div>
+                        </a>
+                    </li>
+                            
+                            </ul>
+        </div>
 
 							<div class="wrap-pic-max-w p-b-30">
 							이력서 리스트 띄우기
@@ -132,7 +204,7 @@
 				
 				<!-- Sidebar -->
 				<div class="col-md-10 col-lg-4 p-b-30" style="float: left;">
-					<div class="p-l-10 p-rl-0-sr991 p-t-70">						
+					<div class="p-l-10 p-rl-0-sr991 p-t-70" style="padding-top: 29px;">						
 						<!-- Category -->
 						<div class="p-b-60">
 							<div class="how2 how2-cl4 flex-s-c">
@@ -148,15 +220,15 @@
 										이력서 관리
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" id="jobopening" onclick="jobopening()">
 										채용공고 관리
 									</a>
 									</c:if>
 								</li>
 
 								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="scrap()">
 										스크랩 정보
 									</a>
 								</li>
@@ -167,7 +239,7 @@
 										지원 현황
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										결제 내역
 									</a>
@@ -180,8 +252,8 @@
 										내 정보 관리
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="company()">
 										기업정보 관리
 									</a>
 									</c:if>
@@ -198,7 +270,6 @@
 										회원 탈퇴
 									</a>
 									
-									<!-- 기업회원이 탈퇴할 경우 채용공고가 사라진다는 경고창or 글 -->
 								</li>
 							</ul>
 						</div>

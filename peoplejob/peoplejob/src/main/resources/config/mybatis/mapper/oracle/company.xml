@@ -51,7 +51,7 @@
 					</foreach>
 				</if>		
 				<if test="academicCondition1 != null">
-					and academicCondition IN 
+					and academic_Condition IN 
 					<foreach collection="academicCondition1" item="academicCondition" 
 						index="index" open="(" close=")" separator=",">
 					#{academicCondition}
@@ -98,7 +98,7 @@
 					</foreach>
 				</if>		
 				<if test="academicCondition1 != null">
-					and academicCondition IN 
+					and academic_Condition IN 
 					<foreach collection="academicCondition1" item="academicCondition" 
 						index="index" open="(" close=")" separator=",">
 					#{academicCondition}
@@ -168,7 +168,7 @@
 					</foreach>
 				</if>		
 				<if test="academicCondition1 != null">
-					and academicCondition IN 
+					and academic_Condition IN 
 					<foreach collection="academicCondition1" item="academicCondition" 
 						index="index" open="(" close=")" separator=",">
 					#{academicCondition}
@@ -201,7 +201,7 @@
 					</foreach>
 				</if>		
 				<if test="academicCondition1 != null">
-					and academicCondition IN 
+					and academic_Condition IN 
 					<foreach collection="academicCondition1" item="academicCondition" 
 						index="index" open="(" close=")" separator=",">
 					#{academicCondition}
@@ -215,6 +215,9 @@
 	<select id="selectPwdCheck" parameterType="map" resultType="int">
 		select count(*) from member
 		where company_code=#{companyCode} and pwd=#{pwd}
+	</select>
+	<select id="selectJobopeningBycomcode" parameterType="int" resultType="JobopeningVo">
+	select * from jobopening where company_code=${companyCode}
 	</select>
 </mapper>
 

@@ -5,6 +5,14 @@
    	color: floralwhite;
     margin-left: 51px;
     }
+    
+/*     footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+} 
+ */
+
     </style>
 <footer>
 		

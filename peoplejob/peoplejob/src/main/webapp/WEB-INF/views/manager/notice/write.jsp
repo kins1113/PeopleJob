@@ -5,11 +5,11 @@
           <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-12">
 				<div class="card card-default">
 					<div class="card-header card-header-border-bottom">
-						<h2>공지사항</h2>
-					</div>
+
+					
 					<div class="card-body">
 						<form name="noticeWrite" method="post"
 						action="<c:url value='/notice/write.do'/>" >
@@ -24,14 +24,14 @@
 							<div class="form-group">
 								<label for="notifycontent">공지사항 내용</label>
 								<textarea class="form-control" id="notifycontent" name="notifycontent" 
-									rows="3" cols="30"></textarea>
+									rows="10" cols="30"></textarea>
 							</div>
 							
 							<div>
 								<!-- 관리자 아이디를 세션 값으로 input  -->
-								<label for="adminid">관리자아이디</label>
-							<input type="text" id="adminid" name="adminid" value="${sessionScope.adminid}" />
-							<input type="text" id="adminCode" name="adminCode" value="${sessionScope.adminCode}" />
+								
+							<input type="hidden" id="adminid" name="adminid" value="${sessionScope.adminid}" />
+							<input type="hidden" id="adminCode" name="adminCode" value="${sessionScope.adminCode}" />
 							</div>
 
 							<div class="form-footer pt-4 pt-5 mt-4 border-top">
@@ -44,7 +44,7 @@
           </div>
           </div>
           </div>
-          
+          </div>
           
           
           

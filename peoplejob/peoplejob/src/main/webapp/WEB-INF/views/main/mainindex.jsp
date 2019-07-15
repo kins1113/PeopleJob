@@ -24,17 +24,7 @@ $(function() {
 			}
 			
 		});
-		/* if($('#memberId').val()==''){
-			alert('아이디를 입력하세요');
-			$('#memberId').focus();
-			event.preventDefault();
-			return false;
-		}else if($('#pwd').val()==''){
-			alert('비밀번호를 입력하세요');
-			$('#pwd').focus();
-			event.preventDefault();
-			return false;
-		} */
+		
 	});
 
 });
@@ -45,6 +35,7 @@ $(function() {
 /* .col-sm-6.p-r-25.p-r-15-sr991 {
     border: 1px solid lightgray;
 } */
+
 
 .logo img {
     max-width: 300%;
@@ -414,20 +405,7 @@ input[type="checkbox"] {
                  <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
          </div>
          <ul class="memberType clear">
-          <!--   <li>
-            		<input type="checkbox" name="saveId" value="">
-            		<span>아이디 저장</span>
-            </li> 
-           
-            <br>
-            <li>
-                    <span class="mbr dotum">
-                <a href="<c:url value='/login/registerU.do'/>" >
-                <strong>회원가입</strong></a>
-                <span class="idBx">
-                 <a href="<c:url value='/login/findId.do'/>">ID/PW 찾기</a></span>
-            </span>
-            </li>-->
+          
         </ul>
         </c:if>
         <c:if test="${!empty sessionScope.memberName }">
@@ -950,7 +928,7 @@ input[type="checkbox"] {
 		</div>
 	</section>
 </div>
-
+</body>
 	<!-- Footer -->
 <%@include file="../main/inc/bottom.jsp" %>
 	

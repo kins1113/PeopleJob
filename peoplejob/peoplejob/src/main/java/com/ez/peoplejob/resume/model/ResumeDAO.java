@@ -43,4 +43,6 @@ public interface ResumeDAO {
 	public ResumeVO selectBydesiredWorkCode(int desiredWorkCode);
 	public ResumeVO selectBymemberCode(int memberCode);
 	
+	public List<ResumeVO>selectAllBtype();
+	
 }

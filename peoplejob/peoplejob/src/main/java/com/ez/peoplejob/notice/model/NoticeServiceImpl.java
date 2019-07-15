@@ -43,7 +43,17 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int deleteNotice(int notifyCode) {
-		return noticeDao.deleteNotice(notifyCode);
+	public int deleteNotice(String[] list) {
+		int count=0;
+		try {
+			for(String a:list) {
+				int cnt=0;
+				cnt=noticeDao.deleteNotice(Integer.parseInt(a));
+				count+=cnt;
+			}
+		}catch(RuntimeException e){
+			e.printStackTrace();
+		}
+		return count;
 	}
 }
