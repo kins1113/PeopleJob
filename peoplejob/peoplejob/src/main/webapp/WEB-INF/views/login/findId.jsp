@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp" %>
+<%@include file="../main/inc/top.jsp" %> 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -22,24 +22,33 @@ $(function() {
 			var email=$('#email').val();
 			
 			if(membername.length>0 && email.length>0){
-				$.ajax({
+				 $.ajax({
 					url : "<c:url value='/login/ajaxfindId.do'/>",
 					type : "post",
-					dataType:"json",
+					dataType:"text",
 					//data: $('#frmfindid').serialize(),
 					data : {"membername":membername, "email":email},
 					//contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(res) {
-						/* var str = "";
-						if (res) {
-							str = "사용가능한 아이디";
-						} else {
-							str = "이미 등록된 아이디";
-						}
-						$('.error').html(str);
-						$('.error').show(); */
 						
-						alert(res);
+						//alert(res);
+						
+						
+						
+					 if(res.length>0){
+							var str="아이디 : "+res;
+							$('.error').html(str);
+							$('.error').show();
+							event.preventDefault();
+							return false;
+						}else{
+							$('.error').html('입력한 정보에 해당하는 아이디가 없습니다.');
+							$('.error').show();
+							event.preventDefault();
+							return false;
+						}
+						
+							event.preventDefault();
 
 					},
 					error : function(xhr, status, error) {
@@ -48,23 +57,25 @@ $(function() {
 				});
 
 			} else {
-				if(membername==''){
-					alert('이름을 입력해주세요!');
-					event.preventDefault();
-					return false;
-				}else if(email.length<1){
-					alert('비밀번호를 입력해주세요');
-					event.preventDefault();
-					return false;
-				}else{
-					$('.error').html("아이디가 없습니다.");
-					$('.error').show();
-					event.preventDefault();
-					return false;					
-				}
+					if(membername==''){
+						alert('이름을 입력해주세요');
+						event.preventDefault();
+						return false;
+					}else if(email.length<1){
+						alert('이메일을 입력해주세요');
+						event.preventDefault();
+						return false;
+					}else{
+						$('.error').html("입력한 정보에 해당하는 아이디가 없습니다.");
+						$('.error').show();
+						event.preventDefault();
+						return false;					
+					}
 			}
+			event.preventDefault();
 		});
-	event.preventDefault();
+	
+	
 
 });
 </script>

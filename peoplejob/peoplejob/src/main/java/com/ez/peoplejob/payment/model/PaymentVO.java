@@ -4,24 +4,25 @@ import java.sql.Timestamp;
 
 public class PaymentVO {
 	private int paymentCode;	// 결제 코드
-	private String patmentway;   // 결제수단
+	private String paymentway;   // 결제수단
 	private String progress;     // 진행상황
 	private int discount;     // 할인금액
 	private Timestamp paydate;    // 결제일
-	private Timestamp payend_date;  // 종료일
-	private int service_code;   //서비스 코드
+	private Timestamp payendDate;  // 종료일
+	private int serviceCode;   //서비스 코드
 	private int memberCode;  //회원 코드
+	
 	public int getPaymentCode() {
 		return paymentCode;
 	}
 	public void setPaymentCode(int paymentCode) {
 		this.paymentCode = paymentCode;
 	}
-	public String getPatmentway() {
-		return patmentway;
+	public String getPaymentway() {
+		return paymentway;
 	}
-	public void setPatmentway(String patmentway) {
-		this.patmentway = patmentway;
+	public void setPaymentway(String paymentway) {
+		this.paymentway = paymentway;
 	}
 	public String getProgress() {
 		return progress;
@@ -41,17 +42,17 @@ public class PaymentVO {
 	public void setPaydate(Timestamp paydate) {
 		this.paydate = paydate;
 	}
-	public Timestamp getPayend_date() {
-		return payend_date;
+	public Timestamp getPayendDate() {
+		return payendDate;
 	}
-	public void setPayend_date(Timestamp payend_date) {
-		this.payend_date = payend_date;
+	public void setPayendDate(Timestamp payendDate) {
+		this.payendDate = payendDate;
 	}
-	public int getService_code() {
-		return service_code;
+	public int getServiceCode() {
+		return serviceCode;
 	}
-	public void setService_code(int service_code) {
-		this.service_code = service_code;
+	public void setServiceCode(int serviceCode) {
+		this.serviceCode = serviceCode;
 	}
 	public int getMemberCode() {
 		return memberCode;
@@ -61,11 +62,12 @@ public class PaymentVO {
 	}
 	@Override
 	public String toString() {
-		return "PaymentVO [paymentCode=" + paymentCode + ", patmentway=" + patmentway + ", progress=" + progress
-				+ ", discount=" + discount + ", paydate=" + paydate + ", payend_date=" + payend_date + ", service_code="
-				+ service_code + ", memberCode=" + memberCode + "]";
+		return "PaymentVO [paymentCode=" + paymentCode + ", paymentway=" + paymentway + ", progress=" + progress
+				+ ", discount=" + discount + ", paydate=" + paydate + ", payendDate=" + payendDate + ", serviceCode="
+				+ serviceCode + ", memberCode=" + memberCode + "]";
 	}
 	
+
 	
 	
 

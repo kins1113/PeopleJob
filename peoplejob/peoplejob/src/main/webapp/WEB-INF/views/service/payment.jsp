@@ -14,73 +14,95 @@
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   <script type="text/javascript">
   $(function(){
-	  
-	  $('#pay').click(function(){
-		  var IMP = window.IMP; // 생략해도 괜찮습니다.
-		  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
-		  
 
 		  
-		  IMP.request_pay({
-			  pg : 'inicis', // version 1.1.0부터 지원.
-			    pay_method : 'card',
-			    merchant_uid : 'peoplejob_' + new Date().getTime(),
-			    name : '주문명:PEOPLEJOB 채용공고 vip관',
-			    amount : 10,
-			    buyer_email : '${memberVo.email}',
-			    buyer_name : buyer_name,
-			    buyer_tel : '${memberVo.tel}',
-			    buyer_addr : '${companyVo.companyAddress}',
-			    buyer_postcode : '${companyVo.companyZipcode}',
-			    m_redirect_url : '<c:url value="/service/importTest.do"/>'
-			}, function(rsp) {
-			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.\n';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount+'원';
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
-			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			    }
-			    alert(msg);
-			});
-	  });
+	  $('#pay').click(function(){
+		  
+		  if(${sessionScope.memberid==null}){
+			  alert('로그인을 해주세요');
+		  }else{
+			  if(${sessionScope.author_code!=3}){
+			 	 alert('기업회원이 아닙니다.');
+			  }else{ //승인받은 기업회원 일 때
+				  var IMP = window.IMP; // 생략해도 괜찮습니다.
+				  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+				  
+				  IMP.request_pay({
+					  	pg : 'inicis', // version 1.1.0부터 지원.
+					    pay_method : 'card',
+					    merchant_uid : 'peoplejob_' + new Date().getTime(),
+					    name : 'PEOPLEJOB 채용공고 vvip관',
+					    amount : 10,
+					    buyer_email : '${memberVo.email}',
+					    buyer_name : '${sessionScope.memberName}',
+					    buyer_tel : '${memberVo.tel}',
+					    buyer_addr : '${companyVo.companyAddress}',
+					    buyer_postcode : '${companyVo.companyZipcode}',
+					    m_redirect_url : '<c:url value="/service/payment.do"/>' //모바일 결제 후 이동될 주소
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					        var msg = '결제가 완료되었습니다.\n';
+					        msg+='결제일로부터 30일간 이용가능합니다.\n';
+					        msg += '고유ID : ' + rsp.imp_uid;
+					        msg += '상점 거래ID : ' + rsp.merchant_uid;
+					        msg += '결제 금액 : ' + rsp.paid_amount+'원';
+					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					        location.href="<c:url value='/service/success.do'/>";
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					        msg += ' : ' + rsp.error_msg;
+					    }
+					    alert(msg);
+					});
+			  }
+		  }
+		  
+		 
+	  });//
   
 	  $('#pay2').click(function(){
 		  var IMP = window.IMP; // 생략해도 괜찮습니다.
 		  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 		  
 
-		  var buyer_name='${sessionScope.memberName}';
-		
-		  IMP.request_pay({
-			    pg : 'inicis', // version 1.1.0부터 지원.
-			    pay_method : 'card',
-			    merchant_uid : 'peoplejob_' + new Date().getTime(),
-			    name : '주문명:PEOPLEJOB 채용공고 vip관',
-			    amount : 10,
-			    buyer_email : '${memberVo.email}',
-			    buyer_name : buyer_name,
-			    buyer_tel : '${memberVo.tel}',
-			    buyer_addr : '${companyVo.companyAddress}',
-			    buyer_postcode : '${companyVo.companyZipcode}',
-			    m_redirect_url : '<c:url value="/service/importTest.do"/>'
-			}, function(rsp) {
-			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.\n';
-			        msg += '고유ID : ' + rsp.imp_uid+'\n';
-			        msg += '상점 거래ID : ' + rsp.merchant_uid+'\n';
-			        msg += '결제 금액 : ' + rsp.paid_amount+'원\n';
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
-			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			    }
-			    alert(msg);
-			});
+		  if(${sessionScope.memberid==null}){
+			  alert('로그인을 해주세요');
+		  }else{
+			  if(${sessionScope.author_code!=3}){
+			 	 alert('기업회원이 아닙니다.');
+			  }else{ //승인받은 기업회원 일 때
+				  var IMP = window.IMP; // 생략해도 괜찮습니다.
+				  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+				  
+				  IMP.request_pay({
+					  	pg : 'inicis', // version 1.1.0부터 지원.
+					    pay_method : 'card',
+					    merchant_uid : 'peoplejob_' + new Date().getTime(),
+					    name : 'PEOPLEJOB 채용공고 vip관',
+					    amount : 10,
+					    buyer_email : '${memberVo.email}',
+					    buyer_name : '${sessionScope.memberName}',
+					    buyer_tel : '${memberVo.tel}',
+					    buyer_addr : '${companyVo.companyAddress}',
+					    buyer_postcode : '${companyVo.companyZipcode}',
+					    m_redirect_url : '<c:url value="/service/importTest.do"/>'
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					        var msg = '결제가 완료되었습니다.\n';
+					        msg += '고유ID : ' + rsp.imp_uid;
+					        msg += '상점 거래ID : ' + rsp.merchant_uid;
+					        msg += '결제 금액 : ' + rsp.paid_amount+'원';
+					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					        msg += ' : ' + rsp.error_msg;
+					    }
+					    alert(msg);
+					});
+			  }
+		  }
 	  });
+	 
   
   });
 </script>
@@ -94,6 +116,7 @@
 
 <input type="text" name="tel" value="${memberVo.tel }">
 <input type="text" name="email" value="${memberVo.email }">
+
 </c:if>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-3">
