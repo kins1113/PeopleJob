@@ -10,6 +10,7 @@
 <style type="text/css">
 
 </style>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
@@ -38,7 +39,7 @@ public JsonNode getAccessToken(String autorize_code) {
 
     postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 
-    postParams.add(new BasicNameValuePair("client_id", " dceec860a1bc965e16c45d03200ab183"));
+    postParams.add(new BasicNameValuePair("client_id", "2cf3b4aff785f5ac3fea03db7cc7efdd"));
 
     postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:9090/peoplejob/oauth"));
 
@@ -82,7 +83,7 @@ public JsonNode getAccessToken(String autorize_code) {
 
 
 </script>
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 
 <div class="container" style="min-height: 550px;padding:8px;">
     	<div class="row">
@@ -156,7 +157,7 @@ public JsonNode getAccessToken(String autorize_code) {
 									<script type='text/javascript'>
         //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('34a7df4396a5b761fba0670df9faaecf');
+        Kakao.init('1bcb7cf50cc23edaa4993201da8c52b7');
         // 카카오 로그인 버튼을 생성합니다.
         Kakao.Auth.createLoginButton({
             container: '#kakao-login-btn',
@@ -170,6 +171,19 @@ public JsonNode getAccessToken(String autorize_code) {
       //]]>
     </script>
 								</form>
+								
+								
+								<c:if test="${userId eq null}">
+        <a href="https://kauth.kakao.com/oauth/authorize
+            ?client_id=2cf3b4aff785f5ac3fea03db7cc7efdd
+            &redirect_uri=http://localhost:9090/peoplejob/login
+            &response_type=code"> kaokaoLogin
+        </a>
+    </c:if>
+    <c:if test="${userId ne null}">
+        <h1>로그인 성공입니다</h1>
+    </c:if>
+    
 								
 							</div>
 						</div>

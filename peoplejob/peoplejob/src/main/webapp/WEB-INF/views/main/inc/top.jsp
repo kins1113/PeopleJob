@@ -247,7 +247,7 @@ function company(){
 								</a>
 								<ul class="sub-menu">
 								<c:if test="${!empty sessionScope.memberid }">
-									<li style="text-align: center">${sessionScope.memberName }님, 환영합니다</li>
+									<li style="text-align: center; font-size: 1.4em;">${sessionScope.memberName }님, 환영합니다</li>
 									<li><a href="<c:url value='/login/logout.do'/>">로그아웃</a></li>
 								</c:if>
 								<c:if test="${empty sessionScope.memberid }">
@@ -257,9 +257,30 @@ function company(){
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="#">이력서 관리</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
 									<li><a href="#" onclick="jobopening()">채용공고 관리</a></li>
 								</c:if>
+								<%-- <c:if test="${sessionScope.author_code==1 }">
+									<li><a href="#">지원현황</a></li>
+								</c:if> --%>
+								 <!-- 일반회원 -->
+                        <c:if test="${sessionScope.author_code==1 }">
+                           <li><a href="<c:url value='/apply/apply_list.do'/>">지원현황</a></li>
+                        </c:if>
+                        <!-- 기업회원 -->
+                        <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
+                           <li><a href="<c:url value='/apply/Capply_list.do'/>">지원현황</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.author_code==1 }">
+                           <li><a href="<c:url value='/scrap/scrap_list.do'/>">스크랩현황</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
+                           <li><a href="#">스크랩현황</a></li>
+                        </c:if>
+                        
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+									<li><a href="<c:url value='/mypage/corp/paymentDetail.do'/>">결제/이용 내역</a></li>
+									</c:if>
 								<!-- 일반회원 -->
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="<c:url value='/apply/apply_list.do'/>">지원현황</a></li>
@@ -277,18 +298,14 @@ function company(){
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="<c:url value='/login/person_update.do'/>">내 정보 관리</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
 									<li><a href="" onclick="company()">기업 정보 관리</a></li>
 								</c:if>
 									<li><a href="<c:url value='/login/changePwd.do'/>">비밀번호 변경</a></li>
 									<li><a href="<c:url value='/login/memberOut.do'/>">회원 탈퇴</a></li>
 								</ul>
 							</li>
-							<%-- 
-								<a href="<c:url value='/mypage/user/userpage.do'/>">
-								<img src="<c:url value='/resources/main/images/icons/my.png'/>" 
-								name="mypage" style="width: 40px;margin-left: 65px;"></a>
-								 --%>
+							
 								<li>
 									<ul class="sub-menu">
 										<li><a href="category-01.html">자유게시판</a></li>
