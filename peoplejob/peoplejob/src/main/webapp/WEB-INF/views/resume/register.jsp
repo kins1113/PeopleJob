@@ -111,10 +111,9 @@
 	</div>
 		
 		<div>
-		 <label for="element">학교명</label>&nbsp;
+		 <label for="schoolname">학교명</label>&nbsp;
 			    
-        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="schoolname" 
-        	class="width_80">
+        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="schoolname">
         </div>
         <div>
 		 <label for="schoollocal">지역</label>&nbsp;
@@ -326,19 +325,19 @@
         </div>
         
         <div>
-        <label for="jobtype">업종1차</label>
+        <label for="btypename1">업종1차</label>
         
-        <input type="text" class="form-control"  name="btypename1" id="btypename1" value="${list.btypename1 }"  style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename1" id="btypename1"   style="ime-mode:active">
         </div>
         <div>
-        <label for="jobtype">업종2차</label>
+        <label for="btypename2">업종2차</label>
         
-        <input type="text" class="form-control"  name="btypename2" id="btypename2" value="${list.btypename2 }"  style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename2" id="btypename2"   style="ime-mode:active">
         </div>
         <div>
-        <label for="jobtype">업종3차</label>
+        <label for="btypename3">업종3차</label>
         
-        <input type="text" class="form-control"  name="btypename3" id="btypename3" value="${list.btypename3 }"  style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename3" id="btypename3"  style="ime-mode:active">
         </div>
         <div>
         <label for="firstname">직종1차</label>

@@ -44,5 +44,9 @@ public interface ResumeDAO {
 	public ResumeVO selectBymemberCode(int memberCode);
 	
 	public List<ResumeVO>selectAllBtype();
+	public int insertBtype1(ResumeVO vo);
+	public int insertBtype2(ResumeVO vo);
+	public int insertBtype3(ResumeVO vo);
+	public int insertLocation2(ResumeVO vo);
 	
 }

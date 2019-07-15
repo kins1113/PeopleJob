@@ -8,7 +8,7 @@
 		select * from langcertification where langlicence_code=#{langlicenceCode}
 	</select>
 	<select id="selectBylicenceCode" parameterType="int" resultType="resumeVo">
-		select * from certificate where l_no=#{l_no}
+		select * from certificate where l_no=#{lNo}
 	</select>
 	<select id="selectBydvCode" parameterType="int" resultType="resumeVo">
 		select * from career where dv_code=#{dvCode}
@@ -78,20 +78,67 @@
 		
 	</insert>
 	
-<insert id="insertLocation" parameterType="resumeVo">
+	
+	
+	
+	<insert id="insertBtype1" parameterType="resumeVo">
 		
-		insert into location
-		select * from location
-		where local_code=#{localCode};
+		insert into btype1
+		select * from btype1
+		where btypename1=#{btypename1}
 		
 	</insert>
 	
-
-
+	<insert id="insertBtype2" parameterType="resumeVo">
+		
+		insert into btype2
+		select * from btype2
+		where btypename2=#{btypename2}
+		
+	</insert>
+	
+	<insert id="insertBtype3" parameterType="resumeVo">
+		
+		insert into btype3
+		select * from btype3
+		where btypename3=#{btypename3}
+		
+	</insert>
+	
+	<insert id="insertLocation" parameterType="resumeVo">
+		
+		insert into location
+		select * from location
+		where sido=#{sido}
+		
+	</insert>
+	<insert id="insertLocation2" parameterType="resumeVo">
+		
+		insert into location2
+		select * from location2
+		where gugun=#{gugun}
+		
+	</insert>
+	
 	<insert id="insertThird" parameterType="resumeVo">
 
 		insert into third
 		select * from third
+		where thirdname=#{thirdname}
+		
+	</insert> 
+	<insert id="insertSecond" parameterType="resumeVo">
+
+		insert into second
+		select * from second
+		where secondname=#{secondname}
+		
+	</insert> 
+	<insert id="insertFirst" parameterType="resumeVo">
+
+		insert into first
+		select * from first
+		where firstname=#{firstname}
 		
 	</insert> 
 	<select id="selectSearch" parameterType="searchVo" resultType="resumeVo">
@@ -146,7 +193,7 @@
 		delete from resume where resume_code=#{resumeCode}
 		</delete>
 		
-		<update id="updateResume" parameterType="resumeVo">
+	<!-- 	<update id="updateResume" parameterType="resumeVo">
 		update (select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
     	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
     	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
@@ -170,7 +217,7 @@
     	email=#{email},picture=#{picture},tel=#{tel},sido=#{sido},gugun=#{gugun},firstname=#{firstname},secondname=#{secondname},thirdname=#{thirdname}
 			 
 		where resume_code=#{resumeCode}
-	</update>
+	</update> -->
 	
 	<!-- <insert id="insertResume" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="resumeCode,langlicenceCode,dvCode,licenceCode,academicCode,desiredworkCode,memberCode" resultType="hashmap">

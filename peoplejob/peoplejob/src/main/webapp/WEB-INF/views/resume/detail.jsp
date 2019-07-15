@@ -103,7 +103,9 @@
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">희망연봉</span> <span>${vo.hopepay}</span></td>
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)시도</span> <span>${vo.sido}</span></td>
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)구군</span> <span>${vo.gugun}</span></td>
- 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업/직종</span> <span>${vo.jobtype}</span></td>
+ 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종1차</span> <span>${vo.btypename1}</span></td>
+ 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종2차</span> <span>${vo.btypename2}</span></td>
+ 				<td><span class="glyphicon glyphicon-star" aria-hidden="true">(희망근무지역)업종3차</span> <span>${vo.btypename3}</span></td>
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">직종1차</span> <span>${vo.firstname}</span></td>
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">직종2차</span> <span>${vo.secondname}</span></td>
  				<td><span class="glyphicon glyphicon-star" aria-hidden="true">직종3차</span> <span>${vo.thirdname}</span></td>

@@ -32,8 +32,6 @@ public class ResumeController {
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
 	public String register_get(ResumeVO vo,HttpSession session, Model model) {
-		List<ResumeVO> list=resumeService.selectAllBtype();
-		model.addAttribute("list", list);
 		String memberid=(String) session.getAttribute("memberid");
 		logger.info("이력서등록 화면 보여주기");
 		vo=resumeService.selectByMemverid(memberid);
@@ -102,7 +100,7 @@ public class ResumeController {
 	
 	@RequestMapping("/detail.do")
 	public String detail(@RequestParam(defaultValue = "0") int resumeCode, 
-			ModelMap model) {
+			@ModelAttribute ResumeVO resumevo,ModelMap model) {
 		logger.info("글 상세보기, 파라미터 resumeCode={}", resumeCode);
 		
 		if(resumeCode==0) {
@@ -111,8 +109,13 @@ public class ResumeController {
 			
 			return "common/message";
 		}
-		
-		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
+		ResumeVO vo=resumeService.selectBydesiredWorkCode(resumevo.getDesiredWorkCode());
+		vo=resumeService.selectByacademicCode(resumevo.getAcademicCode());
+		vo=resumeService.selectBydvCode(resumevo.getDvCode());
+		vo=resumeService.selectBylanglicenceCode(resumevo.getLanglicenceCode());
+		vo=resumeService.selectBylicenceCode(resumevo.getLicenceCode());
+		vo=resumeService.selectBymemberCode(resumevo.getMemberCode());
+		vo=resumeService.selectResumeByNo(resumeCode);
 		logger.info("상세보기 결과 vo={}", vo);
 		
 		model.addAttribute("vo", vo);

@@ -15,15 +15,20 @@ public class ResumeServiceImpl implements ResumeService{
 	@Override
 	@Transactional
 	public int insertResume(ResumeVO vo) {
-		int cnt=resumeDao.insertThird(vo);
-		cnt=resumeDao.insertSecond(vo);
-		cnt=resumeDao.insertFirst(vo);
-		cnt=resumeDao.insertHopeWorking(vo);
-		cnt=resumeDao.insertLocation(vo);
-		cnt=resumeDao.insertEducation(vo);
-		cnt=resumeDao.insertLangcertification(vo);
-		cnt=resumeDao.insertCertificate(vo);
+		int cnt=resumeDao.insertEducation(vo);
 		cnt=resumeDao.insertCareer(vo);
+		cnt=resumeDao.insertLocation2(vo);
+		cnt=resumeDao.insertLocation(vo);
+		cnt=resumeDao.insertFirst(vo);
+		cnt=resumeDao.insertSecond(vo);
+		cnt=resumeDao.insertThird(vo);
+		cnt=resumeDao.insertBtype1(vo);
+		cnt=resumeDao.insertBtype2(vo);
+		cnt=resumeDao.insertBtype3(vo);
+		cnt=resumeDao.insertCertificate(vo);
+		cnt=resumeDao.insertLangcertification(vo);
+		cnt=resumeDao.insertHopeWorking(vo);
+		
 		cnt=resumeDao.insertResume(vo);
 		
 		
@@ -118,5 +123,23 @@ public class ResumeServiceImpl implements ResumeService{
 		
 		return resumeDao.selectAllBtype();
 	}
+	@Override
+	public int insertBtype1(ResumeVO vo) {
+		return resumeDao.insertBtype1(vo);
+	}
+	@Override
+	public int insertBtype2(ResumeVO vo) {
+		return resumeDao.insertBtype2(vo);
+	}
+	@Override
+	public int insertBtype3(ResumeVO vo) {
+		return resumeDao.insertBtype3(vo);
+	}
+	@Override
+	public int insertLocation2(ResumeVO vo) {
+		
+		return resumeDao.insertLocation2(vo);
+	}
+	
 
 }
