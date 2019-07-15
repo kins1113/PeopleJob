@@ -20,6 +20,7 @@
 		  
 		  if(${sessionScope.memberid==null}){
 			  alert('로그인을 해주세요');
+			  location.href="<c:url value='/login/login.do'/>";
 		  }else{
 			  if(${sessionScope.author_code!=3}){
 			 	 alert('기업회원이 아닙니다.');
@@ -67,6 +68,7 @@
 
 		  if(${sessionScope.memberid==null}){
 			  alert('로그인을 해주세요');
+			  location.href="<c:url value='/login/login.do'/>";
 		  }else{
 			  if(${sessionScope.author_code!=3}){
 			 	 alert('기업회원이 아닙니다.');
@@ -107,17 +109,6 @@
   });
 </script>
 <div class="container" style="margin-top: 30px; margin-bottom: 30px;">
-<c:if test="${!empty sessionScope.memberName}">
-
-<%-- <c:forEach var="map" items="${list }">
-<input type="text" name="tel" value="${map['TEL'] }">
-<input type="text" name="email" value="${map['EMAIL'] }">
-</c:forEach> --%>
-
-<input type="text" name="tel" value="${memberVo.tel }">
-<input type="text" name="email" value="${memberVo.email }">
-
-</c:if>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-3">
             <div class="card text-center p-table p-red">

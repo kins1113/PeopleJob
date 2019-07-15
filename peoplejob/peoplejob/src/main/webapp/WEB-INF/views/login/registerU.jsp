@@ -85,7 +85,11 @@ textarea {
 .error {
 	display: none;
 	color: red;
-	font-weight: bold;
+	matgin-left:-30px;
+}
+
+#pwd1error{
+	display: none;
 }
 </style>
 
@@ -158,6 +162,10 @@ textarea {
 				alert('비밀번호가 일치하지 않습니다.');
 				event.preventDefault();
 				$('#pwd2').focus();
+			} else if (!$('#pwd').val().equlas($('#pwd2').val())) {
+				alert('비밀번호가 일치하지 않습니다.');
+				event.preventDefault();
+				$('#pwd2').focus();
 			} else if ($('#membername').val() == '') {
 				alert('이름을 입력해주세요');
 				$('#membername').focus();
@@ -182,6 +190,7 @@ textarea {
 				alert('이메일 인증을 해주세요');
 				event.preventDefault();
 				$('#chkId').focus();
+				return false;
 			} else if ($('input[type=checkbox]').is(":checked") == false) {
 				alert('이용약관에 동의해주세요');
 				$('input[type=checkbox]').focus();
@@ -217,6 +226,9 @@ textarea {
 							}
 						});
 
+					}else if($('#memberid').val()==''){
+						$('.error').hide();
+						$('#chkmemberid').val('N');
 					} else {
 						$('.error').html("아이디 규칙에 맞지 않습니다.");
 						$('.error').show();
@@ -224,13 +236,14 @@ textarea {
 					}
 				});
 
-		//비밀번호 일치하는지
+		//비밀번호 일치여부 
 		$('#pwd2').keyup(function() {
-					if (validate_pwd($('#pwd2').val()) && $('#pwd2').val().length >= 4) {
-						//정상일 때
+					if (validate_pwd($('#pwd').val()) && validate_pwd($('#pwd2').val()) && $('#pwd').val().length>=4 && $('#pwd2').val().length>=4) {
+						// pwd와 pwd2 모두 규칙에 만족할 때
 
 						var pwd=$('#pwd').val();
 						var pwd2=$('#pwd2').val(); 
+						
 						$.ajax({
 							
 							url : "<c:url value='/login/ajaxchkPwd.do'/>",
@@ -238,12 +251,12 @@ textarea {
 							data : {"pwd":pwd, "pwd2":pwd2},
 							success : function(res) {
 								var str = "";
-								if (res) {
+								if (res) { //bool=true
 									str = "비밀번호 일치";
 									$('#chkpwd').val('Y');
-								} else {
-									str = "비밀번호 불일치";
-									$('#chkpwd').val('N');
+								} else { //bool=false
+										str = "비밀번호 불일치";
+										$('#chkpwd').val('N');
 								}
 								$('.pwderror').html(str);
 								$('.pwderror').show();
@@ -254,12 +267,64 @@ textarea {
 							}
 						});
 
-					} else {
+					}else {
 						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
 						$('.pwderror').show();
 						$('#chkpwd').val('N');
 					}
+					
+					
+					/* else if(!validate_pwd($('#pwd').val()) || !validate_pwd($('#pwd2').val()) || $('#pwd').val().length<4 || $('#pwd2').val().length<4){
+						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+						$('.pwderror').show();
+						$('#chkpwd').val('N');
+					} */
 				});
+		
+		$('#pwd').keyup(function() {
+			if (validate_pwd($('#pwd').val()) && validate_pwd($('#pwd2').val()) && $('#pwd').val().length>=4 && $('#pwd2').val().length>=4) {
+				// pwd와 pwd2 모두 규칙에 만족할 때
+
+				var pwd=$('#pwd').val();
+				var pwd2=$('#pwd2').val(); 
+				
+				$.ajax({
+					
+					url : "<c:url value='/login/ajaxchkPwd.do'/>",
+					type : "get",
+					data : {"pwd":pwd, "pwd2":pwd2},
+					success : function(res) {
+						var str = "";
+						if (res) { //bool=true
+							str = "비밀번호 일치";
+							$('#chkpwd').val('Y');
+						} else { //bool=false
+								str = "비밀번호 불일치";
+								$('#chkpwd').val('N');
+						}
+						$('.pwderror').html(str);
+						$('.pwderror').show();
+
+					},
+					error : function(xhr, status, error) {
+						alert(status + ":" + error);
+					}
+				});
+
+			}else {
+				$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+				$('.pwderror').show();
+				$('#chkpwd').val('N');
+			}
+			
+			
+			/* else if(!validate_pwd($('#pwd').val()) || !validate_pwd($('#pwd2').val()) || $('#pwd').val().length<4 || $('#pwd2').val().length<4){
+				$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+				$('.pwderror').show();
+				$('#chkpwd').val('N');
+			} */
+		});
+		
 
 		//핸드폰 정규식
 		function validate_phoneno(ph) {
@@ -278,6 +343,7 @@ textarea {
 			var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
 			return pattern.test(pwd);
 		}
+		
 
 		//이메일 인증용
 		$('#emailcertificate').click(function() {
@@ -350,13 +416,19 @@ textarea {
 
 								<div class="form-group">
 									<div class="row">
-										<span id="pwderror" class="pwderror"></span>
+										<span id="pwd1error" class="pwd1error" style="margin-top: 28px;margin-left:-20px;"></span>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<div class="row">
 										<input type="hidden" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="row">
+										<span id="pwderror" class="pwderror" style="margin-top: 22px;"></span>
 									</div>
 								</div>
 								<div class="form-group">

@@ -57,12 +57,12 @@
 	background-color: #1CB94A;
 	outline: none;
 	color: #fff;
-	font-size: 14px;
 	height: auto;
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
 	border-color: #1CB94A;
+	font-size: 1.2em;
 }
 .btn-login:hover,
 .btn-login:focus {
@@ -84,12 +84,13 @@
 	background-color: #1CB94A;
 	outline: none;
 	color: #fff;
-	font-size: 14px;
+	/* font-size: 14px; */
 	height: auto;
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
 	border-color: #1CB94A;
+	font-size: 1.2em;
 }
 .btn-register:hover,
 .btn-register:focus {
