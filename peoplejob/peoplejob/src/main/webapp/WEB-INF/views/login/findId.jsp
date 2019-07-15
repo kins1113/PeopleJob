@@ -10,8 +10,10 @@
 <style type="text/css">
 .error {
 	display: none;
-	color: red;
-	font-weight: bold;
+    color: steelblue;
+    font-size: 1.2em;
+    margin-left: 18px;
+    font-weight: 500;
 }
 </style>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
@@ -30,10 +32,6 @@ $(function() {
 					data : {"membername":membername, "email":email},
 					//contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(res) {
-						
-						//alert(res);
-						
-						
 						
 					 if(res.length>0){
 							var str="아이디 : "+res;

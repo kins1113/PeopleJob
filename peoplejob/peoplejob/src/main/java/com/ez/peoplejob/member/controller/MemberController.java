@@ -163,7 +163,7 @@ public class MemberController {
 				//checkbox => 체크하면 on, 안하면 null 
 				//(equals(on)으로 하게 되면 null point exception때문에 null이 아닐때는 check, null일 때는 체크안된걸로 확인하기)
 				
-				ck.setMaxAge(100*24*60*60); //유효기간 100일
+				ck.setMaxAge(10*24*60*60); //유효기간 10일
 				response.addCookie(ck);
 			}else {
 				ck.setMaxAge(0); //쿠키 삭제

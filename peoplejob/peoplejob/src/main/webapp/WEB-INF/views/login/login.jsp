@@ -116,13 +116,13 @@ public JsonNode getAccessToken(String autorize_code) {
 										<c:if test="${!empty cookie.ck_memberid }">
 											checked="checked"
 										</c:if>>
-										<label for="saveId">아이디 저장</label>
+										<label for="saveId" style="font-weight: 600;font-size: 1.1em;color: #2b2525c4;">아이디 저장</label>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인" style="    font-size: 1.2em;">
 											</div>
 										</div>
 									</div>
@@ -130,7 +130,7 @@ public JsonNode getAccessToken(String autorize_code) {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="<c:url value='/login/findId.do'/>" tabindex="5" class="forgot-password">ID/PW찾기</a>
+													<a href="<c:url value='/login/findId.do'/>" >ID</a>/<a href="<c:url value='/login/findPwd.do'/>">PW찾기</a>
 												</div>
 											</div>
 										</div>
@@ -139,7 +139,7 @@ public JsonNode getAccessToken(String autorize_code) {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="<c:url value='/login/registerU.do'/>" tabindex="5" class="forgot-password">회원가입</a>
+													<a href="<c:url value='/login/registerU.do'/>">회원가입</a>
 												</div>
 											</div>
 										</div>
