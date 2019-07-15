@@ -19,7 +19,6 @@
 fdsdafsadfasdfsfdsafsf
 <P>  The time on the server is ${serverTime}. </P>sdafsafsdfsaf
 >>>>>>> branch 'master' of https://github.com/kins1113/PeopleJob.git
-pull받기위한 수정
 </body>
 </html>
 

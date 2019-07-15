@@ -24,16 +24,20 @@ public class TableaplyDAOMybatis implements TableaplyDAO{
 		return sqlSession.selectOne(namespace+"selectapplyCount",map);
 	}
 	@Override
-	public int dupapply(int jobopening) {
-		return sqlSession.selectOne(namespace+"dupapply",jobopening);
-	}
-	@Override
 	public int deleteapply(Map<String, Object> map) {
 		return sqlSession.delete(namespace+"deleteapply",map);
 	}
 	@Override
 	public List<TableaplyVO> selectapplyComp(Map<String, Object> map) {
 		return sqlSession.selectList(namespace+"selectapplyComp",map);
+	}
+	@Override
+	public int selectapplyCompcount(Map<String, Object> map) {
+		return sqlSession.selectOne(namespace+"selectapplyCompcount",map);
+	}
+	@Override
+	public int dupapply(Map<String, Object> map) {
+		return sqlSession.selectOne(namespace+"dupapply",map);
 	}
 	
 }

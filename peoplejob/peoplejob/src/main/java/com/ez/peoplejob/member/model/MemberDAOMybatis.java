@@ -84,6 +84,11 @@ public class MemberDAOMybatis implements MemberDAO{
 		return sqlSession.selectOne(namespace+"findPwd",memberVo);
 	}
 
+	@Override
+	public MemberVO selectBymemberCode(int memberCode) {
+		return sqlSession.selectOne(namespace+"selectBymemberCode",memberCode);
+	}
+
 	
 
 }

@@ -114,6 +114,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public MemberVO selectBymemberCode(int memberCode) {
+		return memberDao.selectBymemberCode(memberCode);
+	}
+
+
 
 
 

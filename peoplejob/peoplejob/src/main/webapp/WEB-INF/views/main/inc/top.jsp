@@ -260,8 +260,16 @@ function company(){
 								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
 									<li><a href="#" onclick="jobopening()">채용공고 관리</a></li>
 								</c:if>
+								<!-- 일반회원 -->
 								<c:if test="${sessionScope.author_code==1 }">
-									<li><a href="#">지원현황</a></li>
+									<li><a href="<c:url value='/apply/apply_list.do'/>">지원현황</a></li>
+								</c:if>
+								<!-- 기업회원 -->
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
+									<li><a href="<c:url value='/apply/Capply_list.do'/>">지원현황</a></li>
+								</c:if>
+								<c:if test="${sessionScope.author_code==1 }">
+									<li><a href="<c:url value='/scrap/scrap_list.do'/>">스크랩현황</a></li>
 								</c:if>
 								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
 									<li><a href="#">결제/이용 내역</a></li>
