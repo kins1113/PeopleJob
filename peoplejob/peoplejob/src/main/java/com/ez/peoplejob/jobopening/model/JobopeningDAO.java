@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ez.peoplejob.common.SearchVO;
+import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberVO;
 
 public interface JobopeningDAO {
@@ -18,4 +19,5 @@ public interface JobopeningDAO {
 	int selectTotalCount(Map<String,Object>map);
 	int selectTotalCount2(Map<String,Object>map);
 	int selectPwdCheck(Map<String,Object>map);
+	List<JobopeningVO>selectJobopeningBycomcode(int companyCode);
 }

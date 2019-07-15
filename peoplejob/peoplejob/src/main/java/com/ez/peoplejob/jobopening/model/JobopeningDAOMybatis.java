@@ -62,6 +62,12 @@ public class JobopeningDAOMybatis implements JobopeningDAO{
 		return sqlSession.selectOne(namespace+"selectPwdCheck",map);
 	}
 
+	@Override
+	public List<JobopeningVO> selectJobopeningBycomcode(int companyCode) {
+		return sqlSession.selectList(namespace+"selectJobopeningBycomcode",companyCode);
+	}
+
+
 	         
 	
 }

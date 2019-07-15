@@ -74,5 +74,12 @@ public class JobopeningServiceImpl implements JobopeningService{
 
 
 
+	@Override
+	public List<JobopeningVO> selectJobopeningBycomcode(int companyCode) {
+		return jobopeningDao.selectJobopeningBycomcode(companyCode);
+	}
+
+
+
 	
 }

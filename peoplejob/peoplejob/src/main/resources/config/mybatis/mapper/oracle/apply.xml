@@ -10,7 +10,7 @@
 		insert into apply(apply_code,applydate,opencheck,member_code,jobopening) 
 		values(#{applyCode},sysdate,'N',#{memberCode},#{jobopening})
 	</insert>
-	<select id="selectapply" parameterType="int" resultType="tableaplyVO">
+	<select id="selectapply" parameterType="map" resultType="tableaplyVO">
 	select *
 		from
 		(
@@ -40,6 +40,22 @@
 				#{applyCode}
 		</foreach>
 	</delete>
+	<select id="selectapplyComp" parameterType="map" resultType="tableaplyVO">
+	select *
+		from
+		(
+		    select A.*, rownum as RNUM 
+		    from
+		    (
+			select * from apply where jobopening=#{jobopening}
+			order by applydate desc
+			)A
+		) 
+		<where>
+		<![CDATA[ RNUM>#{firstRecordIndex}  and
+		RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+		</where>
+	</select>
 </mapper>
 
 

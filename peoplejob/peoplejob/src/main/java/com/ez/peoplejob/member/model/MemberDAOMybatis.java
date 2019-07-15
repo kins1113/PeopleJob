@@ -1,5 +1,8 @@
 package com.ez.peoplejob.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -69,6 +72,16 @@ public class MemberDAOMybatis implements MemberDAO{
 	@Override
 	public String findId(MemberVO memberVo) {
 		return sqlSession.selectOne(namespace+"findId",memberVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectPayInfo(String membername) {
+		return sqlSession.selectOne(namespace+"selectPayInfo",membername);
+	}
+
+	@Override
+	public int findPwd(MemberVO memberVo) {
+		return sqlSession.selectOne(namespace+"findPwd",memberVo);
 	}
 
 	

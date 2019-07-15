@@ -12,7 +12,7 @@
  .dashboard{
  	    border: 1px solid lightgray;
  	    margin-top: 30px;
- 	        height: 173px;
+ 	    height: 170px;
  }
  
 .summary_wrap .dashboard .activity_list li {
@@ -40,15 +40,40 @@ a{
 }
 .text{
 	position: absolute;
-    top: 33%;
-    left: 34%;
-    font-weight: bold;
+    top: 30%;
+    left: 25%;
+    font-weight: bold; 
     font-size: 1.1em;
 }
 .doing {
     display: block;
 }
+
+span.sname {
+    font-size: 1.3em;
+    font-family: monospace;
+}
 </style>
+<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript">
+
+var author_code="${sessionScope.author_code}";
+function jobopening(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/company/my_jobopening_list.do?companycode1=${memberVo.companyCode}'/>";
+	}
+} 
+
+function company(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 기업정보를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/login/c_update.do'/>";
+	}
+} 
+</script>
 	<!-- Content -->
 	<section class="bg0 p-b-140 p-t-10">
 		<div class="container">
@@ -70,12 +95,12 @@ a{
                            </div>
                         </a>
                     </li>
-                                   <li class="img">
+                        <li class="img">
                         <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
-                            <span class="doing"><em>2</em> / 10</span>
-                            <span class="sname">이력서</span>
+                            <span class="doing"><em> 0</em> </span>
+                            <span class="sname">스크랩</span>
                            </div>
                         </a>
                     </li> 
@@ -84,8 +109,14 @@ a{
                         <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
-                            <span class="doing"><em>2</em> / 10</span>
-                            <span class="sname">이력서</span>
+                           <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+                            <span class="doing"><em> 0 </em> /10</span>
+                            <span class="sname">결제내역</span>
+                            </c:if>
+                             <c:if test="${sessionScope.author_code==1 }">
+                            <span class="doing"><em> 0 </em> </span>
+                            <span class="sname">지원현황</span>
+                            </c:if>
                            </div>
                         </a>
                     </li>
@@ -95,8 +126,8 @@ a{
                         <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
-                            <span class="doing"><em>2</em> / 10</span>
-                            <span class="sname">이력서</span>
+                            <span class="doing"><em> 0</em></span>
+                            <span class="sname">스크랩</span>
                            </div>
                         </a>
                     </li>
@@ -189,15 +220,15 @@ a{
 										이력서 관리
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" id="jobopening" onclick="jobopening()">
 										채용공고 관리
 									</a>
 									</c:if>
 								</li>
 
 								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="scrap()">
 										스크랩 정보
 									</a>
 								</li>
@@ -208,7 +239,7 @@ a{
 										지원 현황
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										결제 내역
 									</a>
@@ -221,8 +252,8 @@ a{
 										내 정보 관리
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="company()">
 										기업정보 관리
 									</a>
 									</c:if>
@@ -239,7 +270,6 @@ a{
 										회원 탈퇴
 									</a>
 									
-									<!-- 기업회원이 탈퇴할 경우 채용공고가 사라진다는 경고창or 글 -->
 								</li>
 							</ul>
 						</div>

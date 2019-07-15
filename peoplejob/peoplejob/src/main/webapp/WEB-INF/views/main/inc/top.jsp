@@ -138,6 +138,26 @@ button {
     border-bottom: 4px solid darkseagreen;
 }
 </style>
+<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript">
+
+var author_code="${sessionScope.author_code}";
+function jobopening(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/company/my_jobopening_list.do?companycode1=${memberVo.companyCode}'/>";
+	}
+} 
+
+function company(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 기업정보를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/login/c_update.do'/>";
+	}
+} 
+</script>
 </head>
 <body class="animsition">
 	
@@ -237,20 +257,20 @@ button {
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="#">이력서 관리</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 }">
-									<li><a href="#">채용공고 관리</a></li>
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
+									<li><a href="#" onclick="jobopening()">채용공고 관리</a></li>
 								</c:if>
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="#">지원현황</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 }">
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
 									<li><a href="#">결제/이용 내역</a></li>
 								</c:if>
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="<c:url value='/login/person_update.do'/>">내 정보 관리</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 }">
-									<li><a href="<c:url value='/login/c_update.do'/>">기업 정보 관리</a></li>
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
+									<li><a href="" onclick="company()">기업 정보 관리</a></li>
 								</c:if>
 									<li><a href="<c:url value='/login/changePwd.do'/>">비밀번호 변경</a></li>
 									<li><a href="<c:url value='/login/memberOut.do'/>">회원 탈퇴</a></li>

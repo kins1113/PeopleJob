@@ -31,5 +31,9 @@ public class TableaplyDAOMybatis implements TableaplyDAO{
 	public int deleteapply(Map<String, Object> map) {
 		return sqlSession.delete(namespace+"deleteapply",map);
 	}
+	@Override
+	public List<TableaplyVO> selectapplyComp(Map<String, Object> map) {
+		return sqlSession.selectList(namespace+"selectapplyComp",map);
+	}
 	
 }
