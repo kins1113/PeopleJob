@@ -27,4 +27,6 @@ public interface MemberService {
 	String findId(MemberVO memberVo);
 	List<Map<String, Object>> selectPayInfo(String membername);
 	int findPwd(MemberVO memberVo);
+	
+	MemberVO selectBymemberCode(int memberCode);
 }

@@ -29,8 +29,8 @@
 	<select id="selectapplyCount" parameterType="map" resultType="int">
 		select count(*) from apply where member_code=#{memberCode}
 	</select>
-	<select id="dupapply" parameterType="int" resultType="int">
-		select count(*) from apply where jobopening=#{jobopening}
+	<select id="dupapply" parameterType="map" resultType="int">
+		select count(*) from apply where jobopening=#{jobopening} and member_code=#{memberCode}
 	</select>
 	<delete id="deleteapply" parameterType="map">
 		delete apply
@@ -47,7 +47,12 @@
 		    select A.*, rownum as RNUM 
 		    from
 		    (
-			select * from apply where jobopening=#{jobopening}
+			select * from apply where jobopening in 
+			
+			<foreach collection="jobopening" item="jobopening" 
+					index="index" open="(" close=")" separator=",">
+				#{jobopening}
+			</foreach>
 			order by applydate desc
 			)A
 		) 
@@ -55,6 +60,13 @@
 		<![CDATA[ RNUM>#{firstRecordIndex}  and
 		RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
 		</where>
+	</select>
+	<select id="selectapplyCompcount" parameterType="map" resultType="int">
+		select count(*) from apply where jobopening in 
+			<foreach collection="jobopening" item="jobopening" 
+					index="index" open="(" close=")" separator=",">
+				#{jobopening}
+			</foreach>
 	</select>
 </mapper>
 

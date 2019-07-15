@@ -246,5 +246,8 @@
 		<if test="authorityCode==3">2</if>
 		where member_code=#{memberCode}
 	</update>
+	<select id="selectBymemberCode" parameterType="int" resultType="memberVO">
+		select * from member where member_code=#{memberCode}
+	</select>
 	
 </mapper>
