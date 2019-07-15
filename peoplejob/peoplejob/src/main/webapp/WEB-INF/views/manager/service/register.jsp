@@ -58,31 +58,7 @@
 					<input type="text" class="form-control" placeholder="검색어"
 						name="searchKeyword" value="${param.searchKeyword }">
 				</div>
-				<div class="form-group serDiv">
-					<select class="custom-select my-1 mr-sm-2" name="searchCondition">
-						<option value="">선택</option>
-						<option value="boardTitle,boardcontent"
-							<c:if test="${param.searchCondition=='boardTitle,boardcontent' }">
-							selected="selected"
-							</c:if>>아이디
-						</option>
-						<option value="memberid"
-							<c:if test="${param.searchCondition=='memberid' }">
-							selected="selected"
-							</c:if>>이름
-						</option>
-						<option value="type"
-							<c:if test="${param.searchCondition=='type' }">
-							selected="selected"
-						</c:if>>주소
-						</option>
-	<!-- 날짜가 선택되면 달력이 나오도록 처리-->
-						<option value="boardname"
-							<c:if test="${param.key=='boardname' }">
-							selected="selected"
-				</c:if>>날짜</option>
-					</select>
-				</div>
+			
 				<div class="form-group serDiv">
 					<c:import url="/inc/searchDate.do"></c:import>					
 				</div>
@@ -183,7 +159,7 @@
           
           
           
-          
+         
           </div>
           </div>
           </div>
