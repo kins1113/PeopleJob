@@ -14,6 +14,22 @@ public class PopupVO {
 	private Timestamp regdate;		//등록일
 	private String usage;		//사용여부
 	private int popupCode;	//팝업 코드
+	private String startDay;	//시작날짜
+	private String endDay;		//끝나는 날짜
+	
+	
+	public String getStartDay() {
+		return startDay;
+	}
+	public void setStartDay(String startDay) {
+		this.startDay = startDay;
+	}
+	public String getEndDay() {
+		return endDay;
+	}
+	public void setEndDay(String endDay) {
+		this.endDay = endDay;
+	}
 	public int getAdminCode() {
 		return adminCode;
 	}
@@ -78,7 +94,7 @@ public class PopupVO {
 	public String toString() {
 		return "PopupVO [adminCode=" + adminCode + ", popupName=" + popupName + ", popupImg=" + popupImg + ", width="
 				+ width + ", height=" + height + ", left=" + left + ", top=" + top + ", regdate=" + regdate + ", usage="
-				+ usage + ", popupCode=" + popupCode + "]";
+				+ usage + ", popupCode=" + popupCode + ", startDay=" + startDay + ", endDay=" + endDay + "]";
 	}
 	
 }

@@ -4,60 +4,124 @@
 
 
 
-
 <style type="text/css">
 a{color: black;}
 #pageDiv {width: 30%;}
-.serDiv {float: right;margin-top: 9px;}
+.serDiv {float: right;margin-top: 9px;font-size: 9px;}
 input.form-control {	margin-top: 4px;}
 input.btn.btn-secondary.btn-default {margin-top: 4px;}
 #boardTable {font-size: 1.0em;}
 #cardBoduPostList {margin: 0 5px 5px 5px;padding: 0 5px 5px 5px;}
 #btGroup {margin-right: 20px;}
 #pageSize {	float: left;margin-left: 20px;margin-top: 9px;}
+#startDay, #endDay{width: 120px;}
+#btGroup button{margin-top: 4px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
 		//맨위에 체크박스 누르면 전체 선택
-		$("#postCkAll").click(function(){
-			$("input[name=postCheck]").prop("checked",this.checked)
+		$("#memberCkAll").click(function(){
+			$("input[name=memberCk]").prop("checked",this.checked)
 		});
 		$("#pageSize select[name=recordCountPerPage]").change(function(){
 			$("form[name=postList]").submit();
 		});
-		//선택한것 삭제 처리
-		$("#checkDelete").click(function(){
-			$("form[name=postList]").attr("action","<c:url value='/manager/post/postCheckDelete.do'/>");
-			$("form[name=postList]").submit();
-		});
 		//필터링
-		$(".fileterCode").click(function(){
-			$("input[name=filterCode]").val($(this).attr("id"));
-
-			if($("form[name=postList] input[name=filterKey]").val()=="N"){
-				$("form[name=postList] input[name=filterKey]").val("Y");
-			}else if($("form[name=postList] input[name=filterKey]").val()=="Y"){
-				$("form[name=postList] input[name=filterKey]").val("N");
-			}else{
-				$("form[name=postList] input[name=filterKey]").val("Y");
-			}
+		$(".fileterCode").each(function(){
+			$(this).click(function(){
+				var filterCode=$(this).attr("id");
+				$("input[name=filterCode]").val(filterCode);
+				var filterKey=$("input[name=filterKey]").val();
+		
+				if(filterKey!=''){
+					if(filterKey=='Y'){
+						$("input[name=filterKey]").val("N");
+					}else if(filterKey=='N'){
+						$("input[name=filterKey]").val("Y");
+					}
+				}else{
+						$("input[name=filterKey]").val("Y");
+				}
+			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
+	    	$("form[name=memberList]").submit();	    	
+			})
+		});
+		
+		//체크된것 메일 보내기
+	    $("#btMultMail").click(function(){
+	    	$("form[name=memberList]").attr("action","<c:url value='/manager/email_sms/emailMultWrite.do'/>")
+	    		.attr("method",'get');
+	    	$("form[name=memberList]").submit();	    	
+	    });
+		//권한 승인 처리 
+		
+		$("#authorityChange > a").each(function(){
+			$(this).click(function(){
+				var memberCode= $(this).attr("class"); //권한태그 눌렀을때 그 레코드의 회원 번호
+				var authorityCode= $(this).html();
+				if(authorityCode==2){
+					if(confirm("확인된 사업자입니까?")){
+							$.ajax({
+								url:"<c:url value='/manager/member/authorityChange.do'/>",
+								type:"post",
+								data:{"memberCode":memberCode,"authorityCode":authorityCode},
+								success:function(res){
+									var authority=res;
+									$("."+memberCode).html(authority);
+								},
+								error:function(xhr, status, error){
+									alert(status+" : "+error)
+								}
+							});
+					}
+				}else if(authorityCode==3){
+					if(confirm("변경하시겠습니까?")){
+						$.ajax({
+							url:"<c:url value='/manager/member/authorityChange.do'/>",
+							type:"post",
+							data:{"memberCode":memberCode,"authorityCode":authorityCode},
+							success:function(res){
+								var authority=res;
+								$("."+memberCode).html(authority);
+							},
+							error:function(xhr, status, error){
+								alert(status+" : "+error)
+							}
+						});
+				}
+				}
+			});
 			
-			$("form[name=postList]").submit();
 		});
 	});
+	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
-		$("form[name=postList]").submit();
+		$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
+		$("form[name=memberList]").submit();
 	}
-	//삭제 버튼 누르면 삭제=> 미삭제  미삭제 => 삭제로 변경 
-	function changeDelete(delCheck, boardCode){
-		$("input[name=deletecheck]").val(delCheck);
-		$("input[name=boardCode2]").val(boardCode);
-		$("form[name=postList]").attr("action","<c:url value='/manager/post/postList.do?deleteChange=Y'/>")
-		$("form[name=postList]").submit();
-	}
+	//엑셀 다운로드 함수
+	function doExcelDownloadProcess(ckAll){
+		if(ckAll=="all"){
+		//전체 회원 엑셀다운 처리
+			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do?all=all'/>");
+	        $("form[name=memberList]").submit();
+		}else{
+		//지금 화면에 있는 회원만 엑셀 다운
+			if($("input[name=searchKeyword]")==''){
+				$("input[name=searchCondition]").val('');
+			}
+	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do'/>");
+	        $("form[name=memberList]").submit();
+		}
+		
+    }
 </script>
-<form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
+<form name="memberList" method="post" 
+		 enctype="multipart/form-data" >
+<!-- 회사인지 일반인지 구분하기 위한 hidden -->
+<input type="hidden" name="authorityCk" value="${param.authorityCk }">
+
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
@@ -67,6 +131,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 		value='1';
 	</c:if>
  >
+
 <!-- 필터링을 위한 hidden -->
 <input type="hidden" name="filterCode" value="${param.filterCode }">
 <input type="hidden" name="filterKey" value="${param.filterKey}">
@@ -74,6 +139,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 <!-- 삭제 수정 처리를 위한 hidden -->
 <input type="hidden" name="deletecheck" value="N">
 <input type="hidden" name="boardCode2" value="0">
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="card card-default">
@@ -83,9 +149,9 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
 				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button" class="btn btn-secondary btn-default" id="boardAdd" value="등록"> 
-					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="아직 기능 미정"> 
-					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택한 것 삭제">
+					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="선택한 메일">
+					<input type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('all')" id="" value="전체회원 엑셀"> 
+					<button type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('')" id="btExceil">엑셀 다운</button> 
 				</div>
 				<div class="form-group serDiv">
 					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
@@ -96,31 +162,46 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				</div>
 				<div class="form-group serDiv">
 					<select class="custom-select my-1 mr-sm-2" name="searchCondition">
-						<option value="">선택</option>
-						<option value="boardTitle,boardcontent"
-							<c:if test="${param.searchCondition=='boardTitle,boardcontent' }">
-							selected="selected"
-							</c:if>>아이디
-						</option>
+						<option value="all">통합검색</option>
 						<option value="memberid"
 							<c:if test="${param.searchCondition=='memberid' }">
 							selected="selected"
+							</c:if>>아이디
+						</option>
+						<option value="membername"
+							<c:if test="${param.searchCondition=='membername' }">
+							selected="selected"
 							</c:if>>이름
 						</option>
-						<option value="type"
-							<c:if test="${param.searchCondition=='type' }">
+						<option value="address,addressdetail"
+							<c:if test="${param.searchCondition=='address,addressdetail' }">
 							selected="selected"
 						</c:if>>주소
 						</option>
-	<!-- 날짜가 선택되면 달력이 나오도록 처리-->
-						<option value="boardname"
-							<c:if test="${param.key=='boardname' }">
+						<option value="tel"
+							<c:if test="${param.key=='tel' }">
 							selected="selected"
-				</c:if>>날짜</option>
+						</c:if>>번호</option>
+						<option value="email"
+							<c:if test="${param.key=='email' }">
+							selected="selected"
+						</c:if>>메일</option>
 					</select>
 				</div>
+				<div class="form-group serDiv incDate" id="endDay">
+					 <c:import url="../../inc/date.jsp">
+						<c:param name="name" value="endDay"></c:param>
+						<c:param name="id" value="workdate2"></c:param>
+					</c:import> 				
+				</div>
 				<div class="form-group serDiv">
-					<c:import url="/inc/searchDate.do"></c:import>					
+					<br><b> ~ </b>
+				</div>
+				<div class="form-group serDiv incDate" id="startDay">
+					 <c:import url="../../inc/date.jsp">
+						<c:param name="name" value="startDay"></c:param>
+						<c:param name="id" value="workdate1"></c:param>
+					</c:import>				
 				</div>
 				<div class="form-group" id='pageSize'>
 					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
@@ -153,29 +234,63 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<thead>
 						<tr>
 							<th><label class="control control-checkbox checkbox-primary">
-									<input type="checkbox" name="postCheckAll" id="postCkAll" />
-									<div class="control-indicator"></div>
-							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="TYPE">회원 코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardregdate2">생년월일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardhits">성별</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">이메일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">전화번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">권한 번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">회사명</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">사업자 번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">채용공고</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">비고</a></th>
+									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
+										<div class="control-indicator"></div>
+								</label></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">사업자 번호</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사명(로고)</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사주소</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">홈페이지</a></th>
+							
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원 코드</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="address">주소</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="birth">생년월일</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="membergender">성별</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="email">이메일</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="tel">전화번호</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">권한 코드</a></th>
+							<th scope="col">체용공고</th>
+							<th scope="col">비고</th>
 						</tr>
 					</thead>
 					<tbody>
 					<!--  반복 시작  -->
+					<c:if test="${empty list }">
+						<td colspan="16" align="center">만족하는 사용자가 없습니다....</td>
+					</c:if>
+					<c:if test="${!empty list }">
+						<c:forEach var="map" items="${list}">
+						<!-- 기업회원 승인처리를 위한 hidden -->
+							<input type="hidden" name="memberCode" value="${map['MEMBER_CODE']}">
+							<input type="hidden" name="authorityCode" value="${map['AUTHORITY_CODE'] }">							
 							<tr>
-							
+								<td>
+									<label class="control control-checkbox checkbox-primary">
+											<input type="checkbox" name="memberCk" id="memberCk" value="${map['EMAIL']}" />
+											<div class="control-indicator"></div>
+									</label>
+								</td>
+								<td>${map['COMPANYNO'] }</td>
+								<td>${map['COMPANYNAME'] }</td>
+								<td>${map['ADDRESS_1']} ${map['ADDRESSDETAIL_1']}</td>
+								<td>${map['SITE'] }</td>
+
+								<td>${map['MEMBER_CODE']}</td>
+								<td>${map['MEMBERID']}</td>
+								<td>${map['MEMBERNAME']}</td>
+								<td>${map['ADDRESS']} ${map['ADDRESSDETAIL']}</td>
+								<td>${map['BIRTH']}</td>
+								<td>${map['MEMBERGENDER']}</td>
+								<td>${map['EMAIL']}</td>
+								<td>${map['TEL']}</td>
+								<td id="authorityChange"><a href="#"  class="${map['MEMBER_CODE'] }">${map['AUTHORITY_CODE'] }</a></td>
+								<td>아직</td>
+								<td>무엇을 넣을까?</td>
 							</tr>
+						</c:forEach>
+					</c:if>
 					<!-- 반복 끝 -->
 					</tbody>
 				</table>
@@ -212,8 +327,6 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			</div>
 		</div>
 </form>
-
-
 
 
 

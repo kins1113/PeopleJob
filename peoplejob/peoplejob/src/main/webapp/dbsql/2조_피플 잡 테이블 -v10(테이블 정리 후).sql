@@ -637,6 +637,10 @@ USAGE		VARCHAR(10),
 POPUP_CODE	NUMBER PRIMARY KEY,
 constraint FK_RESUME_TO_ foreign key(ADMIN_CODE) references MANAGER(ADMIN_CODE)
 );
+create sequence POPUP_SEQ
+increment by 1
+start with 1
+nocache;
 
 SELECT * FROM POPUP;
 

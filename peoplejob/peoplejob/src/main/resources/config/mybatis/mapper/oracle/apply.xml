@@ -10,7 +10,7 @@
 		insert into apply(apply_code,applydate,opencheck,member_code,jobopening) 
 		values(#{applyCode},sysdate,'N',#{memberCode},#{jobopening})
 	</insert>
-	<select id="selectapply" parameterType="int" resultType="tableaplyVO">
+	<select id="selectapply" parameterType="map" resultType="tableaplyVO">
 	select *
 		from
 		(
@@ -29,8 +29,8 @@
 	<select id="selectapplyCount" parameterType="map" resultType="int">
 		select count(*) from apply where member_code=#{memberCode}
 	</select>
-	<select id="dupapply" parameterType="int" resultType="int">
-		select count(*) from apply where jobopening=#{jobopening}
+	<select id="dupapply" parameterType="map" resultType="int">
+		select count(*) from apply where jobopening=#{jobopening} and member_code=#{memberCode}
 	</select>
 	<delete id="deleteapply" parameterType="map">
 		delete apply
@@ -40,6 +40,34 @@
 				#{applyCode}
 		</foreach>
 	</delete>
+	<select id="selectapplyComp" parameterType="map" resultType="tableaplyVO">
+	select *
+		from
+		(
+		    select A.*, rownum as RNUM 
+		    from
+		    (
+			select * from apply where jobopening in 
+			
+			<foreach collection="jobopening" item="jobopening" 
+					index="index" open="(" close=")" separator=",">
+				#{jobopening}
+			</foreach>
+			order by applydate desc
+			)A
+		) 
+		<where>
+		<![CDATA[ RNUM>#{firstRecordIndex}  and
+		RNUM<=#{firstRecordIndex} + #{recordCountPerPage}]]>
+		</where>
+	</select>
+	<select id="selectapplyCompcount" parameterType="map" resultType="int">
+		select count(*) from apply where jobopening in 
+			<foreach collection="jobopening" item="jobopening" 
+					index="index" open="(" close=")" separator=",">
+				#{jobopening}
+			</foreach>
+	</select>
 </mapper>
 
 

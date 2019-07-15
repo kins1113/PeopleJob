@@ -1,5 +1,8 @@
 package com.ez.peoplejob.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,6 +99,24 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String findId(MemberVO memberVo) {
 		return memberDao.findId(memberVo);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectPayInfo(String membername) {
+		return memberDao.selectPayInfo(membername);
+	}
+
+
+	@Override
+	public int findPwd(MemberVO memberVo) {
+		return memberDao.findPwd(memberVo);
+	}
+
+
+	@Override
+	public MemberVO selectBymemberCode(int memberCode) {
+		return memberDao.selectBymemberCode(memberCode);
 	}
 
 

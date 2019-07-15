@@ -13,7 +13,17 @@
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
-
+	
+	$('input[type=submit]').submit(function(){
+		$('.form-control').each(function(){
+			if($(this).val().length<1){
+				alert($(this).attr('id')+"칸을 입력해주세요");
+				event.prevnetDefault();
+				return false;
+			}	
+			
+		});
+	});
 
 
 });
@@ -39,13 +49,13 @@ $(function() {
 							<div class="col-lg-12">
 								<form id="login-form" action="<c:url value='/login/findPwd.do'/>" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="이름">
+										<input type="text" name="membername" id="이름" tabindex="1" class="form-control" placeholder="이름">
 									</div>
 									<div class="form-group">
-										<input type="text" name="memberid" id="memberid" tabindex="2" class="form-control" placeholder="ID">
+										<input type="text" name="memberid" id="아이디" tabindex="2" class="form-control" placeholder="ID">
 									</div>
 									<div class="form-group">
-										<input type="text" name="email" id="email" tabindex="2" class="form-control" placeholder="이메일">
+										<input type="text" name="email" id="이메일" tabindex="2" class="form-control" placeholder="이메일">
 									</div>
 									
 									
@@ -58,25 +68,7 @@ $(function() {
 									</div>
 									
 								</form>
-								<form id="register-form" action="" method="post" role="form" style="display: none;">
-									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="이름">
-									</div>
-									<div class="form-group">
-										<input type="text" name="memberid" id="memberid" tabindex="2" class="form-control" placeholder="ID">
-									</div>
-									<div class="form-group">
-										<input type="text" name="email" id="email" tabindex="2" class="form-control" placeholder="이메일">
-									</div>
-									
-									<div class="form-group">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="PW찾기">
-											</div>
-										</div>
-									</div>
-								</form>
+								
 							</div>
 						</div>
 					</div>

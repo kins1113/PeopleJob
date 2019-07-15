@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp" %>
+<%@include file="../main/inc/top.jsp" %> 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -17,28 +17,38 @@
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
-	$('input[type=submit]').click(function(){
-		
+	$('#frmfindid').submit(function(){
 			var membername=$('#membername').val();
 			var email=$('#email').val();
 			
 			if(membername.length>0 && email.length>0){
-				$.ajax({
+				 $.ajax({
 					url : "<c:url value='/login/ajaxfindId.do'/>",
 					type : "post",
-					dataType:"json",
+					dataType:"text",
+					//data: $('#frmfindid').serialize(),
 					data : {"membername":membername, "email":email},
+					//contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(res) {
-						/* var str = "";
-						if (res) {
-							str = "사용가능한 아이디";
-						} else {
-							str = "이미 등록된 아이디";
-						}
-						$('.error').html(str);
-						$('.error').show(); */
 						
-						alert(res);
+						//alert(res);
+						
+						
+						
+					 if(res.length>0){
+							var str="아이디 : "+res;
+							$('.error').html(str);
+							$('.error').show();
+							event.preventDefault();
+							return false;
+						}else{
+							$('.error').html('입력한 정보에 해당하는 아이디가 없습니다.');
+							$('.error').show();
+							event.preventDefault();
+							return false;
+						}
+						
+							event.preventDefault();
 
 					},
 					error : function(xhr, status, error) {
@@ -47,11 +57,25 @@ $(function() {
 				});
 
 			} else {
-				$('.error').html("아이디 규칙에 맞지 않습니다.");
-				$('.error').show();
+					if(membername==''){
+						alert('이름을 입력해주세요');
+						event.preventDefault();
+						return false;
+					}else if(email.length<1){
+						alert('이메일을 입력해주세요');
+						event.preventDefault();
+						return false;
+					}else{
+						$('.error').html("입력한 정보에 해당하는 아이디가 없습니다.");
+						$('.error').show();
+						event.preventDefault();
+						return false;					
+					}
 			}
+			event.preventDefault();
 		});
-
+	
+	
 
 });
 </script>
@@ -74,7 +98,7 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="<c:url value='/login/findPwd.do'/>" method="post" role="form" style="display: block;">
+								<form id="frmfindid" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="이름">
 									</div>

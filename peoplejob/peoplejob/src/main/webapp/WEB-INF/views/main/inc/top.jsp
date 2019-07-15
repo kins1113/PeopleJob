@@ -138,6 +138,26 @@ button {
     border-bottom: 4px solid darkseagreen;
 }
 </style>
+<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript">
+
+var author_code="${sessionScope.author_code}";
+function jobopening(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/company/my_jobopening_list.do?companycode1=${memberVo.companyCode}'/>";
+	}
+} 
+
+function company(){
+	if(author_code==2){
+		alert('기업회원은 관리자의 승인을 받은 후 기업정보를 등록할 수 있습니다.');
+	}else if(author_code==3){
+		location.href="<c:url value='/login/c_update.do'/>";
+	}
+} 
+</script>
 </head>
 <body class="animsition">
 	
@@ -227,7 +247,7 @@ button {
 								</a>
 								<ul class="sub-menu">
 								<c:if test="${!empty sessionScope.memberid }">
-									<li style="text-align: center">${sessionScope.memberName }님, 환영합니다</li>
+									<li style="text-align: center; font-size: 1.4em;">${sessionScope.memberName }님, 환영합니다</li>
 									<li><a href="<c:url value='/login/logout.do'/>">로그아웃</a></li>
 								</c:if>
 								<c:if test="${empty sessionScope.memberid }">
@@ -237,30 +257,55 @@ button {
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="#">이력서 관리</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 }">
-									<li><a href="#">채용공고 관리</a></li>
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+									<li><a href="#" onclick="jobopening()">채용공고 관리</a></li>
+								</c:if>
+								<%-- <c:if test="${sessionScope.author_code==1 }">
+									<li><a href="#">지원현황</a></li>
+								</c:if> --%>
+								 <!-- 일반회원 -->
+                        <c:if test="${sessionScope.author_code==1 }">
+                           <li><a href="<c:url value='/apply/apply_list.do'/>">지원현황</a></li>
+                        </c:if>
+                        <!-- 기업회원 -->
+                        <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
+                           <li><a href="<c:url value='/apply/Capply_list.do'/>">지원현황</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.author_code==1 }">
+                           <li><a href="<c:url value='/scrap/scrap_list.do'/>">스크랩현황</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }"> 
+                           <li><a href="#">스크랩현황</a></li>
+                        </c:if>
+                        
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+									<li><a href="<c:url value='/mypage/corp/paymentDetail.do'/>">결제/이용 내역</a></li>
+									</c:if>
+								<!-- 일반회원 -->
+								<c:if test="${sessionScope.author_code==1 }">
+									<li><a href="<c:url value='/apply/apply_list.do'/>">지원현황</a></li>
+								</c:if>
+								<!-- 기업회원 -->
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
+									<li><a href="<c:url value='/apply/Capply_list.do'/>">지원현황</a></li>
 								</c:if>
 								<c:if test="${sessionScope.author_code==1 }">
-									<li><a href="#">지원현황</a></li>
+									<li><a href="<c:url value='/scrap/scrap_list.do'/>">스크랩현황</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 }">
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_Code==3 }">
 									<li><a href="#">결제/이용 내역</a></li>
 								</c:if>
 								<c:if test="${sessionScope.author_code==1 }">
 									<li><a href="<c:url value='/login/person_update.do'/>">내 정보 관리</a></li>
 								</c:if>
-								<c:if test="${sessionScope.author_code==2 }">
-									<li><a href="<c:url value='/login/c_update.do'/>">기업 정보 관리</a></li>
+								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
+									<li><a href="" onclick="company()">기업 정보 관리</a></li>
 								</c:if>
 									<li><a href="<c:url value='/login/changePwd.do'/>">비밀번호 변경</a></li>
 									<li><a href="<c:url value='/login/memberOut.do'/>">회원 탈퇴</a></li>
 								</ul>
 							</li>
-							<%-- 
-								<a href="<c:url value='/mypage/user/userpage.do'/>">
-								<img src="<c:url value='/resources/main/images/icons/my.png'/>" 
-								name="mypage" style="width: 40px;margin-left: 65px;"></a>
-								 --%>
+							
 								<li>
 									<ul class="sub-menu">
 										<li><a href="category-01.html">자유게시판</a></li>

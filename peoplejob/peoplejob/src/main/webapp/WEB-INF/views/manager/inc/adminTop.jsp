@@ -65,8 +65,8 @@
 <script	src="${pageContext.request.contextPath}/resources/admin/assets/plugins/nprogress/nprogress.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery-3.4.1.min.js"></script>
 </head>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
-
+<%-- <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script> --%>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <body class="sidebar-fixed sidebar-dark header-light header-fixed"
 	id="body">
 	<script>
@@ -122,9 +122,9 @@
 										href="#"> <span class="nav-text">통합 관리</span>
 									</a></li> -->
 									<li class="active"><a class="sidenav-item-link"
-										href="${pageContext.request.contextPath}/manager/member/memberList.do"> <span class="nav-text">일반 회원</span>
+										href="${pageContext.request.contextPath}/manager/member/memberList.do?authorityCk=member"> <span class="nav-text">일반 회원</span>
 									</a></li>
-									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/company/companyList.do">
+									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/member/memberList.do?authorityCk=company">
 											<span class="nav-text">기업 회원</span>
 											 <!-- <span	class="badge badge-success">new</span> -->
 

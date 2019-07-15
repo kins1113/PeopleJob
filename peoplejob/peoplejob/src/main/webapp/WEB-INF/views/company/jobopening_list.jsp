@@ -124,6 +124,7 @@
        <!-- 기업회원(3)이면 글쓰기 나옴  -->
          <c:if test="${mvo.authorityCode==3}"> 
         <div class="pull-right"> 
+            <a href="<c:url value='/apply/Capply_list.do'/>" class="btn btn-primary" role="button">지원현황 보기</a>
             <a href="<c:url value='/company/my_jobopening_list.do?companycode1=${mvo.companyCode}'/>" class="btn btn-primary" role="button">내가쓴 채용 정보</a>
             <a href="<c:url value='/company/jobopening_register.do'/>" class="btn btn-primary" role="button">공고등록</a>
         </div>

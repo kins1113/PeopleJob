@@ -9,6 +9,6 @@
 			select service_seq.nextval from dual
 		</selectKey>
 	insert into service(service_code, servicename, serviceprice, servicecontent, serviceday)
-	values(#{serviceCode}, #{servicename},#{serviceprice},#{servicecontent},#{serviceday} )
+	values(#{serviceCode}, #{serviceName},#{servicePrice},#{serviceContent},#{serviceDay} )
 	</insert>
 </mapper>

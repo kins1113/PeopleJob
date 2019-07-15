@@ -78,6 +78,7 @@
 	<select id="selectAllManager" parameterType="map" resultType="memberVo">
 		select * from 
 		(
+			
 			select A.*, rownum as RNUM from 
 			( 
 			select * from member
@@ -120,13 +121,14 @@
 							 <![CDATA[regdate >= #{startDay} and regdate <to_date(#{endDay})+1]]>
 						</if>
 					</if>
+					and authority_code =1
 				</where>
 				<if test="filterCode!=null and filterKey!=null">
 					<if test='filterKey=="Y"'>
-						 order by #{filterCode} desc
+						 order by ${filterCode} desc
 					</if>
 					<if test='filterKey=="N"'>
-						 order by #{filterCode}
+						 order by ${filterCode}
 					</if>
 				</if>
 				<if test="filterCode==null or filterKey==null">
@@ -173,12 +175,12 @@
 							 <![CDATA[ or regdate >= #{startDay} and regdate <to_date(#{endDay})+1]]>
 						</if>
 				</if>				
-				
 			<if test="memberVo.searchCondition== null or memberVo.searchCondition==''
 						or memberVo.searchKeyword== null or memberVo.searchKeyword==''">
 				<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
 					 <![CDATA[regdate >= #{startDay} and regdate <to_date(#{endDay})+1]]>
 				</if>
+				and authority_code =1
 			</if>
 		</where>
 		
@@ -190,4 +192,66 @@
 		select memberid from member
 		where membername=#{membername} and email=#{email}
 	</select>
+	
+	<select id="selectPayInfo" parameterType="string" resultType="map">
+	
+	select c.company_zipcode, c.company_address, m.email, m.tel
+	from company c join member m 
+	on c.COMPANY_CODE = m.COMPANY_CODE
+	where m.membername=#{membername}
+	</select>
+	
+	<select id="findPwd" parameterType="memberVo" resultType="int">
+		select count(pwd) from member
+		where memberid=#{memberid} and membername=#{membername} and email=#{email}
+	</select>
+	
+	<select id="memberByAuthority" parameterType="map" resultType="memberVo">
+		select * from member 
+		where authority_code in
+		<foreach collection="i" item="item"  open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="selectCompanyManager" parameterType="map" resultType="map"> 
+	select * from 
+		(
+			select A.*, rownum as RNUM from 
+			( 
+				select * from member m
+	            left join company c
+	            on m.COMPANY_CODE = c.BUSSINESS_NUMBER          
+	            where authority_code in (2,3)
+	 		) A
+		) 
+	<![CDATA[where RNUM>#{memberVo.firstRecordIndex}  
+	and RNUM<=#{memberVo.firstRecordIndex} + #{memberVo.recordCountPerPage}]]> 
+	</select>
+	
+	<update id="updateAuthorityManager" parameterType="map">
+		update member
+		set authority_code=
+		<if test="authorityCode==2">3</if>
+		<if test="authorityCode==3">2</if>
+		where member_code=#{memberCode}
+	</update>
+	<select id="selectBymemberCode" parameterType="int" resultType="memberVO">
+		select * from member where member_code=#{memberCode}
+	</select>
+	
+	<select id="getTotalRecordCompanyManager" parameterType="map" resultType="int"> 
+				select count(*) from member m
+	            left join company c
+	            on m.COMPANY_CODE = c.BUSSINESS_NUMBER          
+	            where authority_code in (2,3)
+	</select>
+	<select id="selectAllCompanyManager" parameterType="map" resultType="map"> 
+				select * from member m
+	            left join company c
+	            on m.COMPANY_CODE = c.BUSSINESS_NUMBER          
+	            where authority_code in (2,3)
+	            order by authority_code
+	</select>
+	
 </mapper>

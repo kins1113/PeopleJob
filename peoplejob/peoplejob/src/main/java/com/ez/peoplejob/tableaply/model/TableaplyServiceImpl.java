@@ -23,12 +23,20 @@ public class TableaplyServiceImpl implements TableaplyService{
 		return tableaplyDao.selectapplyCount(map);
 	}
 	@Override
-	public int dupapply(int jobopening) {
-		return tableaplyDao.dupapply(jobopening);
+	public int dupapply(Map<String, Object> map) {
+		return tableaplyDao.dupapply(map);
 	}
 	@Override
 	public int deleteJobOpen(Map<String, Object> map) {
 		return tableaplyDao.deleteapply(map);
+	}
+	@Override
+	public List<TableaplyVO> selectapplyComp(Map<String, Object> map) {
+		return tableaplyDao.selectapplyComp(map);
+	}
+	@Override
+	public int selectapplyCompcount(Map<String, Object> map) {
+		return tableaplyDao.selectapplyCompcount(map);
 	}
 
 }

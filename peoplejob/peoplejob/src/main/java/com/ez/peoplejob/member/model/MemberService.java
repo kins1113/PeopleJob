@@ -1,5 +1,8 @@
 package com.ez.peoplejob.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 public interface MemberService {
 	//아이디 중복확인에서 사용하는 final변수
 	int USEFUL_USERID=1;  //사용가능한 아이디
@@ -22,4 +25,8 @@ public interface MemberService {
 	CompanyVO selectCompanyById(String memberId);
 	int updatePwd(MemberVO memberVo);
 	String findId(MemberVO memberVo);
+	List<Map<String, Object>> selectPayInfo(String membername);
+	int findPwd(MemberVO memberVo);
+	
+	MemberVO selectBymemberCode(int memberCode);
 }

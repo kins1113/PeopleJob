@@ -104,6 +104,8 @@
 	                | <small>근무방식 : ${vo.workway }</small>
 	                | <small>급여방식 : ${vo.payway }</small>
 	                | <small>조회수 : ${vo.hits }</small>
+	                <br>
+	                <a href="<c:url value='/apply/insertapply.do?jobopening=${vo.jobopening}'/>"><input type="button" id="apply" name="apply"class="btn btn-primary" value="즉시지원"></a>
 	                </p> 
 	                <span class="label label-info">
 					<img src="<c:url value='/peoplejob_upload/${vo.companyimage }'/>" 
