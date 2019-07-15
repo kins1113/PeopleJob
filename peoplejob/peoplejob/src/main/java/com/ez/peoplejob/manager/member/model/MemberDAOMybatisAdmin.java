@@ -39,6 +39,16 @@ public class MemberDAOMybatisAdmin implements MemberDAOAdmin{
 	public int updateAuthorityManager(Map<String, Integer> map) {
 		return sqlSession.update(namespace+"updateAuthorityManager", map);
 	}
+
+	@Override
+	public int getTotalRecordCompanyManager(Map<String, Object> map) {
+		return sqlSession.selectOne(namespace+"getTotalRecordCompanyManager", map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllCompanyManager(Map<String, Object> map) {
+		return sqlSession.selectList(namespace+"selectAllCompanyManager",map);
+	}
 	
 	
 }

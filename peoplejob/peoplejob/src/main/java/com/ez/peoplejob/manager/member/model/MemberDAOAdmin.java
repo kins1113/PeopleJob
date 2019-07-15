@@ -12,4 +12,6 @@ public interface MemberDAOAdmin {
 	List<MemberVO> memberByAuthority(Map<String, int[]> map);
 	List<Map<String, Object>> selectCompanyManager(Map<String, Object> map);
 	int updateAuthorityManager(Map<String, Integer> map);
+	int getTotalRecordCompanyManager(Map<String, Object> map);
+	List<Map<String, Object>> selectAllCompanyManager(Map<String, Object> map);
 }

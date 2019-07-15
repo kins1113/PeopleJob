@@ -77,9 +77,17 @@ public class MemberManagerController {
 		
 		
 		//토탈 레코드 조회
-		int totalRecord=memberserviceAdmin.getTotalRecord(map);
-		logger.info("일반 회원 조회 totalRecord={}",totalRecord);
+		int totalRecord=0;
+		if("member".equals(authorityCk)) {
+			totalRecord=memberserviceAdmin.getTotalRecord(map);
+			logger.info("일반 회원 조회 totalRecord={}",totalRecord);
+		}else if("company".equals(authorityCk)) {
+			totalRecord=memberserviceAdmin.getTotalRecordCompanyManager(map);
+			logger.info("기업 회원 조회 totalRecord={}",totalRecord);
+		}
 		pagingInfo.setTotalRecord(totalRecord);
+		
+		
 		
 		if("member".equals(authorityCk)) {
 			model.addAttribute("list",memList);

@@ -17,8 +17,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/inc/date.do")
-	public void date(@RequestParam String id,
-					   @RequestParam String name) {
+	public void date(@RequestParam String id, @RequestParam String name) {
 	}
 	
 }

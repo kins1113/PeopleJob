@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/manager/inc/adminTop.jsp"%>
-    
- 
 <style type="text/css">
 a{color: black;}
 #pageDiv {width: 30%;}
@@ -20,57 +18,51 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 .spanSize2{width: 50px; float: left;}
 .infoSpan{font-size: 0.7em;}
 #workdate2, #workdate1 { width: 110px; float: left;height: 20px;}
-/* div#layerpop {
-    width: 1000px;
-}
-
-.modal-dialog {
-    width: 800px;
-}
-
-form#popUpAdd {
-    width: 760px;
-} */
 </style>
-
-<!-- Smart Editor -->	
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/se2/js/jindo.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
-  					
-  <!-- Smart Editor -->
 <script type="text/javascript">
-$(function(){
+	$(function(){
+		// form 태그가 있는 경우
+		// form 태그가 html에 있는경우(여기서는 create_form이라는 id로 세팅된 form 태그) 
+		// FormData 생성자 함수에 인자로 넘겨서 input 태그에 있는 데이터들을 따로 세팅하지 않아도 사용할 수 있다.
+		var createForm = document.getElementById("#popupAdd");
+		var formData = new FormData();
+        
+		$("#btpop").click(function(){
+			event.preventDefault();
 	
-	var oEditors = [];
-	nhn.husky.EZCreator.createInIFrame({
-	    oAppRef: oEditors,
-	    elPlaceHolder: "textAreaContent",
-	    sSkinURI: "<%=request.getContextPath()%>/resources/se2/SmartEditor2Skin.html",
-	    fCreator: "createSEditor2"
+			$.ajax({
+				type:"post",
+				enctype: 'multipart/form-data', 
+				url:"<c:url value='/manager/popup/popupAdd.do'/>",
+				data:
+					//$("#popupAdd").serializeArray()
+				    {formData:formData,popupName:$("input[name=popupName]").val(),
+					usage:$("input[name=usage]").val(),
+					width:$("input[name=width]").val(),
+					height:$("input[name=height]").val(),
+					left:$("input[name=left]").val(),
+					top:$("input[name=top]").val(),
+					startDay:$("input[name=startDay]").val(),
+					endDay:$("input[name=endDay]").val(),
+					}	
+				,dataType:"json",
+			    contentType: false,
+			    processData: false,
+			    cache: false,
+				success:function(res){
+					alert(res);
+				},
+				error:function(xhr,status, error){
+					alert(status+" : "+error);
+				}
+				
+			});//ajax
+			$("#popupAdd").submit();
+		});
+		
+			
 	});
-});
-	//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
-	function submitContents(elClickedObj) {
-	    // 에디터의 내용이 textarea에 적용된다.
-	    oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", [ ]);
-	 
-	    // 에디터의 내용에 대한 값 검증은 이곳에서
-	    // document.getElementById("textAreaContent").value를 이용해서 처리한다.
-	  
-	    try {
-	        elClickedObj.form.submit();
-	    } catch(e) {
-	     
-	    }
-	}
-	 
 
-	// textArea에 이미지 첨부
-	function pasteHTML(filepath){
-	    var sHTML = '<img src="<%=request.getContextPath()%>/peoplejob_upload/'+filepath+'">';
-	    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
-	}
 </script>
   
 <form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
@@ -90,8 +82,8 @@ $(function(){
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
 				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button"class="btn btn-secondary btn-default" id="update"value="출력"> 
-					<input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="미출력"> 
+					<input type="button"class="btn btn-secondary btn-default" id="btUsageY" value="출력"> 
+					<input type="button"class="btn btn-secondary btn-default" id="btUsageN" value="미출력"> 
 					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택삭제">
 					<input type="button" class="btn btn-secondary btn-default" id="popUpAdd" value="팝업등록"
 										data-target="#layerpop" data-toggle="modal"> 
@@ -114,37 +106,10 @@ $(function(){
 							selected="selected"
 						</c:if>>주소
 						</option>
-	<!-- 날짜가 선택되면 달력이 나오도록 처리-->
 						<option value="boardname"
 							<c:if test="${param.key=='boardname' }">
 							selected="selected"
-				</c:if>>날짜</option>
-					</select>
-				</div>
-				<div class="form-group serDiv">
-					<c:import url="/inc/searchDate.do"></c:import>					
-				</div>
-				<div class="form-group" id='pageSize'>
-					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
-						<option value="10"
-							<c:if test="${param.recordCountPerPage==10 }">
-								selected="selected"
-							</c:if>>10개씩
-						</option>
-						<option value="20"
-							<c:if test="${param.recordCountPerPage==20 }">
-								selected="selected"
-							</c:if>>20개씩
-						</option>
-						<option value="30"
-							<c:if test="${param.recordCountPerPage==30 }">
-								selected="selected"
-							</c:if>>30개씩
-						</option>
-						<option value="50"
-							<c:if test="${param.recordCountPerPage==50 }">
-								selected="selected"
-							</c:if>>50개씩
+						</c:if>>날짜
 						</option>
 					</select>
 				</div>
@@ -173,9 +138,27 @@ $(function(){
 					</thead>
 					<tbody>
 					<!--  반복 시작  -->
+						<c:forEach var="vo" items="${list }">
 							<tr>
-							
+								<td>
+									<label class="control control-checkbox checkbox-primary">
+										<input type="checkbox" name="postCheckAll" id="postCkAll" />
+										<div class="control-indicator"></div>
+									</label>
+								</td>
+								<td>${vo.popupCode }</td>
+								<td>${sessionScope.adminid }</td>
+								<td>${vo.startDay } - ${vo.endDay }</td>
+								<td>${vo.popupName }</td>
+								<td>이미지</td>
+								<td>${vo.width }</td>
+								<td>${vo.height }</td>
+								<td>${vo.left }</td>
+								<td>${vo.top }</td>
+								<td>${vo.regdate }</td>
+								<td>${vo.usage }</td>
 							</tr>
+						</c:forEach>
 					<!-- 반복 끝 -->
 					</tbody>
 				</table>
@@ -188,7 +171,7 @@ $(function(){
 <!-- 모달을 띄우기 위한 div-->
 <div class="modal fade" id="layerpop">
 	<div class="modal-dialog">
-		<form name="popUpAdd" id="popUpAdd" method="post">
+		
 			<div class="modal-content">
 				<!-- body -->
 				<div class="modal-body">
@@ -256,9 +239,11 @@ $(function(){
 									</tr>
 									<tr>
 										<th scope="col">내용</th>
-										<td scope="row">
-											 <textarea style="width: 100%" rows="10" name="content" id="textAreaContent" cols="80"></textarea>
-										</td>
+										<td>
+										<form name="popUpAdd" id="popUpAdd" method="post" enctype="multipart/form-data">	<!--    -->
+											<input type="file"  name="popupImg">
+										</form>
+											</td>
 									</tr>
 								</tbody>
 							</table>
@@ -268,11 +253,10 @@ $(function(){
 				</div>
 				<!-- Footer -->
 				<div class="modal-footer">
-					<button type="button" class="mb-1 btn btn-outline-success">등록하기</button>
-					<button type="button" class="mb-1 btn btn-outline-danger">창	닫기</button>
+					<button type="submit"  id="btpop" class="mb-1 btn btn-outline-success">등록하기</button>
+					<button type="button" data-dismiss="modal" class="close mb-1 btn btn-outline-danger">닫기</button>
 				</div>
 			</div>
-		</form>
 	</div>
 </div>
 

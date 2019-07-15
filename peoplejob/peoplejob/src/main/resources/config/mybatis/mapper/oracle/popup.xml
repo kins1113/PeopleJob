@@ -8,11 +8,15 @@
 		<selectKey keyProperty="popupCode" resultType="int" order="BEFORE">
 			select popup_seq.nextval from dual
 		</selectKey>
-		insert into popup (admin_code, popup_name, popup_img, width, height, left, top,
+		insert into popup (admin_code, popup_name, width, height, left, top,
 							 usage, popup_code, end_day, start_day )
-		values(#{adminCode}, #{popupName}, #{popUpImg}, #{width}, #{height}, #{left}, #{top},
+		values(#{adminCode}, #{popupName},  #{width}, #{height}, #{left}, #{top},
 							#{usage}, #{popupCode}, #{endDay}, #{startDay})	
 	</insert>
+
+	<select id="selectPopupAll" resultType="popupVo">
+		select * from popup order by end_day
+	</select>
 
 </mapper>
 

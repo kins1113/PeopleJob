@@ -27,35 +27,8 @@ public class ExcelController {
 	@Autowired private MemberServiceAdmin memberServiceAdmin;
 	private Logger logger=LoggerFactory.getLogger(ExcelController.class);
 	
-	@RequestMapping("/excelTest.do")
-	public String exccelTestView() {
-
-		return "excelTest";
-	}
-	
-	/**
-	 * 여기에서 서버에 값을 가지고 와서 뿌려준다.
-	 */
-	@RequestMapping(value = "/downloadExcelFile.do", method = RequestMethod.POST)
-    public String downloadExcelFile(Model model) {
-        String[] names = {"자몽", "애플망고", "멜론", "오렌지"};
-        long[] prices = {5000, 10000, 7000, 6000};
-        int[] quantities = {50, 50, 40, 40};
-        List<Fruit> list = service.makeFruitList(names, prices, quantities);
-        
-        SXSSFWorkbook workbook = service.excelFileDownloadProcess(list);
-        
-        model.addAttribute("locale", Locale.KOREA);
-        model.addAttribute("workbook", workbook);
-        model.addAttribute("workbookName", "과일표");
-        
-        return "excelDownloadView";
-    }
-	
 	/**
 	 * 옥환 - 관리자에서 member를 엑셀 처리하는 핸들러
-	 * @param model
-	 * @return
 	 */
 	@RequestMapping(value = "/downloadExcelFileMember.do", method = RequestMethod.POST)
     public String downloadExcelFileMember(
@@ -127,4 +100,65 @@ public class ExcelController {
         return "excelDownloadView";
     }
 
+	
+	/**
+	 * 옥환 - 관리자에서 member중 기업회원을 엑셀 처리하는 핸들러
+	 */
+	@RequestMapping(value = "/downloadExcelFileCompany.do", method = RequestMethod.POST)
+    public String downloadExcelFileCompany(
+    		@ModelAttribute MemberVO memberVo,
+			@RequestParam(required = false) String startDay,
+			@RequestParam(required = false) String endDay,
+			@RequestParam(required = false) String filterKey,
+			@RequestParam(required = false) String filterCode,
+			@RequestParam(required = false) String all,
+			@RequestParam(required = false) String authorityCk,
+    		Model model) {
+		
+		logger.info("기업 회원 엑셀 처리시 파라미터 memberVo={}",memberVo);
+		logger.info("파라미터 startDay={}, endDay={}",startDay,endDay);
+		logger.info("파라미터 filterCode={}, filterKey={}",filterCode,filterKey);
+		logger.info("all={}, authorityCk={}",all,authorityCk);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		//날짜 처리
+		map.put("memberVo", memberVo);
+		map.put("startDay", startDay);
+		map.put("endDay", endDay);
+		map.put("filterKey", filterKey);
+		map.put("filterCode", filterCode);
+		
+		List<Map<String, Object>> list=null;
+		if(all==null) {
+			//페이징 처리
+			PaginationInfo pagingInfo=new PaginationInfo();
+			pagingInfo.setCurrentPage(memberVo.getCurrentPage());
+			if(memberVo.getRecordCountPerPage()!=0) {
+				pagingInfo.setRecordCountPerPage(memberVo.getRecordCountPerPage());
+			}else {
+				pagingInfo.setRecordCountPerPage(10);
+			}
+			pagingInfo.setBlockSize(5);
+			
+			memberVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+			memberVo.setRecordCountPerPage(pagingInfo.getRecordCountPerPage());
+			
+			list = memberServiceAdmin.selectCompanyManager(map);
+			logger.info("정해진 값만 맴버 조회 결과 list.size={}",list.size());
+		
+		}else if("all".equals(all)) {
+			Map<String, int[]> intMap=new HashMap<String, int[]>();
+				list = memberServiceAdmin.selectAllCompanyManager(map);
+				logger.info("전체 맴버 조회 결과 list.size={}",list.size());
+			}
+			
+        SXSSFWorkbook workbook = service.makeSimpleCompanyExcelWorkbook(list);
+        
+        model.addAttribute("locale", Locale.KOREA);
+        model.addAttribute("workbook", workbook);
+        model.addAttribute("workbookName", "회원정보");
+        
+        return "excelDownloadView";
+    }
 }

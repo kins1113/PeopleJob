@@ -16,7 +16,6 @@ public class PopupVO {
 	private int popupCode;	//팝업 코드
 	private String startDay;	//시작날짜
 	private String endDay;		//끝나는 날짜
-	private String contentadd;	//내용
 	
 	
 	public String getStartDay() {
@@ -30,12 +29,6 @@ public class PopupVO {
 	}
 	public void setEndDay(String endDay) {
 		this.endDay = endDay;
-	}
-	public String getContentadd() {
-		return contentadd;
-	}
-	public void setContentadd(String contentadd) {
-		this.contentadd = contentadd;
 	}
 	public int getAdminCode() {
 		return adminCode;
@@ -101,8 +94,7 @@ public class PopupVO {
 	public String toString() {
 		return "PopupVO [adminCode=" + adminCode + ", popupName=" + popupName + ", popupImg=" + popupImg + ", width="
 				+ width + ", height=" + height + ", left=" + left + ", top=" + top + ", regdate=" + regdate + ", usage="
-				+ usage + ", popupCode=" + popupCode + ", startDay=" + startDay + ", endDay=" + endDay + ", contentadd="
-				+ contentadd + "]";
+				+ usage + ", popupCode=" + popupCode + ", startDay=" + startDay + ", endDay=" + endDay + "]";
 	}
 	
 }

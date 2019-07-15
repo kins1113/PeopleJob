@@ -121,12 +121,7 @@
 							 <![CDATA[regdate >= #{startDay} and regdate <to_date(#{endDay})+1]]>
 						</if>
 					</if>
-				<if test='authorityCk=="member"'>
 					and authority_code =1
-				</if>
-				<if test="authorityCk=='company'">
-					and authority_code in (2,3)
-				</if>
 				</where>
 				<if test="filterCode!=null and filterKey!=null">
 					<if test='filterKey=="Y"'>
@@ -185,12 +180,7 @@
 				<if test="startDay!=null and startDay !='' and endDay!=null and endDay != ''">
 					 <![CDATA[regdate >= #{startDay} and regdate <to_date(#{endDay})+1]]>
 				</if>
-			</if>
-			<if test='authorityCk=="member"'>
 				and authority_code =1
-			</if>
-			<if test="authorityCk=='company'">
-				and authority_code in (2,3)
 			</if>
 		</where>
 		
@@ -231,7 +221,7 @@
 			( 
 				select * from member m
 	            left join company c
-	            on m.COMPANY_CODE = c.COMPANY_CODE
+	            on m.COMPANY_CODE = c.BUSSINESS_NUMBER          
 	            where authority_code in (2,3)
 	 		) A
 		) 
@@ -246,5 +236,19 @@
 		<if test="authorityCode==3">2</if>
 		where member_code=#{memberCode}
 	</update>
+	
+	<select id="getTotalRecordCompanyManager" parameterType="map" resultType="int"> 
+				select count(*) from member m
+	            left join company c
+	            on m.COMPANY_CODE = c.BUSSINESS_NUMBER          
+	            where authority_code in (2,3)
+	</select>
+	<select id="selectAllCompanyManager" parameterType="map" resultType="map"> 
+				select * from member m
+	            left join company c
+	            on m.COMPANY_CODE = c.BUSSINESS_NUMBER          
+	            where authority_code in (2,3)
+	            order by authority_code
+	</select>
 	
 </mapper>

@@ -104,14 +104,14 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 	function doExcelDownloadProcess(ckAll){
 		if(ckAll=="all"){
 		//전체 회원 엑셀다운 처리
-			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileMember.do?all=all'/>");
+			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do?all=all'/>");
 	        $("form[name=memberList]").submit();
 		}else{
 		//지금 화면에 있는 회원만 엑셀 다운
 			if($("input[name=searchKeyword]")==''){
 				$("input[name=searchCondition]").val('');
 			}
-	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileMember.do'/>");
+	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do'/>");
 	        $("form[name=memberList]").submit();
 		}
 		
@@ -237,6 +237,11 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
 										<div class="control-indicator"></div>
 								</label></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">사업자 번호</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사명(로고)</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회사주소</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="member_Code">홈페이지</a></th>
+							
 							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원 코드</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
 							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
@@ -253,7 +258,7 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 					<tbody>
 					<!--  반복 시작  -->
 					<c:if test="${empty list }">
-						<td colspan="11" align="center">만족하는 사용자가 없습니다....</td>
+						<td colspan="16" align="center">만족하는 사용자가 없습니다....</td>
 					</c:if>
 					<c:if test="${!empty list }">
 						<c:forEach var="map" items="${list}">
@@ -267,6 +272,11 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 											<div class="control-indicator"></div>
 									</label>
 								</td>
+								<td>${map['COMPANYNO'] }</td>
+								<td>${map['COMPANYNAME'] }</td>
+								<td>${map['ADDRESS_1']} ${map['ADDRESSDETAIL_1']}</td>
+								<td>${map['SITE'] }</td>
+
 								<td>${map['MEMBER_CODE']}</td>
 								<td>${map['MEMBERID']}</td>
 								<td>${map['MEMBERNAME']}</td>

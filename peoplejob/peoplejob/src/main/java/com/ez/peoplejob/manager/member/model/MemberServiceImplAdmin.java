@@ -38,5 +38,15 @@ public class MemberServiceImplAdmin  implements MemberServiceAdmin{
 		return memberDaoAdmin.updateAuthorityManager(map);
 	}
 
+	@Override
+	public int getTotalRecordCompanyManager(Map<String, Object> map) {
+		return memberDaoAdmin.getTotalRecordCompanyManager(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllCompanyManager(Map<String, Object> map) {
+		return memberDaoAdmin.selectAllCompanyManager(map);
+	}
+
 	
 }
