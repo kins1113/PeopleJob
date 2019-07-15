@@ -176,4 +176,52 @@ public class ResumeDAOMybatis implements ResumeDAO {
 		int cnt=sqlsession.insert(namespace+"insertLocation2",vo);
 		return cnt;
 	}
+
+	@Override
+	public ResumeVO selectBybtype1(int btypeCode1) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBybtype1",btypeCode1);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectBybtype2(int btypeCode2) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBybtype2",btypeCode2);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectBybtype3(int btypeCode3) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBybtype3",btypeCode3);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectBylocation(int localCode) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBylocation",localCode);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectBylocation2(int localCode2) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBylocation2",localCode2);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectByfirst(int firstCode) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectByfirst",firstCode);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectBysecond(int secondCode) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBysecond",secondCode);
+		return vo;
+	}
+
+	@Override
+	public ResumeVO selectBythird(int thirdCode) {
+		ResumeVO vo=sqlsession.selectOne(namespace+"selectBythird",thirdCode);
+		return vo;
+	}
 }

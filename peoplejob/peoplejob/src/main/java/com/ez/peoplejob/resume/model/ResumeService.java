@@ -37,6 +37,14 @@ public interface ResumeService {
 	public ResumeVO selectByacademicCode(int academicCode);
 	public ResumeVO selectBydesiredWorkCode(int desiredWorkCode);
 	public ResumeVO selectBymemberCode(int memberCode);
+	public ResumeVO selectBybtype1(int btypeCode1);
+	public ResumeVO selectBybtype2(int btypeCode2);
+	public ResumeVO selectBybtype3(int btypeCode3);
+	public ResumeVO selectBylocation(int localCode);
+	public ResumeVO selectBylocation2(int localCode2);
+	public ResumeVO selectByfirst(int firstCode);
+	public ResumeVO selectBysecond(int secondCode);
+	public ResumeVO selectBythird(int thirdCode);
 	public List<ResumeVO>selectAllBtype();
 	
 	public int insertBtype1(ResumeVO vo);
