@@ -32,8 +32,6 @@ public class ResumeController {
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
 	public String register_get(ResumeVO vo,HttpSession session, Model model) {
-		List<ResumeVO> list=resumeService.selectAllBtype();
-		model.addAttribute("list", list);
 		String memberid=(String) session.getAttribute("memberid");
 		logger.info("이력서등록 화면 보여주기");
 		vo=resumeService.selectByMemverid(memberid);
@@ -44,21 +42,16 @@ public class ResumeController {
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
 	public String write_post(@ModelAttribute ResumeVO resumeVo,Model model) {
-		int cnt=1;
-		resumeVo=resumeService.selectBydesiredWorkCode(cnt);
-		resumeVo=resumeService.selectByacademicCode(cnt);
-		resumeVo=resumeService.selectBydvCode(cnt);
-		resumeVo=resumeService.selectBylanglicenceCode(cnt);
-		resumeVo=resumeService.selectBylicenceCode(cnt);
-		resumeVo=resumeService.selectBymemberCode(cnt);
 		
-		model.addAttribute("vo", resumeVo);
+		
 		
 		logger.info("이력서 등록화면 보여주기 매개변수 vo={}",resumeVo);
-		int result=resumeService.insertResume(resumeVo);
+		
+		int cnt=resumeService.insertResume(resumeVo);
+		
 		logger.info("이력서 등록 결과 cnt ={}",cnt);
 		String msg="",url="/resume/register.do";
-		if(result>0) {
+		if(cnt>0) {
 			msg="이력서 등록 성공";
 			url="/resume/list.do";
 		}else {
@@ -102,39 +95,78 @@ public class ResumeController {
 	
 	@RequestMapping("/detail.do")
 	public String detail(@RequestParam(defaultValue = "0") int resumeCode, 
-			ModelMap model) {
-		logger.info("글 상세보기, 파라미터 resumeCode={}", resumeCode);
-		
+			HttpSession session,Model model) {
+		logger.info("이력서 상세보기, 파라미터 resumeCode={}", resumeCode);
+		String id=(String)session.getAttribute("memberid");
 		if(resumeCode==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/resume/list.do");
 			
 			return "common/message";
 		}
-		
 		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
+		ResumeVO vo1=resumeService.selectByMemverid(id);
+		ResumeVO vo2=resumeService.selectBydesiredWorkCode(vo.getDesiredWorkCode());
+		ResumeVO vo3=resumeService.selectByacademicCode(vo.getAcademicCode());
+		ResumeVO vo4=resumeService.selectBydvCode(vo.getDvCode());
+		ResumeVO vo5=resumeService.selectBylanglicenceCode(vo.getLanglicenceCode());
+		ResumeVO vo6=resumeService.selectBylicenceCode(vo.getLicenceCode());
 		logger.info("상세보기 결과 vo={}", vo);
 		
 		model.addAttribute("vo", vo);
+		model.addAttribute("vo1", vo1);
+		model.addAttribute("vo2", vo2);
+		model.addAttribute("vo3", vo3);
+		model.addAttribute("vo4", vo4);
+		model.addAttribute("vo5", vo5);
+		model.addAttribute("vo6", vo6);
 		
 		return "resume/detail";
 	}
 	
 	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
-	public String edit_get(@RequestParam(defaultValue = "0") int resumeCode, 
+	public String edit_get(@RequestParam(defaultValue = "0") int resumeCode,HttpSession session,
 			ModelMap model) {
 		logger.info("수정화면, 파라미터 resumeCode={}", resumeCode);
-		
+		String id=(String)session.getAttribute("memberid");
 		if(resumeCode==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/resume/list.do");
 			return "common/message";
 		}
+		ResumeVO vo=resumeService.selectResumeByNo(resumeCode);
+		ResumeVO vo1=resumeService.selectByMemverid(id);
+		ResumeVO vo2=resumeService.selectBydesiredWorkCode(vo.getDesiredWorkCode());
+		ResumeVO vo3=resumeService.selectByacademicCode(vo.getAcademicCode());
+		ResumeVO vo4=resumeService.selectBydvCode(vo.getDvCode());
+		ResumeVO vo5=resumeService.selectBylanglicenceCode(vo.getLanglicenceCode());
+		ResumeVO vo6=resumeService.selectBylicenceCode(vo.getLicenceCode());
+		ResumeVO vo7=resumeService.selectBylocation(vo.getLocalCode());
+		ResumeVO vo8=resumeService.selectBylocation2(vo.getLocalCode2());
+		ResumeVO vo9=resumeService.selectBybtype1(vo.getBtypeCode1());
+		ResumeVO vo10=resumeService.selectBybtype2(vo.getBtypeCode2());
+		ResumeVO vo11=resumeService.selectBybtype3(vo.getBtypeCode3());
+		ResumeVO vo12=resumeService.selectByfirst(vo.getFirstCode());
+		ResumeVO vo13=resumeService.selectBysecond(vo.getSecondCode());
+		ResumeVO vo14=resumeService.selectBythird(vo.getThirdCode());
+		logger.info("수정화면 조회 결과, vo={}", vo);
 		
-		ResumeVO resumeVo=resumeService.selectResumeByNo(resumeCode);
-		logger.info("수정화면 조회 결과, vo={}", resumeVo);
+		model.addAttribute("vo", vo);
+		model.addAttribute("vo1", vo1);
+		model.addAttribute("vo2", vo2);
+		model.addAttribute("vo3", vo3);
+		model.addAttribute("vo4", vo4);
+		model.addAttribute("vo5", vo5);
+		model.addAttribute("vo6", vo6);
+		model.addAttribute("vo7", vo7);
+		model.addAttribute("vo8", vo8);
+		model.addAttribute("vo9", vo9);
+		model.addAttribute("vo10", vo10);
+		model.addAttribute("vo11", vo11);
+		model.addAttribute("vo12", vo12);
+		model.addAttribute("vo13", vo13);
+		model.addAttribute("vo14", vo14);
 		
-		model.addAttribute("vo", resumeVo);
 		return "resume/edit";
 	}
 	

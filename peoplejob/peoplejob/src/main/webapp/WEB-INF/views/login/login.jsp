@@ -10,6 +10,7 @@
 <style type="text/css">
 
 </style>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
 $(function() {
@@ -38,7 +39,7 @@ public JsonNode getAccessToken(String autorize_code) {
 
     postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 
-    postParams.add(new BasicNameValuePair("client_id", " dceec860a1bc965e16c45d03200ab183"));
+    postParams.add(new BasicNameValuePair("client_id", "2cf3b4aff785f5ac3fea03db7cc7efdd"));
 
     postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:9090/peoplejob/oauth"));
 
@@ -82,7 +83,7 @@ public JsonNode getAccessToken(String autorize_code) {
 
 
 </script>
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 
 <div class="container" style="min-height: 550px;padding:8px;">
     	<div class="row">
@@ -115,13 +116,13 @@ public JsonNode getAccessToken(String autorize_code) {
 										<c:if test="${!empty cookie.ck_memberid }">
 											checked="checked"
 										</c:if>>
-										<label for="saveId">아이디 저장</label>
+										<label for="saveId" style="font-weight: 600;font-size: 1.1em;color: #2b2525c4;">아이디 저장</label>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-register" value="로그인" style="    font-size: 1.2em;">
 											</div>
 										</div>
 									</div>
@@ -129,7 +130,7 @@ public JsonNode getAccessToken(String autorize_code) {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="<c:url value='/login/findId.do'/>" tabindex="5" class="forgot-password">ID/PW찾기</a>
+													<a href="<c:url value='/login/findId.do'/>" >ID</a>/<a href="<c:url value='/login/findPwd.do'/>">PW찾기</a>
 												</div>
 											</div>
 										</div>
@@ -138,7 +139,7 @@ public JsonNode getAccessToken(String autorize_code) {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="<c:url value='/login/registerU.do'/>" tabindex="5" class="forgot-password">회원가입</a>
+													<a href="<c:url value='/login/registerU.do'/>">회원가입</a>
 												</div>
 											</div>
 										</div>
@@ -156,7 +157,7 @@ public JsonNode getAccessToken(String autorize_code) {
 									<script type='text/javascript'>
         //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('34a7df4396a5b761fba0670df9faaecf');
+        Kakao.init('1bcb7cf50cc23edaa4993201da8c52b7');
         // 카카오 로그인 버튼을 생성합니다.
         Kakao.Auth.createLoginButton({
             container: '#kakao-login-btn',
@@ -170,6 +171,19 @@ public JsonNode getAccessToken(String autorize_code) {
       //]]>
     </script>
 								</form>
+								
+								
+								<c:if test="${userId eq null}">
+        <a href="https://kauth.kakao.com/oauth/authorize
+            ?client_id=2cf3b4aff785f5ac3fea03db7cc7efdd
+            &redirect_uri=http://localhost:9090/peoplejob/login
+            &response_type=code"> kaokaoLogin
+        </a>
+    </c:if>
+    <c:if test="${userId ne null}">
+        <h1>로그인 성공입니다</h1>
+    </c:if>
+    
 								
 							</div>
 						</div>

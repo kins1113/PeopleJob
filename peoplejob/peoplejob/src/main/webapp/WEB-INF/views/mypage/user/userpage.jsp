@@ -53,6 +53,16 @@ span.sname {
     font-size: 1.3em;
     font-family: monospace;
 }
+
+ul.p-t-35 {
+    padding-top: 10px;
+    margin-left: -25px;
+}
+
+
+li.how-bor3.p-rl-4 {
+    font-size: 1.1em;
+}
 </style>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
@@ -110,7 +120,7 @@ function company(){
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
                            <c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-                            <span class="doing"><em> 0 </em> /10</span>
+                            <span class="doing"><em> ${fn:length(list)}  </em> </span>
                             <span class="sname">결제내역</span>
                             </c:if>
                              <c:if test="${sessionScope.author_code==1 }">
@@ -127,7 +137,7 @@ function company(){
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
                             <span class="doing"><em> 0</em></span>
-                            <span class="sname">스크랩</span>
+                            <span class="sname">채용공고</span>
                            </div>
                         </a>
                     </li>
@@ -240,7 +250,7 @@ function company(){
 									</a>
 									</c:if>
 									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="<c:url value='/mypage/corp/paymentDetail.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										결제 내역
 									</a>
 									</c:if>
@@ -252,7 +262,7 @@ function company(){
 										내 정보 관리
 									</a>
 									</c:if>
-									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" > <!-- 나중에 3으로 바꿀것, 바꾼 후 2이면 못들어가게 막기 -->
+									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" >
 									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="company()">
 										기업정보 관리
 									</a>

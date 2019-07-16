@@ -49,6 +49,12 @@ $(function() {
 							<div class="col-lg-12">
 								<form id="login-form" action="<c:url value='/login/findPwd.do'/>" method="post" role="form" style="display: block;">
 									<div class="form-group">
+										<span>비밀번호 찾기를 누르면 임시 비밀번호가 해당 이메일로 발송됩니다.</span>
+									</div>
+									<div class="form-group">
+										<span>발급받은 임시 비밀번호로 로그인 후 비밀번호를 변경해주세요.</span>
+									</div>
+									<div class="form-group">
 										<input type="text" name="membername" id="이름" tabindex="1" class="form-control" placeholder="이름">
 									</div>
 									<div class="form-group">

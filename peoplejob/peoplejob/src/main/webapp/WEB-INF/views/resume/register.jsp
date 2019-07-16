@@ -30,15 +30,7 @@
     <!-- hidden필드에 no 넣기 -->
     
     <input type="hidden" name="memberCode" value="${vo.memberCode }">
-    <input type="hidden" name="thirdCode" value="${vo.thirdCode }">
-    <input type="hidden" name="secondCode" value="${vo.secondCode }">
-    <input type="hidden" name="firstCode" value="${vo.firstCode }">
-    <input type="hidden" name="localCode" value="${vo.localCode }">
-    <input type="hidden" name="academicCode" value="${vo.academicCode }">
-    <input type="hidden" name="langlicenceCode" value="${vo.langlicenceCode }">
-    <input type="hidden" name="lNo" value="${vo.lNo }">
-    <input type="hidden" name="dvCode" value="${vo.dvCode }">
-    <input type="hidden" name="resumeCode" value="${vo.resumeCode }">
+    
         
 		
     <div>
@@ -95,26 +87,35 @@
         <label for="education">학력사항</label>&nbsp;
        
        <label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="초등학교 졸업"> 초등학교 졸업
+  		<input type="radio" name="graduatetype" id="graduatetype" value="학력무관"> 학력무관
+		</label>
+		
+       <label class="radio-inline">
+  		<input type="radio" name="graduatetype" id="graduatetype" value="초등학교졸업"> 초등학교 졸업
 		</label>
 		
 		<label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="중학교 졸업"> 중학교 졸업
+  		<input type="radio" name="graduatetype" id="graduatetype" value="중학교졸업"> 중학교 졸업
 		</label>
 		<label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="고등학교 졸업"> 고등학교 졸업
+  		<input type="radio" name="graduatetype" id="graduatetype" value="고등학교졸업"> 고등학교 졸업
 		</label>
 		<label class="radio-inline">
-  		<input type="radio" name="graduatetype" id="graduatetype" value="대학교 졸업"> 대학교 졸업
+  		<input type="radio" name="graduatetype" id="graduatetype" value="대학졸업 (2,3년)"> 대학졸업 (2,3년)
+		</label>
+		<label class="radio-inline">
+  		<input type="radio" name="graduatetype" id="graduatetype" value="대학교졸업 (4년)"> 대학교졸업 (4년)
+		</label>
+		<label class="radio-inline">
+  		<input type="radio" name="graduatetype" id="graduatetype" value="석사졸업이상"> 석사졸업이상
 		</label>
 		<hr>
 	</div>
 		
 		<div>
-		 <label for="element">학교명</label>&nbsp;
+		 <label for="schoolname">학교명</label>&nbsp;
 			    
-        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="schoolname" 
-        	class="width_80">
+        <input type="text"  class="form-control" placeholder="학교명을 입력"  name="schoolname" id="schoolname">
         </div>
         <div>
 		 <label for="schoollocal">지역</label>&nbsp;
@@ -136,13 +137,7 @@
         	<option value="충남">충남</option>
         	<option value="제주">제주</option>
         	<option value="세종">세종</option>
-        	<option value="아시아,중동">아시아,중동</option>
-        	<option value="북,중미">북,중미</option>
-        	<option value="남미">남미</option>
-        	<option value="유럽">유럽</option>
-        	<option value="오세아니아">오세아니아</option>
-        	<option value="아프리카">아프리카</option>
-        	<option value="남극대륙">남극대륙</option>
+        	
         </select>   
        </div>
        <div>
@@ -271,13 +266,13 @@
     	<select class="form-control" name="hopeworkform" id="hopeworkform" >
         	<option value="근무형태 선택">근무형태 선택</option>
         	<option value="정규직">정규직</option>
-        	<option value="교육생">교육생</option>
+        	<option value="교육생 (정규직 전환가능)">교육생</option>
         	<option value="별정직">별정직</option>
         	<option value="파트">파트</option>
         	<option value="전임">전임</option>
-        	<option value="계약직">계약직</option>
+        	<option value="계약직 (정규직 전환가능)">계약직</option>
         	<option value="병역특례">병역특례</option>
-        	<option value="인턴직">인턴직</option>
+        	<option value="인턴직 (정규직 전환가능)">인턴직</option>
         	<option value="아르바이트">아르바이트</option>
         	<option value="파견직">파견직</option>
         	<option value="해외취업">해외취업</option>
@@ -326,19 +321,19 @@
         </div>
         
         <div>
-        <label for="jobtype">업종1차</label>
+        <label for="btypename1">업종1차</label>
         
-        <input type="text" class="form-control"  name="btypename1" id="btypename1" value="${list.btypename1 }"  style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename1" id="btypename1"   style="ime-mode:active">
         </div>
         <div>
-        <label for="jobtype">업종2차</label>
+        <label for="btypename2">업종2차</label>
         
-        <input type="text" class="form-control"  name="btypename2" id="btypename2" value="${list.btypename2 }"  style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename2" id="btypename2"   style="ime-mode:active">
         </div>
         <div>
-        <label for="jobtype">업종3차</label>
+        <label for="btypename3">업종3차</label>
         
-        <input type="text" class="form-control"  name="btypename3" id="btypename3" value="${list.btypename3 }"  style="ime-mode:active">
+        <input type="text" class="form-control"  name="btypename3" id="btypename3"  style="ime-mode:active">
         </div>
         <div>
         <label for="firstname">직종1차</label>

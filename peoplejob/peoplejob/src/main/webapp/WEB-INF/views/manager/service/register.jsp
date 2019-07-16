@@ -5,20 +5,20 @@
           <div class="content-wrapper">
 	<div class="content">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-lg-6">
 				<div class="card card-default">
 					<div class="card-header card-header-border-bottom">
 					<form name="serviceRegister" method="post"
-						action="<c:url value='#'/>" >
+						action="<c:url value='/service/register.do'/>" >
 							<div class="form-group">
 								<label for="serviceName">서비스명</label>
-					<input type="text" class="form-control" id="" name=""/>
-					<label for="srvicePrice">가격</label>
-					<input type="text" class="form-control"/>
-					<label for="srvicePrice">서비스내용</label>
-					<textarea  class="form-control" id="" name="" rows="10" cols="30"></textarea>
-					<label for="srvicePrice">서비스일</label>
-					<input type="text" class="form-control" id="" name=""/>
+					<input type="text" class="form-control" id="serviceName" name="serviceName"/>
+					<label for="servicePrice">가격</label>
+					<input type="text" class="form-control" id="servicePrice" name="servicePrice"/>
+					<label for="serviceContent">서비스내용</label>
+					<textarea  class="form-control" id="serviceContent" name="serviceContent" rows="10" cols="30"></textarea>
+					<label for="serviceDay">서비스일</label>
+					<input type="text" class="form-control" id="serviceDay" name="serviceDay" />
 				
 						<br>
 								<button type="submit" class="btn btn-primary btn-default">등록하기</button>
@@ -29,12 +29,12 @@
           </div>
           </div>
           
-  <form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
-	<div class="col-lg-9">
+	<div class="col-lg-6">
 		<div class="card card-default">
 			<div class="card-header card-header-border-bottom">
-				<h2>기업 회원 관리</h2>
-			</div>
+  <form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
+				<h2>상품 관리</h2>
+			
 <!-- 페이지 처리를 위한 hidden  -->
 <input type="hidden" name="currentPage"
 	<c:if test="${param.currentPage!=null }">
@@ -46,22 +46,6 @@
  >
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
-				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button" class="btn btn-secondary btn-default" id="boardAdd" value="등록"> 
-					<!-- <input type="button"class="btn btn-secondary btn-default" id="checkEdit"value="아직 기능 미정"> 
-					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택한 것 삭제"> -->
-				</div>
-				<div class="form-group serDiv">
-					<input type="submit" class="btn btn-secondary btn-default" id="postSearch"value="검색">&nbsp;
-				</div>
-				<div class="form-group serDiv">
-					<input type="text" class="form-control" placeholder="검색어"
-						name="searchKeyword" value="${param.searchKeyword }">
-				</div>
-			
-				<div class="form-group serDiv">
-					<c:import url="/inc/searchDate.do"></c:import>					
-				</div>
 				<div class="form-group" id='pageSize'>
 					<select class="custom-select my-1 mr-sm-2" name="recordCountPerPage">
 						<option value="10"
@@ -97,25 +81,30 @@
 									<input type="checkbox" name="postCheckAll" id="postCkAll" />
 									<div class="control-indicator"></div>
 							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="TYPE">회원 코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardregdate2">생년월일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardhits">성별</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">이메일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">전화번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">권한 번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">회사명</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">사업자 번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">채용공고</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">비고</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="serviceCode">서비스 코드</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="serviceName">서비스명</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="servicePrice">가격</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="serviceContent">서비스 내용</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="serviceDay">서비스일</a></th>
+			
 						</tr>
 					</thead>
 					<tbody>
 					<!--  반복 시작  -->
 							<tr>
-							
+							<c:if test="${empty list}">
+								<td colspan="6" class="align_center">상품이 존재하지 않습니다.</td>
+							</c:if>
+							<c:if test="${!empty list }">
+								<c:set var="idx" value="0"/>
+								<c:forEach var="vo" items="${list}">
+									<tr>
+									<td>
+									<input type="checkbox" name="serviceChk" value="${vo.ServiceCode }">
+									</td>
+									</tr>
+								</c:forEach>
+							</c:if>
 							</tr>
 					<!-- 반복 끝 -->
 					</tbody>
@@ -150,11 +139,12 @@
 					</c:if>
 				</div>
 				<div class="divSearch"></div>
+				</div>
+			</form>
 			</div>
 		</div>
 		
 		</div>
-		</form>
 
           
           
