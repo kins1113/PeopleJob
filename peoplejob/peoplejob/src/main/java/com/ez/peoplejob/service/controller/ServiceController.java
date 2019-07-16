@@ -1,7 +1,6 @@
 package com.ez.peoplejob.service.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.service.model.ServiceService;
 import com.ez.peoplejob.service.model.ServiceVO;
 
@@ -51,17 +49,18 @@ public class ServiceController {
 		return "common/message";
 	}
 	
-	  @RequestMapping("/service/register.do")
-	  public String list(@ModelAttribute Model model) {
+	  @RequestMapping("/manager/service/list.do")
+	  public String list(Model model) {
 		  //1
+		 
 		  	
 		  //2
-		/* List<Map<String, Object>> list=serviceService.selectAll(); */
-		/* logger.info("공지 글 목록 결과, list.size={}",list.size()); */
+		 List<ServiceVO> list=serviceService.selectAll();
+		 logger.info("서비스 목록 결과, list.size={}",list.size()); 
 			
 			//3
-		/* model.addAttribute("list", list); */
-			return "manager/service/register.do";
+		 model.addAttribute("list", list); 
+			return "manager/service/list";
 	  }
 	 
 }

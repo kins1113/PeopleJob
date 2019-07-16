@@ -106,9 +106,9 @@
 					<!-- sidebar menu -->
 					<ul class="nav sidebar-inner" id="sidebar-menu">
 
+<!-- class="active"  active expand --> 
 
-
-						<li class="has-sub active expand"><a
+						<li class="has-sub "><a
 							class="sidenav-item-link" href="javascript:void(0)"
 							data-toggle="collapse" data-target="#dashboard"
 							aria-expanded="false" aria-controls="dashboard"> <i
@@ -121,7 +121,7 @@
 									<!-- <li class="active"><a class="sidenav-item-link"
 										href="#"> <span class="nav-text">통합 관리</span>
 									</a></li> -->
-									<li class="active"><a class="sidenav-item-link"
+									<li><a class="sidenav-item-link"
 										href="${pageContext.request.contextPath}/manager/member/memberList.do?authorityCk=member"> <span class="nav-text">일반 회원</span>
 									</a></li>
 									<li><a class="sidenav-item-link" href="${pageContext.request.contextPath}/manager/member/memberList.do?authorityCk=company">
@@ -140,20 +140,19 @@
 						</a>
 							<ul class="collapse" id="ui-elements" data-parent="#sidebar-menu">
 								<div class="sub-menu">
-									<li class="has-sub"><a class="sidenav-item-link"
-										href="#" data-toggle="collapse"
-										data-target="#components" aria-expanded="false"
-										aria-controls="components"> <span class="nav-text">이력서
-												관리</span> 
+									
+									<li>
+									<a class="sidenav-item-link" href="${pageContext.request.contextPath }/manager/resume/resumeList.do">
+										<span class="nav-text">이력서 관리</span>
 									</a>
-										</li>
-
-									<li class="has-sub"><a class="sidenav-item-link"
-										href="#" data-toggle="collapse"
-										data-target="#icons" aria-expanded="false"
-										aria-controls="icons"> <span class="nav-text">채용공고
-												관리</span> <b class="caret"></b>
+									</li>
+									<li>
+									<a class="sidenav-item-link" href="${pageContext.request.contextPath }/manager/jobopening/jobopeningList.do">
+										<span class="nav-text">채용공고 관리</span>
 									</a>
+									</li>
+									
+							
 						<!-- 			<ul class="collapse" id="icons">
 											<div class="sub-menu">
 
@@ -172,7 +171,7 @@
 									</a>
 										<ul class="collapse" id="forms">
 											<div class="sub-menu">
-												<li><a href="basic-input.html">상품 조회</a></li>
+												<li><a href="${pageContext.request.contextPath}/manager/service/list.do">상품 조회</a></li>
 												<li><a href="${pageContext.request.contextPath}/manager/service/register.do">상품 등록</a></li>
 											</div>
 										</ul></li>

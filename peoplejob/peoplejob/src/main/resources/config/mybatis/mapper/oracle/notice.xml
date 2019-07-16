@@ -63,10 +63,7 @@
 		where notify_Code=#{notifyCode}
 	</delete>
 	
-	<select id="">
-	
-	
-	</select>
+
 </mapper>
 
 
