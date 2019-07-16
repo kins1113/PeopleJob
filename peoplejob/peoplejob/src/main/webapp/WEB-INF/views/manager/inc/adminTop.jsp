@@ -63,7 +63,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 <script	src="${pageContext.request.contextPath}/resources/admin/assets/plugins/nprogress/nprogress.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery-3.4.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery-3.4.1.js"></script>
 </head>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script> --%>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

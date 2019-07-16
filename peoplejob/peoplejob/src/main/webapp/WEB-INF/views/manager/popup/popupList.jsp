@@ -21,154 +21,140 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 </style>
 <script type="text/javascript">
 	$(function(){
-		// form 태그가 있는 경우
-		// form 태그가 html에 있는경우(여기서는 create_form이라는 id로 세팅된 form 태그) 
-		// FormData 생성자 함수에 인자로 넘겨서 input 태그에 있는 데이터들을 따로 세팅하지 않아도 사용할 수 있다.
-		var createForm = document.getElementById("#popupAdd");
-		var formData = new FormData();
-        
-		$("#btpop").click(function(){
-			event.preventDefault();
-	
+		//사용중 누르면 미사용 , 미사용 누르면 사용 ajax이용하기
+		//url = <c:url value='/manager/popup/updateUsage.do?usage=N'/>
+		$(".updateUsage").click(function(){
+			var usageCk=$(this).html();
+			var popupCode=$(this).parent().next().html();
+			var thisObj=$(this);
 			$.ajax({
+				url:"<c:url value='/manager/popup/updateUsage.do'/>",
 				type:"post",
-				enctype: 'multipart/form-data', 
-				url:"<c:url value='/manager/popup/popupAdd.do'/>",
-				data:
-					//$("#popupAdd").serializeArray()
-				    {formData:formData,popupName:$("input[name=popupName]").val(),
-					usage:$("input[name=usage]").val(),
-					width:$("input[name=width]").val(),
-					height:$("input[name=height]").val(),
-					left:$("input[name=left]").val(),
-					top:$("input[name=top]").val(),
-					startDay:$("input[name=startDay]").val(),
-					endDay:$("input[name=endDay]").val(),
-					}	
-				,dataType:"json",
-			    contentType: false,
-			    processData: false,
-			    cache: false,
+				data:"usageCk="+usageCk+"&popupCode="+popupCode,
+				success:function(res){
+					if(res>0){
+						if(usageCk=="미사용"){
+							thisObj.html("사용중");
+						}else{
+							thisObj.html("미사용");
+						}
+					}
+				},
+				error:function(xhr, status, error){
+					alert(status+" : "+error)
+				}
+			})
+		});
+		
+		//출력 미출력 버튼 누르면 체크된것들 변경
+		$("input[name=usageMultChenge]").click(function(){
+			//체크 안되면 안되도록 유효성 검사 
+			var check=false;
+			
+			$("input[name=popupCk]").each(function(){
+				if($(this).is(":checked")==true){
+					check=true;
+				}
+			});
+			if(!check){
+				alert("하나라도 체크 해야합니다...");
+				event.preventDefault();
+				return;
+			}
+
+			//넘겨줄 값을 변수에 저장하기
+			var usageCk=new Array();
+			var popupCode=new Array();
+			var count=0;
+			
+			$("input[name=popupCk]").each(function(){
+					if($(this).is(":checked")==true){
+						//alert($(this).parent().parent().next().find("a").html()+"    "+$(this).parent().parent().next().next().html()+"   "+count);
+						usageCk[count]=$(this).parent().parent().next().find("a").html();
+						popupCode[count]=$(this).parent().parent().next().next().html();
+						count= count+1;
+					}
+					
+				}); 			
+			
+			$.ajax({
+				url:"<c:url value='/manager/popup/multUpdateUsage.do'/>",
+				type:"post",
+				data:{usageCk:usageCk,
+					popupCode:popupCode},
 				success:function(res){
 					alert(res);
 				},
-				error:function(xhr,status, error){
-					alert(status+" : "+error);
+				error:function(xhr, status, error){
+					alert(status +" ; "+error);
 				}
-				
-			});//ajax
-			$("#popupAdd").submit();
-		});
+			});
+		});//click
+	
 		
+		
+		
+		
+		// form 태그가 있는 경우
+		// form 태그가 html에 있는경우(여기서는 create_form이라는 id로 세팅된 form 태그) 
+		// FormData 생성자 함수에 인자로 넘겨서 input 태그에 있는 데이터들을 따로 세팅하지 않아도 사용할 수 있다.
+        
+		$("#btpop").click(function(){
+			event.preventDefault();
+		
+			 var form = $('#popupAdd').serialize();
+             var formData = new FormData();
+             formData.append("fileObj", $("#popupImg")[0].files[0]);
+             
+          /*    var formData = $("#popupImg").serialize(); */
+			alert(formData);
+          	
+				$.ajax({
+					url:"<c:url value='/manager/popup/popupAdd.do'/>",
+					type:"post",
+					enctype: 'multipart/form-data', 
+					data:formData
+						//$("#popupAdd").serializeArray()
+					   /*  {formData:formData,
+						popupName:$("input[name=popupName]").val(),
+						usage:$("input[name=usage]").val(),
+						width:$("input[name=width]").val(),
+						height:$("input[name=height]").val(),
+						left:$("input[name=left]").val(),
+						top:$("input[name=top]").val(),
+						startDay:$("input[name=startDay]").val(),
+						endDay:$("input[name=endDay]").val(),
+						}	 */
+					,dataType:"json",
+				    contentType: false,
+				    processData: false,
+				    cache: false,
+					success:function(res){
+						alert("성공?")
+						alert(res);
+					},
+					error:function(xhr,status, error){
+						alert(status+" : "+error);
+					}
+					
+				});//ajax
+
+		});
+	
 			
+		//체크박스 전체 선택 처리
+		$("#popupCkAll").click(function(){
+			$("input[name=popupCk]").prop("checked",this.checked);
+		});
 	});
-
+	
+	
 </script>
-  
-<form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
-<!-- 필터링을 위한 hidden -->
-<input type="hidden" name="filterCode" value="${param.filterCode }">
-<input type="hidden" name="filterKey" value="${param.filterKey}">
 
-<!-- 삭제 수정 처리를 위한 hidden -->
-<input type="hidden" name="deletecheck" value="N">
-<input type="hidden" name="boardCode2" value="0">
-<div class="row">
-	<div class="col-lg-12">
-		<div class="card card-default">
-			<div class="card-header card-header-border-bottom">
-				<h2>팝업 관리</h2>
-			</div>
-			<!-- 해더 부분 버튼 그룹 시작  -->
-			<div>
-				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button"class="btn btn-secondary btn-default" id="btUsageY" value="출력"> 
-					<input type="button"class="btn btn-secondary btn-default" id="btUsageN" value="미출력"> 
-					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택삭제">
-					<input type="button" class="btn btn-secondary btn-default" id="popUpAdd" value="팝업등록"
-										data-target="#layerpop" data-toggle="modal"> 
-				</div>
-				<div class="form-group serDiv">
-					<select class="custom-select my-1 mr-sm-2" name="searchCondition">
-						<option value="">선택</option>
-						<option value="boardTitle,boardcontent"
-							<c:if test="${param.searchCondition=='boardTitle,boardcontent' }">
-							selected="selected"
-							</c:if>>아이디
-						</option>
-						<option value="memberid"
-							<c:if test="${param.searchCondition=='memberid' }">
-							selected="selected"
-							</c:if>>이름
-						</option>
-						<option value="type"
-							<c:if test="${param.searchCondition=='type' }">
-							selected="selected"
-						</c:if>>주소
-						</option>
-						<option value="boardname"
-							<c:if test="${param.key=='boardname' }">
-							selected="selected"
-						</c:if>>날짜
-						</option>
-					</select>
-				</div>
-			</div>
-			<!-- 해더 부분 버튼 그룹 끝 -->
-			<div class="card-body" id="cardBoduPostList">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th><label class="control control-checkbox checkbox-primary">
-									<input type="checkbox" name="postCheckAll" id="postCkAll" />
-									<div class="control-indicator"></div>
-							</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="TYPE">팝업 코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">관리자 아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">출력날짜</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">이미지</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardregdate2">가로사이즈</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="boardhits">세로사이즈</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">가로위치</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">세로위치</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">등록일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">사용여부</a></th>
-						</tr>
-					</thead>
-					<tbody>
-					<!--  반복 시작  -->
-						<c:forEach var="vo" items="${list }">
-							<tr>
-								<td>
-									<label class="control control-checkbox checkbox-primary">
-										<input type="checkbox" name="postCheckAll" id="postCkAll" />
-										<div class="control-indicator"></div>
-									</label>
-								</td>
-								<td>${vo.popupCode }</td>
-								<td>${sessionScope.adminid }</td>
-								<td>${vo.startDay } - ${vo.endDay }</td>
-								<td>${vo.popupName }</td>
-								<td>이미지</td>
-								<td>${vo.width }</td>
-								<td>${vo.height }</td>
-								<td>${vo.left }</td>
-								<td>${vo.top }</td>
-								<td>${vo.regdate }</td>
-								<td>${vo.usage }</td>
-							</tr>
-						</c:forEach>
-					<!-- 반복 끝 -->
-					</tbody>
-				</table>
-				<div class="divSearch"></div>
-			</div>
-		</div>
-</form>
 
 
 <!-- 모달을 띄우기 위한 div-->
+<form name="popUpAdd" id="popUpAdd" method="post" enctype="multipart/form-data">	<!--    -->
 <div class="modal fade" id="layerpop">
 	<div class="modal-dialog">
 		
@@ -240,9 +226,9 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 									<tr>
 										<th scope="col">내용</th>
 										<td>
-										<form name="popUpAdd" id="popUpAdd" method="post" enctype="multipart/form-data">	<!--    -->
-											<input type="file"  name="popupImg">
-										</form>
+									
+											<input type="file"  id="popupImg" name="popupImg">
+										
 											</td>
 									</tr>
 								</tbody>
@@ -259,6 +245,99 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 			</div>
 	</div>
 </div>
+</form>
+
+
+
+  
+<form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
+<!-- 필터링을 위한 hidden -->
+<input type="hidden" name="filterCode" value="${param.filterCode }">
+<input type="hidden" name="filterKey" value="${param.filterKey}">
+
+<!-- 삭제 수정 처리를 위한 hidden -->
+<input type="hidden" name="deletecheck" value="N">
+<input type="hidden" name="boardCode2" value="0">
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-default">
+			<div class="card-header card-header-border-bottom">
+				<h2>팝업 관리</h2>
+			</div>
+			<!-- 해더 부분 버튼 그룹 시작  -->
+			<div>
+				<div align="right" class="form-group serDiv" id="btGroup">
+					<input type="button"class="btn btn-secondary btn-default" name="usageMultChenge" id="btUsageY" value="출력"> 
+					<input type="button"class="btn btn-secondary btn-default" name="usageMultChenge" id="btUsageN" value="미출력"> 
+					<input type="button" class="btn btn-secondary btn-default" id="checkDelete"value="선택삭제">
+					<input type="button" class="btn btn-secondary btn-default" id="popUpAdd" value="팝업등록"
+										data-target="#layerpop" data-toggle="modal"> 
+				</div>
+			</div>
+			<!-- 해더 부분 버튼 그룹 끝 -->
+			<div class="card-body" id="cardBoduPostList">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th><label class="control control-checkbox checkbox-primary">
+									<input type="checkbox" name="popupCkAll" id="popupCkAll" />
+									<div class="control-indicator"></div>
+							</label></th>
+							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">사용여부</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="TYPE">팝업 코드</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">관리자 아이디</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">출력날짜</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="memberid">이름</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="boardtitle">이미지</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="boardregdate2">가로사이즈</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="boardhits">세로사이즈</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">가로위치</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">세로위치</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="deletecheck">등록일</a></th>
+						</tr>
+					</thead>
+					<tbody>
+					<!--  반복 시작  -->
+						<c:forEach var="vo" items="${list }">
+							<tr>
+								<td>
+									<label class="control control-checkbox checkbox-primary">
+										<input type="checkbox" name="popupCk" id="popupCk" />
+										<div class="control-indicator"></div>
+									</label>
+								</td>
+								<td>
+									<c:if test='${vo.usage=="N" }'>
+										<a href="#" class="updateUsage">미사용</a>
+									</c:if>
+									<c:if test='${vo.usage=="Y" }'>
+										<a href="#" class="updateUsage">사용중</a>
+									</c:if>
+								</td>
+								<td>${vo.popupCode }</td>
+								<td>${sessionScope.adminid }</td>
+								<td>${vo.startDay } - ${vo.endDay }</td>
+								<td>${vo.popupName }</td>
+								<td>이미지</td>
+								<td>${vo.width }</td>
+								<td>${vo.height }</td>
+								<td>${vo.left }</td>
+								<td>${vo.top }</td>
+								<td>
+									<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/> 
+								</td>
+								
+							</tr>
+						</c:forEach>
+					<!-- 반복 끝 -->
+					</tbody>
+				</table>
+				<div class="divSearch"></div>
+			</div>
+		</div>
+</form>
+
+
 
 		
 		

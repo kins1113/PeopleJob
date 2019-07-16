@@ -18,6 +18,13 @@
 		select * from popup order by end_day
 	</select>
 
+	<update id="updateUsage" parameterType="map" >
+		update popup
+		<if test="usageCk=='미사용'"> set usage= 'Y'</if>
+		<if test="usageCk=='사용중'"> set usage= 'N'</if>
+		where popup_code=#{popupCode}
+	</update>
+	
 </mapper>
 
 

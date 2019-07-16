@@ -1,6 +1,7 @@
 package com.ez.peoplejob.popup.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class PopupDAOMybatis implements PopupDAO{
 	public List<PopupVO> selectPopupAll() {
 		return sqlSession.selectList(namespace+"selectPopupAll");
 	}
+
+	@Override
+	public int updateUsage(Map<String, Object> map) {
+		return sqlSession.update(namespace+"updateUsage",map);
+	}
+	
 
 	
 }

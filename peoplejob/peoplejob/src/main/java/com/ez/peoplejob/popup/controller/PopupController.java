@@ -1,6 +1,8 @@
 package com.ez.peoplejob.popup.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ez.peoplejob.popup.model.PopupService;
@@ -49,5 +52,43 @@ public class PopupController {
 		int result=popupService.insertPopup(popupVo);
 		
 		return result;
+	}
+	
+	@RequestMapping("/updateUsage.do")
+	@ResponseBody
+	public int updateUsage(@RequestParam String usageCk, @RequestParam(defaultValue = "0") int popupCode) {
+		logger.info("popup사용중 변경 처리 ajax 파라미터 usageCk={},  popupCode={}",usageCk,popupCode);
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("usageCk",usageCk);
+		map.put("popupCode", popupCode);
+		
+		int count=popupService.updateUsage(map);
+		logger.info("사용여부 변경 결과 count ={}",count);
+		
+		int result=0;
+		if(count>0) {
+			result=PopupService.USAGE_USA;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping("/multUpdateUsage.do")
+	@ResponseBody
+	public int multUpdateUsage(@RequestParam String[] usageCk, @RequestParam int[] popupCode) {
+		logger.info("ajax popup사용중 mult변경 v파라미터 usageCk.length={}, popupCode.length={}",usageCk.length, popupCode.length);
+		for(int i=0;i<popupCode.length;i++) {
+			logger.info(popupCode[i]+" : "+usageCk[i]);
+		}
+		
+		
+		Map<String,Object>map=new HashMap<String, Object>();
+		map.put("usageCkArr", usageCk);
+		map.put("popupCodeArr", popupCode);
+		
+		
+		
+		return 1;
 	}
 }
