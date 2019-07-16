@@ -193,7 +193,7 @@
 								<button type="button" class="mb-1 btn btn-danger"
 									onclick="location.href='write.do' ">공지등록</button>
 								<button type="button" class="mb-1 btn btn-danger"
-									id="btDelMulti">선택한 상품 삭제</button>
+									id="btDelMulti">선택한 공지 삭제</button>
 
 							</div>
 						</form>
