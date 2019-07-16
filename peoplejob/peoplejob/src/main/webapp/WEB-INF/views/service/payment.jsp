@@ -18,13 +18,18 @@
 		  
 	  $('#pay').click(function(){
 		  
-		  if(${sessionScope.memberid==null}){
+		  if(${sessionScope.memberid==null}){ 
 			  alert('로그인을 해주세요');
 			  location.href="<c:url value='/login/login.do'/>";
-		  }else{
+		  }else{ //로그인을 했을 때 
 			  if(${sessionScope.author_code!=3}){
-			 	 alert('기업회원이 아닙니다.');
-			  }else{ //승인받은 기업회원 일 때
+				  if(${sessionScope.author_code==2}){
+				 	 alert('기업회원 승인을 받은 후 서비스 이용가능합니다.');
+					   
+				  }else if(${sessionScope.author_code==1}){
+				 	 alert('기업회원만 이용가능한 상품입니다.');
+				  }     
+			  }else if(${sessionScope.author_code==3 && fn:length(list)>=1}){ //승인받은 기업회원 일 때 
 				  var IMP = window.IMP; // 생략해도 괜찮습니다.
 				  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 				  
@@ -55,24 +60,29 @@
 					    }
 					    alert(msg);
 					});
+			  }else if(${sessionScope.author_code==3 && fn:length(list)<1}){   
+				  alert('등록된 채용공고가 없습니다. 채용공고를 먼저 등록해주세요');
+				  location.href="<c:url value='/company/jobopening_register.do'/>";  
 			  }
-		  }
+		  }//로그인해서 아이디 있을 때
 		  
 		 
 	  });//
   
-	  $('#pay2').click(function(){
-		  var IMP = window.IMP; // 생략해도 괜찮습니다.
-		  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+ $('#pay2').click(function(){
 		  
-
-		  if(${sessionScope.memberid==null}){
+		  if(${sessionScope.memberid==null}){ 
 			  alert('로그인을 해주세요');
 			  location.href="<c:url value='/login/login.do'/>";
-		  }else{
+		  }else{ //로그인을 했을 때 
 			  if(${sessionScope.author_code!=3}){
-			 	 alert('기업회원이 아닙니다.');
-			  }else{ //승인받은 기업회원 일 때
+				  if(${sessionScope.author_code==2}){
+				 	 alert('기업회원 승인을 받은 후 서비스 이용가능합니다.');
+					   
+				  }else if(${sessionScope.author_code==1}){
+				 	 alert('기업회원만 이용가능한 상품입니다.');
+				  }     
+			  }else if(${sessionScope.author_code==3 && fn:length(list)>=1}){ //승인받은 기업회원 일 때 
 				  var IMP = window.IMP; // 생략해도 괜찮습니다.
 				  IMP.init("imp49241177"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 				  
@@ -87,23 +97,30 @@
 					    buyer_tel : '${memberVo.tel}',
 					    buyer_addr : '${companyVo.companyAddress}',
 					    buyer_postcode : '${companyVo.companyZipcode}',
-					    m_redirect_url : '<c:url value="/service/importTest.do"/>'
+					    m_redirect_url : '<c:url value="/service/payment.do"/>' //모바일 결제 후 이동될 주소
 					}, function(rsp) {
 					    if ( rsp.success ) {
 					        var msg = '결제가 완료되었습니다.\n';
+					        msg+='결제일로부터 30일간 이용가능합니다.\n';
 					        msg += '고유ID : ' + rsp.imp_uid;
 					        msg += '상점 거래ID : ' + rsp.merchant_uid;
 					        msg += '결제 금액 : ' + rsp.paid_amount+'원';
 					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					        location.href="<c:url value='/service/success.do'/>";
 					    } else {
 					        var msg = '결제에 실패하였습니다.';
 					        msg += ' : ' + rsp.error_msg;
 					    }
 					    alert(msg);
 					});
+			  }else if(${sessionScope.author_code==3 && fn:length(list)<1}){   
+				  alert('등록된 채용공고가 없습니다. 채용공고를 먼저 등록해주세요');
+				  location.href="<c:url value='/company/jobopening_register.do'/>";  
 			  }
-		  }
-	  });
+		  }//로그인해서 아이디 있을 때
+		  
+		 
+	  });//
 	 
   
   });

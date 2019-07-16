@@ -1,82 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="../main/inc/top.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@include file="../main/inc/top.jsp"%>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/login.css'/>" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/resources/main/css/login.css'/>" />
 
 <style type="text/css">
-
-input[type=button]{
-	    height: 44px;
-    font-size: small;
+input[type=button] {
+	height: 44px;
+	font-size: small;
 }
 
-span{
-	color:red;
+span {
+	color: red;
 	margin-top: 12px;
+ 	margin-left: -60px; 
 }
-
 
 /*체크박스 디자인*/
 .checkbox.custom {
-  float: left;
-  margin: 0;
-  padding: 0;
-  display: block;
-  width: 100%;
-  margin-bottom: 20px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
 input[type="checkbox"].custom {
-  margin-left: 0;
-  padding: 0;
+	margin-left: 0;
+	padding: 0;
 }
 
 input[type=checkbox].css-checkbox {
-  position: relative; /* 원래 absolute */
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0px;
-  border: 0;
+	position: relative; /* 원래 absolute */
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0px;
+	border: 0;
 }
 
-input[type=checkbox].css-checkbox+label.css-label{
-  padding-left: 70px;
-  height: 65px;
-  display: inline-block;
-  line-height: 70px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  font-size: 15px;
-  vertical-align: middle;
-  cursor: pointer;
-  opacity: 1;
+input[type=checkbox].css-checkbox+label.css-label {
+	padding-left: 70px;
+	height: 65px;
+	display: inline-block;
+	line-height: 70px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 15px;
+	vertical-align: middle;
+	cursor: pointer;
+	opacity: 1;
 }
 
-
-input[type=checkbox].css-checkbox:checked+label.css-label{
-  background-position: 0 -66px;
+input[type=checkbox].css-checkbox:checked+label.css-label {
+	background-position: 0 -66px;
 }
 
 .css-label {
-  background-image: url(http://codeopus.net/file/blog/check1.png);
+	background-image: url(http://codeopus.net/file/blog/check1.png);
 }
 
 div#faq1 {
-    margin-left: -50px;
+	margin-left: -50px;
 }
 
 textarea {
-    margin-left: 14px;
-    border: 1px solid lightgray;
+	margin-left: 14px;
+	border: 1px solid lightgray;
 }
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -118,277 +120,393 @@ textarea {
 		}).open();
 	}
 </script>
-<script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
+<script type="text/javascript"
+	src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
 <script type="text/javascript">
-$(function() {
-	
-	$('form[name=registerC]').submit(function(){
-		
-		$('.form-control').each(function(){
-			if($(this).val().length<1){
-				var msg=$(this).attr('title');
-				alert(msg+'칸을 입력해주세요	.');
-				$(this).focus();
-				event.preventDefault();
-				return false;
-			}else if ($('#chkpwd').val() != 'Y') {
-				alert('비밀번호가 일치하지 않습니다.');
-				event.preventDefault();
-				$('#pwd2').focus();
-				return false;
-			} else if (!validate_phoneno($('#tel').val())) {
-				alert('휴대폰번호를 다시 입력해주세요');
-				$('#tel').focus();
-				event.preventDefault();
-				return false;
-			}
-			if($('#chkId').val()!='Y'){
-				alert('이메일 인증을 해주세요');
-				event.preventDefault();
-				$('#chkId').focus();
-				return false;
-			}
-			if($('input[type=checkbox]').is(":checked")==false){
-				alert('이용약관에 동의해주세요');
-				$('input[type=checkbox]').focus();
-				event.preventDefault();
-				return false;
-			} 
-		});
-		
-	});
-	
-	 $('#emailcertificate').click(function(){
-		var contextPath="/peoplejob";
-		var email=$('#email').val();
-		if(email==null || email==''){
-			alert('이메일을 입력해주세요!');
-			
-		}else{
-			window.open(contextPath+"/login/registeremail.do?email="+email,'emailcertificate',
-			'left=300, top=300, location=yes, width=500, height=300, resizable=no');
-			
-		}
-	}); 
-	
-	
-	//핸드폰 정규식
-	function validate_phoneno(ph){
-		var pattern=new RegExp(/^[0-9]*$/g);
-		return pattern.test(ph);
-	}
-	
-	//아이디 정규식
-	function validate_userid(userid) {
-		var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
-		return pattern.test(userid);
-	}
-	
-	//비밀번호 정규식
-	function validate_pwd(pwd) {
-		var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
-		return pattern.test(pwd);
-	}
-	
-	$('#memberid').keyup(function() {
-		if (validate_userid($('#memberid').val())&& $('#memberid').val().length >= 2) {
-			//정상일 때
+	$(function() {
 
-			$.ajax({
-				url : "<c:url value='/login/ajaxDupUserid.do'/>",
-				type : "get",
-				data : "memberid=" + $('#memberid').val(),
-				success : function(res) {
-					var str = "";
-					if (res) {
-						str = "사용가능한 아이디";
-						$('#chkmemberid').val('Y');
+		$('form[name=registerC]').submit(function() {
+
+			$('.form-control').each(function() {
+				if ($(this).val().length < 1) {
+					var msg = $(this).attr('title');
+					alert(msg + '칸을 입력해주세요	.');
+					$(this).focus();
+					event.preventDefault();
+					return false;
+				} else if ($('#chkpwd').val() != 'Y') {
+					alert('비밀번호가 일치하지 않습니다.');
+					event.preventDefault();
+					$('#pwd2').focus();
+					return false;
+				} else if (!validate_phoneno($('#tel').val())) {
+					alert('휴대폰번호를 다시 입력해주세요');
+					$('#tel').focus();
+					event.preventDefault();
+					return false;
+				}
+				if ($('#chkId').val() != 'Y') {
+					alert('이메일 인증을 해주세요');
+					event.preventDefault();
+					$('#chkId').focus();
+					return false;
+				}
+				if ($('input[type=checkbox]').is(":checked") == false) {
+					alert('이용약관에 동의해주세요');
+					$('input[type=checkbox]').focus();
+					event.preventDefault();
+					return false;
+				}
+			});
+
+		});
+
+		$('#emailcertificate')
+				.click(
+						function() {
+							var contextPath = "/peoplejob";
+							var email = $('#email').val();
+							if (email == null || email == '') {
+								alert('이메일을 입력해주세요!');
+
+							} else {
+								window
+										.open(
+												contextPath
+														+ "/login/registeremail.do?email="
+														+ email,
+												'emailcertificate',
+												'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+
+							}
+						});
+
+		//핸드폰 정규식
+		function validate_phoneno(ph) {
+			var pattern = new RegExp(/^[0-9]*$/g);
+			return pattern.test(ph);
+		}
+
+		//아이디 정규식
+		function validate_userid(userid) {
+			var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+			return pattern.test(userid);
+		}
+
+		//비밀번호 정규식
+		function validate_pwd(pwd) {
+			var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
+			return pattern.test(pwd);
+		}
+
+		$('#memberid').keyup(
+				function() {
+					if (validate_userid($('#memberid').val())
+							&& $('#memberid').val().length >= 2) {
+						//정상일 때
+
+						$.ajax({
+							url : "<c:url value='/login/ajaxDupUserid.do'/>",
+							type : "get",
+							data : "memberid=" + $('#memberid').val(),
+							success : function(res) {
+								var str = "";
+								if (res) {
+									str = "사용가능한 아이디";
+									$('#chkmemberid').val('Y');
+								} else {
+									str = "이미 등록된 아이디";
+									$('#chkmemberid').val('N');
+								}
+								$('.error').html(str);
+								$('.error').show();
+
+							},
+							error : function(xhr, status, error) {
+								alert(status + ":" + error);
+							}
+						});
+
+					} else if ($('#memberid').val() == '') {
+						$('.error').hide();
+						$('#chkmemberid').val('N');
 					} else {
-						str = "이미 등록된 아이디";
+						$('.error').html("아이디 규칙에 맞지 않습니다.");
+						$('.error').show();
 						$('#chkmemberid').val('N');
 					}
-					$('.error').html(str);
-					$('.error').show();
+				});
 
-				},
-				error : function(xhr, status, error) {
-					alert(status + ":" + error);
-				}
-			});
+		//비밀번호 일치여부 
+		$('#pwd2').keyup(
+				function() {
+					if (validate_pwd($('#pwd').val())
+							&& validate_pwd($('#pwd2').val())
+							&& $('#pwd').val().length >= 4
+							&& $('#pwd2').val().length >= 4) {
+						// pwd와 pwd2 모두 규칙에 만족할 때
 
-		} else {
-			$('.error').html("아이디 규칙에 맞지 않습니다.");
-			$('.error').show();
-			$('#chkmemberid').val('N');
-		}
-	});
-	
-	//비밀번호 일치하는지
-	$('#pwd2').keyup(function() {
-				if (validate_pwd($('#pwd2').val()) && $('#pwd2').val().length >= 4) {
-					//정상일 때
+						var pwd = $('#pwd').val();
+						var pwd2 = $('#pwd2').val();
 
-					var pwd=$('#pwd').val();
-					var pwd2=$('#pwd2').val(); 
-					$.ajax({
-						
-						url : "<c:url value='/login/ajaxchkPwd.do'/>",
-						type : "get",
-						data : {"pwd":pwd, "pwd2":pwd2},
-						success : function(res) {
-							var str = "";
-							if (res) {
-								str = "비밀번호 일치";
-								$('#chkpwd').val('Y');
-							} else {
-								str = "비밀번호 불일치";
-								$('#chkpwd').val('N');
+						$.ajax({
+
+							url : "<c:url value='/login/ajaxchkPwd.do'/>",
+							type : "get",
+							data : {
+								"pwd" : pwd,
+								"pwd2" : pwd2
+							},
+							success : function(res) {
+								var str = "";
+								if (res) { //bool=true
+									str = "비밀번호 일치";
+									$('#chkpwd').val('Y');
+								} else { //bool=false
+									str = "비밀번호 불일치";
+									$('#chkpwd').val('N');
+								}
+								$('.pwderror').html(str);
+								$('.pwderror').show();
+
+							},
+							error : function(xhr, status, error) {
+								alert(status + ":" + error);
 							}
-							$('.pwderror').html(str);
-							$('.pwderror').show();
+						});
 
-						},
-						error : function(xhr, status, error) {
-							alert(status + ":" + error);
-						}
-					});
+					} else if ($('#pwd2').val().length < 1) {
+						$('.pwderror').hide();
+						$('#chkpwd').val('N');
 
-				} else {
-					$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
-					$('.pwderror').show();
-					$('#chkpwd').val('N');
-				}
-			});
+					} else {
+						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+						$('.pwderror').show();
+						$('#chkpwd').val('N');
+					}
 
-	//이메일 인증용
-	$('#emailcertificate').click(function() {
-						var contextPath = "/peoplejob";
-						var email = $('#email').val();
-						if (email == null || email == '') {
-							alert('이메일을 입력해주세요!');
+					/* else if(!validate_pwd($('#pwd').val()) || !validate_pwd($('#pwd2').val()) || $('#pwd').val().length<4 || $('#pwd2').val().length<4){
+						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+						$('.pwderror').show();
+						$('#chkpwd').val('N');
+					} */
+				});
 
-						} else {
-							window.open(contextPath+ "/login/registeremail.do?email="+ email,'emailcertificate',
-											'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+		$('#pwd').keyup(function() {
+					if (validate_pwd($('#pwd').val())
+							&& validate_pwd($('#pwd2').val())
+							&& $('#pwd').val().length >= 4
+							&& $('#pwd2').val().length >= 4) {
+						// pwd와 pwd2 모두 규칙에 만족할 때
 
-						}
-					});
-});
+						var pwd = $('#pwd').val();
+						var pwd2 = $('#pwd2').val();
 
+						$.ajax({
+
+							url : "<c:url value='/login/ajaxchkPwd.do'/>",
+							type : "get",
+							data : {
+								"pwd" : pwd,
+								"pwd2" : pwd2
+							},
+							success : function(res) {
+								var str = "";
+								if (res) { //bool=true
+									str = "비밀번호 일치";
+									$('#chkpwd').val('Y');
+								} else { //bool=false
+									str = "비밀번호 불일치";
+									$('#chkpwd').val('N');
+								}
+								$('.pwderror').html(str);
+								$('.pwderror').show();
+
+							},
+							error : function(xhr, status, error) {
+								alert(status + ":" + error);
+							}
+						});
+
+					} else if($('#pwd').val().length<1){
+						$('.pwderror').hide();
+						$('.pwd1error').hide(); 
+						$('#chkpwd').val('N');
+						 
+					}else {
+						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
+						$('.pwderror').show();
+						$('#chkpwd').val('N');
+					}
+
+				});
+
+		//이메일 인증용
+		$('#emailcertificate')
+				.click(
+						function() {
+							var contextPath = "/peoplejob";
+							var email = $('#email').val();
+							if (email == null || email == '') {
+								alert('이메일을 입력해주세요!');
+
+							} else {
+								window
+										.open(
+												contextPath
+														+ "/login/registeremail.do?email="
+														+ email,
+												'emailcertificate',
+												'left=300, top=300, location=yes, width=500, height=300, resizable=no');
+
+							}
+						});
+	});
 </script>
+<div class="body" style="background-color: #f5f6f8;">
 <div class="container">
-    	<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="panel panel-login">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-xs-6">
-								<a href="<c:url value='/login/registerU.do'/>">개인회원</a>
-							</div>
-							<div class="col-xs-6">
-								<a href="<c:url value='/login/registerC.do'/>"  style="color: green; font-size:1.2em;">기업회원</a>
-							</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-login">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-6">
+							<a href="<c:url value='/login/registerU.do'/>">개인회원</a>
 						</div>
-						<hr>
+						<div class="col-xs-6">
+							<a href="<c:url value='/login/registerC.do'/>"
+								style="color: green; font-size: 1.2em;">기업회원</a>
+						</div>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-							
-								 <form id="" action="<c:url value='/login/registerC.do'/> " 
-								method="post" role="form" style="display: block;" name="registerC"  enctype="multipart/form-data">
-								
-									<input type="hidden" name="authorityCode" value=2>
-									<input type="hidden" name="zipcode">
-									<input type="hidden" name="address">
-									<input type="hidden" name="addressdetail">
-									<input type="hidden" name="membergender">
-									<input type="hidden" name="birth">
-									
-									<input type="hidden" name="companyZipcode">
-									<input type="hidden" name="companyAddress">
-									<input type="hidden" name="companyAddressdetail">
+					<hr>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-12">
 
-									<!-- 9개 추가 -->									
-									<input type="hidden" name="womannum">
-									<input type="hidden" name="mannum">
-									<input type="hidden" name="establishyear">
-									<input type="hidden" name="companytype">
-									<input type="hidden" name="site">
-									<input type="hidden" name="sales">
-									<input type="hidden" name="capital">
-									<input type="hidden" name="majorbusiness">
-									<input type="hidden" name="introduction">
+							<form id="" action="<c:url value='/login/registerC.do'/> "
+								method="post" role="form" style="display: block;"
+								name="registerC" enctype="multipart/form-data">
 
+								<input type="hidden" name="authorityCode" value=2> <input
+									type="hidden" name="zipcode"> <input type="hidden"
+									name="address"> <input type="hidden"
+									name="addressdetail"> <input type="hidden"
+									name="membergender"> <input type="hidden" name="birth">
 
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디" 
-										class="form-control" style="width:250px" title="아이디" >아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
+								<input type="hidden" name="companyZipcode"> <input
+									type="hidden" name="companyAddress"> <input
+									type="hidden" name="companyAddressdetail">
+
+								<!-- 9개 추가 -->
+								<input type="hidden" name="womannum"> <input
+									type="hidden" name="mannum"> <input type="hidden"
+									name="establishyear"> <input type="hidden"
+									name="companytype"> <input type="hidden" name="site">
+								<input type="hidden" name="sales"> <input type="hidden"
+									name="capital"> <input type="hidden"
+									name="majorbusiness"> <input type="hidden"
+									name="introduction">
+
+								<div class="form-group">
+									<div class="row" style="margin-left:5px; color:steelblue; font-size:1.1em;">
+										* 모든 항목을 입력해주세요.
 									</div>
-									
-									<div class="form-group">
+								</div>
+								
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="text" name="memberid" id="memberid" tabindex="1"
+										placeholder="아이디" class="form-control" style="width: 250px"
+										title="아이디">아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
+								</div>
+
+								<div class="form-group">
 									<div class="row">
 										<span class="error"></span>
 									</div>
 								</div>
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="password" name="pwd" id="pwd" tabindex="1" placeholder="비밀번호" 
-										class="form-control" style="width:250px" title="비밀번호">비밀번호는 4글자 이상, 영문자와 숫자로 만들어주세요.
+
+								<div class="form-group" style="float: left; margin-right:30px;" >
+										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
+										class="form-control infobox" style="width:250px" title="아이디" maxlength="10">2~10자의 영문자, 숫자와 특수기호(_)만 사용 가능합니다.
+										
 									</div>
-									
-										<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="password" name="pwd2" id="pwd2" tabindex="1" placeholder="비밀번호 확인" 
-										class="form-control" style="width:250px" title="비밀번호 확인">
-									</div>
+
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="password" name="pwd2" id="pwd2" tabindex="1"
+										placeholder="비밀번호 확인" class="form-control"
+										style="width: 250px" title="비밀번호 확인">
+								</div>
+								
+								
 									<div class="form-group">
 									<div class="row">
-										<input type="hidden" id="chkpwd" class="chkpwd" placeholder="비밀번호일치 확인용">
+										<span id="pwd1error" class="pwd1error" style="margin-top: 28px;margin-left:-20px;"></span>
 									</div>
 								</div>
-									<div class="form-group">
+								<div class="form-group">
+									<div class="row">
+										<input type="hidden" id="chkpwd" class="chkpwd"
+											placeholder="비밀번호일치 확인용">
+									</div>
+								</div>
+								<div class="form-group">
 									<div class="row">
 										<span id="pwderror" class="pwderror"></span>
 									</div>
 								</div>
-									
-									<div class="form-group">
-										<input type="text" name="membername" id="membername" tabindex="1" class="form-control" placeholder="담당자명" title="담당자명"  style="width: 300px">
-									</div>
-									
-									<div class="form-group">
-										<input type="text" name="tel" id="tel" tabindex="1" class="form-control" placeholder="담당자전화번호" title="담당자 전화번호"  style="width: 300px">
-									</div>
-									<div class="form-group">
-										<input type="text" name="companyname" id="companyname" tabindex="1" class="form-control" placeholder="기업명" style="width:300px" title="기업명">
-									</div>
-									<div class="form-group">
-										<input type="text" name="businessNumber" id="businessNumber" tabindex="1" class="form-control" placeholder="사업자등록번호" title="사업자 등록번호">
-									</div>
-									
-									<div class="form-group" style="float: left; margin-right:30px;" >
-										<input type="text" name="email" id="email" tabindex="1" placeholder="이메일" 
-										class="form-control" style="width:300px" style="background-color: #50a954" title="이메일">
-									</div>
-									<div class="form-group">
+								<div class="form-group">
+									<input type="text" name="membername" id="membername"
+										tabindex="1" class="form-control" placeholder="담당자명"
+										title="담당자명" style="width: 300px">
+								</div>
+
+								<div class="form-group">
+									<input type="text" name="tel" id="tel" tabindex="1"
+										class="form-control" placeholder="담당자전화번호" title="담당자 전화번호"
+										style="width: 300px">
+								</div>
+								<div class="form-group">
+									<input type="text" name="companyname" id="companyname"
+										tabindex="1" class="form-control" placeholder="기업명"
+										style="width: 300px" title="기업명">
+								</div>
+								<div class="form-group">
+									<input type="text" name="businessNumber" id="businessNumber"
+										tabindex="1" class="form-control" placeholder="사업자등록번호"
+										title="사업자 등록번호">
+								</div>
+
+								<div class="form-group" style="float: left; margin-right: 30px;">
+									<input type="text" name="email" id="email" tabindex="1"
+										placeholder="이메일" class="form-control" style="width: 300px"
+										style="background-color: #50a954" title="이메일">
+								</div>
+								<div class="form-group">
 									<div class="row">
-										<input type="button" value="이메일 인증" class="btn btn-register" id="emailcertificate">
-										</div>
+										<input type="button" value="이메일 인증" class="btn btn-register"
+											id="emailcertificate">
 									</div>
-									<div class="form-group">
-										<input type="text" name="chkId"  id="chkId" tabindex="1" 
-										class="form-control" placeholder="이메일 인증 확인용" style="width: 300px">
-									</div>
-									
-									
-									<div class="form-group">
-				          <h4 style="float:left;">이용약관 동의<input type="checkbox" name="chk" id="chk" style="float: right; margin-right: 300px; margin-left:10px;"></h4>
-						
-				        <ul id="faq-list" class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-				          <li>
-				            <!-- <a data-toggle="collapse" class="collapsed" href="#faq1">이용약관 보기▽ <i class="ion-android-remove"></i></a> -->
-				            <div id="faq1">
-				            <textarea rows="10" cols="65">
+								</div>
+								<div class="form-group">
+									<input type="text" name="chkId" id="chkId" tabindex="1"
+										class="form-control" placeholder="이메일 인증 확인용"
+										style="width: 300px">
+								</div>
+
+
+								<div class="form-group">
+									<h4 style="float: left;">
+										이용약관 동의<input type="checkbox" name="chk" id="chk"
+											style="float: right; margin-right: 300px; margin-left: 10px;">
+									</h4>
+
+									<ul id="faq-list" class="wow fadeInUp"
+										style="visibility: visible; animation-name: fadeInUp;">
+										<li>
+											<!-- <a data-toggle="collapse" class="collapsed" href="#faq1">이용약관 보기▽ <i class="ion-android-remove"></i></a> -->
+											<div id="faq1">
+												<textarea rows="10" cols="65">
 개인 회원 약관 (개정 및 적용 2019. 08. 01)
 제1조 (목적)
 본 약관은 ㈜PEOPLEJOB(이하 "회사")이 운영하는 웹사이트(이하 “사이트”)를 통해 인터넷 관련 서비스를 제공함에 있어, 회사가 제공하는 서비스와 관련하여, 이를 이용하는 가입자(이하 “회원” 또는 “개인회원”)의 이용조건 및 제반 절차, 기타 필요한 사항을 규정함을 목적으로 한다.
@@ -452,36 +570,39 @@ $(function() {
 ② 회사는 제휴를 통해 타 사이트 및 매체에 등록될 수 있음을 고지하고 동의를 받아야 하며, 제휴 사이트 전체 목록을 사이트내에서 상시 열람할 수 있도록 해야 한다.
 				            	
 				            </textarea>
-				            
-				            </div>
-				          </li>
-				
-				        </ul>
-				
-				      
-   				 </div>
-   				 
-   				 <div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="registerCompanysubmit" id="registerCompanysubmit" 
-												tabindex="4" class="form-control btn btn-register" value="가입하기" style="background-color: #50a954">
+
+											</div>
+										</li>
+
+									</ul>
+
+
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-6 col-sm-offset-3">
+										<input type="submit" name="registerCompanysubmit"
+											id="registerCompanysubmit" tabindex="4"
+											class="form-control btn btn-register" value="가입하기"
+											style="background-color: #50a954">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-6 col-sm-offset-3">
+										<div class="text-center">
+											<a href="<c:url value='/login/login.do'/>" tabindex="5"
+												class="forgot-password">로그인하기</a>
 										</div>
 									</div>
-									<div class="form-group">
-											<div class="col-sm-6 col-sm-offset-3">
-												<div class="text-center">
-													<a href="<c:url value='/login/login.do'/>" tabindex="5" class="forgot-password">로그인하기</a>
-												</div>
-											</div>
-									</div>
-									
-								</form>
-							</div>
+								</div>
+
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-<%@include file="../main/inc/bottom.jsp" %>
+</div>
+</div>
+<%@include file="../main/inc/bottom.jsp"%>

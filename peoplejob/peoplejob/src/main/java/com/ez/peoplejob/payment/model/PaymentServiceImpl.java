@@ -29,5 +29,10 @@ public class PaymentServiceImpl implements PaymentService{
 	public PaymentVO selectPaymentByCode(int paymentCode) {
 		return paymentDao.selectPaymentByCode(paymentCode);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectMainAdvertiseByServiceCode(int serviceCode) {
+		return paymentDao.selectMainAdvertiseByServiceCode(serviceCode);
+	}
 	
 }

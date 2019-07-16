@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ez.peoplejob.jobopening.model.JobopeningService;
+import com.ez.peoplejob.jobopening.model.JobopeningVO;
 import com.ez.peoplejob.member.model.CompanyVO;
 import com.ez.peoplejob.member.model.MemberService;
 import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.payment.model.PaymentService;
+import com.ez.peoplejob.scrap.model.ScrapService;
+import com.ez.peoplejob.scrap.model.ScrapVO;
 import com.fasterxml.jackson.databind.JsonNode;
  
 
@@ -29,6 +33,8 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired private MemberService memberService;
 	@Autowired private PaymentService paymentService;
+	@Autowired private ScrapService scrapService;
+	@Autowired private JobopeningService jobService;
 	
 	private kakao_restapi kakao_restapi = new kakao_restapi();
 	
@@ -42,9 +48,15 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 		
 		List<Map<String , Object>> list=paymentService.selectPaymentById(memberid);
 		logger.info("결제 내역 list.size={}",list.size());
+		List<ScrapVO> scraplist=scrapService.selectScrap(memberVo.getMemberCode());
+		logger.info("스크랩 리스트 scraplist.size={}",scraplist.size());
+		List<JobopeningVO> joblist=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());
+		logger.info("채용공고 리스트 joblist.size={}",joblist.size());
 		
 		model.addAttribute("memberVo",memberVo);
 		model.addAttribute("list",list);
+		model.addAttribute("scraplist",scraplist);
+		model.addAttribute("joblist",joblist);
 		
 		return "mypage/user/userpage";
 		
@@ -62,26 +74,6 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 	}
 	
 	
-	@RequestMapping("/service/payment.do")
-	public String importInfo(HttpSession session, Model model) {
-		String membername=(String) session.getAttribute("memberName");
-		String memberId=(String)session.getAttribute("memberid");
-		logger.info("ajax로 결제내역 확인을 위한 정보 보내주기, membername={}",membername);
-		
-		/*List<Map<String , Object>> list=memberService.selectPayInfo(membername);
-		model.addAttribute("lsit",list); */
-		if(memberId!=null && !memberId.isEmpty()) {
-			MemberVO memberVo=memberService.selectByUserid(memberId);
-			logger.info("회원 정보 memberVo={}",memberVo);
-			CompanyVO companyVo=memberService.selectCompanyById(memberId);
-			logger.info("기업 정보 companyVo={}",companyVo);
-			model.addAttribute("memberVo",memberVo);
-			model.addAttribute("companyVO",companyVo);
-			
-		}
-			return "service/payment";
-		
-	}
 	
 	//테스트
 	@RequestMapping("/login/kaokaoTest.do")

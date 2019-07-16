@@ -146,9 +146,10 @@ function jobopening(){
 	if(author_code==2){
 		alert('기업회원은 관리자의 승인을 받은 후 채용공고를 등록할 수 있습니다.');
 	}else if(author_code==3){
-		location.href="<c:url value='/company/my_jobopening_list.do?companycode1=${memberVo.companyCode}'/>";
+		
+		location.href="<c:url value='/company/my_jobopening_list.do?companycode1=${memberVo.companyCode}'/>";  
 	}
-} 
+}  
 
 function company(){
 	if(author_code==2){
@@ -164,8 +165,8 @@ function company(){
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
-		<div class="container-menu-desktop">
-
+		<div class="container-menu-desktop" style="height: 150px; margin-bottom: 30px;">
+ 
 			<!-- Header Mobile -->
 			
 
@@ -191,7 +192,7 @@ function company(){
 			
 			<!--  -->
 			<div class="wrap-main-nav">
-				<div class="main-nav">
+				<div class="main-nav"> 
 					<!-- Menu desktop -->
 					<nav class="menu-desktop">
 						<a class="logo-stick" href="<c:url value='/main/mainindex.do'/>">
@@ -258,7 +259,7 @@ function company(){
 									<li><a href="#">이력서 관리</a></li>
 								</c:if>
 								<c:if test="${sessionScope.author_code==2 || sessionScope.author_code==3 }">
-									<li><a href="#" onclick="jobopening()">채용공고 관리</a></li>
+									<li><a href="" onclick="jobopening()">채용공고 관리</a></li>
 								</c:if>
 								<%-- <c:if test="${sessionScope.author_code==1 }">
 									<li><a href="#">지원현황</a></li>

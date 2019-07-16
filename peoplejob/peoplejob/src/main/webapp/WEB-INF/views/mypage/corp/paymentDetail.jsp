@@ -110,11 +110,11 @@ div#cardBoduPostList {
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
  <script type="text/javascript">
  
- $(function(){
-	 $('input[type=submit]').submit(function(){
-		 if(!confirm('해당 상품을 결제 취소 하시겠습니까?')){
+ $(function(){ 
+	 $('#canclepay').click(function(){
+		  if(!confirm(${i}+'번 상품을 결제 취소 하시겠습니까?')){
 			 event.preventDefault();
-			 return false;
+			 return false; 
 		 }
 	 });
  });
@@ -180,48 +180,43 @@ div#cardBoduPostList {
 	<table class="table table-bordered">
 		<thead>
 			<tr> 
-				<th scope="col"><a href="#" class="fileterCode" id="memberid">번호</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="memberid">상품명</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="member_Code">구매자 이름</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="memberid">할부 기간</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="membername">결제 수단</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="address">결제 일시</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="birth">결제 금액</a></th>
-				<th scope="col"><a href="#" class="fileterCode"
-					id="membergender">사용기간</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="email">결제 상황</a></th>
-				<th scope="col"><a href="#" class="fileterCode" id="tel">결제 취소</a></th>
+				<th scope="col">상품명</a></th>
+				<th scope="col">구매자 이름</th>
+				<th scope="col">할부 기간</th>
+				<th scope="col">결제 수단</th>
+				<th scope="col">결제 일시</th>
+				<th scope="col">결제 금액</th>
+				<th scope="col">사용기간</th>
+				<th scope="col">결제 상황</th>
+				<th scope="col">결제 취소</th>
 			</tr>
 		</thead>
 		<tbody>
 			<!--  반복 시작  -->
 			<c:if test="${empty list }">
-				<td colspan="9" align="center">결제하신 상품이 없습니다.</td>
+				<td colspan="10" align="center">결제하신 상품이 없습니다.</td>
 			</c:if>
+			
 			<c:if test="${!empty list }">
 				<c:forEach var="map" items="${list }">
-					<%-- <c:set var="i" value="1"/> --%>
-
-					<%--  <c:forEach items="i" begin="1" end="${fn:length(list)} ">  --%>
+ 
 					<tr>
-						<td>[${fn:length(list)}]</td>
 						<td>${map['SERVICENAME'] }</td>
 						<td>${sessionScope.memberName }</td>
 						<td>일시불</td>
-						<td>${map['PAYMENTWAY'] }</td>
+						<td>${map['PAYMENTWAY'] }</td> 
 						<td>${map['PAYDATE'] }</td>
 						<td>${map['SERVICEPRICE'] }원</td>
 						<td>~<fmt:formatDate value="${map['PAYEND_DATE'] }"
 								pattern="yyyy/MM/dd HH:mm:ss" />
-						</td>
+						</td> 
 						<td>${map['PROGRESS'] }</td>
 						<form id="frmpay" method="post" action="<c:url value='/mypage/corp/paymentDetail.do'/>">
 						<input type="hidden" name="paymentCode" value="${map['PAYMENT_CODE'] }">
-						<td><input type="submit" value="결제 취소"></td>
+						<td><input type="submit" value="결제 취소" id="canclepay"></td>
 						</form>
-					</tr>
-				 	<%-- </c:forEach>  --%>
-				</c:forEach>
+ 					</tr> 
+				  </c:forEach>  
 			</c:if>
 			<!-- 반복 끝 -->
 		</tbody>

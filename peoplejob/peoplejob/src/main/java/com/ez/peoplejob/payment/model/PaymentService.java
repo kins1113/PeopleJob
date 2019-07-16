@@ -8,4 +8,5 @@ public interface PaymentService {
 	List<Map<String, Object>> selectPaymentById(String memberid);
 	int cancelPay(int paymentCode);
 	PaymentVO selectPaymentByCode(int paymentCode);
+	List<Map<String , Object>> selectMainAdvertiseByServiceCode(int serviceCode);
 }

@@ -28,5 +28,12 @@
 		select * from payment
 		where payment_code=#{paymentCode}
 	</select>
+	
+	<select id="selectMainAdvertiseByServiceCode" resultType="map" parameterType="int">
+	select v.*, c.*
+	from vvipmain v join companyJobOpen c
+	on c.COMPANY_CODE = v.COMPANY_CODE
+	where service_code=#{serviceCode}
+	</select>
 </mapper>
 

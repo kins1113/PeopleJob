@@ -1,6 +1,6 @@
---view �����
+--view �����
 
--- �Խñ� ��ü ��ȸ ��
+-- �Խñ� ��ü ��ȸ ��
 CREATE OR REPLACE VIEW post_All
 as
 select p.* , b.BOARDNAME,b.USAGE "bUSAGE",b.TYPE_CODE, b.COMMENTAGE,
@@ -26,4 +26,20 @@ select *   from   (
 	) A  
 )   
 where RNUM>?     and RNUM<=? + ?;
+
+--결제완료된 채용공고 메인화면에 광고
+CREATE OR REPLACE VIEW vvipMain
+as
+select m.company_code,m.member_code, m.membername, p.progress, p.payend_date, p.service_code
+from member m join payment p
+on p.MEMBER_CODE = m.MEMBER_CODE
+and p.progress='결제완료'
+and payend_date>=sysdate;
+
+CREATE OR REPLACE VIEW companyJobOpen 
+as
+select c.company_Code,c.image, c.companyname, j.jobtitle, j.end_date
+from company c join jobopening j 
+on j.COMPANY_CODE = c.COMPANY_CODE
+where end_date>=sysdate;
                           

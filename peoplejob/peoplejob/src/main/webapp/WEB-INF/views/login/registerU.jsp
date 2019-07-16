@@ -91,6 +91,12 @@ textarea {
 #pwd1error{
 	display: none;
 }
+
+#birthspan{
+	margin-top: -10px;
+    margin-left: 16px;
+    color:gray;
+}
 </style>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -237,7 +243,7 @@ textarea {
 				});
 
 		//비밀번호 일치여부 
-		$('#pwd2').keyup(function() {
+		$('#pwd2').keyup(function() { 
 					if (validate_pwd($('#pwd').val()) && validate_pwd($('#pwd2').val()) && $('#pwd').val().length>=4 && $('#pwd2').val().length>=4) {
 						// pwd와 pwd2 모두 규칙에 만족할 때
 
@@ -267,6 +273,10 @@ textarea {
 							}
 						});
 
+					}else if($('#pwd2').val().length<1){
+						$('.pwderror').hide();
+						$('#chkpwd').val('N');
+						
 					}else {
 						$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
 						$('.pwderror').show();
@@ -311,6 +321,11 @@ textarea {
 					}
 				});
 
+			}else if($('#pwd').val().length<1){
+				$('.pwderror').hide();
+				$('.pwd1error').hide(); 
+				$('#chkpwd').val('N');
+				 
 			}else {
 				$('.pwderror').html("비밀번호 규칙에 맞지 않습니다.");
 				$('.pwderror').show();
@@ -361,6 +376,7 @@ textarea {
 
 	});
 </script>
+<div class="body" style="background-color: #f5f6f8;">
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
@@ -390,7 +406,8 @@ textarea {
 									
 									<div class="form-group" style="float: left; margin-right:30px;" >
 										<input type="text" name="memberid" id="memberid" tabindex="1" placeholder="아이디 *" 
-										class="form-control infobox" style="width:250px" title="아이디">아이디는 2글자이상, 영문자와 숫자, _로 만들어주세요.
+										class="form-control infobox" style="width:250px" title="아이디" maxlength="10">2~10자의 영문자, 숫자와 특수기호(_)만 사용 가능합니다.
+										
 									</div>
 									
 									<div class="form-group">
@@ -456,12 +473,12 @@ textarea {
 								</div>
 								<div class="form-group">
 									<div class="row">
-										<span id="" style="color: gray;">예) 19950812</span>
+										<span id="birthspan">예) 19950812</span>
 									</div>
 								</div>
 								<div class="form-group">
 									<input type="text" name="tel" id="tel" tabindex="1"
-										class="form-control infobox" placeholder="전화번호" title="전화번호"
+										class="form-control infobox" placeholder="전화번호 (숫자만 입력해주세요)" title="전화번호"
 										style="width: 300px">
 
 								</div>
@@ -613,5 +630,5 @@ textarea {
 	</div>
 </div>
 </div>
-
+</div>
 <%@include file="../main/inc/bottom.jsp"%>

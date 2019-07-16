@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/main/css/login.css'/>" />
 <style type="text/css">
-
+ 
 </style>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="<c:url value='/resources/main/js/jquery-3.4.1.min.js'/>"></script>
@@ -84,7 +84,7 @@ public JsonNode getAccessToken(String autorize_code) {
 
 </script>
 
-
+<div class="body" style="background-color: #f5f6f8;">
 <div class="container" style="min-height: 550px;padding:8px;">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -191,5 +191,6 @@ public JsonNode getAccessToken(String autorize_code) {
 				</div>
 			</div>
 		</div>
-	</div>    
+	</div>   
+</div> 
 	<%@include file="../main/inc/bottom.jsp" %>                     

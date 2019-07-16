@@ -101,7 +101,7 @@ function company(){
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
                             <span class="doing"><em>2</em> / 10</span>
-                            <span class="sname">이력서</span>
+                            <span class="sname">???</span>
                            </div>
                         </a>
                     </li>
@@ -109,9 +109,9 @@ function company(){
                         <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
-                            <span class="doing"><em> 0</em> </span>
+                            <span class="doing"><em> ${fn:length(scraplist) }</em> </span>
                             <span class="sname">스크랩</span>
-                           </div>
+                           </div> 
                         </a>
                     </li> 
                     
@@ -129,14 +129,14 @@ function company(){
                             </c:if>
                            </div>
                         </a>
-                    </li>
+                    </li> 
                                    
                                    
                      <li class="img">
                         <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
-                            <span class="doing"><em> 0</em></span>
+                            <span class="doing"><em> ${fn:length(joblist) }</em></span>
                             <span class="sname">채용공고</span>
                            </div>
                         </a>
@@ -263,7 +263,7 @@ function company(){
 									</a>
 									</c:if>
 									<c:if test="${sessionScope.author_code==2|| sessionScope.author_code==3 }" >
-									<a href="<c:url value='/login/c_update.do'/>" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="company()">
+									<a href="" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13" onclick="company()">
 										기업정보 관리
 									</a>
 									</c:if>

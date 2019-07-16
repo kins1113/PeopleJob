@@ -19,4 +19,6 @@ public interface JobopeningService {
 	int selectTotalCount2(Map<String,Object>map);
 	int selectPwdCheck(Map<String,Object>map);
 	List<JobopeningVO>selectJobopeningBycomcode(int companyCode);
+	
+	
 }

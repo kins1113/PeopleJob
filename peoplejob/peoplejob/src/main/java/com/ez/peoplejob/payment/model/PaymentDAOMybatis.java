@@ -28,4 +28,8 @@ public class PaymentDAOMybatis implements PaymentDAO{
 	public PaymentVO selectPaymentByCode(int paymentCode) {
 		return sqlSession.selectOne(namespace+"selectPaymentByCode",paymentCode);
 	}
+	@Override
+	public List<Map<String, Object>> selectMainAdvertiseByServiceCode(int serviceCode) {
+		return sqlSession.selectList(namespace+"selectMainAdvertiseByServiceCode",serviceCode);
+	}
 }

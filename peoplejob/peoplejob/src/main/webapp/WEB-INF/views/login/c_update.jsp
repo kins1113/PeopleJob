@@ -170,23 +170,23 @@ $(function() {
 										<input type="text" name="establishyear" id="establishyear" tabindex="1" class="form-control" placeholder="설립년도" value="${companyVo.establishyear }">
 									</div>
 									<div class="form-group">
-										<input type="text" name="womannum" id="womannum" tabindex="1" class="form-control" placeholder="여자사원 수">
+										<input type="text" name="womannum" id="womannum" tabinde x="1" class="form-control" placeholder="여자사원 수" value="${companyVo.womannum }">
 									</div>
 									<div class="form-group">
 										<input type="text" name="mannum" id="mannum" tabindex="1" class="form-control" placeholder="남자사원 수">
 									</div>
 									<div class="form-group">
-										<input type="text" name="companytype" id="companytype" tabindex="1" class="form-control" placeholder="회사 기업형태" value="${companyVo.companytype }">
+										<input type="text" name="companytype" id="companytype" tabindex="1" class="form-control" placeholder="회사 기업형태" value="${companyVo.mannum }">
 									</div>
 									<div class="form-group">
 										<input type="text" name="site" id="site" tabindex="1" class="form-control" placeholder="회사 site" value="${companyVo.site }">
 									</div>
 									<div class="form-group">
-										<input type="text" name="sales" id="sales" tabindex="1" class="form-control" placeholder="매출액">
+										<input type="text" name="sales" id="sales" tabindex="1" class="form-control" placeholder="매출액" value="${companyVo.sales }">
 										<!-- value="${companyVo.sales }" -->
 									</div>
 									<div class="form-group">
-										<input type="text" name="capital" id="capital" tabindex="1" class="form-control" placeholder="자본금">
+										<input type="text" name="capital" id="capital" tabindex="1" class="form-control" placeholder="자본금" value="${companyVo.capital }">
 										<!--  value="${companyVo.capital }" -->
 									</div>
 									<div class="form-group">

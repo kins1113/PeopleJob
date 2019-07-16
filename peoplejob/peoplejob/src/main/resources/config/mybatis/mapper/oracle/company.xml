@@ -219,6 +219,12 @@
 	<select id="selectJobopeningBycomcode" parameterType="int" resultType="JobopeningVo">
 	select * from jobopening where company_code=#{companyCode}
 	</select>
+	
+	<select id="selectCountById" parameterType="string" resultType="int">
+	select count(*) from jobopening
+	where company_code=(select company_code from member where memberid=#{memberid})
+	and adminagree='Y'
+	</select>
 </mapper>
 
 
