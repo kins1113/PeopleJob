@@ -1,7 +1,9 @@
 package com.ez.peoplejob.resume.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ez.peoplejob.common.FileUploadUtility;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
@@ -27,7 +31,7 @@ public class ResumeController {
 	
 	@Autowired
 	private ResumeService resumeService;
-	
+	@Autowired private FileUploadUtility fileUploadUtil;
 	private Logger logger = LoggerFactory.getLogger(ResumeController.class);
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
@@ -41,10 +45,20 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/register.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute ResumeVO resumeVo,Model model) {
+	public String write_post(@ModelAttribute ResumeVO resumeVo,HttpServletRequest request,Model model) {
 		
 		
-		
+		//이미지 파일 업로드
+		List<Map<String, Object>> list
+		=fileUploadUtil.fileUpload(request);
+				
+				String imageURL="";
+				for(Map<String, Object> map : list) {
+					imageURL=(String) map.get("fileName");
+				}
+				resumeVo.setPicture(imageURL);
+				
+			
 		logger.info("이력서 등록화면 보여주기 매개변수 vo={}",resumeVo);
 		
 		int cnt=resumeService.insertResume(resumeVo);
@@ -222,5 +236,16 @@ public class ResumeController {
 		
 		return "common/message";
 	}
-	}	
+}
+	
+/*
+ * @RequestMapping("/ajaxJobtype.do")
+ * 
+ * @ResponseBody public List<ResumeVO> select(@RequestParam(defaultValue = "0")
+ * int resumeNo){ logger.info("ajax-select.do 요청");
+ * 
+ * List<ResumeVO> list = resumeService.selectAll(searscVo);
+ * 
+ * return list; }
+ */
 
