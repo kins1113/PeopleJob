@@ -157,7 +157,7 @@ public class ExcelController {
         
         model.addAttribute("locale", Locale.KOREA);
         model.addAttribute("workbook", workbook);
-        model.addAttribute("workbookName", "회원정보");
+        model.addAttribute("workbookName", "기업 회원 정보");
         
         return "excelDownloadView";
     }
