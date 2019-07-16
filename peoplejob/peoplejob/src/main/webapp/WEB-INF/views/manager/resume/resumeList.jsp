@@ -20,6 +20,8 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function (){
+		$.resumeList();
+		
 		//맨위에 체크박스 누르면 전체 선택
 		$("#memberCkAll").click(function(){
 			$("input[name=memberCk]").prop("checked",this.checked)
@@ -45,80 +47,36 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 				}
 			$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
 	    	$("form[name=memberList]").submit();	    	
-			
-			
 			})
 		});
 		
-		//체크된것 메일 보내기
-	    $("#btMultMail").click(function(){
-	    	$("form[name=memberList]").attr("action","<c:url value='/manager/email_sms/emailMultWrite.do'/>")
-	    		.attr("method",'get');
-	    	$("form[name=memberList]").submit();	    	
-	    });
-		//권한 승인 처리 
+		//리스트 가져오기 
 		
-		$("#authorityChange > a").each(function(){
-			$(this).click(function(){
-				var memberCode= $(this).attr("class"); //권한태그 눌렀을때 그 레코드의 회원 번호
-				var authorityCode= $(this).html();
-				if(authorityCode==2){
-					if(confirm("확인된 사업자입니까?")){
-							$.ajax({
-								url:"<c:url value='/manager/member/authorityChange.do'/>",
-								type:"post",
-								data:{"memberCode":memberCode,"authorityCode":authorityCode},
-								success:function(res){
-									var authority=res;
-									$("."+memberCode).html(authority);
-								},
-								error:function(xhr, status, error){
-									alert(status+" : "+error)
-								}
-							});
-					}
-				}else if(authorityCode==3){
-					if(confirm("변경하시겠습니까?")){
-						$.ajax({
-							url:"<c:url value='/manager/member/authorityChange.do'/>",
-							type:"post",
-							data:{"memberCode":memberCode,"authorityCode":authorityCode},
-							success:function(res){
-								var authority=res;
-								$("."+memberCode).html(authority);
-							},
-							error:function(xhr, status, error){
-								alert(status+" : "+error)
-							}
-						});
-				}
-				}
-			});
-			
-		});
+		
 	});
+	
+	$.resumeList = function(){
+		alert("함수 안이지");
+		$.ajax({
+			url:"<c:url value='/manger/resume/resumeList.do'/>",
+			type:"post",
+			success:function(res){
+				alert(res);
+			},
+			error:function(xhr, status, error){
+				alert(status+" : "+error);				
+			}
+			
+			
+		});//ajax
+	}
+
 	//페이지 처리 함수
 	function pageFunc(curPage){
 		$("input[name=currentPage]").val(curPage);
 		$("form[name=memberList]").attr("action","<c:url value='/manager/member/memberList.do?authorityCk=company'/>");
 		$("form[name=memberList]").submit();
 	}
-	//엑셀 다운로드 함수
-	function doExcelDownloadProcess(ckAll){
-		if(ckAll=="all"){
-		//전체 회원 엑셀다운 처리
-			$("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do?all=all'/>");
-	        $("form[name=memberList]").submit();
-		}else{
-		//지금 화면에 있는 회원만 엑셀 다운
-			if($("input[name=searchKeyword]")==''){
-				$("input[name=searchCondition]").val('');
-			}
-	        $("form[name=memberList]").attr("action","<c:url value='/downloadExcelFileCompany.do'/>");
-	        $("form[name=memberList]").submit();
-		}
-		
-    }
 </script>
 <form name="memberList" method="post" 
 		 enctype="multipart/form-data" >
@@ -147,14 +105,13 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 	<div class="col-lg-12">
 		<div class="card card-default">
 			<div class="card-header card-header-border-bottom">
-				<h2>기업 회원 관리</h2>
+				<h2>이력서 관리</h2>
 			</div>
 			<!-- 해더 부분 버튼 그룹 시작  -->
 			<div>
 				<div align="right" class="form-group serDiv" id="btGroup">
-					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="선택한 메일">
-					<input type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('all')" id="" value="전체회원 엑셀"> 
-					<button type="button"class="btn btn-secondary btn-default" onclick="doExcelDownloadProcess('')" id="btExceil">엑셀 다운</button> 
+					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="등록">
+					<input type="button" class="btn btn-secondary btn-default" id="btMultMail"value="선택 삭제">
 				</div>
 				<div class="form-group serDiv">
 					<input type="submit" class="btn btn-secondary btn-default" id="companySearch"value="검색">&nbsp;
@@ -238,66 +195,34 @@ input.btn.btn-secondary.btn-default {margin-top: 4px;}
 			<!-- 해더 부분 버튼 그룹 끝 -->
 			<div class="card-body" id="cardBoduPostList">
 				<table class="table table-bordered" id="companyTable">
-					<thead>
+					<thead>	
+					 <colgroup width="3%"></colgroup>
+					 <colgroup width="7%"></colgroup>
+					 <colgroup width="12.5%"></colgroup>
+					 <colgroup width="12.5%"></colgroup>
+        			 <colgroup width="50"></colgroup>
+		       	 	 <colgroup width="15%"></colgroup>
+						<tr>	
+							
+						</tr>
 						<tr>
-							<th><label class="control control-checkbox checkbox-primary">
+							<th>
+								<label class="control control-checkbox checkbox-primary">
 									<input type="checkbox" name="memberCkAll" id="memberCkAll" />
 										<div class="control-indicator"></div>
-								</label></th>
-							<th scope="col"><a href="#" class="fileterCode" id="companyno">사업자 번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="companyname">회사명(로고)</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="company_address">회사주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="site">홈페이지</a></th>
-							
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">회원 코드</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="memberid">아이디</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membername">이름</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="address">주소</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="birth">생년월일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="membergender">성별</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="email">이메일</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="tel">전화번호</a></th>
-							<th scope="col"><a href="#" class="fileterCode" id="member_Code">권한 코드</a></th>
-							<th scope="col">체용공고</th>
-							<th scope="col">비고</th>
+								</label>
+							</th>	
+							<th scope="col"><a href="#" class="fileterCode" id="companyno">회원번호</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="companyno">이름/아이디</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="companyno">나이/성별</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="companyname">이력서</a></th>
+							<th scope="col"><a href="#" class="fileterCode" id="company_address">편집</a></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="resumeTbody">
 					<!--  반복 시작  -->
-					<c:if test="${empty list }">
-						<td colspan="16" align="center">만족하는 사용자가 없습니다....</td>
-					</c:if>
-					<c:if test="${!empty list }">
-						<c:forEach var="map" items="${list}">
-						<!-- 기업회원 승인처리를 위한 hidden -->
-							<input type="hidden" name="memberCode" value="${map['MEMBER_CODE']}">
-							<input type="hidden" name="authorityCode" value="${map['AUTHORITY_CODE'] }">							
-							<tr>
-								<td>
-									<label class="control control-checkbox checkbox-primary">
-											<input type="checkbox" name="memberCk" id="memberCk" value="${map['EMAIL']}" />
-											<div class="control-indicator"></div>
-									</label>
-								</td>
-								<td>${map['COMPANYNO'] }</td>
-								<td>${map['COMPANYNAME'] }</td>
-								<td>${map['COMPANY_ADDRESS']}  ${map['COMPANY_ADDRESSDETAIL']}</td>
-								<td>${map['SITE'] }</td>
-
-								<td>${map['MEMBER_CODE']}</td>
-								<td>${map['MEMBERID']}</td>
-								<td>${map['MEMBERNAME']}</td>
-								<td>${map['ADDRESS']} ${map['ADDRESSDETAIL']}</td>
-								<td>${map['BIRTH']}</td>
-								<td>${map['MEMBERGENDER']}</td>
-								<td>${map['EMAIL']}</td>
-								<td>${map['TEL']}</td>
-								<td id="authorityChange"><a href="#"  class="${map['MEMBER_CODE'] }">${map['AUTHORITY_CODE'] }</a></td>
-								<td>아직</td>
-								<td>무엇을 넣을까?</td>
-							</tr>
-						</c:forEach>
-					</c:if>
+					
+					
 					<!-- 반복 끝 -->
 					</tbody>
 				</table>

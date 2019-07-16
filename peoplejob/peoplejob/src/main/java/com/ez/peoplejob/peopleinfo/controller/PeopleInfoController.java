@@ -1,9 +1,5 @@
 package com.ez.peoplejob.peopleinfo.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ez.peoplejob.common.PaginationInfo;
 import com.ez.peoplejob.common.SearchVO;
 import com.ez.peoplejob.common.WebUtility;
-import com.ez.peoplejob.jobopening.model.JobopeningVO;
-import com.ez.peoplejob.member.model.CompanyVO;
-import com.ez.peoplejob.member.model.MemberVO;
 import com.ez.peoplejob.resume.model.ResumeService;
 import com.ez.peoplejob.resume.model.ResumeVO;
 
@@ -36,12 +29,7 @@ public class PeopleInfoController {
 	public String peopleinfolist(
 		 HttpSession session,
 			@ModelAttribute SearchVO searchVo,Model model) {
-		String id=(String)session.getAttribute("memberid");
-		if(id==null) {
-			id="비회원";
-		}
-		ResumeVO vo=resumeService.selectByMemverid(id);
-		logger.info("로그인 vo={}",vo);
+	
 		logger.info("인재정보 리스트");
 		//1]PaginationInfo 객체 생성
 		PaginationInfo pagingInfo=new PaginationInfo();
@@ -53,7 +41,7 @@ public class PeopleInfoController {
 		searchVo.setRecordCountPerPage(WebUtility.RECORD_COUNT_PER_PAGE);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("셋팅 후 serchVo={}",searchVo);
-		return id;
+		return null;
 		
 		
 		

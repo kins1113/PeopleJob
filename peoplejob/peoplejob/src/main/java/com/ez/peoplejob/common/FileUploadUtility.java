@@ -24,9 +24,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class FileUploadUtility {
 	private Logger logger=LoggerFactory.getLogger(FileUploadUtility.class);
 	
+
 	@Resource(name="fileUploadProperties")
 	Properties props;
-	public List<Map<String, Object>> fileUpload(HttpServletRequest request) {
+	public  List<Map<String, Object>> fileUpload(HttpServletRequest request) {
 		//파일 업로드 처리
 		
 		MultipartHttpServletRequest multiRequest
