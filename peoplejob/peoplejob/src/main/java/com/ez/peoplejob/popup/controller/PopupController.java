@@ -93,14 +93,14 @@ public class PopupController {
 		return 111236799;
 	}
 	*/
-	
+	/*
 	@RequestMapping("/multUpdateUsage.do")
 	@ResponseBody
 	public int MUUsage(@RequestParam String[] popupCk, @RequestParam String[] usageCk, @RequestParam int[] popupCode, @RequestParam String NYck) {
 		logger.info("여기는 들어옵니까?? 파라미터 NYck={}",NYck);
-		
-		String[] usageCkArr=null;
-		int[] popupCodeArr=null;
+	
+		//String[] usageCkArr=new ;
+		//int[] popupCodeArr=null;
 		
 		for(int i=0;i<popupCk.length;i++) {
 			if("on".equals(popupCk[i])) {
@@ -122,6 +122,7 @@ public class PopupController {
 		
 		return re;
 	}
+	*/
 	
 	
 	@RequestMapping("/testUpdate.do")

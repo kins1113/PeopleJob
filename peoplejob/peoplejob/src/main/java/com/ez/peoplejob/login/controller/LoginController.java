@@ -36,22 +36,22 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 	private kakao_restapi kakao_restapi = new kakao_restapi();
 	
 	
-	/*
+	
 	@RequestMapping("/main/mainindex.do")
 	public String mainpage(Model model) {
 		logger.info("메인화면 보여주기!!!");
 		List<Map<String, Object>> list=paymentService.selectMainAdvertiseByServiceCode(1);
 		logger.info("서비스 결제 (vvip관) 리스트, list.size={}",list);
-		List<Map<String, Object>> deadlineList=jobService.deadlineimminentBymonth();
-		logger.info("마감 임박 공채 리스트, deadlineList.size={}",deadlineList);
+		//List<Map<String, Object>> deadlineList=jobService.deadlineimminentBymonth();
+		//logger.info("마감 임박 공채 리스트, deadlineList.size={}",deadlineList);
 		
 		
 		model.addAttribute("list",list);
-		model.addAttribute("deadlineList",deadlineList);
+		//model.addAttribute("deadlineList",deadlineList);
 		
-		return "main/mainindex.do";
+		return "main/mainindex";
 	}
-	*/
+	
 	
 	
 	@RequestMapping("/mypage/user/userpage.do")
