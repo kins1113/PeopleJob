@@ -41,7 +41,7 @@
  <div class="select_img"><img src="" /></div>
  
  <script>
-  $("#gdsImg").change(function(){
+  $("#picture").change(function(){
    if(this.files && this.files[0]) {
     var reader = new FileReader;
     reader.onload = function(data) {
@@ -53,7 +53,7 @@
  </script>
  <%=request.getRealPath("/") %>
 </div>
-        <input type="text" class="form-control"  name="picture" id="picture"  style="ime-mode:active">
+        <input type="hidden" class="form-control"  name="picture" id="picture"  >
     </div>
     <div>        
         <label for="membername">이름</label>
@@ -205,6 +205,7 @@
 	<div>
         <label for="chargework">직종</label>
         <input type="text" class="form-control"  name="chargework" id="chargework" style="ime-mode:active">
+        <c:import url="occupation.jsp"/>
     </div>	
     <div>
         <label for="jobgrade">직급</label>
