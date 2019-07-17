@@ -30,6 +30,10 @@
  				<td><span class="glyphicon glyphicon-globe" aria-hidden="true">주소</span> <span>${vo1.address}</span></td>
  				<td><span class="glyphicon glyphicon-globe" aria-hidden="true">상세주소</span> <span>${vo1.addressdetail}</span></td>
  				<td><span class="glyphicon glyphicon-phone" aria-hidden="true">핸드폰</span> <span>${vo1.tel}</span></td>
+				<td>
+					<img src="<c:url value='/peoplejob_images/${vo.picture }'/>" 
+						alt="${vo1.membername }" width="50">
+				</td>
 				</tr>
 			</table>
 		</div>
@@ -67,7 +71,7 @@
 			<table class="table">
 				<tr>
  				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.certificationtype}</span></td>
-				<c:if test="${vo.certificationtype=='자격증/면허증'}">            	
+				<c:if test="${vo5.certificationtype=='자격증/면허증'}">            	
             		 <label for="lName">자격증명</label>
  				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo6.lName}</span></td>
  				<label for="lInstitution">발행처/기관</label>
@@ -75,7 +79,7 @@
  				 <label for="lGetdate">취득일</label>
  				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo6.lGetdate}</span></td>
             	</c:if>
-				<c:if test="${vo.certificationtype=='어학시험'}">            	
+				<c:if test="${vo5.certificationtype=='어학시험'}">            	
             		 <label for="language">언어</label>
  				<td><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> <span>${vo5.language}</span></td>
  				<label for="institution">발행처/기관</label>

@@ -22,7 +22,7 @@
 	
 	<delete id="deleteService" parameterType="int">
 		delete from service
-		where service_code=#{serviceCode}
+		where service_Code=#{serviceCode}
 	</delete>
 	
 </mapper>

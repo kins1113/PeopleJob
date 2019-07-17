@@ -236,7 +236,7 @@
 		delete from resume where resume_code=#{resumeCode}
 		</delete>
 		
-	<!-- 	<update id="updateResume" parameterType="resumeVo">
+	<!-- <update id="updateResume" parameterType="resumeVo">
 		update (select resume_code, resumetitle, introduce, award, opencheck, langlicencename,lang_getdate,
     	institute,companyname,workterm,chargework,l_name,l_getdate,l_institution,
     	schoolname,major,degree,graduate,graduatecheck,jobtype,hopeworkdate,hopepay,
@@ -260,7 +260,7 @@
     	email=#{email},picture=#{picture},tel=#{tel},sido=#{sido},gugun=#{gugun},firstname=#{firstname},secondname=#{secondname},thirdname=#{thirdname}
 			 
 		where resume_code=#{resumeCode}
-	</update> -->
+	</update>  -->
 	
 	<!-- <insert id="insertResume" parameterType="resumeVo">
 		<selectKey order="BEFORE" keyProperty="resumeCode,langlicenceCode,dvCode,licenceCode,academicCode,desiredworkCode,memberCode" resultType="hashmap">

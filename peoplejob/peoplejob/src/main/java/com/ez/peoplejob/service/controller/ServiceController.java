@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ez.peoplejob.service.model.ServiceService;
 import com.ez.peoplejob.service.model.ServiceVO;
@@ -61,6 +62,26 @@ public class ServiceController {
 			//3
 		 model.addAttribute("list", list); 
 			return "manager/service/list";
+	  }
+	  
+	  @RequestMapping("/manager/service/serviceDel.do")
+	  public String serviceDel(@RequestParam String[] serviceChk, Model model) {
+		  
+			for(int i=0; i<serviceChk.length;i++) {
+				logger.info("{}번째 넘어온값={}",i,serviceChk[i]);
+			}
+			int cnt=serviceService.deleteService(serviceChk);
+			String msg="", url="/manager/service/list.do";
+			
+			if(cnt>0) {
+				msg=cnt+"건 삭제 성공";
+			}else {
+				msg="삭제 실패";
+			}
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			
+			return "common/message";
 	  }
 	 
 }

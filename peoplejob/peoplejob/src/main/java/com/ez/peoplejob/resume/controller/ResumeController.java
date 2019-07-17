@@ -52,11 +52,11 @@ public class ResumeController {
 		List<Map<String, Object>> list
 		=fileUploadUtil.fileUpload(request);
 				
-				String imageURL="";
+				String picture="";
 				for(Map<String, Object> map : list) {
-					imageURL=(String) map.get("fileName");
+					picture=(String) map.get("fileName");
 				}
-				resumeVo.setPicture(imageURL);
+				resumeVo.setPicture(picture);
 				
 			
 		logger.info("이력서 등록화면 보여주기 매개변수 vo={}",resumeVo);
