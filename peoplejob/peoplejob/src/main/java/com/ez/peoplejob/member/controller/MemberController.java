@@ -44,6 +44,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	@RequestMapping("/Test.do")
+	public String Test() {
+		return "login/Test";
+		
+	}
 	@RequestMapping(value="/registerU.do", method = RequestMethod.GET)
 	public String registerU() {
 		logger.info("개인 회원가입 화면 보여주기");

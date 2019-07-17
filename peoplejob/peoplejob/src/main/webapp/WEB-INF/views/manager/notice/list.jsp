@@ -19,8 +19,8 @@
 	});
 	
 	function pageFunc1(curPage){
-	$("input[name=currentPage]").val(curPage);
-	$("form[name=frmSearch]").submit();
+		$("input[name=currentPage]").val(curPage);
+		$("form[name=frmSearch]").submit();
 	}
 
 	

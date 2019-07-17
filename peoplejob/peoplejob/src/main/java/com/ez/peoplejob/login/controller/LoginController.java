@@ -24,9 +24,6 @@ import com.ez.peoplejob.scrap.model.ScrapService;
 import com.ez.peoplejob.scrap.model.ScrapVO;
 import com.fasterxml.jackson.databind.JsonNode;
  
-
-    
-    
 @Controller
 public class LoginController {
 private Logger logger=LoggerFactory.getLogger(LoginController.class);
@@ -39,15 +36,32 @@ private Logger logger=LoggerFactory.getLogger(LoginController.class);
 	private kakao_restapi kakao_restapi = new kakao_restapi();
 	
 	
+	/*
+	@RequestMapping("/main/mainindex.do")
+	public String mainpage(Model model) {
+		logger.info("메인화면 보여주기!!!");
+		List<Map<String, Object>> list=paymentService.selectMainAdvertiseByServiceCode(1);
+		logger.info("서비스 결제 (vvip관) 리스트, list.size={}",list);
+		List<Map<String, Object>> deadlineList=jobService.deadlineimminentBymonth();
+		logger.info("마감 임박 공채 리스트, deadlineList.size={}",deadlineList);
+		
+		
+		model.addAttribute("list",list);
+		model.addAttribute("deadlineList",deadlineList);
+		
+		return "main/mainindex.do";
+	}
+	*/
+	
 	
 	@RequestMapping("/mypage/user/userpage.do")
 	public String mypage(HttpSession session, Model model) {
 		String memberid=(String)session.getAttribute("memberid");
 		MemberVO memberVo=memberService.selectByUserid(memberid);
-		logger.info("마이페이지 화면 보여주기 memberVo={}",memberVo);
+		logger.info("마이페이지 화면!! 보여주기 memberVo={}",memberVo);
 		
 		List<Map<String , Object>> list=paymentService.selectPaymentById(memberid);
-		logger.info("결제 내역 list.size={}",list.size());
+		logger.info("결제결제결제 내역 list.size={}",list.size());
 		List<ScrapVO> scraplist=scrapService.selectScrap(memberVo.getMemberCode());
 		logger.info("스크랩 리스트 scraplist.size={}",scraplist.size());
 		List<JobopeningVO> joblist=jobService.selectJobopeningBycomcode(memberVo.getCompanyCode());

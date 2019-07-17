@@ -225,6 +225,16 @@
 	where company_code=(select company_code from member where memberid=#{memberid})
 	and adminagree='Y'
 	</select>
+	<!-- 
+	<select id="deadlineimminentBymonth" resultType="map">
+		select jobtitle,end_date from 
+	(
+	 select * from jobopening 
+	 order by end_date 
+	 )
+ <![CDATA[where rownum<=10
+ and (end_date-sysdate)<30 ]]>
+	</select> -->
 </mapper>
 
 

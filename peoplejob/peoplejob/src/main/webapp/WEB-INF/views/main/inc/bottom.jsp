@@ -5,14 +5,10 @@
    	color: floralwhite;
     margin-left: 51px;
     }
-    
-/*     footer {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-} 
- */
 
+.bg11{
+	height: 40px;
+}
     </style>
 <footer>
 		
@@ -38,7 +34,7 @@
 			</div>
 		</div>
 		
-		<div class="bg11">
+		<div class="bg11" style="height: 80px;"> 
 			<div class="container size-h-4 flex-c-c p-tb-15">
 				<span class="f1-s-1 cl0 txt-center">
 

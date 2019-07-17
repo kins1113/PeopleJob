@@ -76,7 +76,7 @@ public class ResumeVO {
 	private String btypename1;
 	private String btypename2;
 	private String btypename3;
-	
+	private String imageURL;
 
 	public String getBtypename1() {
 		return btypename1;
