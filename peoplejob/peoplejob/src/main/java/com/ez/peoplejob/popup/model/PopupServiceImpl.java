@@ -4,13 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ez.peoplejob.popup.controller.PopupController;
 
 @Service
 public class PopupServiceImpl implements PopupService{
 	
 	@Autowired private PopupDAO popupDao;
+	private Logger logger=LoggerFactory.getLogger(PopupServiceImpl.class);
 
 	@Override
 	public int insertPopup(PopupVO popupVo) {
@@ -34,16 +39,14 @@ public class PopupServiceImpl implements PopupService{
 		
 		int result=0;
 		if(usageCkArr.length>0) {
-			for(int i=0;i<usageCkArr.length; i++) {
-				map.put("usageCk", usageCkArr[i]);
-				map.put("popupCode", popupCodeArr[i]);
-				
-				result += popupDao.updateUsage(map);
-			}
-		}else {
-			return 0;
+			
+			
+			
+			
+			
+				result = popupDao.updateUsageYandN(map);
 		}
-		
+		logger.info("update 결과 service에서 result={}",result);
 		return result;
 	}
 	

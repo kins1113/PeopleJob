@@ -8,4 +8,5 @@ public interface PopupDAO {
 	int insertPopup(PopupVO popupVo);
 	List<PopupVO> selectPopupAll();
 	int updateUsage(Map<String, Object> map);
+	int updateUsageYandN(Map<String, Object> map);
 }

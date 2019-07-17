@@ -74,6 +74,7 @@ public class PopupController {
 		return result;
 	}
 	
+	/*
 	@RequestMapping("/multUpdateUsage.do")
 	@ResponseBody
 	public int multUpdateUsage(@RequestParam String[] usageCk, @RequestParam int[] popupCode) {
@@ -89,6 +90,45 @@ public class PopupController {
 		
 		
 		
-		return 1;
+		return 111236799;
+	}
+	*/
+	
+	@RequestMapping("/multUpdateUsage.do")
+	@ResponseBody
+	public int MUUsage(@RequestParam String[] popupCk, @RequestParam String[] usageCk, @RequestParam int[] popupCode, @RequestParam String NYck) {
+		logger.info("여기는 들어옵니까?? 파라미터 NYck={}",NYck);
+		
+		String[] usageCkArr=null;
+		int[] popupCodeArr=null;
+		
+		for(int i=0;i<popupCk.length;i++) {
+			if("on".equals(popupCk[i])) {
+				usageCkArr[i]=usageCk[i];
+				popupCodeArr[i]=popupCode[i];
+			}
+		}
+		logger.info("시작 : 여기는 들어옵니까?? usageCkArr[]={}, popupCodeArr[]={}",usageCkArr.length,popupCodeArr.length);
+		
+		Map<String,Object>map=new HashMap<String, Object>();
+		map.put("usageCkArr", usageCkArr);
+		map.put("popupCodeArr", popupCodeArr);
+		map.put("NYck",	NYck);
+		
+		
+		int re = popupService.multUpdateUsage(map);
+		logger.info("끝 : 여기는 들어옵니까??  결과 re={}",re);
+		
+		
+		return re;
+	}
+	
+	
+	@RequestMapping("/testUpdate.do")
+	@ResponseBody
+	public int testpopup(@RequestParam String abc) {
+		logger.info("test.do들어옴 파라미터 abc ={} ",abc);
+		
+		return 1000000;
 	}
 }

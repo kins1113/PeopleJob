@@ -25,6 +25,16 @@
 		where popup_code=#{popupCode}
 	</update>
 	
+	<update id="updateUsageYandN" parameterType="map" >
+		update popup
+		<if test='NYck=="btUsageY"'>set usage='Y'</if>
+		<if test='NYck=="btUsageN"'>set usage='N'</if>
+		where popup_code in 
+		<foreach collection="popupCodeArr" item="i" open="(" close=")" separator=",">
+			#{i}
+		</foreach>
+	</update>
+	
 </mapper>
 
 

@@ -27,6 +27,11 @@ public class PopupDAOMybatis implements PopupDAO{
 	public int updateUsage(Map<String, Object> map) {
 		return sqlSession.update(namespace+"updateUsage",map);
 	}
+
+	@Override
+	public int updateUsageYandN(Map<String, Object> map) {
+		return sqlSession.update(namespace+"updateUsageYandN",map);
+	}
 	
 
 	

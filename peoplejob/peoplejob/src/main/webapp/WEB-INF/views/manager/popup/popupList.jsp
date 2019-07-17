@@ -27,10 +27,11 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 			var usageCk=$(this).html();
 			var popupCode=$(this).parent().next().html();
 			var thisObj=$(this);
+			
 			$.ajax({
 				url:"<c:url value='/manager/popup/updateUsage.do'/>",
-				type:"post",
-				data:"usageCk="+usageCk+"&popupCode="+popupCode,
+				type:"POST",
+				data:{"usageCk":usageCk,"popupCode":popupCode},
 				success:function(res){
 					if(res>0){
 						if(usageCk=="미사용"){
@@ -50,63 +51,48 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 		$("input[name=usageMultChenge]").click(function(){
 			//체크 안되면 안되도록 유효성 검사 
 			var check=false;
-			
 			$("input[name=popupCk]").each(function(){
 				if($(this).is(":checked")==true){
 					check=true;
 				}
 			});
+			alert($(this).attr("id"));
+			var NYck=$(this).attr("id");
 			if(!check){
 				alert("하나라도 체크 해야합니다...");
 				event.preventDefault();
 				return;
-			}
-
-			//넘겨줄 값을 변수에 저장하기
-			var usageCk=new Array();
-			var popupCode=new Array();
-			var count=0;
-			
-			$("input[name=popupCk]").each(function(){
-					if($(this).is(":checked")==true){
-						//alert($(this).parent().parent().next().find("a").html()+"    "+$(this).parent().parent().next().next().html()+"   "+count);
-						usageCk[count]=$(this).parent().parent().next().find("a").html();
-						popupCode[count]=$(this).parent().parent().next().next().html();
-						count= count+1;
+			}else{
+				
+				alert("ajax 전");
+				$.ajax({
+					url:"<c:url value='/manager/popup/multUpdateUsage.do?NYck="+NYck+"'/>",
+					//data:{abc:"가나다"},
+					data:$("form[name=popupList]").serializeArray(),
+					success:function(res){
+						alert("성공 : "+res);
+					},
+					error:function(xhr, status, error){
+						alert(status +" ; "+error);
 					}
-					
-				}); 			
-			
-			$.ajax({
-				url:"<c:url value='/manager/popup/multUpdateUsage.do'/>",
-				type:"post",
-				data:{usageCk:usageCk,
-					popupCode:popupCode},
-				success:function(res){
-					alert(res);
-				},
-				error:function(xhr, status, error){
-					alert(status +" ; "+error);
-				}
-			});
+				});//ajax
+			}//else
 		});//click
 	
-		
-		
 		
 		
 		// form 태그가 있는 경우
 		// form 태그가 html에 있는경우(여기서는 create_form이라는 id로 세팅된 form 태그) 
 		// FormData 생성자 함수에 인자로 넘겨서 input 태그에 있는 데이터들을 따로 세팅하지 않아도 사용할 수 있다.
         
-		$("#btpop").click(function(){
+		/* $("#btpop").click(function(){
 			event.preventDefault();
 		
 			 var form = $('#popupAdd').serialize();
              var formData = new FormData();
              formData.append("fileObj", $("#popupImg")[0].files[0]);
              
-          /*    var formData = $("#popupImg").serialize(); */
+             var formData = $("#popupImg").serialize(); 
 			alert(formData);
           	
 				$.ajax({
@@ -115,7 +101,7 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 					enctype: 'multipart/form-data', 
 					data:formData
 						//$("#popupAdd").serializeArray()
-					   /*  {formData:formData,
+					    {formData:formData,
 						popupName:$("input[name=popupName]").val(),
 						usage:$("input[name=usage]").val(),
 						width:$("input[name=width]").val(),
@@ -124,7 +110,7 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 						top:$("input[name=top]").val(),
 						startDay:$("input[name=startDay]").val(),
 						endDay:$("input[name=endDay]").val(),
-						}	 */
+						}	 
 					,dataType:"json",
 				    contentType: false,
 				    processData: false,
@@ -140,8 +126,8 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 				});//ajax
 
 		});
-	
-			
+	*/
+			 
 		//체크박스 전체 선택 처리
 		$("#popupCkAll").click(function(){
 			$("input[name=popupCk]").prop("checked",this.checked);
@@ -220,7 +206,7 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 											<c:import url="/inc/date.do">
 												<c:param name="name" value="endDay"></c:param>
 												<c:param name="id" value="workdate2"></c:param>
-											</c:import> 
+											</c:import>  
 										</td>
 									</tr>
 									<tr>
@@ -250,7 +236,7 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 
 
   
-<form action="<c:url value='/manager/post/postList.do'/>" name="postList" method="post" >
+<form name="popupList" method="post" >
 <!-- 필터링을 위한 hidden -->
 <input type="hidden" name="filterCode" value="${param.filterCode }">
 <input type="hidden" name="filterKey" value="${param.filterKey}">
@@ -302,9 +288,11 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 							<tr>
 								<td>
 									<label class="control control-checkbox checkbox-primary">
-										<input type="checkbox" name="popupCk" id="popupCk" />
+										<input type="checkbox" name="popupCk" id="popupCk"  />
 										<div class="control-indicator"></div>
 									</label>
+									<input type="hidden" name="usageCk" value="${vo.usage }">
+									<input type="hidden" name="popupCode" value="${vo.popupCode }">
 								</td>
 								<td>
 									<c:if test='${vo.usage=="N" }'>
