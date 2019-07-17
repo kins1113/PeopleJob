@@ -17,5 +17,19 @@ public class ServiceServiceImpl implements ServiceService  {
 	public List<ServiceVO> selectAll() {
 		return serviceDao.selectAll();
 	}
+	@Override
+	public int deleteService(String[] list) {
+		int count=0;
+		try {
+			for(String s:list) {
+				int cnt=0;
+				cnt=serviceDao.deleteService(Integer.parseInt(s));
+				count+=cnt;
+			}
+		}catch(RuntimeException e){
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 }
