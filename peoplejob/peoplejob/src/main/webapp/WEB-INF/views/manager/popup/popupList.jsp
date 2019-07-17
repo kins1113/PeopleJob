@@ -18,6 +18,8 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 .spanSize2{width: 50px; float: left;}
 .infoSpan{font-size: 0.7em;}
 #workdate2, #workdate1 { width: 110px; float: left;height: 20px;}
+.hide{display: none;}
+.show{display: inline;}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -51,31 +53,60 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 		$("input[name=usageMultChenge]").click(function(){
 			//체크 안되면 안되도록 유효성 검사 
 			var check=false;
+			var usageCkArr= new Array();
+			var popupCodeArr= new Array();
+			var count=0;
+			
 			$("input[name=popupCk]").each(function(){
 				if($(this).is(":checked")==true){
 					check=true;
+					usageCkArr[count]=$(this).parent().next().val();
+					popupCodeArr[count]=$(this).parent().next().next().val();
+					count = count +1;
+					//alert("$(this).parent().next().val()= "+$(this).parent().next().val()+", $(this).parent().next().next().val() = "+$(this).parent().next().next().val()+", count = "+count );
 				}
 			});
-			alert($(this).attr("id"));
 			var NYck=$(this).attr("id");
 			if(!check){
 				alert("하나라도 체크 해야합니다...");
 				event.preventDefault();
 				return;
 			}else{
+				var msg;
+				if(NYck=="btUsageY"){
+					msg="체크된 것을 활성화 하시겠습니까?";
+				}else{
+					msg="체크된 것을 비활성화 하시겠습니까?";
+				}
 				
-				alert("ajax 전");
-				$.ajax({
-					url:"<c:url value='/manager/popup/multUpdateUsage.do?NYck="+NYck+"'/>",
-					//data:{abc:"가나다"},
-					data:$("form[name=popupList]").serializeArray(),
-					success:function(res){
-						alert("성공 : "+res);
-					},
-					error:function(xhr, status, error){
-						alert(status +" ; "+error);
-					}
-				});//ajax
+				if(confirm(msg)){
+					$.ajax({
+						url:"<c:url value='/manager/popup/multUpdateUsage.do?NYck="+NYck+"'/>",
+						traditional : true,
+						dataType: "json",
+						data:{usageCk:usageCkArr,popupCode:popupCodeArr},
+						//data:$("form[name=popupList]").serializeArray(),
+						success:function(res){
+							var resCount=0;
+							if(NYck=="btUsageY"){
+								for(i in res){
+									$("#tdPopupUsage"+res[i]).find("a").html("사용중");
+									resCount = resCount+1;
+								}
+								alert(resCount+"개가 활성화 되었습니다.");
+							}else if(NYck=="btUsageN"){
+								for(i in res){
+									$("#tdPopupUsage"+res[i]).find("a").html("미사용");
+									resCount = resCount+1;
+								}
+								alert(resCount+"개가 비활성화 되었습니다.");
+							}
+						},
+						error:function(xhr, status, error){
+							alert(status +" ; "+error);
+						}
+					});//ajax
+				}
 			}//else
 		});//click
 	
@@ -132,6 +163,16 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 		$("#popupCkAll").click(function(){
 			$("input[name=popupCk]").prop("checked",this.checked);
 		});
+	
+	
+		//날짜 수정
+		$(".popupTerm").each(function(){
+			$(this).find(".divTermChenge").hide();
+				$(this).dblclick(function(){
+					$(this).find(".divTermChenge").show();
+					$(this).find(".divTerm").hide();
+			})
+		})
 	});
 	
 	
@@ -294,7 +335,7 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 									<input type="hidden" name="usageCk" value="${vo.usage }">
 									<input type="hidden" name="popupCode" value="${vo.popupCode }">
 								</td>
-								<td>
+								<td id="tdPopupUsage${vo.popupCode }">
 									<c:if test='${vo.usage=="N" }'>
 										<a href="#" class="updateUsage">미사용</a>
 									</c:if>
@@ -304,7 +345,10 @@ input.form-control.size {width: 67px; float: left;height: 20px;}
 								</td>
 								<td>${vo.popupCode }</td>
 								<td>${sessionScope.adminid }</td>
-								<td>${vo.startDay } - ${vo.endDay }</td>
+								<td class="popupTerm">
+									<div class="divTerm">${vo.startDay } - ${vo.endDay }</div>
+									<div class="divTermChenge"><input type="text" value="${vo.startDay }"> - <input type="text" value="${vo.endDay }"><input type="button" id="btTermChenge" value="변경"></div>
+								</td>
 								<td>${vo.popupName }</td>
 								<td>이미지</td>
 								<td>${vo.width }</td>

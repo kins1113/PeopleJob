@@ -74,45 +74,15 @@ public class PopupController {
 		return result;
 	}
 	
-	/*
 	@RequestMapping("/multUpdateUsage.do")
 	@ResponseBody
-	public int multUpdateUsage(@RequestParam String[] usageCk, @RequestParam int[] popupCode) {
-		logger.info("ajax popup사용중 mult변경 v파라미터 usageCk.length={}, popupCode.length={}",usageCk.length, popupCode.length);
-		for(int i=0;i<popupCode.length;i++) {
-			logger.info(popupCode[i]+" : "+usageCk[i]);
-		}
-		
+	public int[] MUUsage(@RequestParam String[] usageCk, @RequestParam int[] popupCode, @RequestParam String NYck) {
+		logger.info("여기는 들어옵니까?? 파라미터 NYck={}",NYck);
+		logger.info("시작 : 여기는 들어옵니까?? usageCk[]={}, popupCode[]={}",usageCk.length,popupCode.length);
 		
 		Map<String,Object>map=new HashMap<String, Object>();
 		map.put("usageCkArr", usageCk);
 		map.put("popupCodeArr", popupCode);
-		
-		
-		
-		return 111236799;
-	}
-	*/
-	/*
-	@RequestMapping("/multUpdateUsage.do")
-	@ResponseBody
-	public int MUUsage(@RequestParam String[] popupCk, @RequestParam String[] usageCk, @RequestParam int[] popupCode, @RequestParam String NYck) {
-		logger.info("여기는 들어옵니까?? 파라미터 NYck={}",NYck);
-	
-		//String[] usageCkArr=new ;
-		//int[] popupCodeArr=null;
-		
-		for(int i=0;i<popupCk.length;i++) {
-			if("on".equals(popupCk[i])) {
-				usageCkArr[i]=usageCk[i];
-				popupCodeArr[i]=popupCode[i];
-			}
-		}
-		logger.info("시작 : 여기는 들어옵니까?? usageCkArr[]={}, popupCodeArr[]={}",usageCkArr.length,popupCodeArr.length);
-		
-		Map<String,Object>map=new HashMap<String, Object>();
-		map.put("usageCkArr", usageCkArr);
-		map.put("popupCodeArr", popupCodeArr);
 		map.put("NYck",	NYck);
 		
 		
@@ -120,9 +90,8 @@ public class PopupController {
 		logger.info("끝 : 여기는 들어옵니까??  결과 re={}",re);
 		
 		
-		return re;
+		return popupCode;
 	}
-	*/
 	
 	
 	@RequestMapping("/testUpdate.do")
