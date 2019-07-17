@@ -199,7 +199,10 @@ function company(){
 							<img src="<c:url value='/resources/main/images/peoplejob_logo.JPG'/>" alt="LOGO">
 						</a>
 
-						<ul class="main-menu">
+						<ul class="main-menu" style="
+    width: 1274px;
+    margin-left: -98px;
+">
 							<li class="main-menu-active">
 								<a href="#">채용정보</a>
 								<ul class="sub-menu">
@@ -241,7 +244,7 @@ function company(){
 								</ul>
 							</li>
 							
-							<li>
+							<li style="margin-left: 188px;">
 								<a href="<c:url value='/mypage/user/userpage.do'/>">
 								<img src="<c:url value='/resources/main/images/icons/my.png'/>" 
 								name="mypage" style="width: 40px;margin-left: 65px;">

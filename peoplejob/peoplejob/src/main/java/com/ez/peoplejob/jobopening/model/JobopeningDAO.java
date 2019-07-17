@@ -21,4 +21,6 @@ public interface JobopeningDAO {
 	int selectPwdCheck(Map<String,Object>map);
 	List<JobopeningVO>selectJobopeningBycomcode(int companyCode);
 	
+	List<Map<String, Object>> deadlineimminentBymonth();
+	
 }

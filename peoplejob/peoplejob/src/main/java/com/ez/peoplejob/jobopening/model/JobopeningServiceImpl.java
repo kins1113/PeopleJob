@@ -81,5 +81,12 @@ public class JobopeningServiceImpl implements JobopeningService{
 
 
 
+	@Override
+	public List<Map<String, Object>> deadlineimminentBymonth() {
+		return jobopeningDao.deadlineimminentBymonth();
+	}
+
+
+
 	
 }

@@ -100,8 +100,8 @@ function company(){
                         <a href="#" onclick="" onmousedown="try{n_trackEvent('myhome', 'dashboard' , 'resume-manage', '');}catch(e){};">
                            <img src="<c:url value='/resources/main/images/circle.PNG'/>"></img>
                            <div class="text">
-                            <span class="doing"><em>2</em> / 10</span>
-                            <span class="sname">???</span>
+                            <span class="doing"><em>0</span>
+                            <span class="sname">지원현황</span> 
                            </div>
                         </a>
                     </li>

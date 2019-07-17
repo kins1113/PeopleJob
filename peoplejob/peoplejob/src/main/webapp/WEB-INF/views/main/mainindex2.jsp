@@ -30,20 +30,6 @@ $(function() {
 		});
 		
 	});
-	 
-	 
-	$('#vvipone').hover(function(){
-				
-			$(this).css("border","2px solid blue");
-			},
-		function(){
-			$('#vvipone').css("border","");
-			
-		
-	});
-		
-	
-	
 
 });
 </script>
@@ -113,12 +99,12 @@ h2 {
 }
 
 .loginWrap {
-	width: 267px;
-    margin-left: 42px;
-    height: 110px;
-    border: 1px solid #e3e4e8;
-    background-color: #f8f8f8;  
-    box-sizing: border-box;
+	width: 263px;
+	margin-left: 20px;
+	height: 110px;
+	border: 1px solid #e3e4e8;
+	background-color: #f3f4f6;
+	box-sizing: border-box;
 }
 
 .blind {
@@ -431,27 +417,6 @@ img.imgsize {
 .col-sm-6.p-r-25.p-r-15-sr991 {
     border: 1px solid lightgray;
 }
- 
- div.left {
-        width: 50%;
-        float: left;
-        box-sizing: border-box;
-        border-right: 1px solid lightgray;
-    }
-    div.right {
-        width: 50%;
-        float: right;
-        box-sizing: border-box;
-        
-    }
- 
- .deadline{
-	margin-bottom: 8px;
- }
- 
- .logintop{
- 	height: 70%;
- }
 </style>
 </head>
 <body class="animsition">
@@ -467,33 +432,15 @@ img.imgsize {
 	<!-- Post -->
 
 	<!-- Banner -->
-	<div class="container" style="max-width: 150%;"> <!-- 원래105% -->
-	<div class="colortop">
-		<div class="flex-c-c" style="margin-top: 10px;width: 1300px;">
+	<div class="container" style="max-width: 105%;">
+		<div class="flex-c-c" style="margin-top: 10px">
 			<a href="#"> <img class="max-w-full"
 				src="<c:url value='/resources/main/images/190125_apple_752x110.png'/>"
-				alt="IMG" style="    margin-right: 212px; max-width: 150%;margin-left: -130px;"> 
-				<%-- <img class="max-w-full" src="<c:url value='/resources/main/images/ezenbanner.PNG'/>" style="width: 100px;" alt="IMG"> --%>
+				alt="IMG"> <%-- <img class="max-w-full" src="<c:url value='/resources/main/images/ezenbanner.PNG'/>" style="width: 100px;" alt="IMG"> --%>
 			</a>
-			
-			<div style="    width: 205px;
-    border: 1px solid lightgray;
-    margin-left: -185px;
-    height: 110px;
-    margin-right: -22px;">
-    	<div class="left" style=" width: 50%;
-        float: left; 
-        box-sizing: border-box; height: 100%;">
-        <br><img alt="" src="<c:url value='/resources/main/images/글자수세기.PNG'/>" style="margin-left: 22px; width: 55px;"><br>&nbsp;글자수 세기</div>
-        <div class="right" style=" width: 50%;float: right;box-sizing: border-box; height: 100%;">
-        <a href="<c:url value='/login/Test.do'/>" onclick="alert('ㅜㅜ');">테스트!!!!!!</a>
-          <br><img alt="" src="<c:url value='/resources/main/images/맞춤법검사.PNG'/>"  style="margin-left: 22px; width: 55px;"><br>&nbsp;맞춤법 검사</div>  
 
-
-    </div>
 			<!-- 로그인  -->
 			<div class="loginWrap">
-			
 				<c:if test="${empty sessionScope.memberid }">
 					<div class="cnt">
 						<form action="<c:url value='/login/mainlogin.do'/>" method="post"
@@ -517,17 +464,14 @@ img.imgsize {
 					<ul class="memberType clear">
 
 					</ul>
-				</c:if> 
+				</c:if>
 				<c:if test="${!empty sessionScope.memberName }">
-				<div class="logintop">
-					<img alt="회원이미지" src="<c:url value='/resources/main/images/people.PNG'/>" width="100px;">
-		        	<span style="margin-bottom: 10px;display: inline-block;">${sessionScope.memberName }님, 환영합니다.</span>
-					<input type="button" value="로그아웃" onclick="location='<c:url value='/login/logout.do'/>'" style="    margin-left: 174px;
-    margin-top: -28px;
-    background: white;
-    border: 1px solid gray;
-    padding: 2px;">
-				</div>
+        	${sessionScope.memberName }님, 환영합니다.
+        	<br>
+					<br>
+					<a href="<c:url value='/login/logout.do'/>">로그아웃</a>
+					<%-- 	<a href="<c:url value='/login/logout.do'/>">
+        	<button value="로그아웃" name="logout"></button></a> --%>
 				</c:if>
 			</div>
 			<!-- loginWrap -->
@@ -764,96 +708,59 @@ img.imgsize {
 
 					</div>
 		<!-- 중간 -->
-		<div style="border: 1px solid lightgray;
-    width: 210px;
-    float: right;
-    margin-right: 288px;
-    height: 366px;
-    display: inline;">
-    <!-- 	<table border="1" style="width:200px;"> 
-    		<tr>
-    			<td colspan="2">마감 임박 공채</td>
-    		</tr>
-    		<tr>
-    			<td>삼성전자</td>
-    			<td>~7.17</td>
-    		</tr> 
-    		<tr>
-    			<td>삼성전자</td>
-    			<td>~7.17</td>
-    		</tr>
-    		<tr>
-    			<td>삼성전자</td>
-    			<td>~7.17</td>
-    		</tr>
-    	</table> -->
-    	<div class="devRankingWrap devStarter" style="display: block;width:200px;">  
- 
-						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width: 200px;margin-top: 0px;
-   							 height: 364px; border: 1px solid white;"> 
+		<div class="rankingColumn devRanking" id="ranking_carousel_1" style="        width: 200px;
+    margin-left: -1px;
+    height: 365px;
+    margin-top: 1px;">
 							<h3 class="blind">신입 랭킹</h3>
 							<div id="ranking_carousel" class="rankListWap">
 								<div class="carousel-pagination">
+									<!-- <span class="carousel-pagination-current">3</span>/<span class="carousel-pagination-total">4</span> -->
 								</div>
-								<ul class="carousel-wrapper" style="padding:0px">
+								<ul class="carousel-wrapper" style="width:200px;">
 
-
-									<li class="carousel-slide on">  
+ 
+									<li class="carousel-slide on">
 										<h4 class="hd_4">마감 임박 공채</h4>
 										<ul class="infoList endList">
-										
-										  <c:forEach var="map" items="${deadlineList }">
-											<li class="deadline">
-											<span class="titBx"><a href="" class="devClick devHref" data-click-value="98">
-											${map['JOBTITLE'] }</a></span> 
-													<span class="txBx">~${map['END_DATE']}</span></li>
-										</c:forEach>   
-										
-										<%--   <c:forEach var="map" items="${list }">
-										<li class="deadline"><span class="titBx"><a href="#" class="devClick devHref" data-click-value="98">
-											${map['JOBTITLE'] }</a></span> 
-													<span class="txBx"></span></li>
-										</c:forEach>  --%>
-										
-										
-											<%-- <li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">㈜GS리테일</a></span> <span class="txBx">~16시</span></li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">호텔신라</a></span> <span class="txBx">~17시</span></li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">에스케이이노베이션</a></span> <span class="txBx">~24시</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">한국국제협력단</a></span> <span class="txBx">~15시</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">주식회사 캠시스</a></span> <span class="txBx">~07.08</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">대한무역투자진흥공사</a></span> <span class="txBx">~24시</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank"> 한국건설기술연구원</a></span> <span class="txBx">~24시</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">(재)씨젠의료재단</a></span> <span class="txBx">~24시</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a
+											<li><span class="titBx"><a
 													href="<c:url value='https://www.naver.com'/>"
 													class="devClick devHref" data-click-value="98"
 													target="_blank">(재)전라북도생물산업진흥원</a></span> <span class="txBx">~18시</span>
 											</li>
-											<li class="deadline"><span class="titBx"><a href="#"
+											<li><span class="titBx"><a href="#"
 													class="devClick devHref" data-click-value="98" target="">위본건설㈜</a></span>
-												<span class="txBx">~24시</span></li> --%>
+												<span class="txBx">~24시</span></li>
 										</ul>
 									</li>
 
@@ -861,30 +768,28 @@ img.imgsize {
 
 							</div>
 						</div>
-					</div> 
-    </div>
-						<div class="p-l-10 p-rl-0-sr991 p-b-20" style="width: 271px;float: right;margin-top: -369px;padding: 0px;">
+						<div class="p-l-10 p-rl-0-sr991 p-b-20" style="width: 274px;float:right;">
 							<!-- Video -->
 							<div class="p-b-23">
 								<div class="how2 how2-cl4 flex-s-c m-b-35">
 									<h3 class="f1-m-2 cl3 tab01-title">공지사항</h3>
 								</div>
-								<ul class="p-t-35" style="padding-top: 0px"> 
-									<li style="margin-bottom: 5px;" >
+								<ul class="p-t-35" style="padding-top: 0px">
+									<li style="margin-bottom: 5px">
 										<!-- <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
 										1
 									</div> -->1&nbsp; <a href="#"
-										class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03" style="margin-left: 30px;"> &nbsp;기업회원
+										class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03"> &nbsp;기업회원
 											회원가입시 주의사항 </a>
 									</li>
 
 									<li style="margin-bottom: 5px">2&nbsp; <a href="#"
-										class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03" style="margin-left: 30px;"> &nbsp; 배너광고
+										class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03"> &nbsp; 배너광고
 											문의 </a>
 									</li>
 
 									<li style="margin-bottom: 5px">3&nbsp; <a href="#"
-										class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03" style="margin-left: 30px;"> &nbsp;자주하는
+										class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03"> &nbsp;자주하는
 											질문 </a>
 									</li>
 
@@ -893,8 +798,62 @@ img.imgsize {
 
 						<div class="devRankingWrap devStarter" style="display: block;">
 
-						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width: 258px;margin-top: -27px; border: 1px solid lightgray; height:240px;">
-							<img alt="" src="<c:url value='/resources/main/images/getImage.png'/>">
+						<div class="rankingColumn devRanking" id="ranking_carousel_1" style="width:200px;">
+							<h3 class="blind">신입 랭킹</h3>
+							<div id="ranking_carousel" class="rankListWap">
+								<div class="carousel-pagination">
+									<!-- <span class="carousel-pagination-current">3</span>/<span class="carousel-pagination-total">4</span> -->
+								</div>
+								<ul class="carousel-wrapper" style="padding:0px">
+
+
+									<li class="carousel-slide on">
+										<h4 class="hd_4">공채</h4>
+										<ul class="infoList endList">
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">㈜GS리테일</a></span> <span class="txBx">~16시</span></li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">호텔신라</a></span> <span class="txBx">~17시</span></li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">에스케이이노베이션</a></span> <span class="txBx">~24시</span>
+											</li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">한국국제협력단</a></span> <span class="txBx">~15시</span>
+											</li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">주식회사 캠시스</a></span> <span class="txBx">~07.08</span>
+											</li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">대한무역투자진흥공사</a></span> <span class="txBx">~24시</span>
+											</li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank"> 한국건설기술연구원</a></span> <span class="txBx">~24시</span>
+											</li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">(재)씨젠의료재단</a></span> <span class="txBx">~24시</span>
+											</li>
+											<li><span class="titBx"><a
+													href="<c:url value='https://www.naver.com'/>"
+													class="devClick devHref" data-click-value="98"
+													target="_blank">(재)전라북도생물산업진흥원</a></span> <span class="txBx">~18시</span>
+											</li>
+											<li><span class="titBx"><a href="#"
+													class="devClick devHref" data-click-value="98" target="">위본건설㈜</a></span>
+												<span class="txBx">~24시</span></li>
+										</ul>
+									</li>
+
+								</ul>
+
+							</div>
 						</div>
 					</div>
 						</div> <!-- 여기까지 공지사항 -->
@@ -905,7 +864,7 @@ img.imgsize {
 					</div> --%>
 				</div>
  
-</div> 
+
 				<!-- 복사 -->
 				<div class="row justify-content-center" style="width: 1300px;margin-left:15px;"> 
 						<%-- <div class="how2 how2-cl4 flex-s-c m-r-10 m-r-0-sr991">
@@ -916,13 +875,13 @@ img.imgsize {
 								
 							</h5>   
 						</div> --%>  
-						<div style="margin-left: -115px;width: 1280px;">
-						<h1>VVIP</h1>  <a href="<c:url value='/service/payment.do'/> " style="font-size:1.1em;color:black;"> >상품문의 </a>
+						<div style="width:750px;margin-left: -115px;">
+						<h1>VVIP</h1>  <a href="<c:url value='/service/payment.do'/> ""> >상품문의 </a>
 						</div>
 						
 						<div class="row p-t-35"
 							style="padding-top: 0px; width: 1300px; margin-left: -125px;">
-							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone">
+							<div class="col-sm-6 p-r-25 p-r-15-sr991">
 								<!-- Item latest -->
 								<div class="m-b-45">
 									<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
@@ -945,7 +904,7 @@ img.imgsize {
 								</div>
 							</div>
 
-							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone">
+							<div class="col-sm-6 p-r-25 p-r-15-sr991">
 								<!-- Item latest -->
 								<div class="m-b-45">
 									<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
@@ -966,7 +925,7 @@ img.imgsize {
 								</div>
 							</div>
 
-							<div class="col-sm-6 p-r-25 p-r-15-sr991" id="vvipone"> 
+							<div class="col-sm-6 p-r-25 p-r-15-sr991">
 								<!-- Item latest -->
 								<div class="m-b-45">
 									<a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
@@ -1065,7 +1024,6 @@ img.imgsize {
 				</div>
 			</div>
 	</div>
-	
 	</section>
 	</div>
 </body>
